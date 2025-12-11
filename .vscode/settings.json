@@ -86,7 +86,7 @@
 	},
 	"json.format.enable": true,
 	"workbench.iconTheme": "vscode-icons",
-	"workbench.colorTheme": "Noctis",
+	"workbench.colorTheme": "Solarized Light",
 	"terminal.integrated.enableMultiLinePasteWarning": "auto",
 	// 📝vscode自带css规则配置
 	"css.validate": true,
