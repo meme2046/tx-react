@@ -1,0 +1,37 @@
+export interface IStrategy {
+	created_at: string;
+	cex: string;
+	act_name: string;
+	symbol: string;
+	lever: number;
+	spot_size: number;
+	futures_size: number;
+	up_status: number;
+	spot_px: number;
+	futures_px: number;
+	spot_trigger_px: number;
+	trigger_px: number;
+	fx_trigger_px: number;
+	pnl: number;
+	pnl_ratio: number;
+	end_time: string;
+	spot_order_id: number;
+	spot_client_order_id: string;
+	spot_profit_order_id: number;
+	spot_profit_client_order_id: string;
+	spot_open_usdt: number;
+	spot_open_px: number;
+	spot_close_usdt: number;
+	spot_close_px: number;
+	futures_order_id: number;
+	futures_client_order_id: string;
+	futures_loss_market_order_id: number;
+	futures_loss_market_client_order_id: string;
+	futures_profit_market_order_id: number;
+	futures_profit_market_client_order_id: string;
+	futures_open_usdt: number;
+	futures_open_px: number;
+	futures_close_usdt: number;
+	futures_close_px: number;
+	position_side: string;
+}

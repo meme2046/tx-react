@@ -23,17 +23,11 @@
 		"erasableSyntaxOnly": true,
 		"noFallthroughCasesInSwitch": true,
 		"noUncheckedSideEffectImports": true,
-		/* */
-		"rootDirs": [".", "./.react-router/types"],
+		/*  */
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["./src/*"]
 		}
 	},
-	"include": [
-		"src",
-		"**/.server/**/*",
-		"**/.client/**/*",
-		".react-router/types/**/*"
-	]
+	"include": ["src"]
 }

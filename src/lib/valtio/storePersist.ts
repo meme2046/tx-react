@@ -1,0 +1,41 @@
+import type { IUser } from "@/types";
+import { persist } from "valtio-persist";
+
+interface IAppPersist {
+	theme: string;
+	lang?: string;
+	cronUrl?: string;
+	githubDataURL: string;
+	user?: IUser;
+}
+
+const initialState: IAppPersist = {
+	theme: "system",
+	cronUrl: "https://192.168.123.7:8000",
+	githubDataURL:
+		"https://raw.githubusercontent.com/txnj/data/refs/heads/main",
+};
+
+// Create a persisted store
+export const { store: storePersist } = await persist<IAppPersist>(
+	// Initial state
+	initialState,
+	// Storage key
+	"tx-react-state"
+);
+
+export function setUser(user?: IUser) {
+	storePersist.user = user;
+}
+
+export function setCronUrl(url?: string) {
+	storePersist.cronUrl = url;
+}
+
+export function setLang(lang: string) {
+	storePersist.lang = lang;
+}
+
+export function setTheme(theme: string) {
+	storePersist.theme = theme;
+}
