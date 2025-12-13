@@ -45,7 +45,7 @@ function TextComponent() {
 		</Alert>
 	);
 	return (
-		<div className="p-4 flex flex-col gap-4 bg-slash">
+		<div className="p-4 flex flex-col gap-4">
 			<Alert>
 				<AlertTitle>字体</AlertTitle>
 				<AlertDescription>
