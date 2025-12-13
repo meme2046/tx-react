@@ -10,7 +10,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 	const { user, theme } = useSnapshot(storePersist);
 
 	const logout = useCallback(async () => {
-		await sleep(5000);
 		setUser(undefined);
 		// navigate("/", { replace: true });
 	}, []);

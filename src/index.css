@@ -1,4 +1,27 @@
 @import "tailwindcss";
+
+body {
+	@apply bg-[url('https://arweave.net/c3cCRBcDb-cbx26AlJqJ9MKYBUPFDXN6pJ3AsVBWTzw')] dark:bg-[url('https://arweave.net/STTh6euGv92OJDYAxAkUQwFj0fJ7oTY4ker1tUSPcY8')] bg-size-[60%] bg-no-repeat bg-top-right;
+}
+
+.bg-slash {
+	background-image: repeating-linear-gradient(
+		45deg,
+		hsl(var(--background)),
+		hsl(var(--background)) 13px,
+		hsla(var(--background1)) 13px,
+		hsla(var(--background1)) 14px
+	);
+}
+
+.bg-dot {
+	background-size: 5px 5px;
+	background-image: radial-gradient(
+		hsl(var(--foreground) / 0.2) 0.5px,
+		hsl(var(--background)) 0.5px
+	);
+}
+
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -118,5 +141,3 @@
 		@apply bg-background text-foreground;
 	}
 }
-
-@plugin 'tailwind-scrollbar';

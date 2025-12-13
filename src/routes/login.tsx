@@ -3,7 +3,7 @@ import * as React from "react";
 import { redirect, useRouter, useRouterState } from "@tanstack/react-router";
 import { z } from "zod";
 
-import { useApp } from "@/hooks/use-app";
+import { useApp } from "@/lib/hooks/use-app";
 
 const fallback = "/dashboard" as const;
 
