@@ -10,10 +10,14 @@ import { routeTree } from "./routeTree.gen";
 import { AppProvider } from "./components/providers";
 import { useApp } from "./lib/hooks/use-app";
 
-import "./index.css";
 import { useSnapshot } from "valtio";
 import { storePersist } from "./lib/valtio";
 import { ToastContainer } from "react-toastify";
+
+import "@theme-toggles/react/css/Expand.css";
+
+import "./index.css";
+import "./_index.css";
 
 const queryClient = new QueryClient();
 

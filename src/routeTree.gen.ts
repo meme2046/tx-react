@@ -11,8 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LayoutTextRouteImport } from './routes/_layout.text'
+import { Route as LayoutCounterRouteImport } from './routes/_layout.counter'
 import { Route as AuthInvoicesRouteImport } from './routes/_auth.invoices'
 import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
 import { Route as AuthInvoicesIndexRouteImport } from './routes/_auth.invoices.index'
@@ -28,6 +31,10 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LayoutRoute = LayoutRouteImport.update({
+  id: '/_layout',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/_auth',
   getParentRoute: () => rootRouteImport,
@@ -36,6 +43,16 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const LayoutTextRoute = LayoutTextRouteImport.update({
+  id: '/text',
+  path: '/text',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutCounterRoute = LayoutCounterRouteImport.update({
+  id: '/counter',
+  path: '/counter',
+  getParentRoute: () => LayoutRoute,
 } as any)
 const AuthInvoicesRoute = AuthInvoicesRouteImport.update({
   id: '/invoices',
@@ -64,6 +81,8 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/dashboard': typeof AuthDashboardRoute
   '/invoices': typeof AuthInvoicesRouteWithChildren
+  '/counter': typeof LayoutCounterRoute
+  '/text': typeof LayoutTextRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/invoices/': typeof AuthInvoicesIndexRoute
 }
@@ -72,6 +91,8 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
   '/dashboard': typeof AuthDashboardRoute
+  '/counter': typeof LayoutCounterRoute
+  '/text': typeof LayoutTextRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/invoices': typeof AuthInvoicesIndexRoute
 }
@@ -79,10 +100,13 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
+  '/_layout': typeof LayoutRouteWithChildren
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
   '/_auth/dashboard': typeof AuthDashboardRoute
   '/_auth/invoices': typeof AuthInvoicesRouteWithChildren
+  '/_layout/counter': typeof LayoutCounterRoute
+  '/_layout/text': typeof LayoutTextRoute
   '/_auth/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/_auth/invoices/': typeof AuthInvoicesIndexRoute
 }
@@ -94,6 +118,8 @@ export interface FileRouteTypes {
     | '/login'
     | '/dashboard'
     | '/invoices'
+    | '/counter'
+    | '/text'
     | '/invoices/$invoiceId'
     | '/invoices/'
   fileRoutesByTo: FileRoutesByTo
@@ -102,16 +128,21 @@ export interface FileRouteTypes {
     | '/about'
     | '/login'
     | '/dashboard'
+    | '/counter'
+    | '/text'
     | '/invoices/$invoiceId'
     | '/invoices'
   id:
     | '__root__'
     | '/'
     | '/_auth'
+    | '/_layout'
     | '/about'
     | '/login'
     | '/_auth/dashboard'
     | '/_auth/invoices'
+    | '/_layout/counter'
+    | '/_layout/text'
     | '/_auth/invoices/$invoiceId'
     | '/_auth/invoices/'
   fileRoutesById: FileRoutesById
@@ -119,6 +150,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRouteWithChildren
+  LayoutRoute: typeof LayoutRouteWithChildren
   AboutRoute: typeof AboutRoute
   LoginRoute: typeof LoginRoute
 }
@@ -139,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_layout': {
+      id: '/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof LayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_auth': {
       id: '/_auth'
       path: ''
@@ -152,6 +191,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_layout/text': {
+      id: '/_layout/text'
+      path: '/text'
+      fullPath: '/text'
+      preLoaderRoute: typeof LayoutTextRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/counter': {
+      id: '/_layout/counter'
+      path: '/counter'
+      fullPath: '/counter'
+      preLoaderRoute: typeof LayoutCounterRouteImport
+      parentRoute: typeof LayoutRoute
     }
     '/_auth/invoices': {
       id: '/_auth/invoices'
@@ -210,9 +263,23 @@ const AuthRouteChildren: AuthRouteChildren = {
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
+interface LayoutRouteChildren {
+  LayoutCounterRoute: typeof LayoutCounterRoute
+  LayoutTextRoute: typeof LayoutTextRoute
+}
+
+const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutCounterRoute: LayoutCounterRoute,
+  LayoutTextRoute: LayoutTextRoute,
+}
+
+const LayoutRouteWithChildren =
+  LayoutRoute._addFileChildren(LayoutRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRouteWithChildren,
+  LayoutRoute: LayoutRouteWithChildren,
   AboutRoute: AboutRoute,
   LoginRoute: LoginRoute,
 }

@@ -11,7 +11,7 @@ const navSample: INav[] = [
 	{ name: "avatar", emoj: "😎", desc: "头像", value: "/sample/avatar" },
 	{ name: "valtio-todo", emoj: "💊", desc: "", value: "/sample/valtio-todo" },
 	{ name: "table", emoj: "📦", desc: "", value: "/sample/table" },
-	{ name: "text", emoj: "📝", desc: "", value: "/sample/text" },
+	{ name: "text", emoj: "📝", desc: "", value: "/text" },
 	{ name: "test", emoj: "🧪", desc: "", value: "/sample/test" },
 ];
 

@@ -5,24 +5,58 @@ import {
 	NavigationMenuLink,
 	NavigationMenuList,
 	NavigationMenuTrigger,
-	navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Link } from "@tanstack/react-router";
 import { Button } from "../ui/button";
+import { SidebarTrigger } from "../ui/sidebar";
+import { navList } from "./list";
+import type { INav } from "@/types";
+import { cn } from "@/lib/utils";
+import { capitalize } from "lodash";
+import { useIsMobile } from "@/lib/hooks/use-mobile";
 
 export function Navbar() {
+	const isMobile = useIsMobile();
+	const renderMenuItems = ({
+		items,
+		className,
+	}: {
+		items: INav[];
+		className?: string;
+	}) => {
+		return items.map((item) => (
+			<li key={item.value}>
+				<NavigationMenuLink asChild>
+					<Link
+						to={item.value}
+						className={cn("select-none", className)}
+					>
+						<div className="text-sm">
+							<span className="text-lg">{item.emoj}</span>
+							<span className="ml-2">
+								{capitalize(item.name)}
+							</span>
+						</div>
+						<p className="text-xs">
+							{item.desc ? `| ${item.desc}` : undefined}
+						</p>
+					</Link>
+				</NavigationMenuLink>
+			</li>
+		));
+	};
 	return (
-		<nav className="py-1 text-sm flex justify-around items-stretch sticky top-0 z-40 inset-x-0 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+		<nav className="py-1 text-sm flex justify-around items-stretch sticky top-0 z-40 inset-x-0 backdrop-blur-xs bg-background/20">
 			<div className="flex items-center">
-				<SidebarTrigger className="text-primary hover:text-success" />
+				<SidebarTrigger />
 				<Link to="/">
 					<Button variant="ghost" className="py-0 px-1">
-						<span className="text-primary">Meme2046</span>
+						<span>Meme</span>
 					</Button>
 				</Link>
 			</div>
 			<div className="hidden sm:flex">
-				<NavigationMenu>
+				<NavigationMenu viewport={isMobile}>
 					<NavigationMenuList>
 						{Object.entries(navList).map(([group, items]) => (
 							<NavigationMenuItem key={group}>
@@ -30,7 +64,7 @@ export function Navbar() {
 									{group}
 								</NavigationMenuTrigger>
 								<NavigationMenuContent>
-									<ul className="flex flex-col p-2 min-w-96">
+									<ul className="min-w-48">
 										{renderMenuItems({ items })}
 									</ul>
 								</NavigationMenuContent>
@@ -39,7 +73,7 @@ export function Navbar() {
 					</NavigationMenuList>
 				</NavigationMenu>
 			</div>
-			<ToggleTheme />
+			<div></div>
 		</nav>
 	);
 }

@@ -35,7 +35,7 @@ function AuthLayout() {
 
 	return (
 		<div className="flex flex-col">
-			<div className="flex justify-end p-4">
+			<div className="flex justify-end py-1 mr-10">
 				<Button onClick={handleLogout} variant="outline">
 					Logout
 				</Button>

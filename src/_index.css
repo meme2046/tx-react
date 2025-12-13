@@ -1,0 +1,48 @@
+body {
+	@apply bg-[url('https://arweave.net/c3cCRBcDb-cbx26AlJqJ9MKYBUPFDXN6pJ3AsVBWTzw')] dark:bg-[url('https://arweave.net/STTh6euGv92OJDYAxAkUQwFj0fJ7oTY4ker1tUSPcY8')] bg-size-[50%] bg-no-repeat bg-top-right;
+}
+
+.bg-slash {
+	background-image: repeating-linear-gradient(
+		45deg,
+		hsl(var(--background)),
+		hsl(var(--background)) 13px,
+		hsla(var(--background1)) 13px,
+		hsla(var(--background1)) 14px
+	);
+}
+
+.bg-dot {
+	background-size: 5px 5px;
+	background-image: radial-gradient(
+		hsl(var(--foreground) / 0.2) 0.5px,
+		hsl(var(--background)) 0.5px
+	);
+}
+
+@keyframes movex {
+	from {
+		transform: translateX(-100%);
+	}
+	to {
+		transform: translateX(100%);
+	}
+}
+
+@layer base {
+	@font-face {
+		font-family: "Delius Swash Caps";
+		font-weight: 400;
+		font-display: swap;
+		src: url("https://arweave.net/6nKnlPeN4v9u1HqdQdT-8KLhqn4OECDmVsJosHnyz48")
+			format("woff2");
+	}
+
+	@font-face {
+		font-family: "Inter";
+		font-weight: 400;
+		font-display: swap;
+		src: url("https://arweave.net/FuEI82P7bYaUYuNQN5eTloaLeZCf29hV4G7mdonBgEA")
+			format("woff2");
+	}
+}
