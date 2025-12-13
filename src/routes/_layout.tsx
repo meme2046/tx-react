@@ -35,7 +35,7 @@ function RouteComponent() {
 							<span className="font-[Caps]">Meme</span>
 						</div>
 					</SidebarHeader>
-					<SidebarContent>
+					<SidebarContent className="scrollbar-thin">
 						<SidebarItems />
 					</SidebarContent>
 				</Sidebar>

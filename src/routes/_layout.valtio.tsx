@@ -13,7 +13,7 @@ export const Route = createFileRoute("/_layout/valtio")({
 	head: () => ({
 		meta: [
 			{
-				title: "Counter",
+				title: "Valtio Todo List",
 			},
 		],
 	}),

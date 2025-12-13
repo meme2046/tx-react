@@ -1,5 +1,43 @@
 @import "tailwindcss";
 @import "tailwindcss-animated";
+@plugin 'tailwind-scrollbar';
+
+html {
+	@apply scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary;
+}
+
+body {
+	@apply bg-[url('https://arweave.net/c3cCRBcDb-cbx26AlJqJ9MKYBUPFDXN6pJ3AsVBWTzw')] dark:bg-[url('https://arweave.net/STTh6euGv92OJDYAxAkUQwFj0fJ7oTY4ker1tUSPcY8')] bg-size-[50%] bg-no-repeat bg-top-right;
+}
+
+@keyframes movex {
+	from {
+		transform: translateX(-100%);
+	}
+	to {
+		transform: translateX(100%);
+	}
+}
+
+@layer base {
+	/* Delius Swash Caps */
+	@font-face {
+		font-family: "Caps";
+		font-weight: 400;
+		font-display: swap;
+		src: url("https://arweave.net/6nKnlPeN4v9u1HqdQdT-8KLhqn4OECDmVsJosHnyz48")
+			format("woff2");
+	}
+
+	/* @font-face {
+		font-family: "Inter";
+		font-weight: 400;
+		font-display: swap;
+		src: url("https://arweave.net/FuEI82P7bYaUYuNQN5eTloaLeZCf29hV4G7mdonBgEA")
+			format("woff2");
+	} */
+}
+
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -79,7 +117,7 @@
 	--card-foreground: oklch(0.41 0.08 74.04);
 	--popover: oklch(0.92 0.04 84.56);
 	--popover-foreground: oklch(0.41 0.08 74.04);
-	--primary: oklch(0.71 0.10 111.96);
+	--primary: oklch(0.71 0.1 111.96);
 	--primary-foreground: oklch(0.98 0.01 2.18);
 	--secondary: oklch(0.88 0.05 83.32);
 	--secondary-foreground: oklch(0.51 0.08 78.21);
@@ -92,7 +130,7 @@
 	--input: oklch(0.74 0.06 79.64);
 	--ring: oklch(0.51 0.08 74.78);
 	--chart-1: oklch(0.66 0.19 41.68);
-	--chart-2: oklch(0.70 0.12 183.58);
+	--chart-2: oklch(0.7 0.12 183.58);
 	--chart-3: oklch(0.48 0.08 211.35);
 	--chart-4: oklch(0.84 0.17 84.99);
 	--chart-5: oklch(0.74 0.17 60.02);
@@ -114,19 +152,24 @@
 	--shadow-offset-x: 0;
 	--shadow-offset-y: 1px;
 	--spacing: 0.25rem;
-	--shadow-2xs: 0 1px 3px 0px oklch(0.00 0 0 / 0.05);
-	--shadow-xs: 0 1px 3px 0px oklch(0.00 0 0 / 0.05);
-	--shadow-sm: 0 1px 3px 0px oklch(0.00 0 0 / 0.10), 0 1px 2px -1px oklch(0.00 0 0 / 0.10);
-	--shadow: 0 1px 3px 0px oklch(0.00 0 0 / 0.10), 0 1px 2px -1px oklch(0.00 0 0 / 0.10);
-	--shadow-md: 0 1px 3px 0px oklch(0.00 0 0 / 0.10), 0 2px 4px -1px oklch(0.00 0 0 / 0.10);
-	--shadow-lg: 0 1px 3px 0px oklch(0.00 0 0 / 0.10), 0 4px 6px -1px oklch(0.00 0 0 / 0.10);
-	--shadow-xl: 0 1px 3px 0px oklch(0.00 0 0 / 0.10), 0 8px 10px -1px oklch(0.00 0 0 / 0.10);
-	--shadow-2xl: 0 1px 3px 0px oklch(0.00 0 0 / 0.25);
+	--shadow-2xs: 0 1px 3px 0px oklch(0 0 0 / 0.05);
+	--shadow-xs: 0 1px 3px 0px oklch(0 0 0 / 0.05);
+	--shadow-sm: 0 1px 3px 0px oklch(0 0 0 / 0.1),
+		0 1px 2px -1px oklch(0 0 0 / 0.1);
+	--shadow: 0 1px 3px 0px oklch(0 0 0 / 0.1),
+		0 1px 2px -1px oklch(0 0 0 / 0.1);
+	--shadow-md: 0 1px 3px 0px oklch(0 0 0 / 0.1),
+		0 2px 4px -1px oklch(0 0 0 / 0.1);
+	--shadow-lg: 0 1px 3px 0px oklch(0 0 0 / 0.1),
+		0 4px 6px -1px oklch(0 0 0 / 0.1);
+	--shadow-xl: 0 1px 3px 0px oklch(0 0 0 / 0.1),
+		0 8px 10px -1px oklch(0 0 0 / 0.1);
+	--shadow-2xl: 0 1px 3px 0px oklch(0 0 0 / 0.25);
 	--tracking-normal: 0em;
 }
 
 .dark {
-	--background: oklch(0.20 0.01 52.89);
+	--background: oklch(0.2 0.01 52.89);
 	--foreground: oklch(0.88 0.05 79.11);
 	--card: oklch(0.25 0.01 48.28);
 	--card-foreground: oklch(0.88 0.05 79.11);
@@ -134,28 +177,28 @@
 	--popover-foreground: oklch(0.88 0.05 79.11);
 	--primary: oklch(0.64 0.05 114.58);
 	--primary-foreground: oklch(0.98 0.01 2.18);
-	--secondary: oklch(0.33 0.02 60.70);
+	--secondary: oklch(0.33 0.02 60.7);
 	--secondary-foreground: oklch(0.88 0.05 83.32);
 	--muted: oklch(0.27 0.01 39.35);
 	--muted-foreground: oklch(0.74 0.06 79.64);
-	--accent: oklch(0.33 0.02 60.70);
+	--accent: oklch(0.33 0.02 60.7);
 	--accent-foreground: oklch(0.86 0.05 85.12);
 	--destructive: oklch(0.63 0.24 29.21);
-	--border: oklch(0.33 0.02 60.70);
-	--input: oklch(0.33 0.02 60.70);
+	--border: oklch(0.33 0.02 60.7);
+	--input: oklch(0.33 0.02 60.7);
 	--ring: oklch(0.64 0.05 114.58);
 	--chart-1: oklch(0.66 0.19 41.68);
-	--chart-2: oklch(0.70 0.12 183.58);
+	--chart-2: oklch(0.7 0.12 183.58);
 	--chart-3: oklch(0.48 0.08 211.35);
 	--chart-4: oklch(0.84 0.17 84.99);
 	--chart-5: oklch(0.74 0.17 60.02);
-	--sidebar: oklch(0.23 0.01 60.90);
+	--sidebar: oklch(0.23 0.01 60.9);
 	--sidebar-foreground: oklch(0.88 0.05 79.11);
 	--sidebar-primary: oklch(0.64 0.05 114.58);
 	--sidebar-primary-foreground: oklch(0.98 0.01 2.18);
-	--sidebar-accent: oklch(0.33 0.02 60.70);
+	--sidebar-accent: oklch(0.33 0.02 60.7);
 	--sidebar-accent-foreground: oklch(0.86 0.05 85.12);
-	--sidebar-border: oklch(0.33 0.02 60.70);
+	--sidebar-border: oklch(0.33 0.02 60.7);
 	--sidebar-ring: oklch(0.64 0.05 114.58);
 	--radius: 0.625rem;
 	--shadow-color: hsl(0 0% 0%);
@@ -166,17 +209,28 @@
 	--shadow-offset-y: 1px;
 	--letter-spacing: 0em;
 	--spacing: 0.25rem;
-	--font-sans: 'Geist', 'Geist Fallback', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-	--font-serif: "Geist", "Geist Fallback", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-	--font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-	--shadow-2xs: 0 1px 3px 0px oklch(0.00 0 0 / 0.05);
-	--shadow-xs: 0 1px 3px 0px oklch(0.00 0 0 / 0.05);
-	--shadow-sm: 0 1px 3px 0px oklch(0.00 0 0 / 0.10), 0 1px 2px -1px oklch(0.00 0 0 / 0.10);
-	--shadow: 0 1px 3px 0px oklch(0.00 0 0 / 0.10), 0 1px 2px -1px oklch(0.00 0 0 / 0.10);
-	--shadow-md: 0 1px 3px 0px oklch(0.00 0 0 / 0.10), 0 2px 4px -1px oklch(0.00 0 0 / 0.10);
-	--shadow-lg: 0 1px 3px 0px oklch(0.00 0 0 / 0.10), 0 4px 6px -1px oklch(0.00 0 0 / 0.10);
-	--shadow-xl: 0 1px 3px 0px oklch(0.00 0 0 / 0.10), 0 8px 10px -1px oklch(0.00 0 0 / 0.10);
-	--shadow-2xl: 0 1px 3px 0px oklch(0.00 0 0 / 0.25);
+	--font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui,
+		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+		Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol", "Noto Color Emoji";
+	--font-serif: "Geist", "Geist Fallback", ui-serif, Georgia, Cambria,
+		"Times New Roman", Times, serif;
+	--font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace,
+		SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+		"Courier New", monospace;
+	--shadow-2xs: 0 1px 3px 0px oklch(0 0 0 / 0.05);
+	--shadow-xs: 0 1px 3px 0px oklch(0 0 0 / 0.05);
+	--shadow-sm: 0 1px 3px 0px oklch(0 0 0 / 0.1),
+		0 1px 2px -1px oklch(0 0 0 / 0.1);
+	--shadow: 0 1px 3px 0px oklch(0 0 0 / 0.1),
+		0 1px 2px -1px oklch(0 0 0 / 0.1);
+	--shadow-md: 0 1px 3px 0px oklch(0 0 0 / 0.1),
+		0 2px 4px -1px oklch(0 0 0 / 0.1);
+	--shadow-lg: 0 1px 3px 0px oklch(0 0 0 / 0.1),
+		0 4px 6px -1px oklch(0 0 0 / 0.1);
+	--shadow-xl: 0 1px 3px 0px oklch(0 0 0 / 0.1),
+		0 8px 10px -1px oklch(0 0 0 / 0.1);
+	--shadow-2xl: 0 1px 3px 0px oklch(0 0 0 / 0.25);
 }
 
 @layer base {
@@ -185,6 +239,6 @@
 	}
 	body {
 		@apply bg-background text-foreground;
-    letter-spacing: var(--tracking-normal);
+		letter-spacing: var(--tracking-normal);
 	}
 }
