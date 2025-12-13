@@ -35,8 +35,12 @@ function RouteComponent() {
 
 	return (
 		<div className="flex flex-col">
-			<div className="flex justify-end py-1 mr-10">
-				<Button onClick={handleLogout} variant="outline">
+			<div className="flex justify-start p-1 mr-10">
+				<Button
+					onClick={handleLogout}
+					variant="outline"
+					className="cursor-pointer"
+				>
 					Logout
 				</Button>
 			</div>

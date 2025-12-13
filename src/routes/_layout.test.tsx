@@ -12,5 +12,9 @@ export const Route = createFileRoute("/_layout/test")({
 });
 
 function RouteComponent() {
-	return <div>Hello "/_layout/test"!</div>;
+	return (
+		<div className="p-4">
+			<p>Hello "/_layout/test"!</p>
+		</div>
+	);
 }

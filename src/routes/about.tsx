@@ -5,6 +5,7 @@ import { useSnapshot } from "valtio";
 import { storePersist, setProgress } from "@/lib/valtio";
 import { ReactSVG } from "react-svg";
 import { SVG_SRC } from "@/consts";
+import { useState } from "react";
 
 export const Route = createFileRoute("/about")({
 	component: About,
@@ -19,8 +20,9 @@ export const Route = createFileRoute("/about")({
 
 function About() {
 	const { theme } = useSnapshot(storePersist);
+	const [count, setCount] = useState(0);
 	return (
-		<>
+		<div className="font-[Caps] space-y-10">
 			<ProgressSpinner />
 			<div className="flex flex-col justify-center items-center">
 				<p>This is the About page! </p>
@@ -38,7 +40,7 @@ function About() {
 					className="w-16 hover:drop-shadow-[0_0_2em_#61dafbaa] animate-spin animate-infinite animate-duration-20000 animate-ease-linear"
 				/>
 			</div>
-			<div className="flex justify-center">
+			<div className="flex justify-center space-x-4">
 				<Button
 					onClick={() => {
 						setProgress(true);
@@ -48,7 +50,15 @@ function About() {
 				>
 					ProgressSpinner
 				</Button>
+				<Button
+					variant="default"
+					className="cursor-pointer"
+					onClick={() => setCount((count) => count + 1)}
+				>
+					<span className="text-lg">count is</span>
+					<span className="text-xl">_{count}</span>
+				</Button>
 			</div>
-		</>
+		</div>
 	);
 }

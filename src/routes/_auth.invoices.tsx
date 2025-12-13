@@ -1,6 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link, Outlet } from "@tanstack/react-router";
-
+import {
+	ResizableHandle,
+	ResizablePanel,
+	ResizablePanelGroup,
+} from "@/components/ui/resizable";
 import { fetchInvoices } from "@/lib/api/fakerInvoice";
 
 export const Route = createFileRoute("/_auth/invoices")({
@@ -14,32 +18,37 @@ function RouteComponent() {
 	const { invoices } = Route.useLoaderData();
 
 	return (
-		<div className="grid grid-cols-3 md:grid-cols-5 min-h-125">
-			<div className="col-span-1 py-2 pl-2 pr-4 md:border-r">
-				<p className="mb-2">Choose an invoice from the list below.</p>
-				<ol className="grid gap-2">
-					{invoices.map((invoice) => (
-						<li key={invoice.id}>
+		<div className="p-4">
+			<ResizablePanelGroup
+				direction="horizontal"
+				className="rounded-lg border"
+			>
+				<ResizablePanel defaultSize={25} className="min-w-[212px]">
+					<div className="p-1 flex flex-col gap-1">
+						{invoices.map((invoice) => (
 							<Link
 								to="/invoices/$invoiceId"
-								params={{ invoiceId: invoice.id.toString() }}
-								className="text-blue-600 hover:opacity-75"
+								params={{
+									invoiceId: invoice.id.toString(),
+								}}
+								className="hover:opacity-75"
 								activeProps={{
 									className: "font-bold underline",
 								}}
 							>
 								<span className="tabular-nums">
 									#{invoice.id.toString().padStart(2, "0")}
-								</span>{" "}
+								</span>
 								- {invoice.title.slice(0, 16)}...
 							</Link>
-						</li>
-					))}
-				</ol>
-			</div>
-			<div className="col-span-2 md:col-span-4 py-2 px-4">
-				<Outlet />
-			</div>
+						))}
+					</div>
+				</ResizablePanel>
+				<ResizableHandle withHandle />
+				<ResizablePanel defaultSize={75}>
+					<Outlet />
+				</ResizablePanel>
+			</ResizablePanelGroup>
 		</div>
 	);
 }
