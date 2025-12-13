@@ -15,10 +15,10 @@ export const Route = createFileRoute("/_auth")({
 			});
 		}
 	},
-	component: AuthLayout,
+	component: RouteComponent,
 });
 
-function AuthLayout() {
+function RouteComponent() {
 	const router = useRouter();
 	const navigate = Route.useNavigate();
 	const app = useApp();

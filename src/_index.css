@@ -11,20 +11,24 @@ body {
 	}
 }
 
+@theme {
+}
+
 @layer base {
+	/* Delius Swash Caps */
 	@font-face {
-		font-family: "Delius Swash Caps";
+		font-family: "Caps";
 		font-weight: 400;
 		font-display: swap;
 		src: url("https://arweave.net/6nKnlPeN4v9u1HqdQdT-8KLhqn4OECDmVsJosHnyz48")
 			format("woff2");
 	}
 
-	@font-face {
+	/* @font-face {
 		font-family: "Inter";
 		font-weight: 400;
 		font-display: swap;
 		src: url("https://arweave.net/FuEI82P7bYaUYuNQN5eTloaLeZCf29hV4G7mdonBgEA")
 			format("woff2");
-	}
+	} */
 }

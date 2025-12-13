@@ -4,7 +4,7 @@ import { ICON_SRC } from "@/consts";
 import { createFileRoute } from "@tanstack/react-router";
 import { ReactSVG } from "react-svg";
 export const Route = createFileRoute("/_layout/text")({
-	component: TextComponent,
+	component: RouteComponent,
 	head: () => ({
 		meta: [
 			{
@@ -14,7 +14,7 @@ export const Route = createFileRoute("/_layout/text")({
 	}),
 });
 
-function TextComponent() {
+function RouteComponent() {
 	const alertData: { type: string; label: string }[] = [
 		{ type: "info", label: "info" },
 		{ type: "success", label: "success" },
@@ -49,7 +49,6 @@ function TextComponent() {
 			<Alert>
 				<AlertTitle>字体</AlertTitle>
 				<AlertDescription>
-					<p>default:-&gt;&nbsp;中文 | English</p>
 					<p className="font-sans">
 						font-sans:-&gt;&nbsp;-&gt;&nbsp;中文 | English
 					</p>
@@ -58,6 +57,9 @@ function TextComponent() {
 					</p>
 					<p className="font-mono">
 						font-mono:-&gt;&nbsp;中文 | English
+					</p>
+					<p className="font-[Caps]">
+						Delius Swash Caps:-&gt;&nbsp;中文 | English
 					</p>
 				</AlertDescription>
 			</Alert>

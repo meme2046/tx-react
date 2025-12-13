@@ -94,5 +94,12 @@
 	"css.lint.unknownProperties": "warning", // 对未知的属性发出警告
 	"css.lint.vendorPrefix": "warning", // 对供应商前缀发出警告
 	"css.lint.duplicateProperties": "error", // 对重复的属性发出错误
-	"css.lint.emptyRules": "warning"
+	"css.lint.emptyRules": "warning",
+	"tailwindCSS.files.exclude": [
+		"**/.git/**",
+		"**/node_modules/**",
+		"**/.hg/**",
+		"**/.svn/**",
+		"**/src/components/ui/**/*"
+	]
 }

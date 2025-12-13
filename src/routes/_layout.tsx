@@ -32,7 +32,7 @@ function RouteComponent() {
 								/>
 								<AvatarFallback className="animate-pulse bg-linear-to-tr from-info to-primary"></AvatarFallback>
 							</Avatar>
-							<span className="text-primary">Meme</span>
+							<span className="font-[Caps]">Meme</span>
 						</div>
 					</SidebarHeader>
 					<SidebarContent>

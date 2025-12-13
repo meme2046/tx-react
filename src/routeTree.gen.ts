@@ -14,7 +14,9 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LayoutValtioRouteImport } from './routes/_layout.valtio'
 import { Route as LayoutTextRouteImport } from './routes/_layout.text'
+import { Route as LayoutTestRouteImport } from './routes/_layout.test'
 import { Route as LayoutCounterRouteImport } from './routes/_layout.counter'
 import { Route as AuthInvoicesRouteImport } from './routes/_auth.invoices'
 import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
@@ -44,9 +46,19 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LayoutValtioRoute = LayoutValtioRouteImport.update({
+  id: '/valtio',
+  path: '/valtio',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const LayoutTextRoute = LayoutTextRouteImport.update({
   id: '/text',
   path: '/text',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutTestRoute = LayoutTestRouteImport.update({
+  id: '/test',
+  path: '/test',
   getParentRoute: () => LayoutRoute,
 } as any)
 const LayoutCounterRoute = LayoutCounterRouteImport.update({
@@ -82,7 +94,9 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthDashboardRoute
   '/invoices': typeof AuthInvoicesRouteWithChildren
   '/counter': typeof LayoutCounterRoute
+  '/test': typeof LayoutTestRoute
   '/text': typeof LayoutTextRoute
+  '/valtio': typeof LayoutValtioRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/invoices/': typeof AuthInvoicesIndexRoute
 }
@@ -92,7 +106,9 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/dashboard': typeof AuthDashboardRoute
   '/counter': typeof LayoutCounterRoute
+  '/test': typeof LayoutTestRoute
   '/text': typeof LayoutTextRoute
+  '/valtio': typeof LayoutValtioRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/invoices': typeof AuthInvoicesIndexRoute
 }
@@ -106,7 +122,9 @@ export interface FileRoutesById {
   '/_auth/dashboard': typeof AuthDashboardRoute
   '/_auth/invoices': typeof AuthInvoicesRouteWithChildren
   '/_layout/counter': typeof LayoutCounterRoute
+  '/_layout/test': typeof LayoutTestRoute
   '/_layout/text': typeof LayoutTextRoute
+  '/_layout/valtio': typeof LayoutValtioRoute
   '/_auth/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/_auth/invoices/': typeof AuthInvoicesIndexRoute
 }
@@ -119,7 +137,9 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/invoices'
     | '/counter'
+    | '/test'
     | '/text'
+    | '/valtio'
     | '/invoices/$invoiceId'
     | '/invoices/'
   fileRoutesByTo: FileRoutesByTo
@@ -129,7 +149,9 @@ export interface FileRouteTypes {
     | '/login'
     | '/dashboard'
     | '/counter'
+    | '/test'
     | '/text'
+    | '/valtio'
     | '/invoices/$invoiceId'
     | '/invoices'
   id:
@@ -142,7 +164,9 @@ export interface FileRouteTypes {
     | '/_auth/dashboard'
     | '/_auth/invoices'
     | '/_layout/counter'
+    | '/_layout/test'
     | '/_layout/text'
+    | '/_layout/valtio'
     | '/_auth/invoices/$invoiceId'
     | '/_auth/invoices/'
   fileRoutesById: FileRoutesById
@@ -192,11 +216,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_layout/valtio': {
+      id: '/_layout/valtio'
+      path: '/valtio'
+      fullPath: '/valtio'
+      preLoaderRoute: typeof LayoutValtioRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/text': {
       id: '/_layout/text'
       path: '/text'
       fullPath: '/text'
       preLoaderRoute: typeof LayoutTextRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/test': {
+      id: '/_layout/test'
+      path: '/test'
+      fullPath: '/test'
+      preLoaderRoute: typeof LayoutTestRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_layout/counter': {
@@ -265,12 +303,16 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface LayoutRouteChildren {
   LayoutCounterRoute: typeof LayoutCounterRoute
+  LayoutTestRoute: typeof LayoutTestRoute
   LayoutTextRoute: typeof LayoutTextRoute
+  LayoutValtioRoute: typeof LayoutValtioRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutCounterRoute: LayoutCounterRoute,
+  LayoutTestRoute: LayoutTestRoute,
   LayoutTextRoute: LayoutTextRoute,
+  LayoutValtioRoute: LayoutValtioRoute,
 }
 
 const LayoutRouteWithChildren =

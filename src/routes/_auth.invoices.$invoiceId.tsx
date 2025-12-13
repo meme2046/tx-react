@@ -7,10 +7,10 @@ export const Route = createFileRoute("/_auth/invoices/$invoiceId")({
 			invoice: await fetchInvoiceById(parseInt(invoiceId)),
 		};
 	},
-	component: InvoicePage,
+	component: RouteComponent,
 });
 
-function InvoicePage() {
+function RouteComponent() {
 	const { invoice } = Route.useLoaderData();
 
 	return (

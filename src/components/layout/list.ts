@@ -5,14 +5,15 @@ export const themes: Record<string, string> = {
 	"🌌 dark": "dark",
 };
 
-const navSample: INav[] = [
+const navDemo: INav[] = [
 	{ name: "home", emoj: "🏠", desc: "", value: "/sample/home" },
 	{ name: "icon", emoj: "⭐", desc: "", value: "/sample/icon" },
 	{ name: "avatar", emoj: "😎", desc: "头像", value: "/sample/avatar" },
-	{ name: "valtio-todo", emoj: "💊", desc: "", value: "/sample/valtio-todo" },
-	{ name: "table", emoj: "📦", desc: "", value: "/sample/table" },
+	{ name: "table", emoj: "📦", desc: "", value: "/table" },
+	{ name: "valtio", emoj: "💊", desc: "", value: "/valtio" },
 	{ name: "text", emoj: "📝", desc: "", value: "/text" },
-	{ name: "test", emoj: "🧪", desc: "", value: "/sample/test" },
+	{ name: "test", emoj: "🧪", desc: "", value: "/test" },
+	{ name: "about", emoj: "🔎", desc: "", value: "/about" },
 ];
 
 const navCron: INav[] = [
@@ -55,5 +56,5 @@ export const navList: Record<string, INav[]> = {
 	Crypto: navCrypto,
 	Cron: navCron,
 	// Lottery: navLottery,
-	Sample: navSample,
+	Demo: navDemo,
 };

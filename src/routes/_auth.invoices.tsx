@@ -7,10 +7,10 @@ export const Route = createFileRoute("/_auth/invoices")({
 	loader: async () => ({
 		invoices: await fetchInvoices(),
 	}),
-	component: InvoicesRoute,
+	component: RouteComponent,
 });
 
-function InvoicesRoute() {
+function RouteComponent() {
 	const { invoices } = Route.useLoaderData();
 
 	return (

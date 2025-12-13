@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_layout/counter")({
-	component: CounterComponent,
+	component: RouteComponent,
 	head: () => ({
 		meta: [
 			{
@@ -11,6 +11,6 @@ export const Route = createFileRoute("/_layout/counter")({
 	}),
 });
 
-function CounterComponent() {
+function RouteComponent() {
 	return <>Counter Page</>;
 }

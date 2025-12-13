@@ -38,12 +38,13 @@ function About() {
 					className="w-16 hover:drop-shadow-[0_0_2em_#61dafbaa] animate-spin animate-infinite animate-duration-20000 animate-ease-linear"
 				/>
 			</div>
-			<div className="p-4">
+			<div className="flex justify-center">
 				<Button
 					onClick={() => {
 						setProgress(true);
 					}}
 					variant="outline"
+					className="cursor-pointer"
 				>
 					ProgressSpinner
 				</Button>

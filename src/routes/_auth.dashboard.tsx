@@ -3,10 +3,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useApp } from "@/lib/hooks/use-app";
 
 export const Route = createFileRoute("/_auth/dashboard")({
-	component: DashboardPage,
+	component: RouteComponent,
 });
 
-function DashboardPage() {
+function RouteComponent() {
 	const app = useApp();
 
 	return (

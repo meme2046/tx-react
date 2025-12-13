@@ -51,7 +51,7 @@ export function Navbar() {
 				<SidebarTrigger />
 				<Link to="/">
 					<Button variant="ghost" className="py-0 px-1">
-						<span>Meme</span>
+						<span className="font-[Caps]">Meme</span>
 					</Button>
 				</Link>
 			</div>
