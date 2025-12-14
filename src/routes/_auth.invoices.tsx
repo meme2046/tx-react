@@ -27,6 +27,7 @@ function RouteComponent() {
 					<div className="p-1 flex flex-col gap-1">
 						{invoices.map((invoice) => (
 							<Link
+								key={invoice.id}
 								to="/invoices/$invoiceId"
 								params={{
 									invoiceId: invoice.id.toString(),

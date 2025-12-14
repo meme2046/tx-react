@@ -13,10 +13,8 @@ import { navList } from "./list";
 import type { INav } from "@/types";
 import { cn } from "@/lib/utils";
 import { capitalize } from "lodash";
-import { useIsMobile } from "@/lib/hooks/use-mobile";
 
 export function Navbar() {
-	const isMobile = useIsMobile();
 	const renderMenuItems = ({
 		items,
 		className,
@@ -30,14 +28,17 @@ export function Navbar() {
 					<Link
 						to={item.value}
 						className={cn("select-none", className)}
+						activeProps={{
+							className: "font-bold",
+						}}
 					>
-						<div className="text-sm">
-							<span className="text-lg">{item.emoj}</span>
+						<div>
+							<span>{item.emoj}</span>
 							<span className="ml-2">
 								{capitalize(item.name)}
 							</span>
 						</div>
-						<p className="text-xs">
+						<p className="text-xs font-thin">
 							{item.desc ? `| ${item.desc}` : undefined}
 						</p>
 					</Link>
@@ -56,15 +57,16 @@ export function Navbar() {
 				</Link>
 			</div>
 			<div className="hidden sm:flex">
-				<NavigationMenu viewport={isMobile}>
+				<NavigationMenu viewport={true}>
 					<NavigationMenuList>
 						{Object.entries(navList).map(([group, items]) => (
 							<NavigationMenuItem key={group}>
 								<NavigationMenuTrigger className="bg-transparent">
 									{group}
 								</NavigationMenuTrigger>
+
 								<NavigationMenuContent>
-									<ul className="min-w-48">
+									<ul className="grid min-w-64">
 										{renderMenuItems({ items })}
 									</ul>
 								</NavigationMenuContent>

@@ -7,7 +7,7 @@ import {
 	SidebarMenuItem,
 	useSidebar,
 } from "../ui/sidebar";
-import { navList } from "./list";
+import { sideNavList } from "./list";
 import { capitalize } from "lodash";
 import { Link } from "@tanstack/react-router";
 export function SidebarItems() {
@@ -15,7 +15,7 @@ export function SidebarItems() {
 
 	return (
 		<>
-			{Object.entries(navList).map(([group, items]) => (
+			{Object.entries(sideNavList).map(([group, items]) => (
 				<SidebarGroup key={group}>
 					<SidebarGroupLabel>{capitalize(group)}</SidebarGroupLabel>
 					<SidebarGroupContent>
@@ -28,6 +28,9 @@ export function SidebarItems() {
 											onClick={() =>
 												isMobile && toggleSidebar()
 											}
+											activeProps={{
+												className: "font-bold",
+											}}
 										>
 											<span className="text-lg">
 												{item.emoj}

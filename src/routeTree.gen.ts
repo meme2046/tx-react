@@ -17,6 +17,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as LayoutValtioRouteImport } from './routes/_layout.valtio'
 import { Route as LayoutTextRouteImport } from './routes/_layout.text'
 import { Route as LayoutTestRouteImport } from './routes/_layout.test'
+import { Route as LayoutTableRouteImport } from './routes/_layout.table'
+import { Route as LayoutGridRouteImport } from './routes/_layout.grid'
 import { Route as AuthInvoicesRouteImport } from './routes/_auth.invoices'
 import { Route as AuthInvoicesIndexRouteImport } from './routes/_auth.invoices.index'
 import { Route as AuthInvoicesInvoiceIdRouteImport } from './routes/_auth.invoices.$invoiceId'
@@ -59,6 +61,16 @@ const LayoutTestRoute = LayoutTestRouteImport.update({
   path: '/test',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutTableRoute = LayoutTableRouteImport.update({
+  id: '/table',
+  path: '/table',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutGridRoute = LayoutGridRouteImport.update({
+  id: '/grid',
+  path: '/grid',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const AuthInvoicesRoute = AuthInvoicesRouteImport.update({
   id: '/invoices',
   path: '/invoices',
@@ -80,6 +92,8 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
   '/invoices': typeof AuthInvoicesRouteWithChildren
+  '/grid': typeof LayoutGridRoute
+  '/table': typeof LayoutTableRoute
   '/test': typeof LayoutTestRoute
   '/text': typeof LayoutTextRoute
   '/valtio': typeof LayoutValtioRoute
@@ -90,6 +104,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
+  '/grid': typeof LayoutGridRoute
+  '/table': typeof LayoutTableRoute
   '/test': typeof LayoutTestRoute
   '/text': typeof LayoutTextRoute
   '/valtio': typeof LayoutValtioRoute
@@ -104,6 +120,8 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
   '/_auth/invoices': typeof AuthInvoicesRouteWithChildren
+  '/_layout/grid': typeof LayoutGridRoute
+  '/_layout/table': typeof LayoutTableRoute
   '/_layout/test': typeof LayoutTestRoute
   '/_layout/text': typeof LayoutTextRoute
   '/_layout/valtio': typeof LayoutValtioRoute
@@ -117,6 +135,8 @@ export interface FileRouteTypes {
     | '/about'
     | '/login'
     | '/invoices'
+    | '/grid'
+    | '/table'
     | '/test'
     | '/text'
     | '/valtio'
@@ -127,6 +147,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/login'
+    | '/grid'
+    | '/table'
     | '/test'
     | '/text'
     | '/valtio'
@@ -140,6 +162,8 @@ export interface FileRouteTypes {
     | '/about'
     | '/login'
     | '/_auth/invoices'
+    | '/_layout/grid'
+    | '/_layout/table'
     | '/_layout/test'
     | '/_layout/text'
     | '/_layout/valtio'
@@ -213,6 +237,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutTestRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/table': {
+      id: '/_layout/table'
+      path: '/table'
+      fullPath: '/table'
+      preLoaderRoute: typeof LayoutTableRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/grid': {
+      id: '/_layout/grid'
+      path: '/grid'
+      fullPath: '/grid'
+      preLoaderRoute: typeof LayoutGridRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_auth/invoices': {
       id: '/_auth/invoices'
       path: '/invoices'
@@ -262,12 +300,16 @@ const AuthRouteChildren: AuthRouteChildren = {
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface LayoutRouteChildren {
+  LayoutGridRoute: typeof LayoutGridRoute
+  LayoutTableRoute: typeof LayoutTableRoute
   LayoutTestRoute: typeof LayoutTestRoute
   LayoutTextRoute: typeof LayoutTextRoute
   LayoutValtioRoute: typeof LayoutValtioRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutGridRoute: LayoutGridRoute,
+  LayoutTableRoute: LayoutTableRoute,
   LayoutTestRoute: LayoutTestRoute,
   LayoutTextRoute: LayoutTextRoute,
   LayoutValtioRoute: LayoutValtioRoute,
