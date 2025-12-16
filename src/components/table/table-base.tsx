@@ -1,7 +1,6 @@
-import type { Row, RowData, Table as TsTable } from "@tanstack/react-table";
+import type { Row, RowData, Table as Table } from "@tanstack/react-table";
 import { flexRender } from "@tanstack/react-table";
 import {
-	Table,
 	TableBody,
 	TableCell,
 	TableHead,
@@ -16,7 +15,7 @@ import { type VirtualItem, Virtualizer } from "@tanstack/react-virtual";
 interface ITableBase<T> {
 	tableContainerRef: React.RefObject<HTMLDivElement | null>;
 	subHeight: number;
-	table: TsTable<T>;
+	table: Table<T>;
 	minFixedWidth: number;
 	isFetching: boolean;
 	isLoading: boolean;
@@ -46,17 +45,15 @@ export function TableBase<T extends RowData>(props: ITableBase<T>) {
 			style={{ maxHeight: `calc(100vh - ${subHeight}px)` }}
 			className="relative overflow-auto scrollbar-thin rounded-lg border shadow min-h-64"
 		>
-			<Table className="w-full text-sm">
-				<TableHeader className="sticky top-0 z-10 bg-muted backdrop-blur">
+			<table className="text-sm w-full">
+				<TableHeader className="sticky top-0 z-10 bg-background/40 backdrop-blur">
 					{table.getHeaderGroups().map((headerGroup) => (
 						<TableRow key={headerGroup.id} className="flex">
 							{headerGroup.headers.map((header) => {
 								return (
 									<TableHead
 										className={`h-auto shrink-0 ${
-											header.getSize() > minFixedWidth
-												? "grow"
-												: ""
+											header.getSize() > minFixedWidth ? "grow" : ""
 										}`}
 										key={header.id}
 										style={{ width: header.getSize() }}
@@ -72,25 +69,20 @@ export function TableBase<T extends RowData>(props: ITableBase<T>) {
 											{header.isPlaceholder
 												? null
 												: flexRender(
-														header.column.columnDef
-															.header,
-														header.getContext()
-												  )}
+														header.column.columnDef.header,
+														header.getContext(),
+													)}
 											{header.column.getCanSort()
 												? {
 														asc: " ⇡",
 														desc: " ⇣",
 														false: " ♯",
-												  }[
-														header.column.getIsSorted() as string
-												  ]
+													}[header.column.getIsSorted() as string]
 												: undefined}
 										</div>
 										<div>
 											{header.column.getCanFilter() ? (
-												<TableFilter
-													column={header.column}
-												/>
+												<TableFilter column={header.column} />
 											) : undefined}
 										</div>
 									</TableHead>
@@ -105,45 +97,32 @@ export function TableBase<T extends RowData>(props: ITableBase<T>) {
 							? {
 									height: `${rowVirtualizer.getTotalSize()}px`,
 									position: "relative",
-							  }
+								}
 							: {}
 					}
 				>
 					{items.length > 0 ? (
 						items.map((item) => {
-							const row = rowVirtualizer
-								? rows[item.index]
-								: (item as Row<T>);
+							const row = rowVirtualizer ? rows[item.index] : (item as Row<T>);
 
 							return (
 								<TableRow
-									className={`${
-										rowVirtualizer ? "absolute" : ""
-									} flex w-full`}
-									key={
-										keyField
-											? row.getValue(keyField)
-											: item.index
-									}
+									className={`${rowVirtualizer ? "absolute" : ""} flex w-full`}
+									key={keyField ? row.getValue(keyField) : item.index}
 									data-index={item.index}
-									data-state={
-										row.getIsSelected() && "selected"
-									}
+									data-state={row.getIsSelected() && "selected"}
 									ref={(node) =>
 										rowVirtualizer
-											? rowVirtualizer.measureElement(
-													node
-											  )
+											? rowVirtualizer.measureElement(node)
 											: undefined
 									}
 									style={
 										rowVirtualizer
 											? {
 													transform: `translateY(${
-														(item as VirtualItem)
-															.start
+														(item as VirtualItem).start
 													}px)`,
-											  }
+												}
 											: {}
 									}
 								>
@@ -152,16 +131,13 @@ export function TableBase<T extends RowData>(props: ITableBase<T>) {
 											<TableCell
 												key={cell.id}
 												className={`shrink-0 truncate ${
-													cell.column.getSize() >
-													minFixedWidth
-														? "grow"
-														: ""
+													cell.column.getSize() > minFixedWidth ? "grow" : ""
 												}`}
 												width={cell.column.getSize()}
 											>
 												{flexRender(
 													cell.column.columnDef.cell,
-													cell.getContext()
+													cell.getContext(),
 												)}
 											</TableCell>
 										);
@@ -173,9 +149,7 @@ export function TableBase<T extends RowData>(props: ITableBase<T>) {
 						<TableRow>
 							<TableCell
 								colSpan={
-									table
-										.getAllColumns()
-										.filter((column) => column.getCanHide())
+									table.getAllColumns().filter((column) => column.getCanHide())
 										.length
 								}
 								className="text-center"
@@ -185,7 +159,7 @@ export function TableBase<T extends RowData>(props: ITableBase<T>) {
 						</TableRow>
 					)}
 				</TableBody>
-			</Table>
+			</table>
 			{((hasNextPage && isFetching) || isLoading) && (
 				<ReactSVG
 					src={ICON_SRC["loading4"]}

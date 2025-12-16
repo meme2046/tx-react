@@ -35,9 +35,7 @@ function RouteComponent() {
 				cell: (info) =>
 					info.getValue() ? (
 						<span>
-							{dayjs(info.getValue<number>()).format(
-								"YYYY-MM-DD HH:mm:ss"
-							)}
+							{dayjs(info.getValue<number>()).format("YYYY-MM-DD HH:mm:ss")}
 						</span>
 					) : undefined,
 				enableColumnFilter: false,
@@ -64,9 +62,7 @@ function RouteComponent() {
 				cell: (info) =>
 					info.getValue() ? (
 						<span>
-							{dayjs(info.getValue<number>()).format(
-								"YYYY-MM-DD HH:mm:ss"
-							)}
+							{dayjs(info.getValue<number>()).format("YYYY-MM-DD HH:mm:ss")}
 						</span>
 					) : undefined,
 				enableColumnFilter: false,
@@ -79,9 +75,7 @@ function RouteComponent() {
 				cell: (info) =>
 					info.getValue() ? (
 						<span>
-							{dayjs(info.getValue<number>()).format(
-								"YYYY-MM-DD HH:mm:ss"
-							)}
+							{dayjs(info.getValue<number>()).format("YYYY-MM-DD HH:mm:ss")}
 						</span>
 					) : undefined,
 				enableColumnFilter: false,
@@ -94,9 +88,7 @@ function RouteComponent() {
 				cell: (info) =>
 					info.getValue() ? (
 						<span>
-							{dayjs(info.getValue<number>()).format(
-								"YYYY-MM-DD HH:mm:ss"
-							)}
+							{dayjs(info.getValue<number>()).format("YYYY-MM-DD HH:mm:ss")}
 						</span>
 					) : undefined,
 				enableColumnFilter: false,
@@ -104,13 +96,13 @@ function RouteComponent() {
 				size: 160,
 			},
 		],
-		[]
+		[],
 	);
 	const initialVisibilityColumns = ["jobName", "startTime", "output", "err"];
 
 	const rowsPerPageList: number[] = [100, 200, 300, 500];
 	const [rowsPerPage, setRowsPerPage] = useState<string>(
-		`${rowsPerPageList[0]}`
+		`${rowsPerPageList[0]}`,
 	);
 
 	const {
@@ -125,7 +117,7 @@ function RouteComponent() {
 
 	const flatData = useMemo(
 		() => data?.pages?.flatMap((page) => page.items) ?? [],
-		[data]
+		[data],
 	);
 
 	return (

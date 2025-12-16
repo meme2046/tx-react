@@ -16,8 +16,12 @@ const navDemo: INav[] = [
 	{ name: "about", emoj: "🔎", desc: "", value: "/about" },
 	{ name: "basic table", emoj: "📦", desc: "", value: "/table-basic" },
 	{
+		name: "virtualized table exp",
+		desc: "",
+		value: "/virtual-exp",
+	},
+	{
 		name: "pagination table",
-		emoj: "📦",
 		desc: "",
 		value: "/table-pagination",
 	},

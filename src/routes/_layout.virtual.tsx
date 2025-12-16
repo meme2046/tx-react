@@ -85,7 +85,7 @@ function RouteComponent() {
 				size: 200,
 			},
 		],
-		[]
+		[],
 	);
 
 	// The virtualizer will need a reference to the scrollable container element
@@ -118,13 +118,13 @@ function RouteComponent() {
 				Refresh Data
 			</Button>
 			<div
-				className="overflow-auto scrollbar-thin rounded-lg border shadow min-h-64"
+				className="relative overflow-auto scrollbar-thin rounded-lg border shadow min-h-64"
 				ref={tableContainerRef}
 				style={{ maxHeight: `calc(100vh - ${200}px)` }}
 			>
 				{/* Even though we're still using sematic table tags, we must use CSS grid and flexbox for dynamic row heights */}
-				<Table>
-					<TableHeader className="z-10 bg-muted backdrop-blur">
+				<table>
+					<TableHeader className="sticky top-0 z-10 bg-transparent backdrop-blur">
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow className="flex" key={headerGroup.id}>
 								{headerGroup.headers.map((header) => {
@@ -133,32 +133,25 @@ function RouteComponent() {
 											key={header.id}
 											style={{ width: header.getSize() }}
 											className={`h-auto shrink-0 ${
-												header.getSize() > minFixedWidth
-													? "grow"
-													: ""
+												header.getSize() > minFixedWidth ? "grow" : ""
 											}`}
 										>
 											<div
 												{...{
-													className:
-														header.column.getCanSort()
-															? "cursor-pointer select-none"
-															: "",
-													onClick:
-														header.column.getToggleSortingHandler(),
+													className: header.column.getCanSort()
+														? "cursor-pointer select-none"
+														: "",
+													onClick: header.column.getToggleSortingHandler(),
 												}}
 											>
 												{flexRender(
-													header.column.columnDef
-														.header,
-													header.getContext()
+													header.column.columnDef.header,
+													header.getContext(),
 												)}
 												{{
 													asc: " 🔼",
 													desc: " 🔽",
-												}[
-													header.column.getIsSorted() as string
-												] ?? null}
+												}[header.column.getIsSorted() as string] ?? null}
 											</div>
 										</TableHead>
 									);
@@ -166,11 +159,8 @@ function RouteComponent() {
 							</TableRow>
 						))}
 					</TableHeader>
-					<TBody
-						table={table}
-						tableContainerRef={tableContainerRef}
-					/>
-				</Table>
+					<TBody table={table} tableContainerRef={tableContainerRef} />
+				</table>
 			</div>
 		</div>
 	);
@@ -249,11 +239,9 @@ function TBodyRow({ row, virtualRow, rowVirtualizer }: TableBodyRowProps) {
 							display: "flex",
 							width: cell.column.getSize(),
 						}}
+						className="shrink-0 truncate grow"
 					>
-						{flexRender(
-							cell.column.columnDef.cell,
-							cell.getContext()
-						)}
+						{flexRender(cell.column.columnDef.cell, cell.getContext())}
 					</TableCell>
 				);
 			})}

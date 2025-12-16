@@ -14,6 +14,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LayoutVirtualExpRouteImport } from './routes/_layout.virtual-exp'
 import { Route as LayoutVirtualRouteImport } from './routes/_layout.virtual'
 import { Route as LayoutValtioRouteImport } from './routes/_layout.valtio'
 import { Route as LayoutTextRouteImport } from './routes/_layout.text'
@@ -48,6 +49,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const LayoutVirtualExpRoute = LayoutVirtualExpRouteImport.update({
+  id: '/virtual-exp',
+  path: '/virtual-exp',
+  getParentRoute: () => LayoutRoute,
 } as any)
 const LayoutVirtualRoute = LayoutVirtualRouteImport.update({
   id: '/virtual',
@@ -118,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/text': typeof LayoutTextRoute
   '/valtio': typeof LayoutValtioRoute
   '/virtual': typeof LayoutVirtualRoute
+  '/virtual-exp': typeof LayoutVirtualExpRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/invoices/': typeof AuthInvoicesIndexRoute
 }
@@ -133,6 +140,7 @@ export interface FileRoutesByTo {
   '/text': typeof LayoutTextRoute
   '/valtio': typeof LayoutValtioRoute
   '/virtual': typeof LayoutVirtualRoute
+  '/virtual-exp': typeof LayoutVirtualExpRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/invoices': typeof AuthInvoicesIndexRoute
 }
@@ -152,6 +160,7 @@ export interface FileRoutesById {
   '/_layout/text': typeof LayoutTextRoute
   '/_layout/valtio': typeof LayoutValtioRoute
   '/_layout/virtual': typeof LayoutVirtualRoute
+  '/_layout/virtual-exp': typeof LayoutVirtualExpRoute
   '/_auth/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/_auth/invoices/': typeof AuthInvoicesIndexRoute
 }
@@ -170,6 +179,7 @@ export interface FileRouteTypes {
     | '/text'
     | '/valtio'
     | '/virtual'
+    | '/virtual-exp'
     | '/invoices/$invoiceId'
     | '/invoices/'
   fileRoutesByTo: FileRoutesByTo
@@ -185,6 +195,7 @@ export interface FileRouteTypes {
     | '/text'
     | '/valtio'
     | '/virtual'
+    | '/virtual-exp'
     | '/invoices/$invoiceId'
     | '/invoices'
   id:
@@ -203,6 +214,7 @@ export interface FileRouteTypes {
     | '/_layout/text'
     | '/_layout/valtio'
     | '/_layout/virtual'
+    | '/_layout/virtual-exp'
     | '/_auth/invoices/$invoiceId'
     | '/_auth/invoices/'
   fileRoutesById: FileRoutesById
@@ -251,6 +263,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_layout/virtual-exp': {
+      id: '/_layout/virtual-exp'
+      path: '/virtual-exp'
+      fullPath: '/virtual-exp'
+      preLoaderRoute: typeof LayoutVirtualExpRouteImport
+      parentRoute: typeof LayoutRoute
     }
     '/_layout/virtual': {
       id: '/_layout/virtual'
@@ -365,6 +384,7 @@ interface LayoutRouteChildren {
   LayoutTextRoute: typeof LayoutTextRoute
   LayoutValtioRoute: typeof LayoutValtioRoute
   LayoutVirtualRoute: typeof LayoutVirtualRoute
+  LayoutVirtualExpRoute: typeof LayoutVirtualExpRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
@@ -376,6 +396,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutTextRoute: LayoutTextRoute,
   LayoutValtioRoute: LayoutValtioRoute,
   LayoutVirtualRoute: LayoutVirtualRoute,
+  LayoutVirtualExpRoute: LayoutVirtualExpRoute,
 }
 
 const LayoutRouteWithChildren =
