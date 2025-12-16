@@ -26,10 +26,7 @@ function RouteComponent() {
 					<SidebarHeader>
 						<div className="flex gap-2 items-center">
 							<Avatar className="ring">
-								<AvatarImage
-									src={AVATAR_SRC.shadcn}
-									alt="@shadcn_sidebar"
-								/>
+								<AvatarImage src={AVATAR_SRC.shadcn} alt="@shadcn_sidebar" />
 								<AvatarFallback className="animate-pulse bg-linear-to-tr from-info to-primary"></AvatarFallback>
 							</Avatar>
 							<span className="font-[Caps]">Meme</span>
@@ -39,7 +36,7 @@ function RouteComponent() {
 						<SidebarItems />
 					</SidebarContent>
 				</Sidebar>
-				<main className="grow overflow-auto">
+				<main className="grow">
 					<Navbar />
 					<Outlet />
 				</main>

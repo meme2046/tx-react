@@ -14,15 +14,14 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as LayoutVirtualExpRouteImport } from './routes/_layout.virtual-exp'
-import { Route as LayoutVirtualRouteImport } from './routes/_layout.virtual'
 import { Route as LayoutValtioRouteImport } from './routes/_layout.valtio'
 import { Route as LayoutTextRouteImport } from './routes/_layout.text'
 import { Route as LayoutTestRouteImport } from './routes/_layout.test'
 import { Route as LayoutTablePaginationRouteImport } from './routes/_layout.table-pagination'
 import { Route as LayoutTableBasicRouteImport } from './routes/_layout.table-basic'
-import { Route as LayoutGridRouteImport } from './routes/_layout.grid'
+import { Route as LayoutIconsRouteImport } from './routes/_layout.icons'
 import { Route as LayoutCronLogsRouteImport } from './routes/_layout.cron-logs'
+import { Route as LayoutAvatarsRouteImport } from './routes/_layout.avatars'
 import { Route as AuthInvoicesRouteImport } from './routes/_auth.invoices'
 import { Route as AuthInvoicesIndexRouteImport } from './routes/_auth.invoices.index'
 import { Route as AuthInvoicesInvoiceIdRouteImport } from './routes/_auth.invoices.$invoiceId'
@@ -50,16 +49,6 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LayoutVirtualExpRoute = LayoutVirtualExpRouteImport.update({
-  id: '/virtual-exp',
-  path: '/virtual-exp',
-  getParentRoute: () => LayoutRoute,
-} as any)
-const LayoutVirtualRoute = LayoutVirtualRouteImport.update({
-  id: '/virtual',
-  path: '/virtual',
-  getParentRoute: () => LayoutRoute,
-} as any)
 const LayoutValtioRoute = LayoutValtioRouteImport.update({
   id: '/valtio',
   path: '/valtio',
@@ -85,14 +74,19 @@ const LayoutTableBasicRoute = LayoutTableBasicRouteImport.update({
   path: '/table-basic',
   getParentRoute: () => LayoutRoute,
 } as any)
-const LayoutGridRoute = LayoutGridRouteImport.update({
-  id: '/grid',
-  path: '/grid',
+const LayoutIconsRoute = LayoutIconsRouteImport.update({
+  id: '/icons',
+  path: '/icons',
   getParentRoute: () => LayoutRoute,
 } as any)
 const LayoutCronLogsRoute = LayoutCronLogsRouteImport.update({
   id: '/cron-logs',
   path: '/cron-logs',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutAvatarsRoute = LayoutAvatarsRouteImport.update({
+  id: '/avatars',
+  path: '/avatars',
   getParentRoute: () => LayoutRoute,
 } as any)
 const AuthInvoicesRoute = AuthInvoicesRouteImport.update({
@@ -116,15 +110,14 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
   '/invoices': typeof AuthInvoicesRouteWithChildren
+  '/avatars': typeof LayoutAvatarsRoute
   '/cron-logs': typeof LayoutCronLogsRoute
-  '/grid': typeof LayoutGridRoute
+  '/icons': typeof LayoutIconsRoute
   '/table-basic': typeof LayoutTableBasicRoute
   '/table-pagination': typeof LayoutTablePaginationRoute
   '/test': typeof LayoutTestRoute
   '/text': typeof LayoutTextRoute
   '/valtio': typeof LayoutValtioRoute
-  '/virtual': typeof LayoutVirtualRoute
-  '/virtual-exp': typeof LayoutVirtualExpRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/invoices/': typeof AuthInvoicesIndexRoute
 }
@@ -132,15 +125,14 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
+  '/avatars': typeof LayoutAvatarsRoute
   '/cron-logs': typeof LayoutCronLogsRoute
-  '/grid': typeof LayoutGridRoute
+  '/icons': typeof LayoutIconsRoute
   '/table-basic': typeof LayoutTableBasicRoute
   '/table-pagination': typeof LayoutTablePaginationRoute
   '/test': typeof LayoutTestRoute
   '/text': typeof LayoutTextRoute
   '/valtio': typeof LayoutValtioRoute
-  '/virtual': typeof LayoutVirtualRoute
-  '/virtual-exp': typeof LayoutVirtualExpRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/invoices': typeof AuthInvoicesIndexRoute
 }
@@ -152,15 +144,14 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
   '/_auth/invoices': typeof AuthInvoicesRouteWithChildren
+  '/_layout/avatars': typeof LayoutAvatarsRoute
   '/_layout/cron-logs': typeof LayoutCronLogsRoute
-  '/_layout/grid': typeof LayoutGridRoute
+  '/_layout/icons': typeof LayoutIconsRoute
   '/_layout/table-basic': typeof LayoutTableBasicRoute
   '/_layout/table-pagination': typeof LayoutTablePaginationRoute
   '/_layout/test': typeof LayoutTestRoute
   '/_layout/text': typeof LayoutTextRoute
   '/_layout/valtio': typeof LayoutValtioRoute
-  '/_layout/virtual': typeof LayoutVirtualRoute
-  '/_layout/virtual-exp': typeof LayoutVirtualExpRoute
   '/_auth/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/_auth/invoices/': typeof AuthInvoicesIndexRoute
 }
@@ -171,15 +162,14 @@ export interface FileRouteTypes {
     | '/about'
     | '/login'
     | '/invoices'
+    | '/avatars'
     | '/cron-logs'
-    | '/grid'
+    | '/icons'
     | '/table-basic'
     | '/table-pagination'
     | '/test'
     | '/text'
     | '/valtio'
-    | '/virtual'
-    | '/virtual-exp'
     | '/invoices/$invoiceId'
     | '/invoices/'
   fileRoutesByTo: FileRoutesByTo
@@ -187,15 +177,14 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/login'
+    | '/avatars'
     | '/cron-logs'
-    | '/grid'
+    | '/icons'
     | '/table-basic'
     | '/table-pagination'
     | '/test'
     | '/text'
     | '/valtio'
-    | '/virtual'
-    | '/virtual-exp'
     | '/invoices/$invoiceId'
     | '/invoices'
   id:
@@ -206,15 +195,14 @@ export interface FileRouteTypes {
     | '/about'
     | '/login'
     | '/_auth/invoices'
+    | '/_layout/avatars'
     | '/_layout/cron-logs'
-    | '/_layout/grid'
+    | '/_layout/icons'
     | '/_layout/table-basic'
     | '/_layout/table-pagination'
     | '/_layout/test'
     | '/_layout/text'
     | '/_layout/valtio'
-    | '/_layout/virtual'
-    | '/_layout/virtual-exp'
     | '/_auth/invoices/$invoiceId'
     | '/_auth/invoices/'
   fileRoutesById: FileRoutesById
@@ -264,20 +252,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_layout/virtual-exp': {
-      id: '/_layout/virtual-exp'
-      path: '/virtual-exp'
-      fullPath: '/virtual-exp'
-      preLoaderRoute: typeof LayoutVirtualExpRouteImport
-      parentRoute: typeof LayoutRoute
-    }
-    '/_layout/virtual': {
-      id: '/_layout/virtual'
-      path: '/virtual'
-      fullPath: '/virtual'
-      preLoaderRoute: typeof LayoutVirtualRouteImport
-      parentRoute: typeof LayoutRoute
-    }
     '/_layout/valtio': {
       id: '/_layout/valtio'
       path: '/valtio'
@@ -313,11 +287,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutTableBasicRouteImport
       parentRoute: typeof LayoutRoute
     }
-    '/_layout/grid': {
-      id: '/_layout/grid'
-      path: '/grid'
-      fullPath: '/grid'
-      preLoaderRoute: typeof LayoutGridRouteImport
+    '/_layout/icons': {
+      id: '/_layout/icons'
+      path: '/icons'
+      fullPath: '/icons'
+      preLoaderRoute: typeof LayoutIconsRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_layout/cron-logs': {
@@ -325,6 +299,13 @@ declare module '@tanstack/react-router' {
       path: '/cron-logs'
       fullPath: '/cron-logs'
       preLoaderRoute: typeof LayoutCronLogsRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/avatars': {
+      id: '/_layout/avatars'
+      path: '/avatars'
+      fullPath: '/avatars'
+      preLoaderRoute: typeof LayoutAvatarsRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_auth/invoices': {
@@ -376,27 +357,25 @@ const AuthRouteChildren: AuthRouteChildren = {
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface LayoutRouteChildren {
+  LayoutAvatarsRoute: typeof LayoutAvatarsRoute
   LayoutCronLogsRoute: typeof LayoutCronLogsRoute
-  LayoutGridRoute: typeof LayoutGridRoute
+  LayoutIconsRoute: typeof LayoutIconsRoute
   LayoutTableBasicRoute: typeof LayoutTableBasicRoute
   LayoutTablePaginationRoute: typeof LayoutTablePaginationRoute
   LayoutTestRoute: typeof LayoutTestRoute
   LayoutTextRoute: typeof LayoutTextRoute
   LayoutValtioRoute: typeof LayoutValtioRoute
-  LayoutVirtualRoute: typeof LayoutVirtualRoute
-  LayoutVirtualExpRoute: typeof LayoutVirtualExpRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutAvatarsRoute: LayoutAvatarsRoute,
   LayoutCronLogsRoute: LayoutCronLogsRoute,
-  LayoutGridRoute: LayoutGridRoute,
+  LayoutIconsRoute: LayoutIconsRoute,
   LayoutTableBasicRoute: LayoutTableBasicRoute,
   LayoutTablePaginationRoute: LayoutTablePaginationRoute,
   LayoutTestRoute: LayoutTestRoute,
   LayoutTextRoute: LayoutTextRoute,
   LayoutValtioRoute: LayoutValtioRoute,
-  LayoutVirtualRoute: LayoutVirtualRoute,
-  LayoutVirtualExpRoute: LayoutVirtualExpRoute,
 }
 
 const LayoutRouteWithChildren =

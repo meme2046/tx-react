@@ -7,21 +7,16 @@ export const themes: Record<string, string> = {
 
 const navDemo: INav[] = [
 	{ name: "invoices", emoj: "🧾", desc: "", value: "/invoices" },
-	{ name: "icon", emoj: "⭐", desc: "", value: "/icon" },
-	{ name: "avatar", emoj: "😎", desc: "头像", value: "/avatar" },
+	{ name: "icons", emoj: "⭐", desc: "", value: "/icons" },
+	{ name: "avatars", emoj: "😎", desc: "头像", value: "/avatars" },
 	{ name: "valtio", emoj: "💊", desc: "", value: "/valtio" },
-	{ name: "grid", emoj: "🔢", desc: "", value: "/grid" },
 	{ name: "text", emoj: "📝", desc: "", value: "/text" },
 	{ name: "test", emoj: "🧪", desc: "", value: "/test" },
 	{ name: "about", emoj: "🔎", desc: "", value: "/about" },
-	{ name: "basic table", emoj: "📦", desc: "", value: "/table-basic" },
-	{
-		name: "virtualized table exp",
-		desc: "",
-		value: "/virtual-exp",
-	},
+	{ name: "basic table", emoj: "", desc: "", value: "/table-basic" },
 	{
 		name: "pagination table",
+		emoj: "",
 		desc: "",
 		value: "/table-pagination",
 	},

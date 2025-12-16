@@ -34,9 +34,7 @@ export function Navbar() {
 					>
 						<div>
 							<span>{item.emoj}</span>
-							<span className="ml-2">
-								{capitalize(item.name)}
-							</span>
+							<span className="ml-2">{capitalize(item.name)}</span>
 						</div>
 						<p className="text-xs font-thin">
 							{item.desc ? `| ${item.desc}` : undefined}
