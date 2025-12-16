@@ -5,8 +5,7 @@ export const ICON_SRC: Record<string, string> = {
 		"https://arweave.net/NwzNofG4ML1djqi6C1ee11i-i97xWWLGPvaINbNki_8",
 	"arrow-right":
 		"https://arweave.net/eVG3fXPJsJ5oTHKvUZZZZP_BXbT0N0iOz6FHkbTk39Q",
-	"arrow-up":
-		"https://arweave.net/uFMmk-67GIyUYJsPNIZaI864vh8dIUkowWMyPuG6Q-4",
+	"arrow-up": "https://arweave.net/uFMmk-67GIyUYJsPNIZaI864vh8dIUkowWMyPuG6Q-4",
 	date: "https://arweave.net/peM8DUaa7bhsLkfbWOYooxe1wKYmmL6n9WA_AVTCzl8",
 	home: "https://arweave.net/_2Kw9msxrmcrZAHMJTiztPbS4Ttq5DmfCATiT_xTRzI",
 	menu: "https://arweave.net/EiarEoJfzJi8oGssaX28RucZYBm4jH-wSA2zvPo_h9E",
@@ -15,6 +14,7 @@ export const ICON_SRC: Record<string, string> = {
 	ok: "https://arweave.net/j5GR9Ukfrk39PJqsZCEBfO6SmxWEB3iu4JIMGtwwYwY",
 	refresh: "https://arweave.net/q6tv8ULwElxM9HbPKd5qTd2QLmjZKd_uHy4f1OPQkzk",
 	refresh1: "https://arweave.net/BbCNzKRF8eyB_ObYgqpvbkr7SU0l9zgE6ihPoO0r18g",
+	processing: "https://arweave.net/p2Zzw2SFjHVdfbZ5KvVv0v7oHbZQNYmcCc9i7ILParw",
 	theme: "https://arweave.net/ATZU_ijNHZ5mrBYAHhdl3ctyXMKG_78cGBsv8l6aHds",
 	chevron: "https://arweave.net/1vTq0udiOiZKX9DnIim6mzU6ZdFEf3xf-TfEdW4hlHE",
 	eye: "https://arweave.net/25zAP9YjodlLiUlF2iHhshFKpHrHz_GU23Gy7nv22go",

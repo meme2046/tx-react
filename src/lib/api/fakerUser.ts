@@ -50,6 +50,7 @@ const newFakerUser = (index: number): IFakerUser => {
 		age: faker.number.int({ min: 18, max: 60 }),
 		avatar: faker.image.avatar(),
 		email: faker.internet.email(),
+		createdAt: faker.date.past(),
 	};
 };
 const range = (len: number) => {
@@ -71,11 +72,10 @@ function makeData(...lens: number[]) {
 	return makeDataLevel();
 }
 
-const data = makeData(100);
-
 export const fetchFakerUser = async (size: number, cursor?: number) => {
 	await sleep(2000);
 	const start = cursor ?? 0;
+	const data = makeData(start + size);
 	const list = data.slice(start, start + size);
 	let nextCursor: number | undefined = start + size;
 	if (list.length == 0) {

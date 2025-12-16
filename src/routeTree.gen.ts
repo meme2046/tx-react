@@ -14,11 +14,14 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LayoutVirtualRouteImport } from './routes/_layout.virtual'
 import { Route as LayoutValtioRouteImport } from './routes/_layout.valtio'
 import { Route as LayoutTextRouteImport } from './routes/_layout.text'
 import { Route as LayoutTestRouteImport } from './routes/_layout.test'
-import { Route as LayoutTableRouteImport } from './routes/_layout.table'
+import { Route as LayoutTablePaginationRouteImport } from './routes/_layout.table-pagination'
+import { Route as LayoutTableBasicRouteImport } from './routes/_layout.table-basic'
 import { Route as LayoutGridRouteImport } from './routes/_layout.grid'
+import { Route as LayoutCronLogsRouteImport } from './routes/_layout.cron-logs'
 import { Route as AuthInvoicesRouteImport } from './routes/_auth.invoices'
 import { Route as AuthInvoicesIndexRouteImport } from './routes/_auth.invoices.index'
 import { Route as AuthInvoicesInvoiceIdRouteImport } from './routes/_auth.invoices.$invoiceId'
@@ -46,6 +49,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LayoutVirtualRoute = LayoutVirtualRouteImport.update({
+  id: '/virtual',
+  path: '/virtual',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const LayoutValtioRoute = LayoutValtioRouteImport.update({
   id: '/valtio',
   path: '/valtio',
@@ -61,14 +69,24 @@ const LayoutTestRoute = LayoutTestRouteImport.update({
   path: '/test',
   getParentRoute: () => LayoutRoute,
 } as any)
-const LayoutTableRoute = LayoutTableRouteImport.update({
-  id: '/table',
-  path: '/table',
+const LayoutTablePaginationRoute = LayoutTablePaginationRouteImport.update({
+  id: '/table-pagination',
+  path: '/table-pagination',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutTableBasicRoute = LayoutTableBasicRouteImport.update({
+  id: '/table-basic',
+  path: '/table-basic',
   getParentRoute: () => LayoutRoute,
 } as any)
 const LayoutGridRoute = LayoutGridRouteImport.update({
   id: '/grid',
   path: '/grid',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutCronLogsRoute = LayoutCronLogsRouteImport.update({
+  id: '/cron-logs',
+  path: '/cron-logs',
   getParentRoute: () => LayoutRoute,
 } as any)
 const AuthInvoicesRoute = AuthInvoicesRouteImport.update({
@@ -92,11 +110,14 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
   '/invoices': typeof AuthInvoicesRouteWithChildren
+  '/cron-logs': typeof LayoutCronLogsRoute
   '/grid': typeof LayoutGridRoute
-  '/table': typeof LayoutTableRoute
+  '/table-basic': typeof LayoutTableBasicRoute
+  '/table-pagination': typeof LayoutTablePaginationRoute
   '/test': typeof LayoutTestRoute
   '/text': typeof LayoutTextRoute
   '/valtio': typeof LayoutValtioRoute
+  '/virtual': typeof LayoutVirtualRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/invoices/': typeof AuthInvoicesIndexRoute
 }
@@ -104,11 +125,14 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
+  '/cron-logs': typeof LayoutCronLogsRoute
   '/grid': typeof LayoutGridRoute
-  '/table': typeof LayoutTableRoute
+  '/table-basic': typeof LayoutTableBasicRoute
+  '/table-pagination': typeof LayoutTablePaginationRoute
   '/test': typeof LayoutTestRoute
   '/text': typeof LayoutTextRoute
   '/valtio': typeof LayoutValtioRoute
+  '/virtual': typeof LayoutVirtualRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/invoices': typeof AuthInvoicesIndexRoute
 }
@@ -120,11 +144,14 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
   '/_auth/invoices': typeof AuthInvoicesRouteWithChildren
+  '/_layout/cron-logs': typeof LayoutCronLogsRoute
   '/_layout/grid': typeof LayoutGridRoute
-  '/_layout/table': typeof LayoutTableRoute
+  '/_layout/table-basic': typeof LayoutTableBasicRoute
+  '/_layout/table-pagination': typeof LayoutTablePaginationRoute
   '/_layout/test': typeof LayoutTestRoute
   '/_layout/text': typeof LayoutTextRoute
   '/_layout/valtio': typeof LayoutValtioRoute
+  '/_layout/virtual': typeof LayoutVirtualRoute
   '/_auth/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/_auth/invoices/': typeof AuthInvoicesIndexRoute
 }
@@ -135,11 +162,14 @@ export interface FileRouteTypes {
     | '/about'
     | '/login'
     | '/invoices'
+    | '/cron-logs'
     | '/grid'
-    | '/table'
+    | '/table-basic'
+    | '/table-pagination'
     | '/test'
     | '/text'
     | '/valtio'
+    | '/virtual'
     | '/invoices/$invoiceId'
     | '/invoices/'
   fileRoutesByTo: FileRoutesByTo
@@ -147,11 +177,14 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/login'
+    | '/cron-logs'
     | '/grid'
-    | '/table'
+    | '/table-basic'
+    | '/table-pagination'
     | '/test'
     | '/text'
     | '/valtio'
+    | '/virtual'
     | '/invoices/$invoiceId'
     | '/invoices'
   id:
@@ -162,11 +195,14 @@ export interface FileRouteTypes {
     | '/about'
     | '/login'
     | '/_auth/invoices'
+    | '/_layout/cron-logs'
     | '/_layout/grid'
-    | '/_layout/table'
+    | '/_layout/table-basic'
+    | '/_layout/table-pagination'
     | '/_layout/test'
     | '/_layout/text'
     | '/_layout/valtio'
+    | '/_layout/virtual'
     | '/_auth/invoices/$invoiceId'
     | '/_auth/invoices/'
   fileRoutesById: FileRoutesById
@@ -216,6 +252,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_layout/virtual': {
+      id: '/_layout/virtual'
+      path: '/virtual'
+      fullPath: '/virtual'
+      preLoaderRoute: typeof LayoutVirtualRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/valtio': {
       id: '/_layout/valtio'
       path: '/valtio'
@@ -237,11 +280,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutTestRouteImport
       parentRoute: typeof LayoutRoute
     }
-    '/_layout/table': {
-      id: '/_layout/table'
-      path: '/table'
-      fullPath: '/table'
-      preLoaderRoute: typeof LayoutTableRouteImport
+    '/_layout/table-pagination': {
+      id: '/_layout/table-pagination'
+      path: '/table-pagination'
+      fullPath: '/table-pagination'
+      preLoaderRoute: typeof LayoutTablePaginationRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/table-basic': {
+      id: '/_layout/table-basic'
+      path: '/table-basic'
+      fullPath: '/table-basic'
+      preLoaderRoute: typeof LayoutTableBasicRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_layout/grid': {
@@ -249,6 +299,13 @@ declare module '@tanstack/react-router' {
       path: '/grid'
       fullPath: '/grid'
       preLoaderRoute: typeof LayoutGridRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/cron-logs': {
+      id: '/_layout/cron-logs'
+      path: '/cron-logs'
+      fullPath: '/cron-logs'
+      preLoaderRoute: typeof LayoutCronLogsRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_auth/invoices': {
@@ -300,19 +357,25 @@ const AuthRouteChildren: AuthRouteChildren = {
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface LayoutRouteChildren {
+  LayoutCronLogsRoute: typeof LayoutCronLogsRoute
   LayoutGridRoute: typeof LayoutGridRoute
-  LayoutTableRoute: typeof LayoutTableRoute
+  LayoutTableBasicRoute: typeof LayoutTableBasicRoute
+  LayoutTablePaginationRoute: typeof LayoutTablePaginationRoute
   LayoutTestRoute: typeof LayoutTestRoute
   LayoutTextRoute: typeof LayoutTextRoute
   LayoutValtioRoute: typeof LayoutValtioRoute
+  LayoutVirtualRoute: typeof LayoutVirtualRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutCronLogsRoute: LayoutCronLogsRoute,
   LayoutGridRoute: LayoutGridRoute,
-  LayoutTableRoute: LayoutTableRoute,
+  LayoutTableBasicRoute: LayoutTableBasicRoute,
+  LayoutTablePaginationRoute: LayoutTablePaginationRoute,
   LayoutTestRoute: LayoutTestRoute,
   LayoutTextRoute: LayoutTextRoute,
   LayoutValtioRoute: LayoutValtioRoute,
+  LayoutVirtualRoute: LayoutVirtualRoute,
 }
 
 const LayoutRouteWithChildren =

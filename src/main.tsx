@@ -7,8 +7,9 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
+import reportWebVitals from "./reportWebVitals.ts";
 import { AppProvider } from "./components/providers";
-import { useApp } from "./lib/hooks/use-app";
+import { useApp } from "./hooks/use-app.ts";
 
 import { useSnapshot } from "valtio";
 import { storePersist } from "./lib/valtio";
@@ -66,3 +67,8 @@ if (!rootElement.innerHTML) {
 		</StrictMode>
 	);
 }
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();

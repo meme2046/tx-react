@@ -7,6 +7,7 @@ export interface IFakerUser {
 	email: string;
 	status: string;
 	avatar: string;
+	createdAt: Date;
 }
 
 export interface IFakerInvoice {

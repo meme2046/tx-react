@@ -1,23 +1,22 @@
+import type { Row, RowData, Table as TsTable } from "@tanstack/react-table";
 import { flexRender } from "@tanstack/react-table";
-import type { Row, RowData, Table } from "@tanstack/react-table";
 import {
+	Table,
 	TableBody,
 	TableCell,
 	TableHead,
 	TableHeader,
 	TableRow,
 } from "../ui/table";
-
+import { TableFilter } from "./table-filter";
 import { ReactSVG } from "react-svg";
 import { ICON_SRC } from "@/consts";
-import { Virtualizer } from "@tanstack/react-virtual";
-import type { VirtualItem } from "@tanstack/react-virtual";
-import { TableFilter } from "./table-filter";
+import { type VirtualItem, Virtualizer } from "@tanstack/react-virtual";
 
 interface ITableBase<T> {
 	tableContainerRef: React.RefObject<HTMLDivElement | null>;
 	subHeight: number;
-	table: Table<T>;
+	table: TsTable<T>;
 	minFixedWidth: number;
 	isFetching: boolean;
 	isLoading: boolean;
@@ -47,7 +46,7 @@ export function TableBase<T extends RowData>(props: ITableBase<T>) {
 			style={{ maxHeight: `calc(100vh - ${subHeight}px)` }}
 			className="relative overflow-auto scrollbar-thin rounded-lg border shadow min-h-64"
 		>
-			<table className="w-full text-sm">
+			<Table className="w-full text-sm">
 				<TableHeader className="sticky top-0 z-10 bg-muted backdrop-blur">
 					{table.getHeaderGroups().map((headerGroup) => (
 						<TableRow key={headerGroup.id} className="flex">
@@ -186,7 +185,7 @@ export function TableBase<T extends RowData>(props: ITableBase<T>) {
 						</TableRow>
 					)}
 				</TableBody>
-			</table>
+			</Table>
 			{((hasNextPage && isFetching) || isLoading) && (
 				<ReactSVG
 					src={ICON_SRC["loading4"]}

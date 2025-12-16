@@ -6,13 +6,14 @@ import {
 	getSortedRowModel,
 	useReactTable,
 } from "@tanstack/react-table";
+
 import type {
 	ColumnDef,
 	ColumnFiltersState,
 	ColumnSort,
+	VisibilityState,
 	RowData,
 	SortingState,
-	VisibilityState,
 } from "@tanstack/react-table";
 
 import { TopContent } from "./top-content.tsx";

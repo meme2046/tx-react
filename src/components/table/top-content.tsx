@@ -49,13 +49,10 @@ export function TopContent<T extends RowData>(props: ITopContent<T>) {
 		<div className="flex justify-between items-center text-sm">
 			<div className="hidden md:flex gap-2 items-center">
 				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
+					<DropdownMenuTrigger asChild className="cursor-pointer">
 						<Button variant="outline">
 							<span>Columns&nbsp;</span>
-							<ReactSVG
-								src={ICON_SRC["chevron"]}
-								className="w-4 opacity-50"
-							/>
+							<ReactSVG src={ICON_SRC["chevron"]} className="w-4 opacity-50" />
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent>
@@ -64,9 +61,7 @@ export function TopContent<T extends RowData>(props: ITopContent<T>) {
 								className="cursor-pointer"
 								key={column.id}
 								checked={column.getIsVisible()}
-								onCheckedChange={(value) =>
-									column.toggleVisibility(!!value)
-								}
+								onCheckedChange={(value) => column.toggleVisibility(!!value)}
 							>
 								{typeof column.columnDef.header === "function"
 									? upperCase(column.id)
@@ -81,14 +76,12 @@ export function TopContent<T extends RowData>(props: ITopContent<T>) {
 					}}
 					value={rowsPerPage}
 				>
-					<SelectTrigger>
+					<SelectTrigger className="cursor-pointer">
 						<SelectValue placeholder="Rows per page" />
 					</SelectTrigger>
 					<SelectContent>
 						<SelectGroup>
-							<SelectLabel className="text-primary">
-								Rows per page
-							</SelectLabel>
+							<SelectLabel className="text-primary">Rows per page</SelectLabel>
 							{rowsPerPageList.map((size) => (
 								<SelectItem
 									className="cursor-pointer"
@@ -102,13 +95,14 @@ export function TopContent<T extends RowData>(props: ITopContent<T>) {
 					</SelectContent>
 				</Select>
 				{!hasNextPage && !isFetching && (
-					<Badge variant="outline" className="text-nowrap">
+					<Badge variant="destructive" className="text-nowrap">
 						所有数据已获取
 					</Badge>
 				)}
 			</div>
 			<div className="flex items-center">
 				<Button
+					className="cursor-pointer rounded-full"
 					disabled={isFetching}
 					size="icon"
 					variant="ghost"
@@ -118,9 +112,7 @@ export function TopContent<T extends RowData>(props: ITopContent<T>) {
 				>
 					<ReactSVG
 						src={ICON_SRC["refresh"]}
-						className={`text-primary w-6 ${
-							isFetching ? "animate-spin" : ""
-						}`}
+						className={`${isFetching ? "animate-spin" : ""}`}
 					/>
 				</Button>
 				<span className="text-nowrap">

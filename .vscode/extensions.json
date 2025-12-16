@@ -14,6 +14,8 @@
 		"oderwat.indent-rainbow",
 		"mechatroner.rainbow-csv",
 		"liviuschera.noctis",
+		"GitHub.github-vscode-theme",
+		"ahmadawais.shades-of-purple",
 		// 工具
 		"vscode-icons-team.vscode-icons",
 		"alefragnani.project-manager",
@@ -25,6 +27,6 @@
 		"bradlc.vscode-tailwindcss",
 		"dbaeumer.vscode-eslint",
 		"burkeholland.simple-react-snippets",
-		"jock.svg"
+		"midudev.better-svg"
 	]
 }

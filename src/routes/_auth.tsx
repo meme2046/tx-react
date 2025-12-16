@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Outlet, redirect, useRouter } from "@tanstack/react-router";
 
-import { useApp } from "@/lib/hooks/use-app";
+import { useApp } from "@/hooks/use-app";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/_auth")({

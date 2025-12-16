@@ -39,7 +39,7 @@ function RouteComponent() {
 						<SidebarItems />
 					</SidebarContent>
 				</Sidebar>
-				<main className="grow">
+				<main className="grow overflow-auto">
 					<Navbar />
 					<Outlet />
 				</main>

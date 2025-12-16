@@ -9,18 +9,24 @@ const navDemo: INav[] = [
 	{ name: "invoices", emoj: "🧾", desc: "", value: "/invoices" },
 	{ name: "icon", emoj: "⭐", desc: "", value: "/icon" },
 	{ name: "avatar", emoj: "😎", desc: "头像", value: "/avatar" },
-	{ name: "table", emoj: "📦", desc: "", value: "/table" },
 	{ name: "valtio", emoj: "💊", desc: "", value: "/valtio" },
 	{ name: "grid", emoj: "🔢", desc: "", value: "/grid" },
 	{ name: "text", emoj: "📝", desc: "", value: "/text" },
 	{ name: "test", emoj: "🧪", desc: "", value: "/test" },
 	{ name: "about", emoj: "🔎", desc: "", value: "/about" },
+	{ name: "basic table", emoj: "📦", desc: "", value: "/table-basic" },
+	{
+		name: "pagination table",
+		emoj: "📦",
+		desc: "",
+		value: "/table-pagination",
+	},
 ];
 
 const navCron: INav[] = [
 	{ name: "api", emoj: "🧩", desc: "设置定时任务API", value: "/cron/api" },
 	{ name: "job", emoj: "🤖", desc: "", value: "/cron/job" },
-	{ name: "log", emoj: "📋", desc: "", value: "/cron/log" },
+	{ name: "log", emoj: "📋", desc: "", value: "/cron-logs" },
 	{ name: "config", emoj: "⚙️", desc: "", value: "/cron/config" },
 	{
 		name: "worker",
