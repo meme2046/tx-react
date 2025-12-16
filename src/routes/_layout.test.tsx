@@ -39,6 +39,9 @@ function RouteComponent() {
 				<Button variant="ghost" size="icon" className="rounded-full">
 					<ReactSVG src={processSvg} className="text-primary animate-spin" />
 				</Button>
+				<Button variant="ghost" size="icon" className="rounded-full">
+					<ReactSVG src={processSvg} className="text-primary" />
+				</Button>
 				<Button variant="outline" className="gap-1">
 					<ReactSVG
 						src={ICON_SRC["processing"]}
