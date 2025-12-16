@@ -70,7 +70,7 @@
 		"notebook.source.organizeImports": "explicit" // notebook 保存时自动排序 import 语句
 	},
 	"editor.formatOnSave": true, // 保存时格式化
-	"prettier.configPath": ".vscode/.prettierrc",
+	"prettier.configPath": ".vscode/.prettierrc.json",
 	"[javascript]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
