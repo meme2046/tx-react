@@ -27,7 +27,7 @@ body {
 }
 
 .bg-slash {
-	@apply bg-[repeating-linear-gradient(45deg,var(--background)_0px,var(--background)_13px,var(--muted)_13px,var(--muted)_14px)];
+	@apply bg-[repeating-linear-gradient(45deg,transparent_0px,transparent_13px,var(--muted)_13px,var(--muted)_14px)];
 }
 
 .bg-dot {
