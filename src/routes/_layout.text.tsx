@@ -42,7 +42,7 @@ function RouteComponent() {
 		</Alert>
 	);
 	return (
-		<div className="p-4 flex flex-col gap-4">
+		<div className="p-4 flex flex-col gap-4 bg-slash">
 			<Alert>
 				<AlertTitle>字体</AlertTitle>
 				<AlertDescription>

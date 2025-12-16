@@ -1,0 +1,35 @@
+html {
+	@apply scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary;
+}
+
+body {
+	@apply bg-[url('https://arweave.net/c3cCRBcDb-cbx26AlJqJ9MKYBUPFDXN6pJ3AsVBWTzw')] dark:bg-[url('https://arweave.net/STTh6euGv92OJDYAxAkUQwFj0fJ7oTY4ker1tUSPcY8')] bg-size-[50%] bg-no-repeat bg-top-right bg-fixed;
+}
+
+@keyframes movex {
+	from {
+		transform: translateX(-100%);
+	}
+	to {
+		transform: translateX(100%);
+	}
+}
+
+@layer base {
+	/* Delius Swash Caps */
+	@font-face {
+		font-family: "Caps";
+		font-weight: 400;
+		font-display: swap;
+		src: url("https://arweave.net/6nKnlPeN4v9u1HqdQdT-8KLhqn4OECDmVsJosHnyz48")
+			format("woff2");
+	}
+}
+
+.bg-slash {
+	@apply bg-[repeating-linear-gradient(45deg,var(--background)_0px,var(--background)_13px,var(--muted)_13px,var(--muted)_14px)];
+}
+
+.bg-dot {
+	@apply bg-size-[5px_5px] bg-radial-[at_50%_50%] from-foreground/50 from-0% to-transparent to-10%;
+}

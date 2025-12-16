@@ -50,6 +50,16 @@ function RouteComponent() {
 					<span className="text-xs">processing</span>
 				</Button>
 			</div>
+			<div className="flex gap-4">
+				<div className="size-50 border bg-[repeating-linear-gradient(45deg,var(--background)_0px,var(--background)_13px,var(--muted)_13px,var(--muted)_14px)]">
+					斜线背景
+				</div>
+				<div className="size-50 border bg-size-[5px_5px] bg-radial-[at_50%_50%] from-foreground/50 from-0% to-transparent to-10%">
+					dot背景
+				</div>
+				<div className="size-50 border bg-slash">斜线背景</div>
+				<div className="size-50 border bg-dot">dot背景</div>
+			</div>
 		</div>
-	)
+	);
 }

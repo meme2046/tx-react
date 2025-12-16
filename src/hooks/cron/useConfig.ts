@@ -5,11 +5,11 @@ import type { IEtcd } from "@/types";
 import { storePersist } from "@/lib/valtio";
 
 export const useConfig = (key?: string) => {
-	const { cronUrl } = useSnapshot(storePersist);
+	const { cronURL } = useSnapshot(storePersist);
 	return useQuery<IEtcd>({
-		queryKey: ["cron-config", key, cronUrl],
+		queryKey: ["cron-config", key, cronURL],
 		queryFn: () => {
-			return http<IEtcd>(`${cronUrl}/api/v1/etcd`, {
+			return http<IEtcd>(`${cronURL}/api/v1/etcd`, {
 				params: { key: key, prefix: false },
 			});
 		},

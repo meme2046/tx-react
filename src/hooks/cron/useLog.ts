@@ -13,28 +13,25 @@ export const useLog = (params: {
 	limit?: number;
 	skip?: number;
 }) => {
-	const { cronUrl } = useSnapshot(storePersist);
+	const { cronURL } = useSnapshot(storePersist);
 	return useQuery<ICronLogList>({
-		queryKey: ["cron-log", params, cronUrl],
+		queryKey: ["cron-log", params, cronURL],
 		queryFn: () => {
-			return http(`${cronUrl}/cron/log`, { d2: true, params });
+			return http(`${cronURL}/cron/log`, { d2: true, params });
 		},
 	});
 };
 
 export const useLogInfinite = (pageSize: number) => {
-	const { cronUrl } = useSnapshot(storePersist);
+	const { cronURL: cronUrl } = useSnapshot(storePersist);
 
 	return useInfiniteQuery<ICronLogList>({
 		queryKey: ["cron-log-infinite", pageSize, cronUrl],
 		queryFn: async ({ pageParam }) => {
 			const cursor = pageParam as number;
-			const resp = await http<ICronLogList>(
-				`${cronUrl}/api/v1/mongo/logs`,
-				{
-					params: { page: cursor, page_size: pageSize },
-				}
-			);
+			const resp = await http<ICronLogList>(`${cronUrl}/api/v1/mongo/logs`, {
+				params: { page: cursor, page_size: pageSize },
+			});
 
 			const len = resp.items.length;
 			if (len > 0) {

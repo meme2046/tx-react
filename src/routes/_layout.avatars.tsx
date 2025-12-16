@@ -18,7 +18,7 @@ export const Route = createFileRoute("/_layout/avatars")({
 
 function RouteComponent() {
 	return (
-		<div className="p-4">
+		<div className="p-4 bg-dot">
 			<Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
 				<CardHeader className="py-2">
 					<CardTitle className="flex items-center gap-2 text-xl font-bold text-primary">

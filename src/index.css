@@ -1,38 +1,7 @@
 @import "tailwindcss";
-@import "tailwindcss-animated";
 @plugin 'tailwind-scrollbar';
-
-html {
-	@apply scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary;
-}
-
-body {
-	@apply bg-[url('https://arweave.net/c3cCRBcDb-cbx26AlJqJ9MKYBUPFDXN6pJ3AsVBWTzw')] dark:bg-[url('https://arweave.net/STTh6euGv92OJDYAxAkUQwFj0fJ7oTY4ker1tUSPcY8')] bg-size-[50%] bg-no-repeat bg-top-right;
-}
-
-@keyframes movex {
-	from {
-		transform: translateX(-100%);
-	}
-	to {
-		transform: translateX(100%);
-	}
-}
-
-@layer base {
-	/* Delius Swash Caps */
-	@font-face {
-		font-family: "Caps";
-		font-weight: 400;
-		font-display: swap;
-		src: url("https://arweave.net/6nKnlPeN4v9u1HqdQdT-8KLhqn4OECDmVsJosHnyz48")
-			format("woff2");
-	}
-	body {
-		letter-spacing: var(--tracking-normal);
-	}
-}
-
+@import "tailwindcss-animated";
+@import "./_index.css";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -250,5 +219,6 @@ body {
 	}
 	body {
 		@apply bg-background text-foreground;
+		letter-spacing: var(--tracking-normal);
 	}
 }

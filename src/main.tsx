@@ -64,7 +64,7 @@ if (!rootElement.innerHTML) {
 			<AppProvider>
 				<App />
 			</AppProvider>
-		</StrictMode>
+		</StrictMode>,
 	);
 }
 
