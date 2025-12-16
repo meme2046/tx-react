@@ -6,12 +6,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ReactSVG } from "react-svg";
 import processSvg from "@/assets/processing.svg";
 
-export const Route = createFileRoute("/_layout/test")({
+export const Route = createFileRoute("/_layout/tests")({
 	component: RouteComponent,
 	head: () => ({
 		meta: [
 			{
-				title: "Test Page",
+				title: "Tests",
 			},
 		],
 	}),
@@ -51,5 +51,5 @@ function RouteComponent() {
 				</Button>
 			</div>
 		</div>
-	);
+	)
 }

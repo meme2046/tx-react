@@ -10,6 +10,13 @@ import { ReactTable } from "@/components/table";
 
 export const Route = createFileRoute("/_layout/cron-logs")({
 	component: RouteComponent,
+	head: () => ({
+		meta: [
+			{
+				title: "Cron Logs",
+			},
+		],
+	}),
 });
 
 function RouteComponent() {

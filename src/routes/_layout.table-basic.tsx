@@ -20,6 +20,13 @@ import { useMemo } from "react";
 
 export const Route = createFileRoute("/_layout/table-basic")({
 	component: RouteComponent,
+	head: () => ({
+		meta: [
+			{
+				title: "Basic Table",
+			},
+		],
+	}),
 });
 
 function RouteComponent() {

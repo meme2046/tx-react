@@ -11,7 +11,7 @@ const navDemo: INav[] = [
 	{ name: "avatars", emoj: "😎", desc: "头像", value: "/avatars" },
 	{ name: "valtio", emoj: "💊", desc: "", value: "/valtio" },
 	{ name: "text", emoj: "📝", desc: "", value: "/text" },
-	{ name: "test", emoj: "🧪", desc: "", value: "/test" },
+	{ name: "tests", emoj: "🧪", desc: "", value: "/tests" },
 	{ name: "about", emoj: "🔎", desc: "", value: "/about" },
 	{ name: "basic table", emoj: "", desc: "", value: "/table-basic" },
 	{
@@ -23,7 +23,7 @@ const navDemo: INav[] = [
 ];
 
 const navCron: INav[] = [
-	{ name: "api", emoj: "🧩", desc: "设置定时任务API", value: "/cron/api" },
+	{ name: "api", emoj: "🧩", desc: "设置定时任务API", value: "/cron-api" },
 	{ name: "job", emoj: "🤖", desc: "", value: "/cron/job" },
 	{ name: "log", emoj: "📋", desc: "", value: "/cron-logs" },
 	{ name: "config", emoj: "⚙️", desc: "", value: "/cron/config" },

@@ -1,19 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_layout/cron-api")({
 	component: RouteComponent,
 	head: () => ({
 		meta: [
 			{
-				title: "Home",
+				title: "Cron API Setting",
 			},
 		],
 	}),
 });
+
 function RouteComponent() {
-	return (
-		<div className="p-2">
-			<h3>Welcome Home!</h3>
-		</div>
-	);
+	return <div>Hello "/_layout/cron-api"!</div>;
 }

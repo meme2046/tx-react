@@ -8,6 +8,13 @@ export const Route = createFileRoute("/_auth/invoices/$invoiceId")({
 		};
 	},
 	component: RouteComponent,
+	head: ({ params: { invoiceId } }) => ({
+		meta: [
+			{
+				title: `Invoice ${invoiceId}`,
+			},
+		],
+	}),
 });
 
 function RouteComponent() {
@@ -16,8 +23,7 @@ function RouteComponent() {
 	return (
 		<section className="grid gap-2">
 			<h2 className="text-lg">
-				<strong>Invoice No.</strong> #
-				{invoice.id.toString().padStart(2, "0")}
+				<strong>Invoice No.</strong> #{invoice.id.toString().padStart(2, "0")}
 			</h2>
 			<p>
 				<strong>Invoice title:</strong> {invoice.title}

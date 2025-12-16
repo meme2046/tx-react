@@ -12,6 +12,13 @@ export const Route = createFileRoute("/_auth/invoices")({
 		invoices: await fetchInvoices(),
 	}),
 	component: RouteComponent,
+	head: () => ({
+		meta: [
+			{
+				title: "Invoices",
+			},
+		],
+	}),
 });
 
 function RouteComponent() {
@@ -19,10 +26,7 @@ function RouteComponent() {
 
 	return (
 		<div className="p-4">
-			<ResizablePanelGroup
-				direction="horizontal"
-				className="rounded-lg border"
-			>
+			<ResizablePanelGroup direction="horizontal" className="rounded-lg border">
 				<ResizablePanel defaultSize={25} className="min-w-[212px]">
 					<div className="p-1 flex flex-col gap-1">
 						{invoices.map((invoice) => (

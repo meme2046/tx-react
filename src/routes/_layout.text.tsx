@@ -16,9 +16,6 @@ export const Route = createFileRoute("/_layout/text")({
 
 function RouteComponent() {
 	const alertData: { type: string; label: string }[] = [
-		{ type: "info", label: "info" },
-		{ type: "success", label: "success" },
-		{ type: "warning", label: "warning" },
 		{ type: "primary", label: "default" },
 		{ type: "secondary", label: "secondary" },
 		{ type: "destructive", label: "destructive" },
@@ -52,12 +49,8 @@ function RouteComponent() {
 					<p className="font-sans">
 						font-sans:-&gt;&nbsp;-&gt;&nbsp;中文 | English
 					</p>
-					<p className="font-serif">
-						font-serif:-&gt;&nbsp;中文 | English
-					</p>
-					<p className="font-mono">
-						font-mono:-&gt;&nbsp;中文 | English
-					</p>
+					<p className="font-serif">font-serif:-&gt;&nbsp;中文 | English</p>
+					<p className="font-mono">font-mono:-&gt;&nbsp;中文 | English</p>
 					<p className="font-[Caps]">
 						Delius Swash Caps:-&gt;&nbsp;中文 | English
 					</p>

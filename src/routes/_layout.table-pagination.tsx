@@ -12,6 +12,13 @@ import { ReactSVG } from "react-svg";
 
 export const Route = createFileRoute("/_layout/table-pagination")({
 	component: RouteComponent,
+	head: () => ({
+		meta: [
+			{
+				title: "Pagination Table",
+			},
+		],
+	}),
 });
 
 function RouteComponent() {
@@ -24,9 +31,7 @@ function RouteComponent() {
 						table.getIsAllPageRowsSelected() ||
 						(table.getIsSomePageRowsSelected() && "indeterminate")
 					}
-					onCheckedChange={(value) =>
-						table.toggleAllPageRowsSelected(!!value)
-					}
+					onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
 					aria-label="Select all"
 				/>
 			),
@@ -92,8 +97,8 @@ function RouteComponent() {
 							orig.status == "paused"
 								? "destructive"
 								: orig.status == "vacation"
-								? "default"
-								: "outline"
+									? "default"
+									: "outline"
 						}`}
 					>
 						{orig.status}
@@ -123,16 +128,11 @@ function RouteComponent() {
 							<ReactSVG
 								src={ICON_SRC["edit"]}
 								className="text-success w-6"
-								onClick={() =>
-									navigator.clipboard.writeText(orig.email)
-								}
+								onClick={() => navigator.clipboard.writeText(orig.email)}
 							/>
 						</Button>
 						<Button variant="ghost" size="icon">
-							<ReactSVG
-								src={ICON_SRC["kill"]}
-								className="text-warning w-6"
-							/>
+							<ReactSVG src={ICON_SRC["kill"]} className="text-warning w-6" />
 						</Button>
 						<Button variant="ghost" size="icon">
 							<ReactSVG
@@ -156,7 +156,7 @@ function RouteComponent() {
 	];
 	const rowsPerPageList: number[] = [10, 20, 30, 50];
 	const [rowsPerPage, setRowsPerPage] = useState<string>(
-		`${rowsPerPageList[0]}`
+		`${rowsPerPageList[0]}`,
 	);
 
 	const { data, isLoading, isFetching, refetch } = useFakerUser(100);

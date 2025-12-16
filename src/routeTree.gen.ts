@@ -16,11 +16,12 @@ import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LayoutValtioRouteImport } from './routes/_layout.valtio'
 import { Route as LayoutTextRouteImport } from './routes/_layout.text'
-import { Route as LayoutTestRouteImport } from './routes/_layout.test'
+import { Route as LayoutTestsRouteImport } from './routes/_layout.tests'
 import { Route as LayoutTablePaginationRouteImport } from './routes/_layout.table-pagination'
 import { Route as LayoutTableBasicRouteImport } from './routes/_layout.table-basic'
 import { Route as LayoutIconsRouteImport } from './routes/_layout.icons'
 import { Route as LayoutCronLogsRouteImport } from './routes/_layout.cron-logs'
+import { Route as LayoutCronApiRouteImport } from './routes/_layout.cron-api'
 import { Route as LayoutAvatarsRouteImport } from './routes/_layout.avatars'
 import { Route as AuthInvoicesRouteImport } from './routes/_auth.invoices'
 import { Route as AuthInvoicesIndexRouteImport } from './routes/_auth.invoices.index'
@@ -59,9 +60,9 @@ const LayoutTextRoute = LayoutTextRouteImport.update({
   path: '/text',
   getParentRoute: () => LayoutRoute,
 } as any)
-const LayoutTestRoute = LayoutTestRouteImport.update({
-  id: '/test',
-  path: '/test',
+const LayoutTestsRoute = LayoutTestsRouteImport.update({
+  id: '/tests',
+  path: '/tests',
   getParentRoute: () => LayoutRoute,
 } as any)
 const LayoutTablePaginationRoute = LayoutTablePaginationRouteImport.update({
@@ -82,6 +83,11 @@ const LayoutIconsRoute = LayoutIconsRouteImport.update({
 const LayoutCronLogsRoute = LayoutCronLogsRouteImport.update({
   id: '/cron-logs',
   path: '/cron-logs',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutCronApiRoute = LayoutCronApiRouteImport.update({
+  id: '/cron-api',
+  path: '/cron-api',
   getParentRoute: () => LayoutRoute,
 } as any)
 const LayoutAvatarsRoute = LayoutAvatarsRouteImport.update({
@@ -111,11 +117,12 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/invoices': typeof AuthInvoicesRouteWithChildren
   '/avatars': typeof LayoutAvatarsRoute
+  '/cron-api': typeof LayoutCronApiRoute
   '/cron-logs': typeof LayoutCronLogsRoute
   '/icons': typeof LayoutIconsRoute
   '/table-basic': typeof LayoutTableBasicRoute
   '/table-pagination': typeof LayoutTablePaginationRoute
-  '/test': typeof LayoutTestRoute
+  '/tests': typeof LayoutTestsRoute
   '/text': typeof LayoutTextRoute
   '/valtio': typeof LayoutValtioRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
@@ -126,11 +133,12 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
   '/avatars': typeof LayoutAvatarsRoute
+  '/cron-api': typeof LayoutCronApiRoute
   '/cron-logs': typeof LayoutCronLogsRoute
   '/icons': typeof LayoutIconsRoute
   '/table-basic': typeof LayoutTableBasicRoute
   '/table-pagination': typeof LayoutTablePaginationRoute
-  '/test': typeof LayoutTestRoute
+  '/tests': typeof LayoutTestsRoute
   '/text': typeof LayoutTextRoute
   '/valtio': typeof LayoutValtioRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
@@ -145,11 +153,12 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/_auth/invoices': typeof AuthInvoicesRouteWithChildren
   '/_layout/avatars': typeof LayoutAvatarsRoute
+  '/_layout/cron-api': typeof LayoutCronApiRoute
   '/_layout/cron-logs': typeof LayoutCronLogsRoute
   '/_layout/icons': typeof LayoutIconsRoute
   '/_layout/table-basic': typeof LayoutTableBasicRoute
   '/_layout/table-pagination': typeof LayoutTablePaginationRoute
-  '/_layout/test': typeof LayoutTestRoute
+  '/_layout/tests': typeof LayoutTestsRoute
   '/_layout/text': typeof LayoutTextRoute
   '/_layout/valtio': typeof LayoutValtioRoute
   '/_auth/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
@@ -163,11 +172,12 @@ export interface FileRouteTypes {
     | '/login'
     | '/invoices'
     | '/avatars'
+    | '/cron-api'
     | '/cron-logs'
     | '/icons'
     | '/table-basic'
     | '/table-pagination'
-    | '/test'
+    | '/tests'
     | '/text'
     | '/valtio'
     | '/invoices/$invoiceId'
@@ -178,11 +188,12 @@ export interface FileRouteTypes {
     | '/about'
     | '/login'
     | '/avatars'
+    | '/cron-api'
     | '/cron-logs'
     | '/icons'
     | '/table-basic'
     | '/table-pagination'
-    | '/test'
+    | '/tests'
     | '/text'
     | '/valtio'
     | '/invoices/$invoiceId'
@@ -196,11 +207,12 @@ export interface FileRouteTypes {
     | '/login'
     | '/_auth/invoices'
     | '/_layout/avatars'
+    | '/_layout/cron-api'
     | '/_layout/cron-logs'
     | '/_layout/icons'
     | '/_layout/table-basic'
     | '/_layout/table-pagination'
-    | '/_layout/test'
+    | '/_layout/tests'
     | '/_layout/text'
     | '/_layout/valtio'
     | '/_auth/invoices/$invoiceId'
@@ -266,11 +278,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutTextRouteImport
       parentRoute: typeof LayoutRoute
     }
-    '/_layout/test': {
-      id: '/_layout/test'
-      path: '/test'
-      fullPath: '/test'
-      preLoaderRoute: typeof LayoutTestRouteImport
+    '/_layout/tests': {
+      id: '/_layout/tests'
+      path: '/tests'
+      fullPath: '/tests'
+      preLoaderRoute: typeof LayoutTestsRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_layout/table-pagination': {
@@ -299,6 +311,13 @@ declare module '@tanstack/react-router' {
       path: '/cron-logs'
       fullPath: '/cron-logs'
       preLoaderRoute: typeof LayoutCronLogsRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/cron-api': {
+      id: '/_layout/cron-api'
+      path: '/cron-api'
+      fullPath: '/cron-api'
+      preLoaderRoute: typeof LayoutCronApiRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_layout/avatars': {
@@ -358,22 +377,24 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface LayoutRouteChildren {
   LayoutAvatarsRoute: typeof LayoutAvatarsRoute
+  LayoutCronApiRoute: typeof LayoutCronApiRoute
   LayoutCronLogsRoute: typeof LayoutCronLogsRoute
   LayoutIconsRoute: typeof LayoutIconsRoute
   LayoutTableBasicRoute: typeof LayoutTableBasicRoute
   LayoutTablePaginationRoute: typeof LayoutTablePaginationRoute
-  LayoutTestRoute: typeof LayoutTestRoute
+  LayoutTestsRoute: typeof LayoutTestsRoute
   LayoutTextRoute: typeof LayoutTextRoute
   LayoutValtioRoute: typeof LayoutValtioRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutAvatarsRoute: LayoutAvatarsRoute,
+  LayoutCronApiRoute: LayoutCronApiRoute,
   LayoutCronLogsRoute: LayoutCronLogsRoute,
   LayoutIconsRoute: LayoutIconsRoute,
   LayoutTableBasicRoute: LayoutTableBasicRoute,
   LayoutTablePaginationRoute: LayoutTablePaginationRoute,
-  LayoutTestRoute: LayoutTestRoute,
+  LayoutTestsRoute: LayoutTestsRoute,
   LayoutTextRoute: LayoutTextRoute,
   LayoutValtioRoute: LayoutValtioRoute,
 }

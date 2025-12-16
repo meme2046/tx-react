@@ -8,7 +8,7 @@ import { SVG_SRC } from "@/consts";
 import { useState } from "react";
 
 export const Route = createFileRoute("/about")({
-	component: About,
+	component: RouteComponent,
 	head: () => ({
 		meta: [
 			{
@@ -18,7 +18,7 @@ export const Route = createFileRoute("/about")({
 	}),
 });
 
-function About() {
+function RouteComponent() {
 	const { theme } = useSnapshot(storePersist);
 	const [count, setCount] = useState(0);
 	return (

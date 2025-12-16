@@ -16,10 +16,17 @@ export const Route = createFileRoute("/login")({
 			throw redirect({ to: search.redirect || fallback });
 		}
 	},
-	component: LoginComponent,
+	component: RouteComponent,
+	head: () => ({
+		meta: [
+			{
+				title: "Login",
+			},
+		],
+	}),
 });
 
-function LoginComponent() {
+function RouteComponent() {
 	const app = useApp();
 	const router = useRouter();
 	const isLoading = useRouterState({ select: (s) => s.isLoading });
@@ -59,9 +66,7 @@ function LoginComponent() {
 		<div className="p-2 grid gap-2 place-items-center">
 			<h3 className="text-xl">Login page</h3>
 			{search.redirect ? (
-				<p className="text-red-500">
-					You need to login to access this page.
-				</p>
+				<p className="text-red-500">You need to login to access this page.</p>
 			) : (
 				<p>Login to see all the cool content in here.</p>
 			)}
