@@ -2,7 +2,7 @@ import type { IFakerInvoice } from "@/types";
 import { http, sleep } from "@/utils";
 
 async function loaderDelayFn<T>(
-	fn: (...args: Array<unknown>) => Promise<T> | T
+	fn: (...args: Array<unknown>) => Promise<T> | T,
 ) {
 	await sleep(1000);
 	const res = await fn();
@@ -19,7 +19,7 @@ const ensureInvoices = async () => {
 		invoicesPromise = Promise.resolve().then(async () => {
 			const data = await http<IFakerInvoice[]>(
 				"https://jsonplaceholder.typicode.com/posts",
-				{ successMessage: "Invoices loaded" }
+				// { successMessage: "Invoices loaded" }
 			);
 			invoices = data.slice(0, 10);
 		});
@@ -40,6 +40,6 @@ export async function fetchInvoiceById(id: number) {
 				throw new Error("Invoice not found");
 			}
 			return invoice;
-		})
+		}),
 	);
 }

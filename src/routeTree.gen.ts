@@ -20,6 +20,7 @@ import { Route as LayoutTestsRouteImport } from './routes/_layout.tests'
 import { Route as LayoutTablePaginationRouteImport } from './routes/_layout.table-pagination'
 import { Route as LayoutTableBasicRouteImport } from './routes/_layout.table-basic'
 import { Route as LayoutIconsRouteImport } from './routes/_layout.icons'
+import { Route as LayoutGateGridRouteImport } from './routes/_layout.gate-grid'
 import { Route as LayoutFearGreedRouteImport } from './routes/_layout.fear-greed'
 import { Route as LayoutCronWorkerRouteImport } from './routes/_layout.cron-worker'
 import { Route as LayoutCronLogsRouteImport } from './routes/_layout.cron-logs'
@@ -27,6 +28,8 @@ import { Route as LayoutCronJobsRouteImport } from './routes/_layout.cron-jobs'
 import { Route as LayoutCronConfigRouteImport } from './routes/_layout.cron-config'
 import { Route as LayoutCronApiRouteImport } from './routes/_layout.cron-api'
 import { Route as LayoutCoingeckoRouteImport } from './routes/_layout.coingecko'
+import { Route as LayoutBitgetSfRouteImport } from './routes/_layout.bitget-sf'
+import { Route as LayoutBitgetGridRouteImport } from './routes/_layout.bitget-grid'
 import { Route as LayoutAvatarsRouteImport } from './routes/_layout.avatars'
 import { Route as AuthInvoicesRouteImport } from './routes/_auth.invoices'
 import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
@@ -86,6 +89,11 @@ const LayoutIconsRoute = LayoutIconsRouteImport.update({
   path: '/icons',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutGateGridRoute = LayoutGateGridRouteImport.update({
+  id: '/gate-grid',
+  path: '/gate-grid',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const LayoutFearGreedRoute = LayoutFearGreedRouteImport.update({
   id: '/fear-greed',
   path: '/fear-greed',
@@ -121,6 +129,16 @@ const LayoutCoingeckoRoute = LayoutCoingeckoRouteImport.update({
   path: '/coingecko',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutBitgetSfRoute = LayoutBitgetSfRouteImport.update({
+  id: '/bitget-sf',
+  path: '/bitget-sf',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutBitgetGridRoute = LayoutBitgetGridRouteImport.update({
+  id: '/bitget-grid',
+  path: '/bitget-grid',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const LayoutAvatarsRoute = LayoutAvatarsRouteImport.update({
   id: '/avatars',
   path: '/avatars',
@@ -154,6 +172,8 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthDashboardRoute
   '/invoices': typeof AuthInvoicesRouteWithChildren
   '/avatars': typeof LayoutAvatarsRoute
+  '/bitget-grid': typeof LayoutBitgetGridRoute
+  '/bitget-sf': typeof LayoutBitgetSfRoute
   '/coingecko': typeof LayoutCoingeckoRoute
   '/cron-api': typeof LayoutCronApiRoute
   '/cron-config': typeof LayoutCronConfigRoute
@@ -161,6 +181,7 @@ export interface FileRoutesByFullPath {
   '/cron-logs': typeof LayoutCronLogsRoute
   '/cron-worker': typeof LayoutCronWorkerRoute
   '/fear-greed': typeof LayoutFearGreedRoute
+  '/gate-grid': typeof LayoutGateGridRoute
   '/icons': typeof LayoutIconsRoute
   '/table-basic': typeof LayoutTableBasicRoute
   '/table-pagination': typeof LayoutTablePaginationRoute
@@ -176,6 +197,8 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/dashboard': typeof AuthDashboardRoute
   '/avatars': typeof LayoutAvatarsRoute
+  '/bitget-grid': typeof LayoutBitgetGridRoute
+  '/bitget-sf': typeof LayoutBitgetSfRoute
   '/coingecko': typeof LayoutCoingeckoRoute
   '/cron-api': typeof LayoutCronApiRoute
   '/cron-config': typeof LayoutCronConfigRoute
@@ -183,6 +206,7 @@ export interface FileRoutesByTo {
   '/cron-logs': typeof LayoutCronLogsRoute
   '/cron-worker': typeof LayoutCronWorkerRoute
   '/fear-greed': typeof LayoutFearGreedRoute
+  '/gate-grid': typeof LayoutGateGridRoute
   '/icons': typeof LayoutIconsRoute
   '/table-basic': typeof LayoutTableBasicRoute
   '/table-pagination': typeof LayoutTablePaginationRoute
@@ -202,6 +226,8 @@ export interface FileRoutesById {
   '/_auth/dashboard': typeof AuthDashboardRoute
   '/_auth/invoices': typeof AuthInvoicesRouteWithChildren
   '/_layout/avatars': typeof LayoutAvatarsRoute
+  '/_layout/bitget-grid': typeof LayoutBitgetGridRoute
+  '/_layout/bitget-sf': typeof LayoutBitgetSfRoute
   '/_layout/coingecko': typeof LayoutCoingeckoRoute
   '/_layout/cron-api': typeof LayoutCronApiRoute
   '/_layout/cron-config': typeof LayoutCronConfigRoute
@@ -209,6 +235,7 @@ export interface FileRoutesById {
   '/_layout/cron-logs': typeof LayoutCronLogsRoute
   '/_layout/cron-worker': typeof LayoutCronWorkerRoute
   '/_layout/fear-greed': typeof LayoutFearGreedRoute
+  '/_layout/gate-grid': typeof LayoutGateGridRoute
   '/_layout/icons': typeof LayoutIconsRoute
   '/_layout/table-basic': typeof LayoutTableBasicRoute
   '/_layout/table-pagination': typeof LayoutTablePaginationRoute
@@ -227,6 +254,8 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/invoices'
     | '/avatars'
+    | '/bitget-grid'
+    | '/bitget-sf'
     | '/coingecko'
     | '/cron-api'
     | '/cron-config'
@@ -234,6 +263,7 @@ export interface FileRouteTypes {
     | '/cron-logs'
     | '/cron-worker'
     | '/fear-greed'
+    | '/gate-grid'
     | '/icons'
     | '/table-basic'
     | '/table-pagination'
@@ -249,6 +279,8 @@ export interface FileRouteTypes {
     | '/login'
     | '/dashboard'
     | '/avatars'
+    | '/bitget-grid'
+    | '/bitget-sf'
     | '/coingecko'
     | '/cron-api'
     | '/cron-config'
@@ -256,6 +288,7 @@ export interface FileRouteTypes {
     | '/cron-logs'
     | '/cron-worker'
     | '/fear-greed'
+    | '/gate-grid'
     | '/icons'
     | '/table-basic'
     | '/table-pagination'
@@ -274,6 +307,8 @@ export interface FileRouteTypes {
     | '/_auth/dashboard'
     | '/_auth/invoices'
     | '/_layout/avatars'
+    | '/_layout/bitget-grid'
+    | '/_layout/bitget-sf'
     | '/_layout/coingecko'
     | '/_layout/cron-api'
     | '/_layout/cron-config'
@@ -281,6 +316,7 @@ export interface FileRouteTypes {
     | '/_layout/cron-logs'
     | '/_layout/cron-worker'
     | '/_layout/fear-greed'
+    | '/_layout/gate-grid'
     | '/_layout/icons'
     | '/_layout/table-basic'
     | '/_layout/table-pagination'
@@ -378,6 +414,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutIconsRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/gate-grid': {
+      id: '/_layout/gate-grid'
+      path: '/gate-grid'
+      fullPath: '/gate-grid'
+      preLoaderRoute: typeof LayoutGateGridRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/fear-greed': {
       id: '/_layout/fear-greed'
       path: '/fear-greed'
@@ -425,6 +468,20 @@ declare module '@tanstack/react-router' {
       path: '/coingecko'
       fullPath: '/coingecko'
       preLoaderRoute: typeof LayoutCoingeckoRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/bitget-sf': {
+      id: '/_layout/bitget-sf'
+      path: '/bitget-sf'
+      fullPath: '/bitget-sf'
+      preLoaderRoute: typeof LayoutBitgetSfRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/bitget-grid': {
+      id: '/_layout/bitget-grid'
+      path: '/bitget-grid'
+      fullPath: '/bitget-grid'
+      preLoaderRoute: typeof LayoutBitgetGridRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_layout/avatars': {
@@ -493,6 +550,8 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface LayoutRouteChildren {
   LayoutAvatarsRoute: typeof LayoutAvatarsRoute
+  LayoutBitgetGridRoute: typeof LayoutBitgetGridRoute
+  LayoutBitgetSfRoute: typeof LayoutBitgetSfRoute
   LayoutCoingeckoRoute: typeof LayoutCoingeckoRoute
   LayoutCronApiRoute: typeof LayoutCronApiRoute
   LayoutCronConfigRoute: typeof LayoutCronConfigRoute
@@ -500,6 +559,7 @@ interface LayoutRouteChildren {
   LayoutCronLogsRoute: typeof LayoutCronLogsRoute
   LayoutCronWorkerRoute: typeof LayoutCronWorkerRoute
   LayoutFearGreedRoute: typeof LayoutFearGreedRoute
+  LayoutGateGridRoute: typeof LayoutGateGridRoute
   LayoutIconsRoute: typeof LayoutIconsRoute
   LayoutTableBasicRoute: typeof LayoutTableBasicRoute
   LayoutTablePaginationRoute: typeof LayoutTablePaginationRoute
@@ -510,6 +570,8 @@ interface LayoutRouteChildren {
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutAvatarsRoute: LayoutAvatarsRoute,
+  LayoutBitgetGridRoute: LayoutBitgetGridRoute,
+  LayoutBitgetSfRoute: LayoutBitgetSfRoute,
   LayoutCoingeckoRoute: LayoutCoingeckoRoute,
   LayoutCronApiRoute: LayoutCronApiRoute,
   LayoutCronConfigRoute: LayoutCronConfigRoute,
@@ -517,6 +579,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutCronLogsRoute: LayoutCronLogsRoute,
   LayoutCronWorkerRoute: LayoutCronWorkerRoute,
   LayoutFearGreedRoute: LayoutFearGreedRoute,
+  LayoutGateGridRoute: LayoutGateGridRoute,
   LayoutIconsRoute: LayoutIconsRoute,
   LayoutTableBasicRoute: LayoutTableBasicRoute,
   LayoutTablePaginationRoute: LayoutTablePaginationRoute,

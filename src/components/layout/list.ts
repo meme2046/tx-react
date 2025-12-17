@@ -43,8 +43,14 @@ const navCron: INav[] = [
 const navCrypto: INav[] = [
 	{ name: "恐贪指数", emoj: "🐝", desc: "", value: "/fear-greed" },
 	{ name: "关注币种", emoj: "🪙", desc: "", value: "/coingecko" },
-	{ name: "Bitget网格", emoj: "🐶", desc: "", value: "/crypto/bitget" },
-	{ name: "Gate网格", emoj: "🐷", desc: "", value: "/crypto/gate" },
+	{
+		name: "Bitget SF",
+		emoj: "🚀",
+		desc: "",
+		value: "/bitget-sf",
+	},
+	{ name: "Bitget Grid", emoj: "🐶", desc: "", value: "/bitget-grid" },
+	{ name: "Gate Grid", emoj: "🐷", desc: "", value: "/gate-grid" },
 	// { name: "币安合约", emoj: "🐸", desc: "", value: "/crypto/bnfutures" },
 	// { name: "赚币", emoj: "🐸", desc: "", value: "/crypto/zb" },
 	// { name: "策略交易", emoj: "🦄", desc: "", value: "/crypto/strategy" },

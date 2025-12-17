@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ICON_SRC } from "@/consts";
 import { createFileRoute } from "@tanstack/react-router";
 import { ReactSVG } from "react-svg";
+import lineSVG from "@/assets/line.svg";
 export const Route = createFileRoute("/_layout/text")({
 	component: RouteComponent,
 	head: () => ({
@@ -44,6 +45,7 @@ function RouteComponent() {
 	);
 
 	const fontData: { name: string; desc: string }[] = [
+		{ name: "", desc: "default" },
 		{ name: "font-sans", desc: "font-sans" },
 		{ name: "font-[Inter]", desc: "Inter" },
 		{ name: "font-serif", desc: "font-serif" },
@@ -62,11 +64,17 @@ function RouteComponent() {
 			<Alert>
 				<AlertTitle>字体</AlertTitle>
 				<AlertDescription className="text-lg">
-					{fontData.map(({ name, desc }) => (
-						<p className={name}>
-							<span>{demoText}</span>
-							<Badge>&nbsp;&lt;-&nbsp;{desc}</Badge>
-						</p>
+					{fontData.map(({ name, desc }, index) => (
+						<div key={index} className="relative">
+							<p className={name}>
+								<span>{demoText}</span>
+								<Badge>&nbsp;&lt;-&nbsp;{desc}</Badge>
+							</p>
+							<ReactSVG
+								src={lineSVG}
+								className="absolute left-0 bottom-0 text-primary w-full"
+							/>
+						</div>
 					))}
 				</AlertDescription>
 			</Alert>

@@ -1,12 +1,13 @@
 <svg
 	xmlns="http://www.w3.org/2000/svg"
-	class="absolute -bottom-1 left-0 w-full max-sm:hidden lg:origin-left lg:scale-x-130"
 	fill="none"
 	height="8"
-	width="453"
+	preserveAspectRatio="none"
+	viewBox="0 0 100 10"
+	width="100%"
 >
-	<path
-		d="M2 6.75068C53.4722 -1.10509 368.533 2.14284 451.5 6.75085"
+        <path
+		d="M1 6.75 C12 -0.26, 80 0.4, 100 6.75"
 		stroke="currentColor"
 		stroke-linecap="round"
 		stroke-width="2.5"

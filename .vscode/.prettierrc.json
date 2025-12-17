@@ -22,7 +22,7 @@
 	"useTabs": true,
 	"embeddedLanguageFormatting": "auto",
 	"plugins": ["@prettier/plugin-xml"],
-	"xmlWhitespaceSensitivity": "ignore",
+	"xmlWhitespaceSensitivity": "strict",
 	"xmlSortAttributesByKey": true,
 	"xmlSelfClosingSpace": true
 }

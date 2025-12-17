@@ -5,6 +5,7 @@ import { ICON_SRC } from "@/consts";
 import { createFileRoute } from "@tanstack/react-router";
 import { ReactSVG } from "react-svg";
 import processSvg from "@/assets/processing.svg";
+import lineSVG from "@/assets/line.svg";
 
 export const Route = createFileRoute("/_layout/tests")({
 	component: RouteComponent,
@@ -49,6 +50,7 @@ function RouteComponent() {
 					/>
 					<span className="text-xs">processing</span>
 				</Button>
+				<ReactSVG src={lineSVG} className="text-primary w-64" />
 			</div>
 			<div className="flex gap-4">
 				<div className="size-50 border bg-[repeating-linear-gradient(45deg,var(--background)_0px,var(--background)_13px,var(--muted)_13px,var(--muted)_14px)]">

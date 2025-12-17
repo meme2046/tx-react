@@ -18,7 +18,7 @@ function RouteComponent() {
 	return (
 		<>
 			<div>Hello "/_layout/cron-config"!</div>
-			<div className="p-4">
+			<div className="p-4 font-mono">
 				{data && (
 					<>
 						<Badge>{data.key}</Badge>
