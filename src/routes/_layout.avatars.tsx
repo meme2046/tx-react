@@ -33,7 +33,7 @@ function RouteComponent() {
 				<CardContent className="p-3">
 					<div className="flex flex-wrap gap-4">
 						{Object.keys(AVATAR_SRC).map((key, index) => (
-							<div key={index}>
+							<div key={index} className="text-center">
 								<Avatar>
 									<AvatarImage src={AVATAR_SRC[key]} alt={upperCase(key)} />
 									<AvatarFallback className="animate-pulse bg-linear-to-tr from-info to-primary"></AvatarFallback>
