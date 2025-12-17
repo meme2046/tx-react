@@ -1,10 +1,9 @@
 import { Combobox } from "@/components/combobox";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ICON_SRC } from "@/consts";
+import { ICON_SRC, SVG_SRC } from "@/consts";
 import { createFileRoute } from "@tanstack/react-router";
 import { ReactSVG } from "react-svg";
-import processSvg from "@/assets/processing.svg";
 import lineSVG from "@/assets/line.svg";
 
 export const Route = createFileRoute("/_layout/tests")({
@@ -38,10 +37,13 @@ function RouteComponent() {
 					/>
 				</Button>
 				<Button variant="ghost" size="icon" className="rounded-full">
-					<ReactSVG src={processSvg} className="text-primary animate-spin" />
+					<ReactSVG
+						src={ICON_SRC["processing"]}
+						className="text-primary animate-spin"
+					/>
 				</Button>
 				<Button variant="ghost" size="icon" className="rounded-full">
-					<ReactSVG src={processSvg} className="text-primary" />
+					<ReactSVG src={ICON_SRC["processing"]} className="text-primary" />
 				</Button>
 				<Button variant="outline" className="gap-1">
 					<ReactSVG
@@ -51,6 +53,7 @@ function RouteComponent() {
 					<span className="text-xs">processing</span>
 				</Button>
 				<ReactSVG src={lineSVG} className="text-primary w-64" />
+				<ReactSVG src={SVG_SRC["line"]} className="text-primary w-64" />
 			</div>
 			<div className="flex gap-4">
 				<div className="size-50 border bg-[repeating-linear-gradient(45deg,var(--background)_0px,var(--background)_13px,var(--muted)_13px,var(--muted)_14px)]">

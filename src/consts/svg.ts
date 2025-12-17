@@ -1,4 +1,5 @@
 export const SVG_SRC: Record<string, string> = {
+	line: "https://arweave.net/mfUS0iPbauAXqPYb0mRNYDCJhVQn8uKwG_HHqzYhANc",
 	binance: "https://arweave.net/aQNyKNtNCRgYJVAxmarQbkvS_gQm_vsLymMakfmfs-c",
 	bitget: "https://arweave.net/Hz2HGdVT5JjpN8vzWKRvr_EKdiqYlQALTkLv7g4UXvo",
 	coinbase: "https://arweave.net/tO9YYZ0EeV37hK9mm117fcgQB5nvG04t3hRssGT7f8U",

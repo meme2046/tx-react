@@ -81,10 +81,12 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[xml]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": false
 	},
 	"[svg]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": false
 	},
 	"[json]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -95,6 +97,7 @@
 	"[css]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
+
 	// 📝彩虹缩进 indent-rainbow 配置
 	"indentRainbow.ignoreErrorLanguages": ["python", "typescriptreact"],
 	// 📝code-runner
