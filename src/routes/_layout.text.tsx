@@ -67,8 +67,10 @@ function RouteComponent() {
 					{fontData.map(({ name, desc }, index) => (
 						<div key={index} className="relative">
 							<p className={name}>
-								<span>{demoText}</span>
-								<Badge>&nbsp;&lt;-&nbsp;{desc}</Badge>
+								<span>{demoText}&nbsp;</span>
+								<Badge variant="outline" className="shadow">
+									&nbsp;&lt;-&nbsp;{desc}
+								</Badge>
 							</p>
 							<ReactSVG
 								src={lineSVG}
