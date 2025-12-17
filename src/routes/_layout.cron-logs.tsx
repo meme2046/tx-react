@@ -128,7 +128,7 @@ function RouteComponent() {
 	);
 
 	return (
-		<div className="p-4">
+		<>
 			<ReactTable
 				data={flatData}
 				fetchNextPage={fetchNextPage}
@@ -144,10 +144,10 @@ function RouteComponent() {
 				setRowsPerPage={setRowsPerPage}
 				estimateRowHeight={36}
 				overscan={12}
-				subHeight={120}
+				subHeight={96}
 				total={get(data?.pages[0], "total")}
 				type="virtualized"
 			/>
-		</div>
+		</>
 	);
 }

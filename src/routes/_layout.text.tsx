@@ -1,4 +1,5 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ICON_SRC } from "@/consts";
 import { createFileRoute } from "@tanstack/react-router";
@@ -41,19 +42,32 @@ function RouteComponent() {
 			</AlertDescription>
 		</Alert>
 	);
+
+	const fontData: { name: string; desc: string }[] = [
+		{ name: "font-sans", desc: "font-sans" },
+		{ name: "font-[Inter]", desc: "Inter" },
+		{ name: "font-serif", desc: "font-serif" },
+		{ name: "font-[Nunito]", desc: "Nunito" },
+		{ name: "font-mono", desc: "font-mono" },
+		{ name: "font-[JetBrainsMono]", desc: "JetBrainsMono" },
+		{ name: "font-[DSC]", desc: "DeliusSwashCaps" },
+		{ name: "font-[Sniglet]", desc: "Sniglet" },
+		// { name: "font-[Gabriela]", desc: "Gabriela" },
+		// { name: "font-[Outfit]", desc: "Outfit" },
+	];
+	const demoText =
+		"Design Stunning UIs Faster with Shadcn Theme Generator | 中文 | English | 0123456789";
 	return (
 		<div className="p-4 flex flex-col gap-4 bg-slash">
 			<Alert>
 				<AlertTitle>字体</AlertTitle>
-				<AlertDescription>
-					<p className="font-sans">
-						font-sans:-&gt;&nbsp;-&gt;&nbsp;中文 | English
-					</p>
-					<p className="font-serif">font-serif:-&gt;&nbsp;中文 | English</p>
-					<p className="font-mono">font-mono:-&gt;&nbsp;中文 | English</p>
-					<p className="font-[Caps]">
-						Delius Swash Caps:-&gt;&nbsp;中文 | English
-					</p>
+				<AlertDescription className="text-lg">
+					{fontData.map(({ name, desc }) => (
+						<p className={name}>
+							<span>{demoText}</span>
+							<Badge>&nbsp;&lt;-&nbsp;{desc}</Badge>
+						</p>
+					))}
 				</AlertDescription>
 			</Alert>
 			{alertData.map(({ type, label }) => renderAlert(type, label))}

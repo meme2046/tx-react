@@ -127,18 +127,15 @@ function RouteComponent() {
 						<Button variant="ghost" size="icon">
 							<ReactSVG
 								src={ICON_SRC["edit"]}
-								className="text-success w-6"
+								className="text-success"
 								onClick={() => navigator.clipboard.writeText(orig.email)}
 							/>
 						</Button>
 						<Button variant="ghost" size="icon">
-							<ReactSVG src={ICON_SRC["kill"]} className="text-warning w-6" />
+							<ReactSVG src={ICON_SRC["kill"]} className="text-warning" />
 						</Button>
 						<Button variant="ghost" size="icon">
-							<ReactSVG
-								src={ICON_SRC["delete"]}
-								className="text-destructive w-6"
-							/>
+							<ReactSVG src={ICON_SRC["delete"]} className="text-destructive" />
 						</Button>
 					</div>
 				);

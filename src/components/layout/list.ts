@@ -6,13 +6,11 @@ export const themes: Record<string, string> = {
 };
 
 const navDemo: INav[] = [
-	{ name: "invoices", emoj: "🧾", desc: "", value: "/invoices" },
 	{ name: "icons", emoj: "⭐", desc: "", value: "/icons" },
 	{ name: "avatars", emoj: "😎", desc: "头像", value: "/avatars" },
 	{ name: "valtio", emoj: "💊", desc: "", value: "/valtio" },
 	{ name: "text", emoj: "📝", desc: "", value: "/text" },
 	{ name: "tests", emoj: "🧪", desc: "", value: "/tests" },
-	{ name: "about", emoj: "🔎", desc: "", value: "/about" },
 	{ name: "basic table", emoj: "", desc: "", value: "/table-basic" },
 	{
 		name: "pagination table",
@@ -22,29 +20,35 @@ const navDemo: INav[] = [
 	},
 ];
 
+export const navOther: INav[] = [
+	{ name: "about", emoj: "🔎", desc: "", value: "/about" },
+	{ name: "dashboard", emoj: "🎛️", desc: "", value: "/dashboard" },
+	{ name: "invoices", emoj: "🧾", desc: "", value: "/invoices" },
+	{ name: "login", emoj: "🛡️", desc: "", value: "/login" },
+];
+
 const navCron: INav[] = [
 	{ name: "api", emoj: "🧩", desc: "设置定时任务API", value: "/cron-api" },
-	{ name: "job", emoj: "🤖", desc: "", value: "/cron/job" },
+	{ name: "job", emoj: "🤖", desc: "", value: "/cron-jobs" },
 	{ name: "log", emoj: "📋", desc: "", value: "/cron-logs" },
-	{ name: "config", emoj: "⚙️", desc: "", value: "/cron/config" },
+	{ name: "config", emoj: "⚙️", desc: "", value: "/cron-config" },
 	{
 		name: "worker",
 		emoj: "🖥️",
 		desc: "当前任务执行节点",
-		value: "/cron/worker",
+		value: "/cron-worker",
 	},
 ];
 
 const navCrypto: INav[] = [
-	{ name: "关注币种", emoj: "🪙", desc: "", value: "/crypto/coin" },
+	{ name: "恐贪指数", emoj: "🐝", desc: "", value: "/fear-greed" },
+	{ name: "关注币种", emoj: "🪙", desc: "", value: "/coingecko" },
 	{ name: "Bitget网格", emoj: "🐶", desc: "", value: "/crypto/bitget" },
 	{ name: "Gate网格", emoj: "🐷", desc: "", value: "/crypto/gate" },
 	// { name: "币安合约", emoj: "🐸", desc: "", value: "/crypto/bnfutures" },
 	// { name: "赚币", emoj: "🐸", desc: "", value: "/crypto/zb" },
 	// { name: "策略交易", emoj: "🦄", desc: "", value: "/crypto/strategy" },
 	// { name: "土狗", emoj: "🐶", desc: "", value: "/crypto/meme" },
-	{ name: "恐贪指数", emoj: "🐝", desc: "", value: "/crypto/fg" },
-
 	// { name: "网格交易", emoj: "🧮", desc: "", value: "/crypto/grid-tx" },
 	// { name: "收益曲线", emoj: "🚀", desc: "", value: "/crypto/chart" },
 	// { name: "联系我们", emoj: "🌱", desc: "", value: "/crypto/contact" },
@@ -68,4 +72,5 @@ export const sideNavList: Record<string, INav[]> = {
 	Crypto: navCrypto,
 	Cron: navCron,
 	Demo: navDemo,
+	Other: navOther,
 };

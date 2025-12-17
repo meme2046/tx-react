@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
@@ -46,7 +45,6 @@ export function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<RouterProvider router={router} context={{ app: app }} />
-			<ReactQueryDevtools initialIsOpen={false} />
 			<ToastContainer
 				position="bottom-center"
 				theme={theme == "system" ? "colored" : theme}

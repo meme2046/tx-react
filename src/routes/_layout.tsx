@@ -29,7 +29,7 @@ function RouteComponent() {
 								<AvatarImage src={AVATAR_SRC.shadcn} alt="@shadcn_sidebar" />
 								<AvatarFallback className="animate-pulse bg-linear-to-tr from-info to-primary"></AvatarFallback>
 							</Avatar>
-							<span className="font-[Caps]">Meme</span>
+							<span className="font-[DSC]">Meme</span>
 						</div>
 					</SidebarHeader>
 					<SidebarContent className="scrollbar-thin">

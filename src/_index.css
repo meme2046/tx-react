@@ -1,5 +1,5 @@
 html {
-	@apply scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary;
+	@apply scrollbar-thin scrollbar-thumb-primary scrollbar-track-transparent;
 }
 
 body {
@@ -16,14 +16,64 @@ body {
 }
 
 @layer base {
-	/* Delius Swash Caps */
+	/* Inter-VariableF...z,wght.ttf */
 	@font-face {
-		font-family: "Caps";
+		font-family: "Inter";
+		font-weight: 400;
+		font-display: swap;
+		src: url("https://arweave.net/qFrZTwXAm1apiVgOYqpqmq2yWC8wRffpd3J6lMlzEwI")
+			format("woff2");
+	}
+	/* Nunito-VariableFont_wght.ttf */
+	@font-face {
+		font-family: "Nunito";
+		font-weight: 400;
+		font-display: swap;
+		src: url("https://arweave.net/-S1mctngrxKYvYi3RdgNJoZgJPh26mVDaVdKe-05hDA")
+			format("woff2");
+	}
+	/* JetBrainsMono-V...t_wght.ttf */
+	@font-face {
+		font-family: "JetBrainsMono";
+		font-weight: 400;
+		font-display: swap;
+		src: url("https://arweave.net/HsIZ0ZIWD-YcRo_Z4lyZsHevQQIr0J_afG0pVRCotXw")
+			format("woff2");
+	}
+	/* DeliusSwashCaps-Regular.ttf */
+	@font-face {
+		font-family: "DSC";
 		font-weight: 400;
 		font-display: swap;
 		src: url("https://arweave.net/6nKnlPeN4v9u1HqdQdT-8KLhqn4OECDmVsJosHnyz48")
 			format("woff2");
 	}
+	/* Sniglet-Regular.ttf */
+	@font-face {
+		font-family: "Sniglet";
+		font-weight: 400;
+		font-display: swap;
+		src: url("https://arweave.net/Wz2wNNDl9ypIdQU_4S04i6QuPDWwJnv1fQhQpBjB1iY")
+			format("woff2");
+	}
+
+	/* Gabriela-Regular.ttf */
+	/* @font-face {
+		font-family: "Gabriela";
+		font-weight: 400;
+		font-display: swap;
+		src: url("https://arweave.net/qAID3w-MgaZrO6SEvGBM7qWjz9LbwZNXKFqMGQIZjA8")
+			format("woff2");
+	} */
+
+	/* Outfit-VariableFont_wght.ttf */
+	/* @font-face {
+		font-family: "Outfit";
+		font-weight: 400;
+		font-display: swap;
+		src: url("https://arweave.net/Vp_lSwDuHQLfZ70OoLKczYsa8C3u5bxi17J-gOYMt8M")
+			format("woff2");
+	} */
 }
 
 .bg-slash {
@@ -33,3 +83,9 @@ body {
 .bg-dot {
 	@apply bg-size-[5px_5px] bg-radial-[at_50%_50%] from-foreground/50 from-0% to-transparent to-10%;
 }
+
+/* 
+--font-sans: "Inter",
+--font-serif: "Nunito",
+--font-mono: "JetBrainsMono", 
+*/
