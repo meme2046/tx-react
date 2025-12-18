@@ -6,7 +6,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ReactSVG } from "react-svg";
 import lineSVG from "@/assets/line.svg";
 import processingSVG from "@/assets/processing.svg";
-import refreshSVG from "@/assets/refresh.svg";
 
 export const Route = createFileRoute("/_layout/tests")({
 	component: RouteComponent,

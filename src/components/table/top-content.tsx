@@ -112,7 +112,7 @@ export function TopContent<T extends RowData>(props: ITopContent<T>) {
 				>
 					<ReactSVG
 						src={ICON_SRC["processing"]}
-						className={`text-primary w-6 ${isFetching ? "animate-spin" : ""}`}
+						className={`text-purple-500 w-6 ${isFetching ? "animate-spin" : ""}`}
 					/>
 				</Button>
 				<span className="text-nowrap">
