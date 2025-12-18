@@ -19,7 +19,7 @@ export const Route = createFileRoute("/_layout/fear-greed")({
 function RouteComponent() {
 	const { data } = useFearGreed();
 	return (
-		<div className="flex flex-col items-center pt-4 font-[DSC]">
+		<div className="flex flex-col items-center pt-4 font-[DeliusSwashCaps]">
 			<div className={`flex items-center justify-center relative`}>
 				<ReactSVG
 					className="cursor-pointer rounded-full bg-slate-500 absolute top-[86.7px] text-orange-400 w-10 animate-wiggle-more animate-infinite"

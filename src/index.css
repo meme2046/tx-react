@@ -53,7 +53,7 @@
 		"JetBrainsMono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
 		"Liberation Mono", "Courier New", monospace;
 	--font-serif:
-		"Nunito", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+		"Gabriela", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 	--radius: 0.5rem;
 	--tracking-tighter: calc(var(--tracking-normal) - 0.05em);
 	--tracking-tight: calc(var(--tracking-normal) - 0.025em);
@@ -117,7 +117,7 @@
 		"Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
 		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 	--font-serif:
-		"Nunito", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+		"Gabriela", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 	--font-mono:
 		"JetBrainsMono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
 		"Liberation Mono", "Courier New", monospace;
@@ -189,7 +189,7 @@
 		"Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
 		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 	--font-serif:
-		"Nunito", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+		"Gabriela", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 	--font-mono:
 		"JetBrainsMono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
 		"Liberation Mono", "Courier New", monospace;

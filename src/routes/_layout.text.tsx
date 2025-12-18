@@ -49,12 +49,12 @@ function RouteComponent() {
 		{ name: "font-sans", desc: "font-sans" },
 		{ name: "font-[Inter]", desc: "Inter" },
 		{ name: "font-serif", desc: "font-serif" },
-		{ name: "font-[Nunito]", desc: "Nunito" },
+		{ name: "font-[Gabriela]", desc: "Gabriela" },
 		{ name: "font-mono", desc: "font-mono" },
 		{ name: "font-[JetBrainsMono]", desc: "JetBrainsMono" },
-		{ name: "font-[DSC]", desc: "DeliusSwashCaps" },
+		{ name: "font-[DeliusSwashCaps]", desc: "DeliusSwashCaps" },
 		{ name: "font-[Sniglet]", desc: "Sniglet" },
-		// { name: "font-[Gabriela]", desc: "Gabriela" },
+		// { name: "font-[Nunito]", desc: "Nunito" },
 		// { name: "font-[Outfit]", desc: "Outfit" },
 	];
 	const demoText =

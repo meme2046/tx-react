@@ -24,14 +24,16 @@ body {
 		src: url("https://arweave.net/qFrZTwXAm1apiVgOYqpqmq2yWC8wRffpd3J6lMlzEwI")
 			format("woff2");
 	}
-	/* Nunito-VariableFont_wght.ttf */
+
+	/* Gabriela-Regular.ttf */
 	@font-face {
-		font-family: "Nunito";
+		font-family: "Gabriela";
 		font-weight: 400;
 		font-display: swap;
-		src: url("https://arweave.net/-S1mctngrxKYvYi3RdgNJoZgJPh26mVDaVdKe-05hDA")
+		src: url("https://arweave.net/qAID3w-MgaZrO6SEvGBM7qWjz9LbwZNXKFqMGQIZjA8")
 			format("woff2");
 	}
+
 	/* JetBrainsMono-V...t_wght.ttf */
 	@font-face {
 		font-family: "JetBrainsMono";
@@ -42,7 +44,7 @@ body {
 	}
 	/* DeliusSwashCaps-Regular.ttf */
 	@font-face {
-		font-family: "DSC";
+		font-family: "DeliusSwashCaps";
 		font-weight: 400;
 		font-display: swap;
 		src: url("https://arweave.net/6nKnlPeN4v9u1HqdQdT-8KLhqn4OECDmVsJosHnyz48")
@@ -57,12 +59,12 @@ body {
 			format("woff2");
 	}
 
-	/* Gabriela-Regular.ttf */
+	/* Nunito-VariableFont_wght.ttf */
 	/* @font-face {
-		font-family: "Gabriela";
+		font-family: "Nunito";
 		font-weight: 400;
 		font-display: swap;
-		src: url("https://arweave.net/qAID3w-MgaZrO6SEvGBM7qWjz9LbwZNXKFqMGQIZjA8")
+		src: url("https://arweave.net/-S1mctngrxKYvYi3RdgNJoZgJPh26mVDaVdKe-05hDA")
 			format("woff2");
 	} */
 

@@ -22,7 +22,7 @@ function RouteComponent() {
 	const { theme } = useSnapshot(storePersist);
 	const [count, setCount] = useState(0);
 	return (
-		<div className="font-[DSC] space-y-10">
+		<div className="font-[DeliusSwashCaps] space-y-10">
 			<ProgressSpinner />
 			<div className="flex flex-col justify-center items-center">
 				<p>This is the About page! </p>
