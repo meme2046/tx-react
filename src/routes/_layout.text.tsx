@@ -50,9 +50,9 @@ function RouteComponent() {
 		{ name: "font-serif", desc: "font-serif" },
 		{ name: "font-[Gabriela]", desc: "Gabriela" },
 		{ name: "font-mono", desc: "font-mono" },
-		{ name: "font-[JetBrainsMono]", desc: "JetBrainsMono" },
 		{ name: "font-[DeliusSwashCaps]", desc: "DeliusSwashCaps" },
 		{ name: "font-[Sniglet]", desc: "Sniglet" },
+		// { name: "font-[JetBrainsMono]", desc: "JetBrainsMono" },
 		// { name: "font-[Nunito]", desc: "Nunito" },
 		// { name: "font-[Outfit]", desc: "Outfit" },
 	];

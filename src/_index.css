@@ -34,14 +34,6 @@ body {
 			format("woff2");
 	}
 
-	/* JetBrainsMono-V...t_wght.ttf */
-	@font-face {
-		font-family: "JetBrainsMono";
-		font-weight: 400;
-		font-display: swap;
-		src: url("https://arweave.net/HsIZ0ZIWD-YcRo_Z4lyZsHevQQIr0J_afG0pVRCotXw")
-			format("woff2");
-	}
 	/* DeliusSwashCaps-Regular.ttf */
 	@font-face {
 		font-family: "DeliusSwashCaps";
@@ -58,6 +50,15 @@ body {
 		src: url("https://arweave.net/Wz2wNNDl9ypIdQU_4S04i6QuPDWwJnv1fQhQpBjB1iY")
 			format("woff2");
 	}
+
+	/* JetBrainsMono-V...t_wght.ttf */
+	/* @font-face {
+		font-family: "JetBrainsMono";
+		font-weight: 400;
+		font-display: swap;
+		src: url("https://arweave.net/HsIZ0ZIWD-YcRo_Z4lyZsHevQQIr0J_afG0pVRCotXw")
+			format("woff2");
+	} */
 
 	/* Nunito-VariableFont_wght.ttf */
 	/* @font-face {

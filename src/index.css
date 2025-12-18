@@ -50,7 +50,7 @@
 		"Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
 		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 	--font-mono:
-		"JetBrainsMono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+		"Consolas", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
 		"Liberation Mono", "Courier New", monospace;
 	--font-serif:
 		"Gabriela", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
@@ -119,7 +119,7 @@
 	--font-serif:
 		"Gabriela", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 	--font-mono:
-		"JetBrainsMono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+		"Consolas", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
 		"Liberation Mono", "Courier New", monospace;
 	--shadow-color: hsl(0 0% 0%);
 	--shadow-opacity: 0.1;
@@ -191,7 +191,7 @@
 	--font-serif:
 		"Gabriela", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 	--font-mono:
-		"JetBrainsMono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+		"Consolas", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
 		"Liberation Mono", "Courier New", monospace;
 	--shadow-2xs: 0 1px 3px 0px oklch(0 0 0 / 0.05);
 	--shadow-xs: 0 1px 3px 0px oklch(0 0 0 / 0.05);
