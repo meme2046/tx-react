@@ -5,6 +5,8 @@ import { ICON_SRC, SVG_SRC } from "@/consts";
 import { createFileRoute } from "@tanstack/react-router";
 import { ReactSVG } from "react-svg";
 import lineSVG from "@/assets/line.svg";
+import processingSVG from "@/assets/processing.svg";
+import refreshSVG from "@/assets/refresh.svg";
 
 export const Route = createFileRoute("/_layout/tests")({
 	component: RouteComponent,
@@ -30,29 +32,58 @@ function RouteComponent() {
 			/>
 
 			<div className="flex gap-1">
-				<Button variant="outline" size="icon">
+				<Button variant="ghost" size="icon">
 					<ReactSVG
 						src={ICON_SRC["refresh"]}
-						className={`text-primary animate-spin`}
+						className={`animate-spin text-indigo-500`}
+					/>
+				</Button>
+				<Button variant="ghost" size="icon">
+					<ReactSVG
+						src={ICON_SRC["refresh1"]}
+						className={`animate-spin w-6 text-violet-500`}
+					/>
+				</Button>
+				<Button variant="ghost" size="icon">
+					<ReactSVG
+						src={ICON_SRC["loading1"]}
+						className={`animate-spin text-fuchsia-500`}
+					/>
+				</Button>
+				<Button variant="ghost" size="icon">
+					<ReactSVG
+						src={ICON_SRC["loading2"]}
+						className={`animate-spin text-pink-500 `}
+					/>
+				</Button>
+				<Button variant="ghost" size="icon">
+					<ReactSVG
+						src={ICON_SRC["loading3"]}
+						className={`animate-spin text-rose-500`}
+					/>
+				</Button>
+				<Button variant="ghost" size="icon">
+					<ReactSVG
+						src={ICON_SRC["loading4"]}
+						className={`animate-spin text-blue-500`}
 					/>
 				</Button>
 				<Button variant="ghost" size="icon" className="rounded-full">
 					<ReactSVG
 						src={ICON_SRC["processing"]}
-						className="text-primary animate-spin"
+						className="text-sky-500 animate-spin w-6"
 					/>
-				</Button>
-				<Button variant="ghost" size="icon" className="rounded-full">
-					<ReactSVG src={ICON_SRC["processing"]} className="text-primary" />
 				</Button>
 				<Button variant="outline" className="gap-1">
 					<ReactSVG
-						src={ICON_SRC["processing"]}
-						className=" text-lime-500 animate-spin"
+						src={processingSVG}
+						className="text-purple-500 animate-spin w-6"
 					/>
 					<span className="text-xs">processing</span>
 				</Button>
-				<ReactSVG src={lineSVG} className="text-primary w-64" />
+			</div>
+			<div>
+				<ReactSVG src={lineSVG} className="text-rose-500 w-64" />
 				<ReactSVG src={SVG_SRC["line"]} className="text-primary w-64" />
 			</div>
 			<div className="flex gap-4">

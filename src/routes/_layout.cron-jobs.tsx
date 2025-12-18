@@ -64,7 +64,10 @@ function RouteComponent() {
 								name={orig.name}
 								title="edit"
 								triggerContent={
-									<ReactSVG src={ICON_SRC["edit"]} className="text-lime-600" />
+									<ReactSVG
+										src={ICON_SRC["edit"]}
+										className="text-lime-600 w-6"
+									/>
 								}
 							/>
 							<KillJob name={orig.name} />
@@ -98,7 +101,7 @@ function RouteComponent() {
 						triggerContent={
 							<>
 								<span>Add new job&nbsp;</span>
-								<ReactSVG src={ICON_SRC["plus"]} />
+								<ReactSVG src={ICON_SRC["plus"]} className="w-4" />
 							</>
 						}
 					/>

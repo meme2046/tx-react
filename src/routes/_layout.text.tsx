@@ -28,7 +28,7 @@ function RouteComponent() {
 		<Alert key={type}>
 			<AlertTitle className="flex">
 				<Button variant={label as "default"}>
-					<ReactSVG src={ICON_SRC["rocket"]} />
+					<ReactSVG src={ICON_SRC["rocket"]} className="w-6" />
 					{type}
 				</Button>
 			</AlertTitle>

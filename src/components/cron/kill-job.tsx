@@ -37,7 +37,7 @@ export function KillJob(props: { name?: string }) {
 							}
 						}}
 					>
-						<ReactSVG src={ICON_SRC["kill"]} className="text-yellow-600" />
+						<ReactSVG src={ICON_SRC["kill"]} className="text-yellow-600 w-6" />
 					</Button>
 				</TooltipTrigger>
 				<TooltipContent side="bottom">

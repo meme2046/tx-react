@@ -53,7 +53,7 @@ function RouteComponent() {
 					{Object.keys(ICON_SRC).map((item) => (
 						<div key={item} className="flex flex-col items-center">
 							<Button variant="outline" className="gap-1">
-								<ReactSVG src={ICON_SRC[item]} className="text-primary" />
+								<ReactSVG src={ICON_SRC[item]} className="text-primary w-6" />
 								<span className="text-xs">{item}</span>
 							</Button>
 						</div>

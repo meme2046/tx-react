@@ -35,7 +35,10 @@ export function DeleteJob({ name }: { name?: string }) {
 						<TooltipTrigger asChild>
 							<AlertDialogTrigger asChild>
 								<Button size="icon" variant="ghost" className="cursor-pointer">
-									<ReactSVG src={ICON_SRC["delete"]} className="text-red-600" />
+									<ReactSVG
+										src={ICON_SRC["delete"]}
+										className="text-red-600 w-6"
+									/>
 								</Button>
 							</AlertDialogTrigger>
 						</TooltipTrigger>

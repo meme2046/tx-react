@@ -163,7 +163,7 @@ export function TableBase<T extends RowData>(props: ITableBase<T>) {
 			{((hasNextPage && isFetching) || isLoading) && (
 				<ReactSVG
 					src={ICON_SRC["loading4"]}
-					className="sticky animate-spin text-info w-8 left-1/2 bottom-10 m-2"
+					className="sticky animate-spin text-primary w-8 left-1/2 transform -translate-x-1/2 bottom-10 m-2"
 				/>
 			)}
 		</div>
