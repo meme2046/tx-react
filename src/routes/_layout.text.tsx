@@ -1,10 +1,9 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ICON_SRC } from "@/consts";
+import { ICON_SRC, SVG_SRC } from "@/consts";
 import { createFileRoute } from "@tanstack/react-router";
 import { ReactSVG } from "react-svg";
-import lineSVG from "@/assets/line.svg";
 export const Route = createFileRoute("/_layout/text")({
 	component: RouteComponent,
 	head: () => ({
@@ -73,7 +72,7 @@ function RouteComponent() {
 								</Badge>
 							</p>
 							<ReactSVG
-								src={lineSVG}
+								src={SVG_SRC["line"]}
 								className="absolute left-0 bottom-0 text-primary w-full"
 							/>
 						</div>
