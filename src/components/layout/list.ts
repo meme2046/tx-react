@@ -7,7 +7,6 @@ export const themes: Record<string, string> = {
 
 const navDemo: INav[] = [
 	{ name: "icons", emoj: "⭐", desc: "", value: "/icons" },
-	{ name: "avatars", emoj: "😎", desc: "头像", value: "/avatars" },
 	{ name: "valtio", emoj: "💊", desc: "", value: "/valtio" },
 	{ name: "text", emoj: "📝", desc: "", value: "/text" },
 	{ name: "tests", emoj: "🧪", desc: "", value: "/tests" },

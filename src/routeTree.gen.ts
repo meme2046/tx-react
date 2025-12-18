@@ -30,7 +30,6 @@ import { Route as LayoutCronApiRouteImport } from './routes/_layout.cron-api'
 import { Route as LayoutCoingeckoRouteImport } from './routes/_layout.coingecko'
 import { Route as LayoutBitgetSfRouteImport } from './routes/_layout.bitget-sf'
 import { Route as LayoutBitgetGridRouteImport } from './routes/_layout.bitget-grid'
-import { Route as LayoutAvatarsRouteImport } from './routes/_layout.avatars'
 import { Route as AuthInvoicesRouteImport } from './routes/_auth.invoices'
 import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
 import { Route as AuthInvoicesIndexRouteImport } from './routes/_auth.invoices.index'
@@ -139,11 +138,6 @@ const LayoutBitgetGridRoute = LayoutBitgetGridRouteImport.update({
   path: '/bitget-grid',
   getParentRoute: () => LayoutRoute,
 } as any)
-const LayoutAvatarsRoute = LayoutAvatarsRouteImport.update({
-  id: '/avatars',
-  path: '/avatars',
-  getParentRoute: () => LayoutRoute,
-} as any)
 const AuthInvoicesRoute = AuthInvoicesRouteImport.update({
   id: '/invoices',
   path: '/invoices',
@@ -171,7 +165,6 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/dashboard': typeof AuthDashboardRoute
   '/invoices': typeof AuthInvoicesRouteWithChildren
-  '/avatars': typeof LayoutAvatarsRoute
   '/bitget-grid': typeof LayoutBitgetGridRoute
   '/bitget-sf': typeof LayoutBitgetSfRoute
   '/coingecko': typeof LayoutCoingeckoRoute
@@ -196,7 +189,6 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/login': typeof LoginRoute
   '/dashboard': typeof AuthDashboardRoute
-  '/avatars': typeof LayoutAvatarsRoute
   '/bitget-grid': typeof LayoutBitgetGridRoute
   '/bitget-sf': typeof LayoutBitgetSfRoute
   '/coingecko': typeof LayoutCoingeckoRoute
@@ -225,7 +217,6 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/_auth/dashboard': typeof AuthDashboardRoute
   '/_auth/invoices': typeof AuthInvoicesRouteWithChildren
-  '/_layout/avatars': typeof LayoutAvatarsRoute
   '/_layout/bitget-grid': typeof LayoutBitgetGridRoute
   '/_layout/bitget-sf': typeof LayoutBitgetSfRoute
   '/_layout/coingecko': typeof LayoutCoingeckoRoute
@@ -253,7 +244,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/dashboard'
     | '/invoices'
-    | '/avatars'
     | '/bitget-grid'
     | '/bitget-sf'
     | '/coingecko'
@@ -278,7 +268,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/login'
     | '/dashboard'
-    | '/avatars'
     | '/bitget-grid'
     | '/bitget-sf'
     | '/coingecko'
@@ -306,7 +295,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/_auth/dashboard'
     | '/_auth/invoices'
-    | '/_layout/avatars'
     | '/_layout/bitget-grid'
     | '/_layout/bitget-sf'
     | '/_layout/coingecko'
@@ -484,13 +472,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutBitgetGridRouteImport
       parentRoute: typeof LayoutRoute
     }
-    '/_layout/avatars': {
-      id: '/_layout/avatars'
-      path: '/avatars'
-      fullPath: '/avatars'
-      preLoaderRoute: typeof LayoutAvatarsRouteImport
-      parentRoute: typeof LayoutRoute
-    }
     '/_auth/invoices': {
       id: '/_auth/invoices'
       path: '/invoices'
@@ -549,7 +530,6 @@ const AuthRouteChildren: AuthRouteChildren = {
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface LayoutRouteChildren {
-  LayoutAvatarsRoute: typeof LayoutAvatarsRoute
   LayoutBitgetGridRoute: typeof LayoutBitgetGridRoute
   LayoutBitgetSfRoute: typeof LayoutBitgetSfRoute
   LayoutCoingeckoRoute: typeof LayoutCoingeckoRoute
@@ -569,7 +549,6 @@ interface LayoutRouteChildren {
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
-  LayoutAvatarsRoute: LayoutAvatarsRoute,
   LayoutBitgetGridRoute: LayoutBitgetGridRoute,
   LayoutBitgetSfRoute: LayoutBitgetSfRoute,
   LayoutCoingeckoRoute: LayoutCoingeckoRoute,

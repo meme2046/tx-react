@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { AVATAR_SRC, ICON_SRC, SVG_SRC } from "@/consts";
 import { createFileRoute } from "@tanstack/react-router";
+import { upperCase } from "lodash";
+import React from "react";
 import { ReactSVG } from "react-svg";
 
 export const Route = createFileRoute("/_layout/icons")({
@@ -38,14 +40,15 @@ function RouteComponent() {
 				<Button variant="link">Link</Button>
 				<Button variant="ghost">Ghost</Button>
 			</div>
-			<Card className="bg-card shadow-md rounded-md">
-				<CardHeader className="py-1 rounded-t-md">
-					<CardTitle className="flex items-center gap-3 text-primary">
-						<Avatar className="ring">
-							<AvatarImage src={AVATAR_SRC["6"]} alt="6" />
-							<AvatarFallback className="animate-pulse bg-linear-to-tr from-info to-primary"></AvatarFallback>
-						</Avatar>
-						<span className="text-lg font-semibold">Icons</span>
+			<Card className="py-0 gap-0">
+				<CardHeader>
+					<CardTitle className="flex items-center gap-2">
+						<img
+							className="w-12 rounded-full ring"
+							src={AVATAR_SRC["65"]}
+							alt="@shadcn"
+						/>
+						<span className="text-lg font-semibold text-primary">ICON</span>
 					</CardTitle>
 				</CardHeader>
 				<Separator />
@@ -60,14 +63,15 @@ function RouteComponent() {
 					))}
 				</CardContent>
 			</Card>
-			<Card className="bg-card shadow-md rounded-md">
-				<CardHeader className="py-1 rounded-t-md">
-					<CardTitle className="flex items-center gap-3 text-primary">
-						<Avatar className="ring">
-							<AvatarImage src={AVATAR_SRC["71"]} alt="71" />
-							<AvatarFallback className="animate-pulse bg-linear-to-tr from-info to-primary"></AvatarFallback>
-						</Avatar>
-						<span className="text-lg font-semibold">SVGs</span>
+			<Card className="py-0 gap-0">
+				<CardHeader>
+					<CardTitle className="flex items-center gap-2">
+						<img
+							className="w-12 rounded-full ring"
+							src={AVATAR_SRC["71"]}
+							alt="@shadcn"
+						/>
+						<span className="text-lg font-semibold text-primary">SVG</span>
 					</CardTitle>
 				</CardHeader>
 				<Separator />
@@ -80,6 +84,35 @@ function RouteComponent() {
 							</Button>
 						</div>
 					))}
+				</CardContent>
+			</Card>
+			<Card className="py-0 gap-0">
+				<CardHeader>
+					<CardTitle className="flex items-center gap-2">
+						<img
+							className="w-12 rounded-full ring"
+							src="https://github.com/shadcn.png"
+							alt="@shadcn"
+						/>
+						<span className="text-lg font-semibold text-primary">头像</span>
+					</CardTitle>
+				</CardHeader>
+
+				<Separator className="bg-primary/20" />
+				<CardContent className="p-3">
+					<div className="flex flex-wrap gap-4">
+						{Object.keys(AVATAR_SRC).map((key, index) => (
+							<div key={index} className="text-center">
+								<Avatar>
+									<AvatarImage src={AVATAR_SRC[key]} alt={upperCase(key)} />
+									<AvatarFallback className="animate-pulse bg-linear-to-tr from-secondary to-primary"></AvatarFallback>
+								</Avatar>
+								<span className="mt-1 text-xs text-muted-foreground">
+									{key}
+								</span>
+							</div>
+						))}
+					</div>
 				</CardContent>
 			</Card>
 		</div>
