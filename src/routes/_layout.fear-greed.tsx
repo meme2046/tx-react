@@ -5,6 +5,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import dayjs from "dayjs";
 import { ReactSVG } from "react-svg";
 import GaugeChart from "react-gauge-chart";
+import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/_layout/fear-greed")({
 	component: RouteComponent,
 	head: () => ({
@@ -21,10 +22,16 @@ function RouteComponent() {
 	return (
 		<div className="flex flex-col items-center pt-4 font-[DeliusSwashCaps]">
 			<div className={`flex items-center justify-center relative`}>
-				<ReactSVG
-					className="cursor-pointer rounded-full bg-slate-500 absolute top-[86.7px] text-orange-400 w-10 animate-wiggle-more animate-infinite"
-					src={SVG_SRC["btc"]}
-				/>
+				<Button
+					variant="outline"
+					size="icon-lg"
+					className="rounded-full cursor-pointer absolute top-[86.7px]"
+				>
+					<ReactSVG
+						className="animate-wiggle-more animate-infinite"
+						src={SVG_SRC["btc"]}
+					/>
+				</Button>
 			</div>
 			<div>
 				<GaugeChart

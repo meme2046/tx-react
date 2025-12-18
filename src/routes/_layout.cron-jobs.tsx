@@ -27,7 +27,7 @@ function RouteComponent() {
 				header: "序号",
 				enableColumnFilter: true,
 				enableSorting: true,
-				size: 160,
+				size: 88,
 			},
 			{
 				accessorKey: "name",

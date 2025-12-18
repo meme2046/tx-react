@@ -27,7 +27,9 @@ export const TableFilter = <TData, TValue>({
 	) : (
 		<DebouncedInput
 			className={`max-w-40 ${className}`}
-			onChange={(value) => column.setFilterValue(value)}
+			onChange={(value) => {
+				column.setFilterValue(value);
+			}}
 			placeholder={`Search...`}
 		/>
 	);

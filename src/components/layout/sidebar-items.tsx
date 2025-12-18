@@ -17,7 +17,9 @@ export function SidebarItems() {
 		<>
 			{Object.entries(sideNavList).map(([group, items]) => (
 				<SidebarGroup key={group}>
-					<SidebarGroupLabel>{startCase(group)}</SidebarGroupLabel>
+					<SidebarGroupLabel className="font-[Sniglet]">
+						{startCase(group)}
+					</SidebarGroupLabel>
 					<SidebarGroupContent>
 						<SidebarMenu>
 							{items.map((item) => (
