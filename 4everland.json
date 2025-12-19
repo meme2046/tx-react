@@ -1,0 +1,9 @@
+{
+	"redirects": [
+		{
+			"from": "/*",
+			"to": "/index.html",
+			"statusCode": 200
+		}
+	]
+}
