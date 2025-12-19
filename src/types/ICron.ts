@@ -18,6 +18,7 @@ export interface ICronLog {
 }
 
 export interface ICronJob {
+	sortIndex: number;
 	name: string;
 	command: string;
 	cronExpr: string;

@@ -23,7 +23,8 @@ function RouteComponent() {
 	const columns = useMemo<ColumnDef<ICronJob>[]>(
 		() => [
 			{
-				accessorKey: "sortIndex",
+				accessorFn: (row) => `${row.sortIndex}`,
+				id: "sortIndex",
 				header: "序号",
 				enableColumnFilter: true,
 				enableSorting: true,
