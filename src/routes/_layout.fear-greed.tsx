@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import { ReactSVG } from "react-svg";
 import GaugeChart from "react-gauge-chart";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 export const Route = createFileRoute("/_layout/fear-greed")({
 	component: RouteComponent,
 	head: () => ({
@@ -49,26 +50,27 @@ function RouteComponent() {
 			</div>
 
 			{data && data.now && (
-				<Card className="shadow-lg rounded-lg">
-					<CardContent className="p-6">
+				<Card className="shadow rounded-lg py-4">
+					<CardContent className="grid text-center gap-1">
 						<p className="text-lg font-semibold text-primary">
-							当前:{" "}
 							<span>{`${data.now.value} (${data.now.value_classification})`}</span>
 						</p>
 						<p className="text-sm text-foreground">
-							昨天:{" "}
+							<span>昨天:</span>
 							<span>{`${data.yesterday.value} (${data.yesterday.value_classification})`}</span>
 						</p>
 						<p className="text-sm text-foreground">
-							本周:{" "}
+							<span>本周:</span>
 							<span>{`${data.lastWeek.value} (${data.lastWeek.value_classification})`}</span>
 						</p>
-						<p className="text-xs mt-2 text-muted-foreground">
-							更新时间:{" "}
-							{dayjs
-								.unix(Number(data.now.timestamp))
-								.format("YYYY-MM-DD HH:mm")}
-						</p>
+						<Badge variant="outline" className="shadow">
+							<span>更新时间:</span>
+							<span>
+								{dayjs
+									.unix(Number(data.now.timestamp))
+									.format("YYYY-MM-DD HH:mm")}
+							</span>
+						</Badge>
 					</CardContent>
 				</Card>
 			)}
