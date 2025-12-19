@@ -36,7 +36,6 @@ const router = createRouter({
 	context: {
 		app: undefined!,
 	},
-	basepath: "/",
 });
 
 // Register the router instance for type safety
