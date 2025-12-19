@@ -39,7 +39,7 @@ function RouteComponent() {
 				enableColumnFilter: false,
 			},
 			{
-				accessorFn: (row) => `${row.symbol},${row.cex}`,
+				accessorFn: (row) => `${row.symbol},${row.cex},${row.chain}`,
 				id: "coin",
 				header: "币种&交易平台",
 				size: 144,

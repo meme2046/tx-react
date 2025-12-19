@@ -17,4 +17,5 @@ export const SVG_SRC: Record<string, string> = {
 	beta: "https://arweave.net/KCAbhCpxYWfb7mZ3uPF9wQyGyaDYPHwn0zbR7nTXC80",
 	shadcn: "https://arweave.net/-2hSbOI-O2qs3u9d_yf4ylmV3AeSG739b-MaYghh8TA",
 	solana: "https://arweave.net/cGqOWiKeBCH1xO97fbs7Pi4assSD3aBudpuCtamWLy4",
+	sol: "https://arweave.net/cGqOWiKeBCH1xO97fbs7Pi4assSD3aBudpuCtamWLy4",
 };
