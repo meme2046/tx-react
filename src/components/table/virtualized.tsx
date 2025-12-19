@@ -26,7 +26,7 @@ interface IVirtualizedTable<T> {
 }
 
 export function VirtualizedTable<T extends RowData>(
-	props: IVirtualizedTable<T>
+	props: IVirtualizedTable<T>,
 ) {
 	const {
 		table,
@@ -60,8 +60,13 @@ export function VirtualizedTable<T extends RowData>(
 
 	const handleSortingChange: OnChangeFn<SortingState> = (updater) => {
 		setSorting(updater);
-		if (table.getRowModel().rows.length) {
-			rowVirtualizer.scrollToIndex?.(0);
+		// 更全面的检查确保可以安全滚动
+		if (rows.length > 0 && rowVirtualizer.scrollElement) {
+			requestAnimationFrame(() => {
+				if (rowVirtualizer.scrollElement && rows.length > 0) {
+					rowVirtualizer.scrollToIndex(0);
+				}
+			});
 		}
 	};
 
@@ -71,10 +76,15 @@ export function VirtualizedTable<T extends RowData>(
 	}));
 
 	useEffect(() => {
-		if (rowsPerPage) {
-			rowVirtualizer.scrollToIndex?.(0);
+		// 更全面的检查确保可以安全滚动
+		if (rowsPerPage && rowVirtualizer.scrollElement && rows.length > 0) {
+			requestAnimationFrame(() => {
+				if (rowVirtualizer.scrollElement && rows.length > 0) {
+					rowVirtualizer.scrollToIndex(0);
+				}
+			});
 		}
-	}, [rowVirtualizer, rowsPerPage]);
+	}, [rowVirtualizer, rowsPerPage, rows.length]);
 
 	const virtualItems = rowVirtualizer.getVirtualItems();
 	const [lastVirtualIndex, setLastVirtualIndex] = useState<number>(-1);

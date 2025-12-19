@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { http } from "../../utils";
 import type { CoingeckoCoinsMarketsItem, IKV } from "@/types";
+import { useSnapshot } from "valtio";
+import { storePersist } from "@/lib/valtio";
 
 export function useCoingeckoCoinsMarkets(coinList: string[]) {
 	return useQuery<CoingeckoCoinsMarketsItem[]>({
@@ -28,17 +30,15 @@ export function useCoingeckoCoinsMarkets(coinList: string[]) {
 }
 
 export function useCoinsFromGithub() {
+	const { githubDataURL } = useSnapshot(storePersist);
 	return useQuery<IKV[]>({
 		queryKey: ["coingecko-coins-github"],
 		queryFn: () => {
-			return http(
-				"https://raw.githubusercontent.com/txnj/data/refs/heads/main/coingecko.json",
-				{
-					headers: {
-						"Content-Type": "application/json",
-					},
+			return http(`${githubDataURL}/coingecko.json`, {
+				headers: {
+					"Content-Type": "application/json",
 				},
-			);
+			});
 		},
 	});
 }

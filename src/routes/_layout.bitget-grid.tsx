@@ -136,7 +136,7 @@ function RouteComponent() {
 		isFetchingNextPage,
 		isFetching,
 		isLoading,
-	} = useCsvInfinite<IGrid>("github-bitget", "bitget");
+	} = useCsvInfinite<IGrid>("github", "bitget");
 
 	const sortedData = useMemo(() => {
 		const flatData = data?.pages?.flatMap((page) => page.list) ?? [];

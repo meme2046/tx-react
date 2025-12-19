@@ -17,7 +17,7 @@ export function CoingeckoItem({ item }: CoingeckoItemProps) {
 				<img
 					src={item.image}
 					alt={item.symbol}
-					className="w-10 h-10 rounded-full"
+					className="size-10 rounded-full"
 				/>
 				<span>{upperCase(item.symbol)}</span>
 

@@ -21,7 +21,7 @@ export interface IStrategy {
 	spot_profit_client_order_id: string;
 	spot_open_usdt: number;
 	spot_open_px: number;
-	spot_close_usdt: number;
+	spot_achieved_pl: number;
 	spot_close_px: number;
 	futures_order_id: number;
 	futures_client_order_id: string;
@@ -31,7 +31,7 @@ export interface IStrategy {
 	futures_profit_market_client_order_id: string;
 	futures_open_usdt: number;
 	futures_open_px: number;
-	futures_close_usdt: number;
+	futures_achieved_pl: number;
 	futures_close_px: number;
 	position_side: string;
 }

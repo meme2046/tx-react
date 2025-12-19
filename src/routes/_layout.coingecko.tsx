@@ -31,7 +31,7 @@ function RouteComponent() {
 
 	const renderCard = (title: string, imgSrc: string) => (
 		<Card className="shadow-md hover:shadow-lg transition-shadow">
-			<CardHeader className="py-2 px-4">
+			<CardHeader className="px-4">
 				<CardTitle className="flex items-center gap-2">
 					<img
 						src={imgSrc}

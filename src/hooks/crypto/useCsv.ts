@@ -100,7 +100,7 @@ export const useCsvInfinite = <T extends object>(
 ) => {
 	const { githubDataURL } = useSnapshot(storePersist);
 	return useInfiniteQuery<IInfiniteList<T>>({
-		queryKey: [`infinite-${key}`],
+		queryKey: [`infinite-${key}-${fileName}`],
 		queryFn: ({ pageParam = "" }) => {
 			return fetchCsvData<T>(githubDataURL, fileName, Number(pageParam));
 		},

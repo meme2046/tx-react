@@ -227,4 +227,5 @@ export const COIN_SRC: Record<string, string> = {
 	rfc: "https://arweave.net/HWSDt07xgwO-r8p0974KKrCaNvvlwnaQ6MLIpLNg_cE",
 	alch: "https://arweave.net/C5J-cSuxk6oLBjlPqxdilm34614kITvQg2FnlWkPFnQ",
 	hippo: "https://arweave.net/lvy4e9eq5y1o1HdZ_0GjTVTtl-7QYsUx5a5GirH9PRA",
+	xaut: "https://arweave.net/VArnxbCw23goI5Wg8LNYBDH3fGonRWJcL-tFAtQ0EA8",
 };

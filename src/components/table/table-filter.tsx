@@ -21,14 +21,14 @@ export const TableFilter = <TData, TValue>({
 	return filterVariant === "select" ? (
 		<Combobox
 			list={selectItems ?? []}
-			onchange={(v) => column.setFilterValue(v)}
+			onchange={(v) => column.setFilterValue(`${v}`)}
 			width={column.getSize() > 160 ? 160 : column.getSize()}
 		/>
 	) : (
 		<DebouncedInput
 			className={`max-w-40 ${className}`}
 			onChange={(value) => {
-				column.setFilterValue(value);
+				column.setFilterValue(`${value}`);
 			}}
 			placeholder={`Search...`}
 		/>
