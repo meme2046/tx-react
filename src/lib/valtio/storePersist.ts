@@ -12,7 +12,8 @@ interface IAppPersist {
 const initialState: IAppPersist = {
 	theme: "system",
 	cronURL: "https://192.168.123.7:8000",
-	githubDataURL: "https://raw.githubusercontent.com/txnj/data/refs/heads/main",
+	githubDataURL:
+		"https://raw.githubusercontent.com/meme2046/data/refs/heads/main",
 };
 
 // Create a persisted store
