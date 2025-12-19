@@ -47,7 +47,7 @@ export function Navbar() {
 	return (
 		<nav className="py-1 text-sm flex justify-around items-stretch sticky top-0 z-40 inset-x-0 backdrop-blur-xs bg-background/20">
 			<div className="flex items-center">
-				<SidebarTrigger />
+				<SidebarTrigger className="text-primary hover:text-lime-600" />
 				<Link to="/">
 					<Button variant="ghost" className="py-0 px-1">
 						<span className="font-[DeliusSwashCaps]">Meme</span>
