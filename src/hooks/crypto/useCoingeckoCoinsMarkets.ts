@@ -23,8 +23,8 @@ export function useCoingeckoCoinsMarkets(coinList: string[]) {
 				},
 			});
 		},
-		// refetchOnWindowFocus: false,
-		// refetchInterval: 60 * 1000,
+		refetchOnWindowFocus: false,
+		refetchInterval: 60 * 1000,
 		// refetchIntervalInBackground: true,
 	});
 }
@@ -40,5 +40,7 @@ export function useCoinsFromGithub() {
 				},
 			});
 		},
+		refetchOnWindowFocus: false,
+		refetchInterval: 60 * 1000,
 	});
 }
