@@ -14,7 +14,9 @@ export interface IStrategy {
 	fx_trigger_px: number;
 	pnl: number;
 	pnl_ratio: number;
-	end_time: string;
+	spot_close_at: string;
+	futures_close_at: string;
+	close_at: string;
 	spot_order_id: number;
 	spot_client_order_id: string;
 	spot_profit_order_id: number;
@@ -25,10 +27,6 @@ export interface IStrategy {
 	spot_close_px: number;
 	futures_order_id: number;
 	futures_client_order_id: string;
-	futures_loss_market_order_id: number;
-	futures_loss_market_client_order_id: string;
-	futures_profit_market_order_id: number;
-	futures_profit_market_client_order_id: string;
 	futures_open_usdt: number;
 	futures_open_px: number;
 	futures_achieved_pl: number;
