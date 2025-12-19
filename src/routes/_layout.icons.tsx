@@ -6,7 +6,6 @@ import { Separator } from "@/components/ui/separator";
 import { AVATAR_SRC, ICON_SRC, SVG_SRC } from "@/consts";
 import { createFileRoute } from "@tanstack/react-router";
 import { upperCase } from "lodash";
-import React from "react";
 import { ReactSVG } from "react-svg";
 
 export const Route = createFileRoute("/_layout/icons")({
