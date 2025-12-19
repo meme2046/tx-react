@@ -2,7 +2,11 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { RouterProvider, createRouter } from "@tanstack/react-router";
+import {
+	RouterProvider,
+	createHashHistory,
+	createRouter,
+} from "@tanstack/react-router";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
@@ -21,10 +25,12 @@ import "./index.css";
 const queryClient = new QueryClient();
 
 // Create a new router instance
+const hashHistory = createHashHistory();
 
 // Set up a Router instance
 const router = createRouter({
 	routeTree,
+	history: hashHistory,
 	defaultPreload: "intent",
 	scrollRestoration: true,
 	context: {
