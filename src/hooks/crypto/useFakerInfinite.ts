@@ -1,7 +1,6 @@
 import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import { fetchData } from "./makeData.ts";
-import type { IStrategyTx } from "@/types/IStrategyTx.ts";
-import type { IArweaveDataList } from "@/types/IArweave.ts";
+import type { IArweaveDataList, IStrategyTx } from "@/types";
 
 export const useFakerInfinite = (fetchSize: number) => {
 	return useInfiniteQuery<IArweaveDataList<IStrategyTx>>({

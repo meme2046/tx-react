@@ -2,6 +2,7 @@ export * from "./IUser.ts";
 export * from "./INav.ts";
 export * from "./IArweave.ts";
 export * from "./IStrategyTx.ts";
+export * from "./IArweaveDataList.ts";
 export * from "./IFearGreed.ts";
 export * from "./ICron.ts";
 export * from "./IKV.ts";
