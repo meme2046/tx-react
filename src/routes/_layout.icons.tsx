@@ -43,7 +43,7 @@ function RouteComponent() {
 				<CardHeader>
 					<CardTitle className="flex items-center gap-2">
 						<img
-							className="w-12 rounded-full ring"
+							className="w-12 rounded-full"
 							src={AVATAR_SRC["65"]}
 							alt="@shadcn"
 						/>
@@ -66,7 +66,7 @@ function RouteComponent() {
 				<CardHeader>
 					<CardTitle className="flex items-center gap-2">
 						<img
-							className="w-12 rounded-full ring"
+							className="w-12 rounded-full"
 							src={AVATAR_SRC["71"]}
 							alt="@shadcn"
 						/>
@@ -89,7 +89,7 @@ function RouteComponent() {
 				<CardHeader>
 					<CardTitle className="flex items-center gap-2">
 						<img
-							className="w-12 rounded-full ring"
+							className="w-12 rounded-full"
 							src="https://github.com/shadcn.png"
 							alt="@shadcn"
 						/>

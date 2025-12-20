@@ -12,8 +12,8 @@ export function CoingeckoItem({ item }: CoingeckoItemProps) {
 	const change = item.price_change_percentage_24h;
 
 	return (
-		<Card className="cursor-pointer min-w-24 overflow-hidden transition-all duration-300 hover:shadow-md">
-			<CardContent className="p-2 flex flex-col items-center">
+		<Card className="p-0 cursor-pointer overflow-hidden">
+			<CardContent className="py-1 px-3 flex flex-col items-center">
 				<img
 					src={item.image}
 					alt={item.symbol}
@@ -24,10 +24,13 @@ export function CoingeckoItem({ item }: CoingeckoItemProps) {
 				<span className="text-xs underline">
 					{effective(item.current_price.toString())}
 				</span>
-				<span
+				{/* <span
 					className={badgeVariants({
 						variant: `${change >= 0 ? "default" : "destructive"}`,
 					})}
+				> */}
+				<span
+					className={`text-sm rounded-full px-1 shadow-xl ${change >= 0 ? "bg-lime-600" : "bg-red-400"}`}
 				>
 					{change.toFixed(3)}%
 				</span>

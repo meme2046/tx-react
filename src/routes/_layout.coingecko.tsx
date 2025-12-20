@@ -30,22 +30,18 @@ function RouteComponent() {
 	}, [data]);
 
 	const renderCard = (title: string, imgSrc: string) => (
-		<Card className="shadow-md hover:shadow-lg transition-shadow">
+		<Card className="py-0 gap-0">
 			<CardHeader className="px-4">
 				<CardTitle className="flex items-center gap-2">
-					<img
-						src={imgSrc}
-						className="w-12 rounded-full ring ring-info"
-						alt={title}
-					/>
+					<img src={imgSrc} className="w-12 rounded-full" alt={title} />
 					<span className="underline">
-						{data?.find((v) => v.id === "bitcoin")?.current_price}
+						${data?.find((v) => v.id === "bitcoin")?.current_price}
 					</span>
 					<span className="text-lg font-semibold">{title}</span>
 				</CardTitle>
 			</CardHeader>
 			<Separator />
-			<CardContent className="p-4 flex justify-center flex-wrap gap-2">
+			<CardContent className="p-3 flex justify-center flex-wrap gap-2">
 				{sortedData?.map((item, _) => (
 					<div key={item.id}>
 						<CoingeckoItem item={item} />
