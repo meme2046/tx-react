@@ -130,9 +130,8 @@ export function TableBase<T extends RowData>(props: ITableBase<T>) {
 										return (
 											<TableCell
 												key={cell.id}
-												className={`shrink-0 truncate p-1 align-baseline ${
-													cell.column.getSize() > minFixedWidth ? "grow" : ""
-												}`}
+												className={`truncate p-1 content-center 
+													${cell.column.getSize() > minFixedWidth ? "grow" : "shrink-0"}`}
 												width={cell.column.getSize()}
 											>
 												{flexRender(
