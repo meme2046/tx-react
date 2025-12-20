@@ -95,7 +95,7 @@ export function TopContent<T extends RowData>(props: ITopContent<T>) {
 					</SelectContent>
 				</Select>
 				{!hasNextPage && !isFetching && (
-					<Badge variant="destructive" className="text-nowrap">
+					<Badge variant="destructive" className={"text-nowrap"}>
 						所有数据已获取
 					</Badge>
 				)}

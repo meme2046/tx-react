@@ -73,7 +73,7 @@ export function Navbar() {
 					</NavigationMenuList>
 				</NavigationMenu>
 			</div>
-			<div></div>
+			<div className="w-16"></div>
 		</nav>
 	);
 }

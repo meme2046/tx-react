@@ -149,8 +149,12 @@ function RouteComponent() {
 
 	const initialVisibilityColumns = [
 		"select",
+		"id",
 		"name",
+		"age",
 		"role",
+		"team",
+		"email",
 		"status",
 		"actions",
 	];
