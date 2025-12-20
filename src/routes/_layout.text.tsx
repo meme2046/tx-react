@@ -59,7 +59,7 @@ function RouteComponent() {
 	const demoText =
 		"Design Stunning UIs Faster with Shadcn Theme Generator | 中文 | English | 0123456789";
 	return (
-		<div className="p-4 flex flex-col gap-4 bg-slash">
+		<div className="flex flex-col gap-4 bg-dot">
 			<Alert>
 				<AlertTitle>字体</AlertTitle>
 				<AlertDescription className="text-lg">

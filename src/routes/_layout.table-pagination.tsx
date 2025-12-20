@@ -163,7 +163,7 @@ function RouteComponent() {
 	const flatData = useMemo(() => data?.list ?? [], [data]);
 
 	return (
-		<div className="p-4 space-y-4">
+		<div>
 			<div>Hello "/_layout/table"!</div>
 
 			<ReactTable

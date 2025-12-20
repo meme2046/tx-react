@@ -12,7 +12,6 @@ import { Outlet } from "@tanstack/react-router";
 import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/layout/navbar";
 import { SidebarItems } from "@/components/layout/sidebar-items";
-import { createRef } from "react";
 
 export const Route = createFileRoute("/_layout")({
 	component: RouteComponent,

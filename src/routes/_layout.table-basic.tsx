@@ -83,7 +83,7 @@ function RouteComponent() {
 	});
 
 	return (
-		<div className="p-2">
+		<div>
 			<Table className="border-collapse table-auto">
 				<TableHeader>
 					{table.getHeaderGroups().map((headerGroup) => (

@@ -21,7 +21,7 @@ export const Route = createFileRoute("/_layout/valtio")({
 
 function RouteComponent() {
 	return (
-		<div className="p-4 bg-dot">
+		<div>
 			<Card className="mt-4 rounded-lg shadow-md text-primary">
 				<CardHeader>
 					<CardTitle className="text-2xl text-primary">

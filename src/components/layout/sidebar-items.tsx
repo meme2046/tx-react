@@ -29,7 +29,7 @@ export function SidebarItems() {
 											to={item.value}
 											onClick={() => isMobile && toggleSidebar()}
 											activeProps={{
-												className: "font-bold",
+												className: "font-bold text-primary",
 											}}
 										>
 											<span className="text-lg">{item.emoj}</span>

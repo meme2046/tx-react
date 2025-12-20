@@ -21,7 +21,7 @@ export const Route = createFileRoute("/_layout/icons")({
 
 function RouteComponent() {
 	return (
-		<div className="p-4 flex flex-col gap-6 bg-slash">
+		<div className="flex flex-col gap-6 bg-slash">
 			<div className="flex gap-2 flex-wrap justify-center">
 				<Badge>primary</Badge>
 				<Badge variant="default">default</Badge>

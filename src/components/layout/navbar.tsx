@@ -29,7 +29,7 @@ export function Navbar() {
 						to={item.value}
 						className={cn("select-none", className)}
 						activeProps={{
-							className: "font-bold",
+							className: "font-bold text-primary",
 						}}
 					>
 						<div>
@@ -47,9 +47,9 @@ export function Navbar() {
 	return (
 		<nav className="py-1 text-sm flex justify-around items-stretch sticky top-0 z-40 inset-x-0 backdrop-blur-xs bg-background/20">
 			<div className="flex items-center">
-				<SidebarTrigger className="text-primary hover:text-lime-600" />
+				<SidebarTrigger className="text-primary hover:text-lime-600 [&>svg]:size-6! cursor-pointer" />
 				<Link to="/">
-					<Button variant="ghost" className="py-0 px-1">
+					<Button variant="ghost" className="py-0 px-1 cursor-pointer">
 						<span className="font-[DeliusSwashCaps]">Meme</span>
 					</Button>
 				</Link>
