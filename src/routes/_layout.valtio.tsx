@@ -21,15 +21,13 @@ export const Route = createFileRoute("/_layout/valtio")({
 
 function RouteComponent() {
 	return (
-		<div className="p-4">
+		<div className="p-4 bg-dot">
 			<Card className="mt-4 rounded-lg shadow-md text-primary">
 				<CardHeader>
 					<CardTitle className="text-2xl text-primary">
 						Valtio Todo List ✏️
 					</CardTitle>
-					<CardDescription>
-						A simple todo list using valtio
-					</CardDescription>
+					<CardDescription>A simple todo list using valtio</CardDescription>
 				</CardHeader>
 				<CardContent>
 					<Filters />
