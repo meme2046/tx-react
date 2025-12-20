@@ -5,7 +5,6 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import type { IAppContext } from "@/components/providers";
 import { HeadContent } from "@tanstack/react-router";
 import { ToggleTheme } from "@/components/toggle-theme";
-import { SidebarProvider } from "@/components/ui/sidebar";
 
 interface RouterContext {
 	app: IAppContext;
