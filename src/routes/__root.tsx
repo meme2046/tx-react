@@ -5,6 +5,7 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import type { IAppContext } from "@/components/providers";
 import { HeadContent } from "@tanstack/react-router";
 import { ToggleTheme } from "@/components/toggle-theme";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 interface RouterContext {
 	app: IAppContext;
@@ -15,7 +16,9 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 		<>
 			<ToggleTheme />
 			<HeadContent />
+			{/* <SidebarProvider className="w-full h-full p-0 m-0"> */}
 			<Outlet />
+			{/* </SidebarProvider> */}
 			<TanStackDevtools
 				config={{
 					position: "bottom-right",

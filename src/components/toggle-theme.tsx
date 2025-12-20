@@ -12,7 +12,7 @@ export const ToggleTheme = () => {
 			reversed={false}
 			title="toggle theme"
 			placeholder="toggle theme"
-			className={`fixed top-1 right-1 rounded text-3xl text-primary z-50`}
+			className={`fixed top-1 right-4 rounded text-3xl text-primary z-50`}
 			duration={500}
 			toggled={Object.values(themes)[1] === theme}
 			onToggle={(isToggled) => {

@@ -1,9 +1,27 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
 html {
 	@apply scrollbar-thin scrollbar-thumb-primary scrollbar-track-transparent;
 }
 
 body {
 	@apply bg-[url('https://arweave.net/c3cCRBcDb-cbx26AlJqJ9MKYBUPFDXN6pJ3AsVBWTzw')] dark:bg-[url('https://arweave.net/STTh6euGv92OJDYAxAkUQwFj0fJ7oTY4ker1tUSPcY8')] bg-size-[50%] bg-no-repeat bg-top-right bg-fixed;
+}
+
+#root {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	overflow: auto;
+	@apply scrollbar-thin;
 }
 
 @keyframes movex {

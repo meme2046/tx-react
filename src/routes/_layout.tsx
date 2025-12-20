@@ -19,30 +19,28 @@ export const Route = createFileRoute("/_layout")({
 
 function RouteComponent() {
 	return (
-		<>
-			<SidebarProvider>
-				<ProgressSpinner />
-				<Sidebar className="z-50" variant="inset">
-					<SidebarHeader>
-						<div className="flex gap-2 items-center">
-							<Avatar className="ring">
-								<AvatarImage src={AVATAR_SRC.shadcn} alt="@shadcn_sidebar" />
-								<AvatarFallback className="animate-pulse bg-linear-to-tr from-info to-primary"></AvatarFallback>
-							</Avatar>
-							<span className="font-[DeliusSwashCaps]">Meme</span>
-						</div>
-					</SidebarHeader>
-					<SidebarContent className="scrollbar-thin">
-						<SidebarItems />
-					</SidebarContent>
-				</Sidebar>
-				<main className="grow overflow-auto">
-					<Navbar />
-					<div className="px-1 min-h-[calc(100vh-64px)]">
-						<Outlet />
+		<SidebarProvider className="w-full h-full p-0 m-0">
+			<ProgressSpinner />
+			<Sidebar className="z-50" variant="inset">
+				<SidebarHeader>
+					<div className="flex gap-2 items-center">
+						<Avatar className="ring">
+							<AvatarImage src={AVATAR_SRC.shadcn} alt="@shadcn_sidebar" />
+							<AvatarFallback className="animate-pulse bg-linear-to-tr from-info to-primary"></AvatarFallback>
+						</Avatar>
+						<span className="font-[DeliusSwashCaps]">Meme</span>
 					</div>
-				</main>
-			</SidebarProvider>
-		</>
+				</SidebarHeader>
+				<SidebarContent className="scrollbar-thin">
+					<SidebarItems />
+				</SidebarContent>
+			</Sidebar>
+			<main className="grow overflow-auto scrollbar-thin">
+				<Navbar />
+				{/* <div className="px-1 min-h-[calc(100vh-64px)]"> */}
+				<Outlet />
+				{/* </div> */}
+			</main>
+		</SidebarProvider>
 	);
 }
