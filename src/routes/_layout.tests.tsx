@@ -49,7 +49,7 @@ function RouteComponent() {
 				<Button variant="ghost" size="icon">
 					<ReactSVG
 						src={ICON_SRC["loading2"]}
-						className={`animate-spin text-pink-500 `}
+						className={`animate-spin text-pink-500`}
 					/>
 				</Button>
 				<Button variant="ghost" size="icon">

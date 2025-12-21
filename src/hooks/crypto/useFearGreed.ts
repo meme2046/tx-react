@@ -8,5 +8,7 @@ export const useFearGreed = () => {
 		queryFn: () => {
 			return http("https://api.coin-stats.com/v2/fear-greed");
 		},
+		refetchOnWindowFocus: false,
+		refetchInterval: 60 * 1000,
 	});
 };

@@ -1,10 +1,12 @@
 import { CoingeckoItem } from "@/components/crypto";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { AVATAR_SRC } from "@/consts";
+import { AVATAR_SRC, ICON_SRC } from "@/consts";
 import { useCoingeckoCoinsMarkets, useCoinsFromGithub } from "@/hooks/crypto";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo } from "react";
+import { ReactSVG } from "react-svg";
 
 export const Route = createFileRoute("/_layout/coingecko")({
 	component: RouteComponent,
@@ -19,7 +21,7 @@ export const Route = createFileRoute("/_layout/coingecko")({
 
 function RouteComponent() {
 	const { data: coins } = useCoinsFromGithub();
-	const { data } = useCoingeckoCoinsMarkets(
+	const { data, isFetching } = useCoingeckoCoinsMarkets(
 		coins?.map((item) => item.key) ?? [],
 	);
 
@@ -38,6 +40,17 @@ function RouteComponent() {
 						${data?.find((v) => v.id === "bitcoin")?.current_price}
 					</span>
 					<span className="text-lg font-semibold">{title}</span>
+
+					<Button
+						variant="ghost"
+						size="icon"
+						className="cursor-pointer rounded-full"
+					>
+						<ReactSVG
+							src={ICON_SRC["loading2"]}
+							className={`text-purple-500 w-6 ${isFetching ? "animate-spin" : ""}`}
+						/>
+					</Button>
 				</CardTitle>
 			</CardHeader>
 			<Separator />
