@@ -9,8 +9,10 @@ export const TxStrategyEnd = ({ data }: { data: string }) => {
 		<div className="flex flex-col gap-1 items-start">
 			{pnl ? (
 				<>
-					<Badge variant={variant}>收益额: ${pnl}</Badge>
-					<Badge variant={variant}>
+					<Badge variant={variant} className="bg-green-600">
+						收益额: ${pnl}
+					</Badge>
+					<Badge variant={variant} className="bg-green-600">
 						收益率: {(Number(pnlRatio) * 100).toFixed(3)}%
 					</Badge>
 				</>
