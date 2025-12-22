@@ -102,7 +102,7 @@ function RouteComponent() {
 				},
 			},
 			{
-				accessorKey: "end_time",
+				accessorKey: "close_at",
 				id: "closeAt",
 				header: "结束时间",
 				size: 160,
@@ -111,7 +111,7 @@ function RouteComponent() {
 					return (
 						<>
 							{closeAt ? (
-								<Badge>{matchStr(closeAt)}</Badge>
+								<Badge variant="outline">{matchStr(closeAt)}</Badge>
 							) : (
 								<Skeleton className="w-32 h-5" />
 							)}
