@@ -169,7 +169,7 @@ function RouteComponent() {
 	return (
 		<>
 			<div className="relative mt-1">
-				<Badge className="absolute right-0 md:right-40 bg-lime-600/60">
+				<Badge className="absolute right-0 md:right-40 bg-lime-600">
 					<span className="text-lg">💰</span>
 					<span className="text-base">{round(pnl, 2)}</span>
 				</Badge>
