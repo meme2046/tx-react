@@ -91,7 +91,7 @@ function RouteComponent() {
 					`${row.pnl},${row.pnl_ratio},${row.pnl ? "complete" : "pending"}`,
 				id: "pnl",
 				header: "结算",
-				size: 128,
+				size: 132,
 				cell: (row) => <TxStrategyEnd data={row.getValue<string>()} />,
 				meta: {
 					filterVariant: "select",
@@ -105,7 +105,7 @@ function RouteComponent() {
 				accessorKey: "close_at",
 				id: "closeAt",
 				header: "结束时间",
-				size: 160,
+				size: 132,
 				cell: (cell) => {
 					const closeAt = cell.getValue<string>();
 					return (
