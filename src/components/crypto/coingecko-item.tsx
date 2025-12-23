@@ -1,7 +1,6 @@
 import { upperCase } from "lodash";
 import { effective } from "../../utils";
 import { Card, CardContent } from "../ui/card";
-import { badgeVariants } from "../ui/badge";
 import type { CoingeckoCoinsMarketsItem } from "@/types";
 
 interface CoingeckoItemProps {
