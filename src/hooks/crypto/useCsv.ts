@@ -9,11 +9,11 @@ import Papa from "papaparse";
 import { useSnapshot } from "valtio";
 import { isAxiosError } from "axios";
 import { toast } from "react-toastify";
-import { storePersist } from "@/lib/valtio";
+import { store } from "@/lib/valtio";
 import type { IGrid, IInfiniteList, IStrategy } from "@/types";
 
 export const useGrid = () => {
-	const { githubDataURL } = useSnapshot(storePersist);
+	const { githubDataURL } = useSnapshot(store);
 	return useQuery<IGrid[]>({
 		queryKey: ["github-grid"],
 		queryFn: () => {
@@ -38,7 +38,7 @@ export const useGrid = () => {
 };
 
 export const useStrategy = () => {
-	const { githubDataURL } = useSnapshot(storePersist);
+	const { githubDataURL } = useSnapshot(store);
 	return useQuery<IStrategy[]>({
 		queryKey: ["github-strategy"],
 		queryFn: () => {
@@ -98,7 +98,7 @@ export const useCsvInfinite = <T extends object>(
 	key: string,
 	fileName: string,
 ) => {
-	const { githubDataURL } = useSnapshot(storePersist);
+	const { githubDataURL } = useSnapshot(store);
 	return useInfiniteQuery<IInfiniteList<T>>({
 		queryKey: [`infinite-${key}-${fileName}`],
 		queryFn: ({ pageParam = "" }) => {

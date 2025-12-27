@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { http } from "../../utils";
 import type { CoingeckoCoinsMarketsItem, IKV } from "@/types";
 import { useSnapshot } from "valtio";
-import { storePersist } from "@/lib/valtio";
+import { store } from "@/lib/valtio";
 
 export function useCoingeckoCoinsMarkets(coinList: string[]) {
 	return useQuery<CoingeckoCoinsMarketsItem[]>({
@@ -25,12 +25,12 @@ export function useCoingeckoCoinsMarkets(coinList: string[]) {
 		},
 		refetchOnWindowFocus: false,
 		refetchInterval: 60 * 1000,
-		// refetchIntervalInBackground: true,
+		refetchIntervalInBackground: true,
 	});
 }
 
 export function useCoinsFromGithub() {
-	const { githubDataURL } = useSnapshot(storePersist);
+	const { githubDataURL } = useSnapshot(store);
 	return useQuery<IKV[]>({
 		queryKey: ["coingecko-coins-github"],
 		queryFn: () => {

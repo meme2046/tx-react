@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { AVATAR_SRC, ICON_SRC, SVG_SRC } from "@/consts";
+import { AVATAR_SRC, ICON_SRC, IMG_SRC, SVG_SRC } from "@/consts";
 import { createFileRoute } from "@tanstack/react-router";
 import { upperCase } from "lodash";
 import { ReactSVG } from "react-svg";
@@ -106,6 +106,33 @@ function RouteComponent() {
 									<AvatarImage src={AVATAR_SRC[key]} alt={upperCase(key)} />
 									<AvatarFallback className="animate-pulse bg-linear-to-tr from-secondary to-primary"></AvatarFallback>
 								</Avatar>
+								<span className="mt-1 text-xs text-muted-foreground">
+									{key}
+								</span>
+							</div>
+						))}
+					</div>
+				</CardContent>
+			</Card>
+
+			<Card className="py-0 gap-0 hover:bg-accent">
+				<CardHeader>
+					<CardTitle className="flex items-center gap-2">
+						<img
+							className="w-12 rounded-full"
+							src={IMG_SRC["au888"]}
+							alt="au888"
+						/>
+						<span className="text-lg font-semibold text-primary">图片</span>
+					</CardTitle>
+				</CardHeader>
+
+				<Separator className="bg-primary/20" />
+				<CardContent className="p-3">
+					<div className="flex flex-wrap gap-4">
+						{Object.keys(IMG_SRC).map((key, index) => (
+							<div key={index} className="text-center">
+								<img src={IMG_SRC[key]} alt={upperCase(key)} className="w-24" />
 								<span className="mt-1 text-xs text-muted-foreground">
 									{key}
 								</span>
