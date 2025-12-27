@@ -20,6 +20,7 @@ import { Route as LayoutTestsRouteImport } from './routes/_layout.tests'
 import { Route as LayoutTablePaginationRouteImport } from './routes/_layout.table-pagination'
 import { Route as LayoutTableBasicRouteImport } from './routes/_layout.table-basic'
 import { Route as LayoutIconsRouteImport } from './routes/_layout.icons'
+import { Route as LayoutGushitongRouteImport } from './routes/_layout.gushitong'
 import { Route as LayoutGateGridRouteImport } from './routes/_layout.gate-grid'
 import { Route as LayoutFearGreedRouteImport } from './routes/_layout.fear-greed'
 import { Route as LayoutCronWorkerRouteImport } from './routes/_layout.cron-worker'
@@ -86,6 +87,11 @@ const LayoutTableBasicRoute = LayoutTableBasicRouteImport.update({
 const LayoutIconsRoute = LayoutIconsRouteImport.update({
   id: '/icons',
   path: '/icons',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutGushitongRoute = LayoutGushitongRouteImport.update({
+  id: '/gushitong',
+  path: '/gushitong',
   getParentRoute: () => LayoutRoute,
 } as any)
 const LayoutGateGridRoute = LayoutGateGridRouteImport.update({
@@ -175,6 +181,7 @@ export interface FileRoutesByFullPath {
   '/cron-worker': typeof LayoutCronWorkerRoute
   '/fear-greed': typeof LayoutFearGreedRoute
   '/gate-grid': typeof LayoutGateGridRoute
+  '/gushitong': typeof LayoutGushitongRoute
   '/icons': typeof LayoutIconsRoute
   '/table-basic': typeof LayoutTableBasicRoute
   '/table-pagination': typeof LayoutTablePaginationRoute
@@ -199,6 +206,7 @@ export interface FileRoutesByTo {
   '/cron-worker': typeof LayoutCronWorkerRoute
   '/fear-greed': typeof LayoutFearGreedRoute
   '/gate-grid': typeof LayoutGateGridRoute
+  '/gushitong': typeof LayoutGushitongRoute
   '/icons': typeof LayoutIconsRoute
   '/table-basic': typeof LayoutTableBasicRoute
   '/table-pagination': typeof LayoutTablePaginationRoute
@@ -227,6 +235,7 @@ export interface FileRoutesById {
   '/_layout/cron-worker': typeof LayoutCronWorkerRoute
   '/_layout/fear-greed': typeof LayoutFearGreedRoute
   '/_layout/gate-grid': typeof LayoutGateGridRoute
+  '/_layout/gushitong': typeof LayoutGushitongRoute
   '/_layout/icons': typeof LayoutIconsRoute
   '/_layout/table-basic': typeof LayoutTableBasicRoute
   '/_layout/table-pagination': typeof LayoutTablePaginationRoute
@@ -254,6 +263,7 @@ export interface FileRouteTypes {
     | '/cron-worker'
     | '/fear-greed'
     | '/gate-grid'
+    | '/gushitong'
     | '/icons'
     | '/table-basic'
     | '/table-pagination'
@@ -278,6 +288,7 @@ export interface FileRouteTypes {
     | '/cron-worker'
     | '/fear-greed'
     | '/gate-grid'
+    | '/gushitong'
     | '/icons'
     | '/table-basic'
     | '/table-pagination'
@@ -305,6 +316,7 @@ export interface FileRouteTypes {
     | '/_layout/cron-worker'
     | '/_layout/fear-greed'
     | '/_layout/gate-grid'
+    | '/_layout/gushitong'
     | '/_layout/icons'
     | '/_layout/table-basic'
     | '/_layout/table-pagination'
@@ -400,6 +412,13 @@ declare module '@tanstack/react-router' {
       path: '/icons'
       fullPath: '/icons'
       preLoaderRoute: typeof LayoutIconsRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/gushitong': {
+      id: '/_layout/gushitong'
+      path: '/gushitong'
+      fullPath: '/gushitong'
+      preLoaderRoute: typeof LayoutGushitongRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_layout/gate-grid': {
@@ -540,6 +559,7 @@ interface LayoutRouteChildren {
   LayoutCronWorkerRoute: typeof LayoutCronWorkerRoute
   LayoutFearGreedRoute: typeof LayoutFearGreedRoute
   LayoutGateGridRoute: typeof LayoutGateGridRoute
+  LayoutGushitongRoute: typeof LayoutGushitongRoute
   LayoutIconsRoute: typeof LayoutIconsRoute
   LayoutTableBasicRoute: typeof LayoutTableBasicRoute
   LayoutTablePaginationRoute: typeof LayoutTablePaginationRoute
@@ -559,6 +579,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutCronWorkerRoute: LayoutCronWorkerRoute,
   LayoutFearGreedRoute: LayoutFearGreedRoute,
   LayoutGateGridRoute: LayoutGateGridRoute,
+  LayoutGushitongRoute: LayoutGushitongRoute,
   LayoutIconsRoute: LayoutIconsRoute,
   LayoutTableBasicRoute: LayoutTableBasicRoute,
   LayoutTablePaginationRoute: LayoutTablePaginationRoute,

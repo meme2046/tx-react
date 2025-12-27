@@ -50,21 +50,12 @@ const navCrypto: INav[] = [
 	},
 	{ name: "Bitget Grid", emoj: "🐶", desc: "", value: "/bitget-grid" },
 	{ name: "Gate Grid", emoj: "🐷", desc: "", value: "/gate-grid" },
-	// { name: "币安合约", emoj: "🐸", desc: "", value: "/crypto/bnfutures" },
-	// { name: "赚币", emoj: "🐸", desc: "", value: "/crypto/zb" },
-	// { name: "策略交易", emoj: "🦄", desc: "", value: "/crypto/strategy" },
-	// { name: "土狗", emoj: "🐶", desc: "", value: "/crypto/meme" },
-	// { name: "网格交易", emoj: "🧮", desc: "", value: "/crypto/grid-tx" },
-	// { name: "收益曲线", emoj: "🚀", desc: "", value: "/crypto/chart" },
-	// { name: "联系我们", emoj: "🌱", desc: "", value: "/crypto/contact" },
+	{ name: "股市", emoj: "📊", desc: "", value: "/gushitong" },
 ];
 
 export const navLottery: INav[] = [
 	{ name: "d3", emoj: "🍀", desc: "", value: "/lottery/d3" },
 	{ name: "p3", emoj: "🍀", desc: "", value: "/lottery/p3" },
-	// { name: "3d-telegram", emoj: "🍃", desc: "", value: "/lottery/3d" },
-	// ☘️🍀🍃
-	// { name: "ssq", emoj: "🎰", desc: "", value: "/lottery/ssq" },
 ];
 
 export const navList: Record<string, INav[]> = {

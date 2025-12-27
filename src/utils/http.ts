@@ -15,14 +15,18 @@ const defaultConfig: Config = {
 	method: "get",
 	errorMessage: "missing data",
 	d2: false,
+	// 设置响应超时
+	timeout: 30000,
 };
 
 export const http = async <T>(url: string, config: Config = {}): Promise<T> => {
-	const { token, data, ...rest } = config;
+	const { token, data, headers, ...rest } = config;
 	const myConfig = {
 		url: url,
 		...defaultConfig,
+		// 合并传入的 headers
 		headers: {
+			...headers,
 			Authorization: token ? `Bearer ${token}` : undefined,
 			"Content-Type": data ? "application/json" : undefined,
 		},
