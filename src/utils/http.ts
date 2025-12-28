@@ -57,8 +57,7 @@ export const http = async <T>(url: string, config: Config = {}): Promise<T> => {
 				toast.error(myConfig.errorMessage);
 			}
 		}
-
-		return Promise.reject(err);
+		throw new Error(String(err));
 	} finally {
 		setProgress(false);
 	}

@@ -5,7 +5,7 @@ export interface GetBanner {
 }
 
 interface GetBannerResult {
-	list: GetBannerList[];
+	list: GetBannerItem[];
 	tabs: GetBannerTab[];
 	curtab: string;
 }
@@ -15,7 +15,7 @@ interface GetBannerTab {
 	market: string;
 }
 
-interface GetBannerList {
+export interface GetBannerItem {
 	p: string;
 	lastPrice: string;
 	status: string;
