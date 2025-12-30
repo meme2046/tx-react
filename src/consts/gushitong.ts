@@ -1,0 +1,11 @@
+export const GUSHITONG_LOGO: Record<string, string> = {
+  "000001": "https://baidu-finance.cdn.bcebos.com/imgs/icons/index_000001.svg",
+  IXIC: "https://baidu-finance.cdn.bcebos.com/imgs/logo/indices/bbed2a87be06d1318a5c035e45c0f54c.svg",
+  USDCNH: "https://arweave.net/qIGswQTXG_7jNU0RflLi8Qt-2FTC5ccbpWoOmMm7u5Q",
+};
+
+export const GUSHITONG_MARKET: Record<string, string> = {
+  ab: "A股",
+  us: "美股",
+  global: "全球",
+};
