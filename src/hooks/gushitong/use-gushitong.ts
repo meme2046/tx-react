@@ -15,8 +15,8 @@ export const useRedis = <T>(key: string) => {
         return d.data;
       });
     },
-    refetchOnWindowFocus: false,
-    refetchInterval: 80 * 1000,
+    refetchOnWindowFocus: true,
+    refetchInterval: 60 * 1000,
     refetchIntervalInBackground: false,
   });
 };
