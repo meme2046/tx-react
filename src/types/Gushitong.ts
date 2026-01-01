@@ -1,7 +1,12 @@
 export interface Gushitong<T> {
-  QueryID: string;
-  ResultCode: string | number;
-  Result: T;
+  success: boolean;
+  data?: RedisData<T>;
+  error?: string;
+}
+
+interface RedisData<T> {
+  data: T;
+  timestamp: number;
 }
 
 export interface BannerResult {
