@@ -4,7 +4,9 @@ import { GUSHITONG_LOGO, GUSHITONG_MARKET } from "@/consts/gushitong";
 import { useRedis } from "@/hooks/gushitong/use-gushitong";
 import type { BannerItem, BannerResult, OpenData } from "@/types/Gushitong";
 import { createFileRoute } from "@tanstack/react-router";
+import { timeStamp } from "console";
 import dayjs from "dayjs";
+import { compact } from "lodash";
 import { useMemo } from "react";
 
 export const Route = createFileRoute("/_layout/gushitong")({
@@ -18,8 +20,8 @@ export const Route = createFileRoute("/_layout/gushitong")({
   }),
 });
 
-function BannerCard(props: { item: BannerItem; timestamp?: number }) {
-  const { item, timestamp } = { ...props };
+function BannerCard(props: { item: BannerItem }) {
+  const { item } = { ...props };
   return (
     <Card className="py-1 gap-1 justify-around">
       <CardHeader>
@@ -27,7 +29,7 @@ function BannerCard(props: { item: BannerItem; timestamp?: number }) {
           <img
             src={GUSHITONG_LOGO[item.code]}
             alt={item.code}
-            className="w-10"
+            className={`w-10 ${item.code == "USDCNH" ? "" : "rounded-full"}`}
           />
           <div>
             <p className="text-lg">{item.name}</p>
@@ -58,9 +60,9 @@ function BannerCard(props: { item: BannerItem; timestamp?: number }) {
             </span>
           </div>
         </div>
-        {timestamp && (
+        {item.timestamp && (
           <Badge variant="outline">
-            更新时间: {dayjs(timestamp).format("YYYY-MM-DD HH:mm:ss")}
+            更新时间: {dayjs(item.timestamp).format("YYYY-MM-DD HH:mm:ss")}
           </Badge>
         )}
       </CardContent>
@@ -68,8 +70,8 @@ function BannerCard(props: { item: BannerItem; timestamp?: number }) {
   );
 }
 
-function OpenDataCard(props: { item: OpenData; timestamp: number }) {
-  const { item, timestamp } = { ...props };
+function OpenDataCard(props: { item: OpenData }) {
+  const { item } = { ...props };
 
   return (
     <Card className="py-1 gap-1 justify-around">
@@ -78,7 +80,7 @@ function OpenDataCard(props: { item: OpenData; timestamp: number }) {
           <img
             src={item.minute_data.basicinfos.logo ?? GUSHITONG_LOGO[item.code]}
             alt={item.code}
-            className="w-10"
+            className="w-10 rounded-full"
           />
           <div>
             <p className="text-lg">{item.name}</p>
@@ -133,7 +135,7 @@ function OpenDataCard(props: { item: OpenData; timestamp: number }) {
           </div>
         </div>
         <Badge variant="outline">
-          更新时间: {dayjs(timestamp).format("YYYY-MM-DD HH:mm:ss")}
+          更新时间: {dayjs(item.timestamp).format("YYYY-MM-DD HH:mm:ss")}
         </Badge>
       </CardContent>
     </Card>
@@ -147,45 +149,42 @@ function RouteComponent() {
   const { data: foreign } = useRedis<BannerResult>(
     "baidu.finance.getbanner.foreign",
   );
-  const { data: au888 } = useRedis<any>("baidu.gushitong.opendata.AU888");
-  const { data: btcusd } = useRedis<any>("baidu.gushitong.opendata.BTCUSD");
-  const { data: xauusd } = useRedis<any>("baidu.gushitong.opendata.XAUUSD");
 
-  const dataList = useMemo(() => {
-    const combinedData = [
-      ...(indexBanner?.data || []),
-      ...(foreign?.data.list || []),
+  const bannerList = useMemo(() => {
+    const combinedBanner = [
+      ...(indexBanner?.data || []).map((item) => ({
+        ...item,
+        timestamp: indexBanner?.timestamp,
+      })),
+      ...(foreign?.data.list || []).map((item) => ({
+        ...item,
+        timestamp: foreign?.timestamp,
+      })),
     ];
-    return combinedData.filter((item) =>
+    return combinedBanner.filter((item) =>
       Object.keys(GUSHITONG_LOGO).includes(item.code),
     );
   }, [indexBanner, foreign]);
+
+  const { data: au888 } = useRedis<any>("baidu.gushitong.opendata.AU888");
+  const { data: xauusd } = useRedis<any>("baidu.gushitong.opendata.XAUUSD");
+  const { data: btcusd } = useRedis<any>("baidu.gushitong.opendata.BTCUSD");
+  const { data: ethusd } = useRedis<any>("baidu.gushitong.opendata.ETHUSD");
+
+  const openDataList = useMemo(() => {
+    return compact([au888, xauusd, btcusd, ethusd]).map((item) => ({
+      ...item.data[0]?.DisplayData.resultData.tplData.result,
+      timestamp: item.timestamp,
+    }));
+  }, [au888, xauusd, btcusd, ethusd]);
+
   return (
     <div className="flex flex-wrap gap-4 p-4">
-      {au888 && (
-        <OpenDataCard
-          item={au888.data[0]?.DisplayData.resultData.tplData.result}
-          timestamp={au888.timestamp}
-        />
-      )}
-      {xauusd && (
-        <OpenDataCard
-          item={xauusd.data[0]?.DisplayData.resultData.tplData.result}
-          timestamp={xauusd.timestamp}
-        />
-      )}
-      {btcusd && (
-        <OpenDataCard
-          item={btcusd.data[0]?.DisplayData.resultData.tplData.result}
-          timestamp={btcusd.timestamp}
-        />
-      )}
-      {dataList?.map((item, index) => {
-        let ts = indexBanner?.timestamp;
-        if (item.market == "global") {
-          ts = foreign?.timestamp;
-        }
-        return <BannerCard key={index} item={item} timestamp={ts} />;
+      {openDataList.map((data, index) => (
+        <OpenDataCard key={`open-data-${index}`} item={data} />
+      ))}
+      {bannerList?.map((item, index) => {
+        return <BannerCard key={index} item={item} />;
       })}
     </div>
   );

@@ -17,6 +17,6 @@ export const useRedis = <T>(key: string) => {
     },
     refetchOnWindowFocus: true,
     refetchInterval: 60 * 1000,
-    refetchIntervalInBackground: false,
+    // refetchIntervalInBackground: false,
   });
 };

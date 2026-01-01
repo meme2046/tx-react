@@ -32,6 +32,7 @@ export interface BannerItem {
   financeType: string;
   exchange: string;
   subType: string;
+  timestamp?: number;
 }
 
 export interface OpenData {
@@ -41,6 +42,7 @@ export interface OpenData {
   code: string;
   marketName: string;
   tag_list: Taglist[];
+  timestamp: number;
 }
 
 interface Taglist {

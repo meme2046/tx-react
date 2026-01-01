@@ -2,7 +2,9 @@ export const GUSHITONG_LOGO: Record<string, string> = {
   "000001": "https://baidu-finance.cdn.bcebos.com/imgs/icons/index_000001.svg",
   IXIC: "https://baidu-finance.cdn.bcebos.com/imgs/logo/indices/bbed2a87be06d1318a5c035e45c0f54c.svg",
   USDCNH: "https://arweave.net/qIGswQTXG_7jNU0RflLi8Qt-2FTC5ccbpWoOmMm7u5Q",
-  BTCUSD: "https://arweave.net/iTHsm2tFuK66u3yj8LvjvWuAL3-Z9mbYJzzOJvnQw2Y",
+  BTCUSD: "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png",
+  ETHUSD:
+    "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png",
   XAUUSD:
     "https://baidu-finance.cdn.bcebos.com/imgs/icons/0530/futures_ab_GOLD.png",
 };
