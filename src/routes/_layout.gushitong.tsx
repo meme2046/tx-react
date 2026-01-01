@@ -9,6 +9,13 @@ import { useMemo } from "react";
 
 export const Route = createFileRoute("/_layout/gushitong")({
   component: RouteComponent,
+  head: () => ({
+    meta: [
+      {
+        title: "股市",
+      },
+    ],
+  }),
 });
 
 function BannerCard(props: { item: BannerItem; timestamp?: number }) {
