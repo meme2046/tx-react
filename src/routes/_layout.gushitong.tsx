@@ -4,7 +4,6 @@ import { GUSHITONG_LOGO, GUSHITONG_MARKET } from "@/consts/gushitong";
 import { useRedis } from "@/hooks/gushitong/use-gushitong";
 import type { BannerItem, BannerResult, OpenData } from "@/types/Gushitong";
 import { createFileRoute } from "@tanstack/react-router";
-import { timeStamp } from "console";
 import dayjs from "dayjs";
 import { compact } from "lodash";
 import { useMemo } from "react";
