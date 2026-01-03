@@ -5,7 +5,7 @@ import { useRedis } from "@/hooks/gushitong/use-gushitong";
 import type { BannerItem, BannerResult, OpenData } from "@/types/Gushitong";
 import { createFileRoute } from "@tanstack/react-router";
 import dayjs from "dayjs";
-import { compact } from "lodash";
+import { compact, round } from "lodash";
 import { useMemo } from "react";
 
 export const Route = createFileRoute("/_layout/gushitong")({
@@ -43,9 +43,7 @@ function BannerCard(props: { item: BannerItem }) {
       </CardHeader>
       <CardContent>
         <div className="flex gap-1 items-end justify-start text-sm">
-          <span className="text-5xl">
-            {item.lastPrice.slice(0, item.lastPrice.indexOf(".") + 3)}
-          </span>
+          <span className="text-5xl">{round(Number(item.lastPrice), 2)}</span>
           <div className="flex flex-col gap-0.5 items-start">
             <span
               className={`px-1 rounded-xl ${item.increase.startsWith("-") ? "bg-rose-500" : "bg-lime-500"}`}
@@ -103,10 +101,7 @@ function OpenDataCard(props: { item: OpenData }) {
         )}
         <div className="flex gap-1 items-end text-sm justify-start">
           <span className="text-5xl">
-            {item.minute_data.cur.price.slice(
-              0,
-              item.minute_data.cur.price.indexOf(".") + 3,
-            )}
+            {round(Number(item.minute_data.cur.price), 2)}
           </span>
           <div className="flex flex-col gap-0.5 items-start justify-center">
             <span
