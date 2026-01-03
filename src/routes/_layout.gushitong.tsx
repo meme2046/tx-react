@@ -22,7 +22,7 @@ export const Route = createFileRoute("/_layout/gushitong")({
 function BannerCard(props: { item: BannerItem }) {
   const { item } = { ...props };
   return (
-    <Card className="py-1 gap-1 justify-around">
+    <Card className="py-1 gap-1 justify-between">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <img
@@ -71,7 +71,7 @@ function OpenDataCard(props: { item: OpenData }) {
   const { item } = { ...props };
 
   return (
-    <Card className="py-1 gap-1 justify-around">
+    <Card className="py-1 gap-1 justify-between">
       <CardHeader className="gap-0">
         <div className="flex items-center gap-2">
           <img
