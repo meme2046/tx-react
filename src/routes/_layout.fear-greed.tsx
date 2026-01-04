@@ -24,7 +24,7 @@ function RouteComponent() {
   const data = redisData?.data;
 
   return (
-    <div className="flex flex-col items-center pt-4">
+    <div className="flex flex-col items-center pt-4 font-[DeliusSwashCaps]">
       <div className={`flex items-center justify-center relative`}>
         <Button
           variant="outline"
@@ -43,7 +43,7 @@ function RouteComponent() {
           nrOfLevels={8}
           arcWidth={0.3}
           percent={data && data.now ? Number(data.now.value) / 100 : 0.5}
-          className="font-[Sniglet]"
+          // className="font-[Sniglet]"
           needleColor="var(--primary)"
           hideText={true}
           textColor="var(--primary)"
