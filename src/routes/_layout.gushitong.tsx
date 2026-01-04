@@ -1,7 +1,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { GUSHITONG_LOGO, GUSHITONG_MARKET } from "@/consts/gushitong";
-import { useRedis } from "@/hooks/gushitong/use-gushitong";
+import { useRedis } from "@/hooks/use-redis";
 import type { BannerItem, BannerResult, OpenData } from "@/types/Gushitong";
 import { createFileRoute } from "@tanstack/react-router";
 import dayjs from "dayjs";
@@ -41,6 +42,7 @@ function BannerCard(props: { item: BannerItem }) {
           </div>
         </CardTitle>
       </CardHeader>
+      <Separator />
       <CardContent>
         <div className="flex gap-1 items-end justify-start text-sm">
           <span className="text-5xl">{round(Number(item.lastPrice), 2)}</span>
@@ -88,7 +90,8 @@ function OpenDataCard(props: { item: OpenData }) {
           </div>
         </div>
       </CardHeader>
-      <CardContent className="space-y-0.5">
+      <Separator />
+      <CardContent>
         {item.tag_list.length > 0 && (
           <div className="flex gap-0.5 text-xs">
             {item.tag_list.map((tag) => (

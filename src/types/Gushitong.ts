@@ -1,4 +1,4 @@
-export interface Gushitong<T> {
+export interface RedisResponse<T> {
   success: boolean;
   data?: RedisData<T>;
   error?: string;
