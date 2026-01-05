@@ -45,6 +45,36 @@ export interface OpenData {
   timestamp: number;
 }
 
+export interface SelfSelectItem {
+  CNYPrice: string;
+  amount: string;
+  amplitudeRatio: string;
+  capitalization: string;
+  code: string;
+  exchange: string;
+  follow_status: string;
+  holdingAmount: string;
+  increase: string;
+  logo?: { logo: string; type: string };
+  market: string;
+  name: string;
+  pbRate: string;
+  peRate: string;
+  price: string;
+  pv: string;
+  ratio: string;
+  sf_url: string;
+  src_loc: string;
+  status: string;
+  stockStatus: string;
+  stockStatusInfo: string;
+  subType: string;
+  turnoverRatio: string;
+  type: string;
+  volume: string;
+  timestamp: number;
+}
+
 interface Taglist {
   desc: string;
   imageUrl: string;
