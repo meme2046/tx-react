@@ -41,9 +41,9 @@ function BannerCard(props: { item: BannerItem }) {
           <div>
             <p className="text-lg">{item.name}</p>
             <div className="text-xs flex items-center gap-0.5">
-              <span className="rounded">
+              <Badge className="py-0">
                 {item.exchange ?? GUSHITONG_MARKET[item.market]}
-              </span>
+              </Badge>
               <span className="border rounded px-1">{item.code}</span>
             </div>
           </div>
@@ -97,7 +97,9 @@ function OpenDataCard(props: { item: OpenData }) {
           <div>
             <p className="text-lg">{item.name}</p>
             <div className="text-xs flex items-center gap-0.5">
-              <span className="rounded">{item.marketName}</span>
+              {item.marketName && (
+                <Badge className="py-0">{item.marketName}</Badge>
+              )}
               <span className="border rounded px-1">{item.code}</span>
             </div>
           </div>
@@ -171,7 +173,7 @@ function SelfSelectCard({ item }: { item: SelfSelectItem }) {
           <div>
             <p className="text-lg">{item.name}</p>
             <div className="text-xs flex items-center gap-0.5">
-              <span className="rounded">{item.exchange}</span>
+              {item.exchange && <Badge className="py-0">{item.exchange}</Badge>}
               <span className="border rounded px-1">{item.code}</span>
             </div>
           </div>
@@ -260,14 +262,14 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-wrap gap-4 p-4">
-      {openDataList.map((data, index) => (
-        <OpenDataCard key={`open-data-${index}`} item={data} />
+      {openDataList.map((item, index) => (
+        <OpenDataCard key={`open-data-${index}`} item={item} />
       ))}
       {bannerList?.map((item, index) => {
-        return <BannerCard key={index} item={item} />;
+        return <BannerCard key={`banner-${index}`} item={item} />;
       })}
       {ssList?.map((item, index) => {
-        return <SelfSelectCard key={index} item={item} />;
+        return <SelfSelectCard key={`self-select-${index}`} item={item} />;
       })}
     </div>
   );
