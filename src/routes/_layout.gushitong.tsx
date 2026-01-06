@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { SVG_SRC } from "@/consts";
 import { GUSHITONG_LOGO, GUSHITONG_MARKET } from "@/consts/gushitong";
 import { useRedis } from "@/hooks/use-redis";
 import type {
@@ -13,6 +14,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import dayjs from "dayjs";
 import { compact, round } from "lodash";
 import { useMemo } from "react";
+import { ReactSVG } from "react-svg";
 
 export const Route = createFileRoute("/_layout/gushitong")({
   component: RouteComponent,
@@ -65,9 +67,15 @@ function BannerCard(props: { item: BannerItem }) {
           </div>
         </div>
         {item.timestamp && (
-          <Badge variant="outline">
-            更新时间: {dayjs(item.timestamp).format("YYYY-MM-DD HH:mm:ss")}
-          </Badge>
+          <div className="relative inline-block">
+            <Badge variant="outline">
+              更新时间: {dayjs(item.timestamp).format("YYYY-MM-DD HH:mm:ss")}
+            </Badge>
+            {/* <ReactSVG
+              src={SVG_SRC["line"]}
+              className="text-primary absolute left-0 bottom-0 w-full"
+            /> */}
+          </div>
         )}
       </CardContent>
     </Card>
@@ -136,9 +144,15 @@ function OpenDataCard(props: { item: OpenData }) {
             </span>
           </div>
         </div>
-        <Badge variant="outline">
-          更新时间: {dayjs(item.timestamp).format("YYYY-MM-DD HH:mm:ss")}
-        </Badge>
+        <div className="relative inline-block">
+          <Badge variant="outline">
+            更新时间: {dayjs(item.timestamp).format("YYYY-MM-DD HH:mm:ss")}
+          </Badge>
+          <ReactSVG
+            src={SVG_SRC["line"]}
+            className="text-primary absolute left-0 bottom-0 w-full"
+          />
+        </div>
       </CardContent>
     </Card>
   );
@@ -184,9 +198,15 @@ function SelfSelectCard({ item }: { item: SelfSelectItem }) {
             </span>
           </div>
         </div>
-        <Badge variant="outline">
-          更新时间: {dayjs(item.timestamp).format("YYYY-MM-DD HH:mm:ss")}
-        </Badge>
+        <div className="relative inline-block">
+          <Badge variant="outline">
+            更新时间: {dayjs(item.timestamp).format("YYYY-MM-DD HH:mm:ss")}
+          </Badge>
+          {/* <ReactSVG
+            src={SVG_SRC["line"]}
+            className="text-primary absolute left-0 bottom-0 w-full"
+          /> */}
+        </div>
       </CardContent>
     </Card>
   );
