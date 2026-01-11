@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { AVATAR_SRC, SVG_SRC } from "@/consts";
 import { useRedis } from "@/hooks/use-redis";
 import type { CoingeckoMarketsItem } from "@/types/CoingeckoCoin";
+import type { RedisData } from "@/types/Gushitong";
 import { createFileRoute } from "@tanstack/react-router";
 import dayjs from "dayjs";
 import { useMemo } from "react";
@@ -66,7 +67,7 @@ function RenderCard({
 
 function RouteComponent() {
   const { data: redisData } =
-    useRedis<CoingeckoMarketsItem[]>("coingecko.markets");
+    useRedis<RedisData<CoingeckoMarketsItem[]>>("coingecko.markets");
   const data = redisData?.data;
   const timestamp = redisData?.timestamp;
 

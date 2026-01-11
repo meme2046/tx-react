@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useRedis } from "@/hooks/use-redis";
 import type { FearGreed } from "@/types/FearGreed";
+import type { RedisData } from "@/types/Gushitong";
 export const Route = createFileRoute("/_layout/fear-greed")({
   component: RouteComponent,
   head: () => ({
@@ -20,7 +21,9 @@ export const Route = createFileRoute("/_layout/fear-greed")({
 });
 
 function RouteComponent() {
-  const { data: redisData } = useRedis<FearGreed>("coinstats.fear-greed");
+  const { data: redisData } = useRedis<RedisData<FearGreed>>(
+    "coinstats.fear-greed",
+  );
   const data = redisData?.data;
 
   return (
