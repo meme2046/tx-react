@@ -1,0 +1,35 @@
+export interface Strategy {
+  open_at: number;
+  close_at?: number;
+  spot_close_at?: number;
+  futures_close_at?: number;
+  cex: string;
+  act_name: string;
+  symbol: string;
+  lever: number;
+  spot_size: number;
+  futures_size: number;
+  up_status: number;
+  spot_px: number;
+  futures_px: number;
+  spot_trigger_px: number;
+  trigger_px: number;
+  fx_trigger_px: number;
+  pnl: number;
+  pnl_ratio: number;
+  spot_order_id: number;
+  spot_client_order_id: string;
+  spot_profit_order_id: number;
+  spot_profit_client_order_id: string;
+  spot_open_usdt: number;
+  spot_open_px: number;
+  spot_achieved_pl: number;
+  spot_close_px: number;
+  futures_order_id: number;
+  futures_client_order_id: string;
+  futures_open_usdt: number;
+  futures_open_px: number;
+  futures_achieved_pl: number;
+  futures_close_px: number;
+  position_side: string;
+}

@@ -8,6 +8,7 @@ import type {
   BannerItem,
   BannerResult,
   OpenData,
+  RedisData,
   SelfSelectItem,
 } from "@/types/Gushitong";
 import { createFileRoute } from "@tanstack/react-router";
@@ -215,10 +216,10 @@ function SelfSelectCard({ item }: { item: SelfSelectItem }) {
 }
 
 function RouteComponent() {
-  const { data: indexBanner } = useRedis<BannerItem[]>(
+  const { data: indexBanner } = useRedis<RedisData<BannerItem[]>>(
     "baidu.finance.indexbanner",
   );
-  const { data: foreign } = useRedis<BannerResult>(
+  const { data: foreign } = useRedis<RedisData<BannerResult>>(
     "baidu.finance.getbanner.foreign",
   );
 

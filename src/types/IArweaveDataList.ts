@@ -1,7 +1,7 @@
-import type { IArweaveData } from "./IArweave";
+import type { ArweaveData } from "./IArweave";
 
-export interface IArweaveDataList<T extends IArweaveData> {
-	list: T[];
-	prevCursor?: string;
-	nextCursor?: string;
+export interface IArweaveDataList<T extends ArweaveData> {
+  list: T[];
+  prevCursor?: string;
+  nextCursor?: string;
 }

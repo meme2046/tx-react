@@ -7,11 +7,12 @@ import {
 import { ReactTable } from "@/components/table";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useCsvInfinite } from "@/hooks/crypto";
-import type { IStrategy } from "@/types";
+import { useRedisListInfinite } from "@/hooks/use-redis";
+import type { Strategy } from "@/types";
 import { matchStr } from "@/utils";
 import { createFileRoute } from "@tanstack/react-router";
 import type { ColumnDef } from "@tanstack/react-table";
+import dayjs from "dayjs";
 import { reduce, round } from "lodash";
 import { useMemo, useState } from "react";
 
@@ -27,7 +28,7 @@ export const Route = createFileRoute("/_layout/bitget-sf")({
 });
 
 function RouteComponent() {
-  const columns = useMemo<ColumnDef<IStrategy>[]>(
+  const columns = useMemo<ColumnDef<Strategy>[]>(
     () => [
       {
         accessorKey: "spot_client_order_id",
@@ -36,11 +37,17 @@ function RouteComponent() {
         size: 180,
       },
       {
-        accessorKey: "created_at",
+        accessorKey: "open_at",
         id: "openAt",
         header: "策略开启时间",
         size: 160,
-        cell: (cell) => <Badge>{matchStr(cell.getValue<string>())}</Badge>,
+        cell: (cell) => (
+          <Badge>
+            {dayjs(Number(cell.getValue<string>())).format(
+              "YYYY-MM-DD HH:mm:ss",
+            )}
+          </Badge>
+        ),
         enableColumnFilter: false,
       },
       {
@@ -111,7 +118,11 @@ function RouteComponent() {
           return (
             <>
               {closeAt ? (
-                <Badge variant="outline">{matchStr(closeAt)}</Badge>
+                <Badge variant="outline">
+                  {dayjs(Number(cell.getValue<string>())).format(
+                    "YYYY-MM-DD HH:mm:ss",
+                  )}
+                </Badge>
               ) : (
                 <Skeleton className="w-32 h-5" />
               )}
@@ -145,21 +156,19 @@ function RouteComponent() {
     isFetchingNextPage,
     isFetching,
     isLoading,
-  } = useCsvInfinite<IStrategy>("github", "bitget_sf");
+  } = useRedisListInfinite<Strategy>("bitget_sf");
 
   const sortedData = useMemo(() => {
     const flatData = data?.pages?.flatMap((page) => page.list) ?? [];
     return flatData.sort((a, b) => {
-      return (
-        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-      );
+      return new Date(b.open_at).getTime() - new Date(a.open_at).getTime();
     });
   }, [data]);
 
   const pnl = useMemo(() => {
     return reduce(
       sortedData,
-      (sum: number, v: IStrategy) => {
+      (sum: number, v: Strategy) => {
         return sum + Number(v.pnl);
       },
       0,

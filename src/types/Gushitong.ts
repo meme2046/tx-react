@@ -1,10 +1,10 @@
 export interface RedisResponse<T> {
   success: boolean;
-  data?: RedisData<T>;
+  data?: T;
   error?: string;
 }
 
-interface RedisData<T> {
+export interface RedisData<T> {
   data: T;
   timestamp: number;
 }

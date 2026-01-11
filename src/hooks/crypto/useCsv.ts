@@ -10,7 +10,7 @@ import { useSnapshot } from "valtio";
 import { isAxiosError } from "axios";
 import { toast } from "react-toastify";
 import { store } from "@/lib/valtio";
-import type { IGrid, IInfiniteList, IStrategy } from "@/types";
+import type { IGrid, InfiniteList, Strategy } from "@/types";
 
 export const useGrid = () => {
   const { githubDataURL } = useSnapshot(store);
@@ -39,18 +39,18 @@ export const useGrid = () => {
 
 export const useStrategy = () => {
   const { githubDataURL } = useSnapshot(store);
-  return useQuery<IStrategy[]>({
+  return useQuery<Strategy[]>({
     queryKey: ["github-strategy"],
     queryFn: () => {
       return http<string>(
         `${githubDataURL}/strategy_0.csv?t=${dayjs().valueOf()}`,
       ).then((resp) => {
-        return new Promise<IStrategy[]>((resolve, reject) => {
+        return new Promise<Strategy[]>((resolve, reject) => {
           Papa.parse(resp, {
             header: true,
             skipEmptyLines: true,
             complete: (results: Papa.ParseResult<unknown>) => {
-              resolve(results.data as IStrategy[]);
+              resolve(results.data as Strategy[]);
             },
             error: (error: unknown) => {
               reject(error);
@@ -66,7 +66,7 @@ export const fetchCsvData = async <T extends object>(
   url: string,
   fileName: string,
   cursor: number,
-): Promise<IInfiniteList<T>> => {
+): Promise<InfiniteList<T>> => {
   try {
     const resp = await http<string>(
       `${url}/${fileName}_${cursor}.csv?t=${dayjs().valueOf()}`,
@@ -99,7 +99,7 @@ export const useCsvInfinite = <T extends object>(
   fileName: string,
 ) => {
   const { githubDataURL } = useSnapshot(store);
-  return useInfiniteQuery<IInfiniteList<T>>({
+  return useInfiniteQuery<InfiniteList<T>>({
     queryKey: [`infinite-${key}-${fileName}`],
     queryFn: ({ pageParam = "" }) => {
       return fetchCsvData<T>(githubDataURL, fileName, Number(pageParam));
