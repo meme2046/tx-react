@@ -38,7 +38,7 @@ async function fetchRedisList<T extends object>(
     const nextCursor = `${(cursor + 1) * size}`;
 
     if (resp.success) {
-      console.log("count: ", resp.data?.length);
+      // console.log("count: ", resp.data?.length);
       if (resp.data && resp.data.length > 0) {
         return {
           list: resp.data || [],
@@ -62,11 +62,11 @@ async function fetchRedisList<T extends object>(
 
 export const useRedisListInfinite = <T extends object>(
   key: string,
-  size: number = 5000,
+  size: number = 10000,
 ) => {
   const { redisBaseURL } = useSnapshot(store);
   return useInfiniteQuery<InfiniteList<T>>({
-    queryKey: [`${key}`],
+    queryKey: [`redis-set-${key}`],
     queryFn: ({ pageParam }) => {
       return fetchRedisList<T>(
         `${redisBaseURL}/api/v1/redis/byset`,
