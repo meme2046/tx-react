@@ -146,7 +146,7 @@ function RouteComponent() {
     isFetchingNextPage,
     isFetching,
     isLoading,
-  } = useRedisListInfinite<IGrid>("gate");
+  } = useRedisListInfinite<IGrid>("gate_grid");
 
   const sortedData = useMemo(() => {
     const flatData = data?.pages?.flatMap((page) => page.list) ?? [];

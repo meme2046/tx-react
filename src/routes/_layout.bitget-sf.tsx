@@ -156,6 +156,7 @@ function RouteComponent() {
     isFetching,
     isLoading,
   } = useRedisListInfinite<Strategy>("bitget_sf");
+  // = useCsvInfinite<Strategy>("github", "bitget_sf");
 
   const sortedData = useMemo(() => {
     const flatData = data?.pages?.flatMap((page) => page.list) ?? [];

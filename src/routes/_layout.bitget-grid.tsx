@@ -146,7 +146,7 @@ function RouteComponent() {
     isFetchingNextPage,
     isFetching,
     isLoading,
-  } = useRedisListInfinite<IGrid>("bitget");
+  } = useRedisListInfinite<IGrid>("bitget_grid");
 
   const sortedData = useMemo(() => {
     const flatData = data?.pages?.flatMap((page) => page.list) ?? [];
