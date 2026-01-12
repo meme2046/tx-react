@@ -12,8 +12,8 @@ const initialState: IApp = {
   loaderDelay: 0,
   githubDataURL:
     "https://raw.githubusercontent.com/meme2046/data/refs/heads/main",
-  redisBaseURL: "http://192.168.123.7:8877",
-  // https://meme.us.kg:8888
+  redisBaseURL: "https://meme.us.kg:8888",
+  // https://meme.us.kg:8888 http://192.168.123.7:8877
 };
 
 export const store = proxy<IApp>(initialState);
