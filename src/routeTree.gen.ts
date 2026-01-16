@@ -34,6 +34,7 @@ import { Route as LayoutBitgetGridRouteImport } from './routes/_layout.bitget-gr
 import { Route as AuthInvoicesRouteImport } from './routes/_auth.invoices'
 import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
 import { Route as AuthInvoicesIndexRouteImport } from './routes/_auth.invoices.index'
+import { Route as LayoutCandlestickSingleRouteImport } from './routes/_layout.candlestick.single'
 import { Route as AuthInvoicesInvoiceIdRouteImport } from './routes/_auth.invoices.$invoiceId'
 
 const LoginRoute = LoginRouteImport.update({
@@ -159,6 +160,11 @@ const AuthInvoicesIndexRoute = AuthInvoicesIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthInvoicesRoute,
 } as any)
+const LayoutCandlestickSingleRoute = LayoutCandlestickSingleRouteImport.update({
+  id: '/candlestick/single',
+  path: '/candlestick/single',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const AuthInvoicesInvoiceIdRoute = AuthInvoicesInvoiceIdRouteImport.update({
   id: '/$invoiceId',
   path: '/$invoiceId',
@@ -189,6 +195,7 @@ export interface FileRoutesByFullPath {
   '/text': typeof LayoutTextRoute
   '/valtio': typeof LayoutValtioRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
+  '/candlestick/single': typeof LayoutCandlestickSingleRoute
   '/invoices/': typeof AuthInvoicesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -214,6 +221,7 @@ export interface FileRoutesByTo {
   '/text': typeof LayoutTextRoute
   '/valtio': typeof LayoutValtioRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
+  '/candlestick/single': typeof LayoutCandlestickSingleRoute
   '/invoices': typeof AuthInvoicesIndexRoute
 }
 export interface FileRoutesById {
@@ -243,6 +251,7 @@ export interface FileRoutesById {
   '/_layout/text': typeof LayoutTextRoute
   '/_layout/valtio': typeof LayoutValtioRoute
   '/_auth/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
+  '/_layout/candlestick/single': typeof LayoutCandlestickSingleRoute
   '/_auth/invoices/': typeof AuthInvoicesIndexRoute
 }
 export interface FileRouteTypes {
@@ -271,6 +280,7 @@ export interface FileRouteTypes {
     | '/text'
     | '/valtio'
     | '/invoices/$invoiceId'
+    | '/candlestick/single'
     | '/invoices/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -296,6 +306,7 @@ export interface FileRouteTypes {
     | '/text'
     | '/valtio'
     | '/invoices/$invoiceId'
+    | '/candlestick/single'
     | '/invoices'
   id:
     | '__root__'
@@ -324,6 +335,7 @@ export interface FileRouteTypes {
     | '/_layout/text'
     | '/_layout/valtio'
     | '/_auth/invoices/$invoiceId'
+    | '/_layout/candlestick/single'
     | '/_auth/invoices/'
   fileRoutesById: FileRoutesById
 }
@@ -512,6 +524,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthInvoicesIndexRouteImport
       parentRoute: typeof AuthInvoicesRoute
     }
+    '/_layout/candlestick/single': {
+      id: '/_layout/candlestick/single'
+      path: '/candlestick/single'
+      fullPath: '/candlestick/single'
+      preLoaderRoute: typeof LayoutCandlestickSingleRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_auth/invoices/$invoiceId': {
       id: '/_auth/invoices/$invoiceId'
       path: '/$invoiceId'
@@ -566,6 +585,7 @@ interface LayoutRouteChildren {
   LayoutTestsRoute: typeof LayoutTestsRoute
   LayoutTextRoute: typeof LayoutTextRoute
   LayoutValtioRoute: typeof LayoutValtioRoute
+  LayoutCandlestickSingleRoute: typeof LayoutCandlestickSingleRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
@@ -586,6 +606,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutTestsRoute: LayoutTestsRoute,
   LayoutTextRoute: LayoutTextRoute,
   LayoutValtioRoute: LayoutValtioRoute,
+  LayoutCandlestickSingleRoute: LayoutCandlestickSingleRoute,
 }
 
 const LayoutRouteWithChildren =
