@@ -1,6 +1,7 @@
 import { useRedis } from "@/hooks/use-redis";
 import { createFileRoute } from "@tanstack/react-router";
 import ReactECharts, { type EChartsOption } from "echarts-for-react";
+import { useEffect, useRef, useState } from "react";
 export const Route = createFileRoute("/_layout/candlestick/matrix-stock")({
   component: RouteComponent,
   head: () => ({
@@ -19,18 +20,15 @@ const colorGray = "#888";
 const colorGreenOpacity = "rgba(71, 178, 98, 0.2)";
 const colorRedOpacity = "rgba(235, 84, 84, 0.2)";
 const matrixMargin = 10;
-const chartWidth = 800;
-const chartHeight = 500;
-const matrixWidth = chartWidth - matrixMargin * 2;
-const matrixHeight = chartHeight - matrixMargin * 2;
-const getPriceColor = (price) => {
+
+const getPriceColor = (price: number) => {
   return price === lastClose
     ? colorGray
     : price > lastClose
       ? colorRed
       : colorGreen;
 };
-const priceFormatter = (value) => {
+const priceFormatter = (value: number) => {
   const result = Math.round(value * 100) / 100 + "";
   // Adding padding 0 if needed
   let dotIndex = result.indexOf(".");
@@ -151,20 +149,32 @@ const getTitle = (text: string, subtext: string, coord: number[]) => {
 };
 
 const titles = [
-  getTitle("Volume", Math.round(sumVolume / 1000) + "B", [0, 1]),
-  getTitle("Order Book", "", [1, 0]),
+  getTitle("Volume", Math.round(sumVolume / 1000) + "B", [0, 4]),
+  getTitle("Order Book", "", [4, 0]),
 ];
 
 function RouteComponent() {
+  const chartRef = useRef(null);
+  const [matrixWidth, setMatrixWidth] = useState(0);
+  const [matrixHeight, setMatrixHeight] = useState(0);
+  useEffect(() => {
+    if (chartRef.current) {
+      const myChart = (chartRef.current as any).getEchartsInstance();
+      if (myChart) {
+        setMatrixWidth(myChart.getWidth() - matrixMargin * 2);
+        setMatrixHeight(myChart.getHeight() - matrixMargin * 2);
+        console.log(matrixWidth, matrixHeight);
+      }
+    }
+  }, [chartRef.current]);
   // 使用 EChartsOption 类型确保配置项类型安全
   const option: EChartsOption = {
-    title: {
-      text: titles,
-    },
+    title: titles,
     xAxis: [
       {
         type: "time",
-        show: false,
+        gridIndex: 0,
+        show: true,
         breaks: [
           {
             start: breakStartTime,
@@ -176,7 +186,7 @@ function RouteComponent() {
       {
         type: "time",
         gridIndex: 1,
-        show: false,
+        show: true,
         breaks: [
           {
             start: breakStartTime,
@@ -188,8 +198,8 @@ function RouteComponent() {
       {
         type: "value",
         gridIndex: 2,
-        show: false,
-        max: "dataMax",
+        show: true,
+        max: "dataMax", // "dataMax" 是 ECharts 提供的特殊值,表示使用数据中的最大值作为坐标轴的最大值
       },
     ],
     yAxis: [
@@ -213,7 +223,7 @@ function RouteComponent() {
     ],
     grid: [
       {
-        coordinateSystem: "matrix",
+        coordinateSystem: "matrix", // 指定该网格使用矩阵坐标系，而非默认的笛卡尔坐标系
         coord: [0, 0],
         top: 0,
         bottom: 0,
@@ -222,7 +232,7 @@ function RouteComponent() {
       },
       {
         coordinateSystem: "matrix",
-        coord: [0, 1],
+        coord: [0, 4],
         top: 20,
         bottom: 0,
         left: 0,
@@ -230,7 +240,7 @@ function RouteComponent() {
       },
       {
         coordinateSystem: "matrix",
-        coord: [1, 0],
+        coord: [4, 0],
         top: 15,
         bottom: 2,
         left: 2,
@@ -382,32 +392,32 @@ function RouteComponent() {
       bottom: matrixMargin,
       x: {
         show: false,
-        data: Array(2).fill(null),
+        data: Array(5).fill(null),
       },
       y: {
         show: false,
-        data: Array(2).fill(null),
+        data: Array(5).fill(null),
       },
       body: {
         data: [
           {
             coord: [
-              [0, 0],
-              [0, 0],
+              [0, 3],
+              [0, 3],
             ],
             mergeCells: true,
           },
           {
             coord: [
-              [0, 0],
-              [1, 1],
+              [0, 3],
+              [4, 4],
             ],
             mergeCells: true,
           },
           {
             coord: [
-              [1, 1],
-              [0, 1],
+              [4, 4],
+              [0, 4],
             ],
             mergeCells: true,
           },
@@ -415,33 +425,34 @@ function RouteComponent() {
       },
     },
     graphic: {
-      elements: Array.from({ length: 1 }, (_, i) => {
+      elements: Array.from({ length: 3 }, (_, i) => {
+        // 生成 3 条水平横向线
         const lineWidth = 1;
         return {
           type: "line",
           shape: {
-            x1: matrixMargin + lineWidth,
-            y1: (matrixHeight / 2) * (i + 1),
-            x2: (matrixWidth / 2) * 1 + matrixMargin,
-            y2: (matrixHeight / 2) * (i + 1),
+            x1: matrixMargin + lineWidth, // 横向起点（左侧）
+            y1: (matrixHeight / 5) * (i + 1),
+            x2: (matrixWidth / 5) * 4 + matrixMargin, // 横向终点（右侧）
+            y2: (matrixHeight / 5) * (i + 1),
           },
           style: {
-            stroke: "#bbb",
+            stroke: i === 1 ? "#bbb" : "#eee",
             lineWidth,
-            lineDash: "dashed",
+            lineDash: i == 1 ? "dashed" : false,
           },
         };
       }).concat(
-        Array.from({ length: 1 }, (_, i) => {
+        Array.from({ length: 3 }, (_, i) => {
+          // 生成 3 条垂直纵向线
           const lineWidth = 1;
-          const matrixWidth = chartWidth - matrixMargin * 2;
           return {
             type: "line",
             shape: {
-              x1: (matrixWidth / 2) * (i + 1) + matrixMargin,
-              y1: matrixMargin + lineWidth,
-              x2: (matrixWidth / 2) * (i + 1) + matrixMargin,
-              y2: chartHeight - matrixMargin,
+              x1: (matrixWidth / 5) * (i + 1) + matrixMargin,
+              y1: matrixMargin,
+              x2: (matrixWidth / 5) * (i + 1) + matrixMargin,
+              y2: matrixHeight + matrixMargin,
             },
             style: {
               stroke: "#eee",
@@ -455,8 +466,9 @@ function RouteComponent() {
   };
 
   return (
-    <div style={{ width: "100%", height: "500px" }}>
+    <div className="w-full h-96">
       <ReactECharts
+        ref={chartRef}
         option={option}
         style={{ height: "100%", width: "100%" }}
         opts={{ renderer: "canvas" }}
