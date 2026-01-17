@@ -198,7 +198,7 @@ function RouteComponent() {
       {
         type: "value",
         gridIndex: 2,
-        show: true,
+        show: false, // 如果为true,由于订单簿的 x 轴类型是 value ，ECharts 会自动生成网格线，这些网格线在视觉上表现为竖线
         max: "dataMax", // "dataMax" 是 ECharts 提供的特殊值,表示使用数据中的最大值作为坐标轴的最大值
       },
     ],
