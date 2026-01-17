@@ -1,6 +1,7 @@
+import { useRedis } from "@/hooks/use-redis";
 import { createFileRoute } from "@tanstack/react-router";
 import ReactECharts, { type EChartsOption } from "echarts-for-react";
-
+import { time } from "echarts";
 export const Route = createFileRoute("/_layout/candlestick/single")({
   component: RouteComponent,
   head: () => ({
@@ -11,6 +12,33 @@ export const Route = createFileRoute("/_layout/candlestick/single")({
     ],
   }),
 });
+
+/**
+ * Generate random data, not relevant to echarts API.
+ */
+function generateData() {
+  var seriesData = [];
+  var time = new Date("2024-04-09T09:30:00Z");
+  var endTime = new Date("2024-04-09T15:00:00Z").getTime();
+  var breakStart = new Date("2024-04-09T11:30:00Z").getTime();
+  var breakEnd = new Date("2024-04-09T13:00:00Z").getTime();
+  for (var val = 1669; time.getTime() <= endTime; ) {
+    if (time.getTime() <= breakStart || time.getTime() >= breakEnd) {
+      val =
+        val +
+        Math.floor((Math.random() - 0.5 * Math.sin(val / 1000)) * 20 * 100) /
+          100;
+      val = +val.toFixed(2);
+      seriesData.push([time.getTime(), val]);
+    }
+    time.setMinutes(time.getMinutes() + 1);
+  }
+  return {
+    seriesData: seriesData,
+    breakStart: breakStart,
+    breakEnd: breakEnd,
+  };
+}
 
 /**
  * 生成日内两个交易时段的时间点（字符串格式 HH:mm）
@@ -39,27 +67,17 @@ const generateTimePoints = (): string[] => {
   return times;
 };
 
-/**
- * 生成模拟价格数据（围绕基准值波动，带简单趋势）
- */
-const generatePriceData = (length: number): number[] => {
-  const base = 3000;
-  const data: number[] = [];
-  let lastValue = base;
-
-  for (let i = 0; i < length; i++) {
-    const change = (Math.random() - 0.5) * 20; // 小幅随机波动
-    lastValue += change;
-    data.push(parseFloat(lastValue.toFixed(2)));
-  }
-
-  return data;
-};
 function RouteComponent() {
-  const timeData = generateTimePoints();
-  console.log(timeData);
-  const priceData = generatePriceData(timeData.length);
-  console.log(priceData);
+  // {
+  //   "formatTime": "14:57",
+  //   "price": "1032.22",
+  //   "time": "1768546655",
+  //   "type": "1",
+  //   "volume": "1"
+  // },
+
+  // const { data: au888 } = useRedis<any>("baidu.gushitong.opendata.AU888");
+  var _data = generateData();
 
   // 使用 EChartsOption 类型确保配置项类型安全
   const option: EChartsOption = {
@@ -71,6 +89,7 @@ function RouteComponent() {
       },
     },
     tooltip: {
+      show: true,
       trigger: "axis",
       formatter: (params: string | any[]) => {
         if (Array.isArray(params) && params.length > 0) {
@@ -80,54 +99,69 @@ function RouteComponent() {
         return "";
       },
     },
-    xAxis: {
-      type: "category",
-      boundaryGap: false,
-      data: timeData,
-      axisLabel: {
-        rotate: 45,
-        fontSize: 10,
-      },
-      splitLine: {
-        show: true,
-        lineStyle: {
-          color: "#eee",
-        },
-      },
-    },
-    yAxis: {
-      type: "value",
-      scale: true,
-      splitLine: {
-        show: true,
-        lineStyle: {
-          color: "#eee",
-        },
-      },
-    },
-    series: [
+    xAxis: [
       {
-        name: "价格",
-        type: "line",
-        smooth: true,
-        symbol: "none",
-        data: priceData,
-        lineStyle: {
-          width: 2,
-          color: "#ec4f4f",
+        type: "time",
+        interval: 1000 * 60 * 30,
+        axisLabel: {
+          showMinLabel: true,
+          showMaxLabel: true,
+          formatter: (value, _index, extra) => {
+            if (!extra || !extra.break) {
+              // The third parameter is `useUTC: true`.
+              return time.format(value, "{HH}:{mm}", true);
+            }
+            // Only render the label on break start, but not on break end.
+            if (extra.break.type === "start") {
+              return (
+                time.format(extra.break.start, "{HH}:{mm}", true) +
+                "/" +
+                time.format(extra.break.end, "{HH}:{mm}", true)
+              );
+            }
+            return "";
+          },
         },
-        areaStyle: {
-          color: "rgba(236, 79, 79, 0.1)",
+        breakLabelLayout: {
+          // Disable auto move of break labels if overlapping,
+          // and use `axisLabel.formatter` to control the label display.
+          moveOverlap: false,
+        },
+        breaks: [
+          {
+            start: _data.breakStart,
+            end: _data.breakEnd,
+            gap: 0,
+          },
+        ],
+        breakArea: {
+          expandOnClick: false,
+          zigzagAmplitude: 0,
+          zigzagZ: 200,
         },
       },
     ],
-    grid: {
-      left: "3%",
-      right: "4%",
-      bottom: "12%",
-      top: "15%",
-      containLabel: true,
+    yAxis: {
+      type: "value",
+      min: "dataMin",
     },
+    dataZoom: [
+      {
+        type: "inside",
+        xAxisIndex: 0,
+      },
+      {
+        type: "slider",
+        xAxisIndex: 0,
+      },
+    ],
+    series: [
+      {
+        type: "line",
+        symbolSize: 0,
+        data: _data.seriesData,
+      },
+    ],
   };
 
   return (

@@ -23,6 +23,12 @@ const navDemo: INav[] = [
     desc: "",
     value: "/candlestick/single",
   },
+  {
+    name: "股市矩阵图",
+    emoj: "",
+    desc: "",
+    value: "/candlestick/matrix-stock",
+  },
 ];
 
 export const navOther: INav[] = [

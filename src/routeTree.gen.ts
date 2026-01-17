@@ -35,6 +35,7 @@ import { Route as AuthInvoicesRouteImport } from './routes/_auth.invoices'
 import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
 import { Route as AuthInvoicesIndexRouteImport } from './routes/_auth.invoices.index'
 import { Route as LayoutCandlestickSingleRouteImport } from './routes/_layout.candlestick.single'
+import { Route as LayoutCandlestickMatrixStockRouteImport } from './routes/_layout.candlestick.matrix-stock'
 import { Route as AuthInvoicesInvoiceIdRouteImport } from './routes/_auth.invoices.$invoiceId'
 
 const LoginRoute = LoginRouteImport.update({
@@ -165,6 +166,12 @@ const LayoutCandlestickSingleRoute = LayoutCandlestickSingleRouteImport.update({
   path: '/candlestick/single',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutCandlestickMatrixStockRoute =
+  LayoutCandlestickMatrixStockRouteImport.update({
+    id: '/candlestick/matrix-stock',
+    path: '/candlestick/matrix-stock',
+    getParentRoute: () => LayoutRoute,
+  } as any)
 const AuthInvoicesInvoiceIdRoute = AuthInvoicesInvoiceIdRouteImport.update({
   id: '/$invoiceId',
   path: '/$invoiceId',
@@ -195,6 +202,7 @@ export interface FileRoutesByFullPath {
   '/text': typeof LayoutTextRoute
   '/valtio': typeof LayoutValtioRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
+  '/candlestick/matrix-stock': typeof LayoutCandlestickMatrixStockRoute
   '/candlestick/single': typeof LayoutCandlestickSingleRoute
   '/invoices/': typeof AuthInvoicesIndexRoute
 }
@@ -221,6 +229,7 @@ export interface FileRoutesByTo {
   '/text': typeof LayoutTextRoute
   '/valtio': typeof LayoutValtioRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
+  '/candlestick/matrix-stock': typeof LayoutCandlestickMatrixStockRoute
   '/candlestick/single': typeof LayoutCandlestickSingleRoute
   '/invoices': typeof AuthInvoicesIndexRoute
 }
@@ -251,6 +260,7 @@ export interface FileRoutesById {
   '/_layout/text': typeof LayoutTextRoute
   '/_layout/valtio': typeof LayoutValtioRoute
   '/_auth/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
+  '/_layout/candlestick/matrix-stock': typeof LayoutCandlestickMatrixStockRoute
   '/_layout/candlestick/single': typeof LayoutCandlestickSingleRoute
   '/_auth/invoices/': typeof AuthInvoicesIndexRoute
 }
@@ -280,6 +290,7 @@ export interface FileRouteTypes {
     | '/text'
     | '/valtio'
     | '/invoices/$invoiceId'
+    | '/candlestick/matrix-stock'
     | '/candlestick/single'
     | '/invoices/'
   fileRoutesByTo: FileRoutesByTo
@@ -306,6 +317,7 @@ export interface FileRouteTypes {
     | '/text'
     | '/valtio'
     | '/invoices/$invoiceId'
+    | '/candlestick/matrix-stock'
     | '/candlestick/single'
     | '/invoices'
   id:
@@ -335,6 +347,7 @@ export interface FileRouteTypes {
     | '/_layout/text'
     | '/_layout/valtio'
     | '/_auth/invoices/$invoiceId'
+    | '/_layout/candlestick/matrix-stock'
     | '/_layout/candlestick/single'
     | '/_auth/invoices/'
   fileRoutesById: FileRoutesById
@@ -531,6 +544,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutCandlestickSingleRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/candlestick/matrix-stock': {
+      id: '/_layout/candlestick/matrix-stock'
+      path: '/candlestick/matrix-stock'
+      fullPath: '/candlestick/matrix-stock'
+      preLoaderRoute: typeof LayoutCandlestickMatrixStockRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_auth/invoices/$invoiceId': {
       id: '/_auth/invoices/$invoiceId'
       path: '/$invoiceId'
@@ -585,6 +605,7 @@ interface LayoutRouteChildren {
   LayoutTestsRoute: typeof LayoutTestsRoute
   LayoutTextRoute: typeof LayoutTextRoute
   LayoutValtioRoute: typeof LayoutValtioRoute
+  LayoutCandlestickMatrixStockRoute: typeof LayoutCandlestickMatrixStockRoute
   LayoutCandlestickSingleRoute: typeof LayoutCandlestickSingleRoute
 }
 
@@ -606,6 +627,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutTestsRoute: LayoutTestsRoute,
   LayoutTextRoute: LayoutTextRoute,
   LayoutValtioRoute: LayoutValtioRoute,
+  LayoutCandlestickMatrixStockRoute: LayoutCandlestickMatrixStockRoute,
   LayoutCandlestickSingleRoute: LayoutCandlestickSingleRoute,
 }
 
