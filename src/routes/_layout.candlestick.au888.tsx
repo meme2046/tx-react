@@ -18,12 +18,12 @@ export const Route = createFileRoute("/_layout/candlestick/au888")({
 
 function RouteComponent() {
   const { data: au888 } = useRedis<any>("getstockquotation.AU888");
-  const [priceData, setPriceData] = useState<PriceItem[]>();
-  const [averageData, setAverageData] = useState<number[][]>();
-  const [volumeData, setVolumeData] = useState<number[][]>();
+  const [priceData, setPriceData] = useState<PriceItem[]>([]);
+  const [averageData, setAverageData] = useState<number[][]>([]);
+  const [volumeData, setVolumeData] = useState<number[][]>([]);
   const [startTime, setStartTime] = useState<number>();
   const [endTime, setEndTime] = useState<number>();
-  const [breaks, setBreaks] = useState<BreakItem[]>();
+  const [breaks, setBreaks] = useState<BreakItem[]>([]);
 
   const matrixMargin = 10;
 
@@ -143,7 +143,7 @@ function RouteComponent() {
       {
         type: "time",
         gridIndex: 1,
-        show: true,
+        show: false,
         breaks: breaks,
       },
     ],
@@ -207,21 +207,21 @@ function RouteComponent() {
       },
       y: {
         show: false,
-        data: Array(5).fill(null),
+        data: Array(10).fill(null),
       },
       body: {
         data: [
           {
             coord: [
               [0, 0],
-              [0, 3],
+              [0, 6],
             ],
             mergeCells: true,
           },
           {
             coord: [
               [0, 0],
-              [4, 4],
+              [7, 8],
             ],
             mergeCells: true,
           },
@@ -239,7 +239,7 @@ function RouteComponent() {
       },
       {
         coordinateSystem: "matrix",
-        coord: [0, 4],
+        coord: [0, 7],
         top: 0,
         bottom: 0,
         left: 0,
