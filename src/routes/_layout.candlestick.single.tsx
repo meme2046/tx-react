@@ -17,7 +17,7 @@ export const Route = createFileRoute("/_layout/candlestick/single")({
  * Generate random data, not relevant to echarts API.
  */
 function generateData() {
-  var seriesData = [];
+  var seriesData: number[][] = [];
   var time = new Date("2024-04-09T09:30:00Z");
   var endTime = new Date("2024-04-09T15:00:00Z").getTime();
   var breakStart = new Date("2024-04-09T11:30:00Z").getTime();
@@ -76,7 +76,7 @@ function RouteComponent() {
   //   "volume": "1"
   // },
 
-  // const { data: au888 } = useRedis<any>("baidu.gushitong.opendata.AU888");
+  const { data: au888 } = useRedis<any>("getstockquotation.AU888");
   var _data = generateData();
 
   // 使用 EChartsOption 类型确保配置项类型安全
@@ -91,13 +91,10 @@ function RouteComponent() {
     tooltip: {
       show: true,
       trigger: "axis",
-      formatter: (params: string | any[]) => {
-        if (Array.isArray(params) && params.length > 0) {
-          const param = params[0];
-          return `${param.name}<br/>${param.seriesName}: ${Number(param.value).toFixed(2)}`;
-        }
-        return "";
-      },
+      // formatter: (params: string | any[]) => {
+      //   console.log("params", params);
+      //   return "name";
+      // },
     },
     xAxis: [
       {
@@ -165,12 +162,15 @@ function RouteComponent() {
   };
 
   return (
-    <div style={{ width: "100%", height: "500px" }}>
-      <ReactECharts
-        option={option}
-        style={{ height: "100%", width: "100%" }}
-        opts={{ renderer: "canvas" }}
-      />
-    </div>
+    <>
+      <div style={{ width: "100%", height: "500px" }}>
+        <ReactECharts
+          option={option}
+          style={{ height: "100%", width: "100%" }}
+          opts={{ renderer: "canvas" }}
+        />
+      </div>
+      <div>{JSON.stringify(_data)}</div>
+    </>
   );
 }

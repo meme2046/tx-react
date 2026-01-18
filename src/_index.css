@@ -1,76 +1,76 @@
 html,
 body {
-	margin: 0;
-	padding: 0;
-	height: 100%;
-	width: 100%;
-	overflow: hidden;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
 html {
-	@apply scrollbar-thin scrollbar-thumb-primary scrollbar-track-transparent;
+  @apply scrollbar-thin scrollbar-thumb-primary scrollbar-track-transparent;
 }
 
 body {
-	@apply bg-[url('https://arweave.net/c3cCRBcDb-cbx26AlJqJ9MKYBUPFDXN6pJ3AsVBWTzw')] dark:bg-[url('https://arweave.net/STTh6euGv92OJDYAxAkUQwFj0fJ7oTY4ker1tUSPcY8')] bg-size-[50%] bg-no-repeat bg-top-right bg-fixed;
+  @apply bg-[url('https://arweave.net/c3cCRBcDb-cbx26AlJqJ9MKYBUPFDXN6pJ3AsVBWTzw')] dark:bg-[url('https://arweave.net/STTh6euGv92OJDYAxAkUQwFj0fJ7oTY4ker1tUSPcY8')] bg-size-[50%] bg-no-repeat bg-top-right bg-fixed;
 }
 
 #root {
-	margin: 0;
-	padding: 0;
-	height: 100%;
-	width: 100%;
-	overflow: auto;
-	@apply scrollbar-thin;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  @apply scrollbar-thin;
 }
 
 @keyframes movex {
-	from {
-		transform: translateX(-100%);
-	}
-	to {
-		transform: translateX(100%);
-	}
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
 }
 
 @layer base {
-	/* Inter-VariableF...z,wght.ttf */
-	@font-face {
-		font-family: "Inter";
-		font-weight: 400;
-		font-display: swap;
-		src: url("https://arweave.net/qFrZTwXAm1apiVgOYqpqmq2yWC8wRffpd3J6lMlzEwI")
-			format("woff2");
-	}
+  /* Inter-VariableF...z,wght.ttf */
+  @font-face {
+    font-family: "Inter";
+    font-weight: 400;
+    font-display: swap;
+    src: url("https://arweave.net/qFrZTwXAm1apiVgOYqpqmq2yWC8wRffpd3J6lMlzEwI")
+      format("woff2");
+  }
 
-	/* Gabriela-Regular.ttf */
-	@font-face {
-		font-family: "Gabriela";
-		font-weight: 400;
-		font-display: swap;
-		src: url("https://arweave.net/qAID3w-MgaZrO6SEvGBM7qWjz9LbwZNXKFqMGQIZjA8")
-			format("woff2");
-	}
+  /* Gabriela-Regular.ttf */
+  @font-face {
+    font-family: "Gabriela";
+    font-weight: 400;
+    font-display: swap;
+    src: url("https://arweave.net/qAID3w-MgaZrO6SEvGBM7qWjz9LbwZNXKFqMGQIZjA8")
+      format("woff2");
+  }
 
-	/* DeliusSwashCaps-Regular.ttf */
-	@font-face {
-		font-family: "DeliusSwashCaps";
-		font-weight: 400;
-		font-display: swap;
-		src: url("https://arweave.net/6nKnlPeN4v9u1HqdQdT-8KLhqn4OECDmVsJosHnyz48")
-			format("woff2");
-	}
-	/* Sniglet-Regular.ttf */
-	@font-face {
-		font-family: "Sniglet";
-		font-weight: 400;
-		font-display: swap;
-		src: url("https://arweave.net/Wz2wNNDl9ypIdQU_4S04i6QuPDWwJnv1fQhQpBjB1iY")
-			format("woff2");
-	}
+  /* DeliusSwashCaps-Regular.ttf */
+  @font-face {
+    font-family: "DeliusSwashCaps";
+    font-weight: 400;
+    font-display: swap;
+    src: url("https://arweave.net/6nKnlPeN4v9u1HqdQdT-8KLhqn4OECDmVsJosHnyz48")
+      format("woff2");
+  }
+  /* Sniglet-Regular.ttf */
+  @font-face {
+    font-family: "Sniglet";
+    font-weight: 400;
+    font-display: swap;
+    src: url("https://arweave.net/Wz2wNNDl9ypIdQU_4S04i6QuPDWwJnv1fQhQpBjB1iY")
+      format("woff2");
+  }
 
-	/* JetBrainsMono-V...t_wght.ttf */
-	/* @font-face {
+  /* JetBrainsMono-V...t_wght.ttf */
+  /* @font-face {
 		font-family: "JetBrainsMono";
 		font-weight: 400;
 		font-display: swap;
@@ -78,8 +78,8 @@ body {
 			format("woff2");
 	} */
 
-	/* Nunito-VariableFont_wght.ttf */
-	/* @font-face {
+  /* Nunito-VariableFont_wght.ttf */
+  /* @font-face {
 		font-family: "Nunito";
 		font-weight: 400;
 		font-display: swap;
@@ -87,8 +87,8 @@ body {
 			format("woff2");
 	} */
 
-	/* Outfit-VariableFont_wght.ttf */
-	/* @font-face {
+  /* Outfit-VariableFont_wght.ttf */
+  /* @font-face {
 		font-family: "Outfit";
 		font-weight: 400;
 		font-display: swap;
@@ -98,11 +98,11 @@ body {
 }
 
 .bg-slash {
-	@apply bg-[repeating-linear-gradient(45deg,transparent_0px,transparent_13px,var(--muted)_13px,var(--muted)_14px)];
+  @apply bg-[repeating-linear-gradient(45deg,transparent_0px,transparent_13px,var(--muted)_13px,var(--muted)_14px)];
 }
 
 .bg-dot {
-	@apply bg-size-[5px_5px] bg-radial-[at_50%_50%] from-foreground/50 from-0% to-transparent to-10%;
+  @apply bg-size-[5px_5px] bg-radial-[at_50%_50%] from-foreground/50 from-0% to-transparent to-10%;
 }
 
 /* 
