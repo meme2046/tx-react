@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import ReactECharts, { type EChartsOption } from "echarts-for-react";
 import { time } from "echarts";
 import { useEffect, useState } from "react";
-import type { PriceItem } from "@/types/Charts";
+import type { VolPxItem } from "@/types/Charts";
 
 export const Route = createFileRoute("/_layout/candlestick/demo")({
   component: RouteComponent,
@@ -11,8 +11,8 @@ export const Route = createFileRoute("/_layout/candlestick/demo")({
 
 function RouteComponent() {
   const { data: au888 } = useRedis<any>("getstockquotation.AU888");
-  const [priceData, setPriceData] = useState<PriceItem[]>([]);
-  const [volumeData, setVolumeData] = useState<PriceItem[]>([]);
+  const [priceData, setPriceData] = useState<VolPxItem[]>([]);
+  const [volumeData, setVolumeData] = useState<VolPxItem[]>([]);
   const [breaks, setBreaks] = useState<any[]>([]);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function RouteComponent() {
 
     // Process volume data
     setVolumeData(
-      priceinfo.map((item: PriceItem) => ({
+      priceinfo.map((item: VolPxItem) => ({
         ...item,
         value: [item.time, Number(item.volume)],
       })),

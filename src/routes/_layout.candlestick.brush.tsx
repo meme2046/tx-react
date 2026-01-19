@@ -4,7 +4,7 @@ import ReactECharts, { type EChartsOption } from "echarts-for-react";
 import { time } from "echarts";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import type { BreakItem, PriceItem } from "@/types/Charts";
+import type { BreakItem, VolPxItem } from "@/types/Charts";
 export const Route = createFileRoute("/_layout/candlestick/brush")({
   component: RouteComponent,
   head: () => ({
@@ -18,7 +18,7 @@ export const Route = createFileRoute("/_layout/candlestick/brush")({
 
 function RouteComponent() {
   const { data: au888 } = useRedis<any>("getstockquotation.AU888");
-  const [priceData, setPriceData] = useState<PriceItem[]>([]);
+  const [priceData, setPriceData] = useState<VolPxItem[]>([]);
   const [averageData, setAverageData] = useState<number[][]>([]);
   const [volumeData, setVolumeData] = useState<number[][]>([]);
   const [startTime, setStartTime] = useState<number>();
@@ -44,14 +44,14 @@ function RouteComponent() {
     setEndTime(priceinfo.at(-1).time);
 
     setAverageData(
-      priceinfo.map((item: PriceItem) => [
+      priceinfo.map((item: VolPxItem) => [
         Number(`${item.time}000`),
         Number(item.avgPrice),
       ]),
     );
 
     setVolumeData(
-      priceinfo.map((item: PriceItem) => [
+      priceinfo.map((item: VolPxItem) => [
         Number(`${item.time}000`),
         Number(item.volume),
       ]),

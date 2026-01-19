@@ -6,9 +6,21 @@ export interface BreakItem {
   /** 断点-gap（时间间隔） */
   gap: number; //gap 核心：控制断点区域的视觉空白间隙（单位：像素）,gap: 0：断点无额外空白，前后视觉紧密衔接，简洁展示数据中断
 }
-
+export interface MarketData {
+  timestamp: number;
+  time: string;
+  price: number;
+  avgPrice?: number;
+  range: string;
+  ratio: string;
+  volume: number;
+  amount: string;
+  totalVolume?: string;
+  totalAmount?: string;
+  value: [number, number];
+}
 // 价格信息接口
-export interface PriceItem {
+export interface VolPxItem {
   /** 成交额（格式化字符串，如 "2891.39万"） */
   amount: string;
   /** 平均价格（字符串格式，如 "1032.64"） */

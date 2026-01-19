@@ -2,9 +2,11 @@ import { useRedis } from "@/hooks/use-redis";
 import { createFileRoute } from "@tanstack/react-router";
 import ReactECharts, { type EChartsOption } from "echarts-for-react";
 import { time } from "echarts";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import dayjs from "dayjs";
-import type { BreakItem, PriceItem } from "@/types/Charts";
+import type { BreakItem, VolPxItem } from "@/types/Charts";
+import { isNumber, isPlainObject, size } from "lodash";
+import { parseMarketData, type ParseResult } from "@/utils/parse";
 export const Route = createFileRoute("/_layout/candlestick/au888")({
   component: RouteComponent,
   head: () => ({
@@ -18,72 +20,39 @@ export const Route = createFileRoute("/_layout/candlestick/au888")({
 
 function RouteComponent() {
   const { data: au888 } = useRedis<any>("getstockquotation.AU888");
-  const [priceData, setPriceData] = useState<PriceItem[]>([]);
-  const [averageData, setAverageData] = useState<number[][]>([]);
-  const [volumeData, setVolumeData] = useState<PriceItem[]>([]);
-  const [startTime, setStartTime] = useState<number>();
-  const [endTime, setEndTime] = useState<number>();
-  const [breaks, setBreaks] = useState<BreakItem[]>([]);
+  // const [priceData, setPriceData] = useState<VolPxItem[]>([]);
+  // const [averageData, setAverageData] = useState<number[][]>([]);
+  // const [volumeData, setVolumeData] = useState<VolPxItem[]>([]);
+  // const [startTime, setStartTime] = useState<number>();
+  // const [endTime, setEndTime] = useState<number>();
+  // const [breaks, setBreaks] = useState<BreakItem[]>([]);
 
   const matrixMargin = 10;
 
-  useEffect(() => {
+  const { marketData, volData, breaks, avgData } = useMemo<ParseResult>(() => {
     if (!au888) {
-      return;
+      return { marketData: [], volData: [], breaks: [], avgData: undefined };
     }
-
-    // 将 priceinfo 中的字符串数字字段转换为 number
-    const priceinfo = au888?.data.priceinfo.map((item: any) => ({
-      ...item,
-      time: Number(`${item.time}000`),
-      value: [Number(`${item.time}000`), Number(item.price)],
-    }));
-
-    setPriceData(priceinfo);
-    setStartTime(priceinfo[0].time);
-    setEndTime(priceinfo.at(-1).time);
-
-    setAverageData(
-      priceinfo.map((item: PriceItem) => [
-        Number(`${item.time}`),
-        Number(item.avgPrice),
-      ]),
+    return parseMarketData(
+      au888?.data.newMarketData.marketData[0].p,
+      au888?.data.newMarketData.keys,
     );
-
-    setVolumeData(
-      priceinfo.map((item: PriceItem) => ({
-        ...item,
-        value: [item.time, Number(item.volume)],
-      })),
-    );
-
-    // 正常情况下PriceItem中的time(unix时间戳的字符串形式)间隔为60s,如果大于60s，就是break,
-    // 则记录下break的开始时间、结束时间、gap(时间间隔)
-    const _breaks: BreakItem[] = [];
-    for (let i = 0; i < priceinfo.length - 1; i++) {
-      const item = priceinfo[i];
-      const nextItem = priceinfo[i + 1];
-      if (nextItem.time - item.time > 60 * 1000) {
-        _breaks.push({
-          start: item.time,
-          end: nextItem.time,
-          gap: 0,
-        });
-      }
-    }
-    setBreaks(_breaks);
   }, [au888]);
 
   // 使用 EChartsOption 类型确保配置项类型安全
   const option: EChartsOption = {
-    titles: [
+    title: [
       {
-        text: "价格",
+        text: "沪金主连",
         coordinateSystem: "matrix",
         coord: [0, 0],
       },
       {
         text: "成交量",
+        left: 36,
+        textStyle: {
+          fontSize: 12,
+        },
         coordinateSystem: "matrix",
         coord: [0, 7],
       },
@@ -97,16 +66,28 @@ function RouteComponent() {
       formatter: (params: string | any[]) => {
         console.log("params", params);
         if (Array.isArray(params) && params.length > 0) {
-          const param = params[0];
-          return `
-          时间: ${param.data.datetime}<br/>
-          ${param.seriesName}: ${Number(param.value[1]).toFixed(2)}<br/>
-          涨跌额: ${param.data.increase}<br/>
+          // 找到第一个 data 为对象的项作为 param
+          const param =
+            params.find((item: any) => isPlainObject(item.data)) || params[0];
+
+          let tooltipContent = `
+          时间: ${param.data.time}<br/>
+          ${param.seriesName}: ${Number(param.value[1])}<br/>
+          涨跌额: ${param.data.range}<br/>
           涨跌幅: ${param.data.ratio}<br/>
-          均价: ${param.data.avgPrice}<br/>
+          `;
+
+          // 只有当 avgPrice 存在时才显示均价行
+          if (isNumber(param.data.avgPrice)) {
+            tooltipContent += `均价: ${param.data.avgPrice}<br/>`;
+          }
+
+          tooltipContent += `
           成交量: ${param.data.volume}手<br/>
           成交额: ${param.data.amount}<br/> 
           `;
+
+          return tooltipContent;
         }
         return "";
       },
@@ -159,6 +140,9 @@ function RouteComponent() {
         },
         breakArea: {
           expandOnClick: false,
+          itemStyle: {
+            borderColor: "orange",
+          },
         },
       },
       {
@@ -181,6 +165,9 @@ function RouteComponent() {
         },
         breakArea: {
           expandOnClick: false,
+          itemStyle: {
+            borderColor: "orange",
+          },
         },
       },
     ],
@@ -223,16 +210,18 @@ function RouteComponent() {
       {
         name: "价格",
         type: "line",
-        symbolSize: 0,
-        data: priceData,
+        showSymbol: false,
+        symbolSize: 4,
+        data: marketData,
         xAxisIndex: 0,
         yAxisIndex: 0,
       },
-      {
+      avgData && {
         name: "均价",
         type: "line",
-        symbolSize: 0,
-        data: averageData,
+        showSymbol: false,
+        symbolSize: 4,
+        data: avgData,
         xAxisIndex: 0,
         yAxisIndex: 0,
       },
@@ -241,7 +230,7 @@ function RouteComponent() {
         type: "bar",
         xAxisIndex: 1,
         yAxisIndex: 1,
-        data: volumeData,
+        data: volData,
       },
     ],
     matrix: {
@@ -258,7 +247,7 @@ function RouteComponent() {
         data: Array(1).fill(null),
       },
       y: {
-        show: true,
+        show: false,
         data: Array(10).fill(null),
         levelSize: 36,
       },
@@ -313,7 +302,7 @@ function RouteComponent() {
           opts={{ renderer: "canvas" }}
         />
       </div>
-      <div>{JSON.stringify(breaks)}</div>
+      <div>{JSON.stringify(marketData)}</div>
     </>
   );
 }
