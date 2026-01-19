@@ -76,13 +76,18 @@ function RouteComponent() {
 
   // 使用 EChartsOption 类型确保配置项类型安全
   const option: EChartsOption = {
-    title: {
-      text: "沪金主连",
-      left: "center",
-      textStyle: {
-        fontSize: 16,
+    titles: [
+      {
+        text: "价格",
+        coordinateSystem: "matrix",
+        coord: [0, 0],
       },
-    },
+      {
+        text: "成交量",
+        coordinateSystem: "matrix",
+        coord: [0, 7],
+      },
+    ],
     tooltip: {
       show: true,
       trigger: "axis",
@@ -244,12 +249,16 @@ function RouteComponent() {
       right: matrixMargin,
       top: matrixMargin,
       bottom: matrixMargin,
+      backgroundStyle: {
+        borderWidth: 0,
+        borderType: "dashed",
+      },
       x: {
         show: false,
         data: Array(1).fill(null),
       },
       y: {
-        show: false,
+        show: true,
         data: Array(10).fill(null),
         levelSize: 36,
       },
