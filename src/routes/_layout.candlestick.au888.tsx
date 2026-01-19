@@ -4,9 +4,9 @@ import ReactECharts, { type EChartsOption } from "echarts-for-react";
 import { time } from "echarts";
 import { useEffect, useMemo, useState } from "react";
 import dayjs from "dayjs";
-import type { BreakItem, VolPxItem } from "@/types/Charts";
+import type { BreakItem, ChartResult, VolPxItem } from "@/types/Charts";
 import { isNumber, isPlainObject, size } from "lodash";
-import { parseMarketData, type ParseResult } from "@/utils/parse";
+import { formatNumberZh, parseMarketData } from "@/utils/parse";
 export const Route = createFileRoute("/_layout/candlestick/au888")({
   component: RouteComponent,
   head: () => ({
@@ -29,7 +29,7 @@ function RouteComponent() {
 
   const matrixMargin = 10;
 
-  const { marketData, volData, breaks, avgData } = useMemo<ParseResult>(() => {
+  const { marketData, volData, breaks, avgData } = useMemo<ChartResult>(() => {
     if (!au888) {
       return { marketData: [], volData: [], breaks: [], avgData: undefined };
     }
@@ -65,6 +65,7 @@ function RouteComponent() {
       },
       formatter: (params: string | any[]) => {
         console.log("params", params);
+
         if (Array.isArray(params) && params.length > 0) {
           // 找到第一个 data 为对象的项作为 param
           const param =
@@ -72,7 +73,7 @@ function RouteComponent() {
 
           let tooltipContent = `
           时间: ${param.data.time}<br/>
-          ${param.seriesName}: ${Number(param.value[1])}<br/>
+          ${params[0].seriesName}: ${params[0].value[1]}<br/>
           涨跌额: ${param.data.range}<br/>
           涨跌幅: ${param.data.ratio}<br/>
           `;
@@ -84,7 +85,7 @@ function RouteComponent() {
 
           tooltipContent += `
           成交量: ${param.data.volume}手<br/>
-          成交额: ${param.data.amount}<br/> 
+          成交额: ${formatNumberZh(param.data.amount)}<br/> 
           `;
 
           return tooltipContent;
@@ -197,10 +198,10 @@ function RouteComponent() {
       },
     ],
     dataZoom: [
-      {
-        type: "inside",
-        xAxisIndex: [0, 1], // 同时作用于第 0 和第 1 个 x 轴
-      },
+      // {
+      //   type: "inside",
+      //   xAxisIndex: [0, 1], // 同时作用于第 0 和第 1 个 x 轴
+      // },
       {
         type: "slider",
         xAxisIndex: [0, 1], // 同时作用于第 0 和第 1 个 x 轴

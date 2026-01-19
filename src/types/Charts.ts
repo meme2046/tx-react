@@ -6,6 +6,14 @@ export interface BreakItem {
   /** 断点-gap（时间间隔） */
   gap: number; //gap 核心：控制断点区域的视觉空白间隙（单位：像素）,gap: 0：断点无额外空白，前后视觉紧密衔接，简洁展示数据中断
 }
+
+export interface ChartResult {
+  marketData: MarketData[];
+  volData: number[][];
+  breaks: BreakItem[];
+  avgData?: number[][];
+}
+
 export interface MarketData {
   timestamp: number;
   time: string;
@@ -14,7 +22,7 @@ export interface MarketData {
   range: string;
   ratio: string;
   volume: number;
-  amount: string;
+  amount: number;
   totalVolume?: string;
   totalAmount?: string;
   value: [number, number];
