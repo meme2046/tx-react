@@ -1,8 +1,8 @@
 export interface BreakItem {
   /** 断点开始时间 */
-  breakStart: number;
+  start: number;
   /** 断点结束时间 */
-  breakEnd: number;
+  end: number;
   /** 断点-gap（时间间隔） */
   gap: number; //gap 核心：控制断点区域的视觉空白间隙（单位：像素）,gap: 0：断点无额外空白，前后视觉紧密衔接，简洁展示数据中断
 }

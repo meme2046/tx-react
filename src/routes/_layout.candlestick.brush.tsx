@@ -5,12 +5,12 @@ import { time } from "echarts";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import type { BreakItem, PriceItem } from "@/types/Charts";
-export const Route = createFileRoute("/_layout/candlestick/au888")({
+export const Route = createFileRoute("/_layout/candlestick/brush")({
   component: RouteComponent,
   head: () => ({
     meta: [
       {
-        title: "沪金主连",
+        title: "brush",
       },
     ],
   }),
@@ -20,7 +20,7 @@ function RouteComponent() {
   const { data: au888 } = useRedis<any>("getstockquotation.AU888");
   const [priceData, setPriceData] = useState<PriceItem[]>([]);
   const [averageData, setAverageData] = useState<number[][]>([]);
-  const [volumeData, setVolumeData] = useState<PriceItem[]>([]);
+  const [volumeData, setVolumeData] = useState<number[][]>([]);
   const [startTime, setStartTime] = useState<number>();
   const [endTime, setEndTime] = useState<number>();
   const [breaks, setBreaks] = useState<BreakItem[]>([]);
@@ -35,7 +35,7 @@ function RouteComponent() {
     // 将 priceinfo 中的字符串数字字段转换为 number
     const priceinfo = au888?.data.priceinfo.map((item: any) => ({
       ...item,
-      time: Number(`${item.time}000`),
+      time: Number(item.time),
       value: [Number(`${item.time}000`), Number(item.price)],
     }));
 
@@ -45,16 +45,16 @@ function RouteComponent() {
 
     setAverageData(
       priceinfo.map((item: PriceItem) => [
-        Number(`${item.time}`),
+        Number(`${item.time}000`),
         Number(item.avgPrice),
       ]),
     );
 
     setVolumeData(
-      priceinfo.map((item: PriceItem) => ({
-        ...item,
-        value: [item.time, Number(item.volume)],
-      })),
+      priceinfo.map((item: PriceItem) => [
+        Number(`${item.time}000`),
+        Number(item.volume),
+      ]),
     );
 
     // 正常情况下PriceItem中的time(unix时间戳的字符串形式)间隔为60s,如果大于60s，就是break,
@@ -63,10 +63,10 @@ function RouteComponent() {
     for (let i = 0; i < priceinfo.length - 1; i++) {
       const item = priceinfo[i];
       const nextItem = priceinfo[i + 1];
-      if (nextItem.time - item.time > 60 * 1000) {
+      if (nextItem.time - item.time > 60) {
         _breaks.push({
-          start: item.time,
-          end: nextItem.time,
+          breakStart: item.time * 1000,
+          breakEnd: nextItem.time * 1000,
           gap: 0,
         });
       }
@@ -77,7 +77,7 @@ function RouteComponent() {
   // 使用 EChartsOption 类型确保配置项类型安全
   const option: EChartsOption = {
     title: {
-      text: "沪金主连",
+      text: "brush",
       left: "center",
       textStyle: {
         fontSize: 16,
@@ -88,7 +88,9 @@ function RouteComponent() {
       trigger: "axis",
       axisPointer: {
         type: "cross",
+        snap: true,
       },
+
       formatter: (params: string | any[]) => {
         console.log("params", params);
         if (Array.isArray(params) && params.length > 0) {
@@ -112,6 +114,9 @@ function RouteComponent() {
           xAxisIndex: "all",
         },
       ],
+      label: {
+        backgroundColor: "#777",
+      },
     },
     xAxis: [
       {
@@ -119,15 +124,6 @@ function RouteComponent() {
         type: "time",
         gridIndex: 0,
         interval: 1000 * 60,
-        axisLine: {
-          show: true, // 隐藏轴线
-        },
-        axisTick: {
-          show: true, // 隐藏刻度
-        },
-        splitLine: {
-          show: false, // 隐藏分割线
-        },
         axisLabel: {
           showMinLabel: true,
           showMaxLabel: true,
@@ -148,35 +144,23 @@ function RouteComponent() {
             return "";
           },
         },
-        breaks: breaks,
         breakLabelLayout: {
-          moveOverlap: false, // 控制当断点标签发生重叠时，是否自动移动标签以避免重叠
+          // Disable auto move of break labels if overlapping,
+          // and use `axisLabel.formatter` to control the label display.
+          moveOverlap: false,
         },
+        breaks: breaks,
         breakArea: {
           expandOnClick: false,
+          zigzagAmplitude: 0,
+          zigzagZ: 200,
         },
       },
       {
-        show: true,
         type: "time",
         gridIndex: 1,
-        interval: 1000 * 60,
-        axisLabel: {
-          show: false,
-        },
-        axisLine: {
-          show: true, // 隐藏轴线
-        },
-        axisTick: {
-          show: false, // 隐藏刻度
-        },
+        show: false,
         breaks: breaks,
-        breakLabelLayout: {
-          moveOverlap: false, // 控制当断点标签发生重叠时，是否自动移动标签以避免重叠
-        },
-        breakArea: {
-          expandOnClick: false,
-        },
       },
     ],
     yAxis: [
@@ -187,20 +171,10 @@ function RouteComponent() {
         axisLabel: {
           inside: true, // 将刻度标签显示在轴线内侧
         },
-        axisLine: {
-          show: false, // 隐藏轴线
-        },
-        axisTick: {
-          show: true, // 隐藏刻度
-        },
-        splitLine: {
-          show: false, // 隐藏分割线
-        },
       },
       {
         type: "value",
         gridIndex: 1,
-        max: "dataMax",
         show: false,
       },
     ],
@@ -251,12 +225,8 @@ function RouteComponent() {
       y: {
         show: false,
         data: Array(10).fill(null),
-        levelSize: 36,
       },
       body: {
-        itemStyle: {
-          borderWidth: 0,
-        },
         data: [
           {
             coord: [
@@ -277,27 +247,22 @@ function RouteComponent() {
     },
     grid: [
       {
-        coordinateSystem: "matrix", // 指定该网格使用矩阵坐标系，而非默认的笛卡尔坐标系
-        coord: [0, 0],
-        top: 0,
-        bottom: 0,
-        left: 36,
-        right: 48,
+        left: "6%",
+        right: "6%",
+        height: "50%",
       },
       {
-        coordinateSystem: "matrix",
-        coord: [0, 7],
-        top: 0,
-        bottom: 0,
-        left: 36,
-        right: 48,
+        left: "6%",
+        right: "6%",
+        top: "63%",
+        height: "16%",
       },
     ],
   };
 
   return (
     <>
-      <div className="w-full h-96">
+      <div className="w-full h-120">
         <ReactECharts
           option={option}
           style={{ height: "100%", width: "100%" }}

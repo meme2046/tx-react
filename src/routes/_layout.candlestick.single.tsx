@@ -133,8 +133,6 @@ function RouteComponent() {
         ],
         breakArea: {
           expandOnClick: false,
-          zigzagAmplitude: 0,
-          zigzagZ: 200,
         },
       },
     ],
