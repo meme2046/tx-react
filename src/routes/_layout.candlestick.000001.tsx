@@ -7,6 +7,13 @@ import { useMemo } from "react";
 
 export const Route = createFileRoute("/_layout/candlestick/000001")({
   component: RouteComponent,
+  head: () => ({
+    meta: [
+      {
+        title: "上证指数",
+      },
+    ],
+  }),
 });
 
 function RouteComponent() {

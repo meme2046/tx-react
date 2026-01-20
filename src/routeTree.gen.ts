@@ -34,10 +34,6 @@ import { Route as LayoutBitgetGridRouteImport } from './routes/_layout.bitget-gr
 import { Route as AuthInvoicesRouteImport } from './routes/_auth.invoices'
 import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
 import { Route as AuthInvoicesIndexRouteImport } from './routes/_auth.invoices.index'
-import { Route as LayoutCandlestickSingleRouteImport } from './routes/_layout.candlestick.single'
-import { Route as LayoutCandlestickMatrixStockRouteImport } from './routes/_layout.candlestick.matrix-stock'
-import { Route as LayoutCandlestickDemoRouteImport } from './routes/_layout.candlestick.demo'
-import { Route as LayoutCandlestickBrushRouteImport } from './routes/_layout.candlestick.brush'
 import { Route as LayoutCandlestickAu888RouteImport } from './routes/_layout.candlestick.au888'
 import { Route as LayoutCandlestick000001RouteImport } from './routes/_layout.candlestick.000001'
 import { Route as AuthInvoicesInvoiceIdRouteImport } from './routes/_auth.invoices.$invoiceId'
@@ -165,27 +161,6 @@ const AuthInvoicesIndexRoute = AuthInvoicesIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthInvoicesRoute,
 } as any)
-const LayoutCandlestickSingleRoute = LayoutCandlestickSingleRouteImport.update({
-  id: '/candlestick/single',
-  path: '/candlestick/single',
-  getParentRoute: () => LayoutRoute,
-} as any)
-const LayoutCandlestickMatrixStockRoute =
-  LayoutCandlestickMatrixStockRouteImport.update({
-    id: '/candlestick/matrix-stock',
-    path: '/candlestick/matrix-stock',
-    getParentRoute: () => LayoutRoute,
-  } as any)
-const LayoutCandlestickDemoRoute = LayoutCandlestickDemoRouteImport.update({
-  id: '/candlestick/demo',
-  path: '/candlestick/demo',
-  getParentRoute: () => LayoutRoute,
-} as any)
-const LayoutCandlestickBrushRoute = LayoutCandlestickBrushRouteImport.update({
-  id: '/candlestick/brush',
-  path: '/candlestick/brush',
-  getParentRoute: () => LayoutRoute,
-} as any)
 const LayoutCandlestickAu888Route = LayoutCandlestickAu888RouteImport.update({
   id: '/candlestick/au888',
   path: '/candlestick/au888',
@@ -228,10 +203,6 @@ export interface FileRoutesByFullPath {
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/candlestick/000001': typeof LayoutCandlestick000001Route
   '/candlestick/au888': typeof LayoutCandlestickAu888Route
-  '/candlestick/brush': typeof LayoutCandlestickBrushRoute
-  '/candlestick/demo': typeof LayoutCandlestickDemoRoute
-  '/candlestick/matrix-stock': typeof LayoutCandlestickMatrixStockRoute
-  '/candlestick/single': typeof LayoutCandlestickSingleRoute
   '/invoices/': typeof AuthInvoicesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -259,10 +230,6 @@ export interface FileRoutesByTo {
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/candlestick/000001': typeof LayoutCandlestick000001Route
   '/candlestick/au888': typeof LayoutCandlestickAu888Route
-  '/candlestick/brush': typeof LayoutCandlestickBrushRoute
-  '/candlestick/demo': typeof LayoutCandlestickDemoRoute
-  '/candlestick/matrix-stock': typeof LayoutCandlestickMatrixStockRoute
-  '/candlestick/single': typeof LayoutCandlestickSingleRoute
   '/invoices': typeof AuthInvoicesIndexRoute
 }
 export interface FileRoutesById {
@@ -294,10 +261,6 @@ export interface FileRoutesById {
   '/_auth/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/_layout/candlestick/000001': typeof LayoutCandlestick000001Route
   '/_layout/candlestick/au888': typeof LayoutCandlestickAu888Route
-  '/_layout/candlestick/brush': typeof LayoutCandlestickBrushRoute
-  '/_layout/candlestick/demo': typeof LayoutCandlestickDemoRoute
-  '/_layout/candlestick/matrix-stock': typeof LayoutCandlestickMatrixStockRoute
-  '/_layout/candlestick/single': typeof LayoutCandlestickSingleRoute
   '/_auth/invoices/': typeof AuthInvoicesIndexRoute
 }
 export interface FileRouteTypes {
@@ -328,10 +291,6 @@ export interface FileRouteTypes {
     | '/invoices/$invoiceId'
     | '/candlestick/000001'
     | '/candlestick/au888'
-    | '/candlestick/brush'
-    | '/candlestick/demo'
-    | '/candlestick/matrix-stock'
-    | '/candlestick/single'
     | '/invoices/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -359,10 +318,6 @@ export interface FileRouteTypes {
     | '/invoices/$invoiceId'
     | '/candlestick/000001'
     | '/candlestick/au888'
-    | '/candlestick/brush'
-    | '/candlestick/demo'
-    | '/candlestick/matrix-stock'
-    | '/candlestick/single'
     | '/invoices'
   id:
     | '__root__'
@@ -393,10 +348,6 @@ export interface FileRouteTypes {
     | '/_auth/invoices/$invoiceId'
     | '/_layout/candlestick/000001'
     | '/_layout/candlestick/au888'
-    | '/_layout/candlestick/brush'
-    | '/_layout/candlestick/demo'
-    | '/_layout/candlestick/matrix-stock'
-    | '/_layout/candlestick/single'
     | '/_auth/invoices/'
   fileRoutesById: FileRoutesById
 }
@@ -585,34 +536,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthInvoicesIndexRouteImport
       parentRoute: typeof AuthInvoicesRoute
     }
-    '/_layout/candlestick/single': {
-      id: '/_layout/candlestick/single'
-      path: '/candlestick/single'
-      fullPath: '/candlestick/single'
-      preLoaderRoute: typeof LayoutCandlestickSingleRouteImport
-      parentRoute: typeof LayoutRoute
-    }
-    '/_layout/candlestick/matrix-stock': {
-      id: '/_layout/candlestick/matrix-stock'
-      path: '/candlestick/matrix-stock'
-      fullPath: '/candlestick/matrix-stock'
-      preLoaderRoute: typeof LayoutCandlestickMatrixStockRouteImport
-      parentRoute: typeof LayoutRoute
-    }
-    '/_layout/candlestick/demo': {
-      id: '/_layout/candlestick/demo'
-      path: '/candlestick/demo'
-      fullPath: '/candlestick/demo'
-      preLoaderRoute: typeof LayoutCandlestickDemoRouteImport
-      parentRoute: typeof LayoutRoute
-    }
-    '/_layout/candlestick/brush': {
-      id: '/_layout/candlestick/brush'
-      path: '/candlestick/brush'
-      fullPath: '/candlestick/brush'
-      preLoaderRoute: typeof LayoutCandlestickBrushRouteImport
-      parentRoute: typeof LayoutRoute
-    }
     '/_layout/candlestick/au888': {
       id: '/_layout/candlestick/au888'
       path: '/candlestick/au888'
@@ -683,10 +606,6 @@ interface LayoutRouteChildren {
   LayoutValtioRoute: typeof LayoutValtioRoute
   LayoutCandlestick000001Route: typeof LayoutCandlestick000001Route
   LayoutCandlestickAu888Route: typeof LayoutCandlestickAu888Route
-  LayoutCandlestickBrushRoute: typeof LayoutCandlestickBrushRoute
-  LayoutCandlestickDemoRoute: typeof LayoutCandlestickDemoRoute
-  LayoutCandlestickMatrixStockRoute: typeof LayoutCandlestickMatrixStockRoute
-  LayoutCandlestickSingleRoute: typeof LayoutCandlestickSingleRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
@@ -709,10 +628,6 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutValtioRoute: LayoutValtioRoute,
   LayoutCandlestick000001Route: LayoutCandlestick000001Route,
   LayoutCandlestickAu888Route: LayoutCandlestickAu888Route,
-  LayoutCandlestickBrushRoute: LayoutCandlestickBrushRoute,
-  LayoutCandlestickDemoRoute: LayoutCandlestickDemoRoute,
-  LayoutCandlestickMatrixStockRoute: LayoutCandlestickMatrixStockRoute,
-  LayoutCandlestickSingleRoute: LayoutCandlestickSingleRoute,
 }
 
 const LayoutRouteWithChildren =
