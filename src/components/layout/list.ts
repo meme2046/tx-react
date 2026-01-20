@@ -62,7 +62,8 @@ const navCrypto: INav[] = [
   },
   { name: "Bitget Grid", emoj: "🐶", desc: "", value: "/bitget-grid" },
   { name: "Gate Grid", emoj: "🐷", desc: "", value: "/gate-grid" },
-  { name: "股市", emoj: "📊", desc: "", value: "/gushitong" },
+  { name: "股市图表", emoj: "📈", desc: "", value: "/candlestick/gushi" },
+  { name: "加密货币图表", emoj: "📊", desc: "", value: "/candlestick/crypto" },
 ];
 
 export const navLottery: INav[] = [

@@ -34,6 +34,8 @@ import { Route as LayoutBitgetGridRouteImport } from './routes/_layout.bitget-gr
 import { Route as AuthInvoicesRouteImport } from './routes/_auth.invoices'
 import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
 import { Route as AuthInvoicesIndexRouteImport } from './routes/_auth.invoices.index'
+import { Route as LayoutCandlestickGushiRouteImport } from './routes/_layout.candlestick.gushi'
+import { Route as LayoutCandlestickCryptoRouteImport } from './routes/_layout.candlestick.crypto'
 import { Route as LayoutCandlestickAu888RouteImport } from './routes/_layout.candlestick.au888'
 import { Route as LayoutCandlestick000001RouteImport } from './routes/_layout.candlestick.000001'
 import { Route as AuthInvoicesInvoiceIdRouteImport } from './routes/_auth.invoices.$invoiceId'
@@ -161,6 +163,16 @@ const AuthInvoicesIndexRoute = AuthInvoicesIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthInvoicesRoute,
 } as any)
+const LayoutCandlestickGushiRoute = LayoutCandlestickGushiRouteImport.update({
+  id: '/candlestick/gushi',
+  path: '/candlestick/gushi',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutCandlestickCryptoRoute = LayoutCandlestickCryptoRouteImport.update({
+  id: '/candlestick/crypto',
+  path: '/candlestick/crypto',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const LayoutCandlestickAu888Route = LayoutCandlestickAu888RouteImport.update({
   id: '/candlestick/au888',
   path: '/candlestick/au888',
@@ -203,6 +215,8 @@ export interface FileRoutesByFullPath {
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/candlestick/000001': typeof LayoutCandlestick000001Route
   '/candlestick/au888': typeof LayoutCandlestickAu888Route
+  '/candlestick/crypto': typeof LayoutCandlestickCryptoRoute
+  '/candlestick/gushi': typeof LayoutCandlestickGushiRoute
   '/invoices/': typeof AuthInvoicesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -230,6 +244,8 @@ export interface FileRoutesByTo {
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/candlestick/000001': typeof LayoutCandlestick000001Route
   '/candlestick/au888': typeof LayoutCandlestickAu888Route
+  '/candlestick/crypto': typeof LayoutCandlestickCryptoRoute
+  '/candlestick/gushi': typeof LayoutCandlestickGushiRoute
   '/invoices': typeof AuthInvoicesIndexRoute
 }
 export interface FileRoutesById {
@@ -261,6 +277,8 @@ export interface FileRoutesById {
   '/_auth/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/_layout/candlestick/000001': typeof LayoutCandlestick000001Route
   '/_layout/candlestick/au888': typeof LayoutCandlestickAu888Route
+  '/_layout/candlestick/crypto': typeof LayoutCandlestickCryptoRoute
+  '/_layout/candlestick/gushi': typeof LayoutCandlestickGushiRoute
   '/_auth/invoices/': typeof AuthInvoicesIndexRoute
 }
 export interface FileRouteTypes {
@@ -291,6 +309,8 @@ export interface FileRouteTypes {
     | '/invoices/$invoiceId'
     | '/candlestick/000001'
     | '/candlestick/au888'
+    | '/candlestick/crypto'
+    | '/candlestick/gushi'
     | '/invoices/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -318,6 +338,8 @@ export interface FileRouteTypes {
     | '/invoices/$invoiceId'
     | '/candlestick/000001'
     | '/candlestick/au888'
+    | '/candlestick/crypto'
+    | '/candlestick/gushi'
     | '/invoices'
   id:
     | '__root__'
@@ -348,6 +370,8 @@ export interface FileRouteTypes {
     | '/_auth/invoices/$invoiceId'
     | '/_layout/candlestick/000001'
     | '/_layout/candlestick/au888'
+    | '/_layout/candlestick/crypto'
+    | '/_layout/candlestick/gushi'
     | '/_auth/invoices/'
   fileRoutesById: FileRoutesById
 }
@@ -536,6 +560,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthInvoicesIndexRouteImport
       parentRoute: typeof AuthInvoicesRoute
     }
+    '/_layout/candlestick/gushi': {
+      id: '/_layout/candlestick/gushi'
+      path: '/candlestick/gushi'
+      fullPath: '/candlestick/gushi'
+      preLoaderRoute: typeof LayoutCandlestickGushiRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/candlestick/crypto': {
+      id: '/_layout/candlestick/crypto'
+      path: '/candlestick/crypto'
+      fullPath: '/candlestick/crypto'
+      preLoaderRoute: typeof LayoutCandlestickCryptoRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/candlestick/au888': {
       id: '/_layout/candlestick/au888'
       path: '/candlestick/au888'
@@ -606,6 +644,8 @@ interface LayoutRouteChildren {
   LayoutValtioRoute: typeof LayoutValtioRoute
   LayoutCandlestick000001Route: typeof LayoutCandlestick000001Route
   LayoutCandlestickAu888Route: typeof LayoutCandlestickAu888Route
+  LayoutCandlestickCryptoRoute: typeof LayoutCandlestickCryptoRoute
+  LayoutCandlestickGushiRoute: typeof LayoutCandlestickGushiRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
@@ -628,6 +668,8 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutValtioRoute: LayoutValtioRoute,
   LayoutCandlestick000001Route: LayoutCandlestick000001Route,
   LayoutCandlestickAu888Route: LayoutCandlestickAu888Route,
+  LayoutCandlestickCryptoRoute: LayoutCandlestickCryptoRoute,
+  LayoutCandlestickGushiRoute: LayoutCandlestickGushiRoute,
 }
 
 const LayoutRouteWithChildren =

@@ -1,6 +1,6 @@
 import { VolPxChart } from "@/components/charts/vol-px-chart";
 import { useRedis } from "@/hooks/use-redis";
-import type { ChartResult } from "@/types/Charts";
+import type { ChartData } from "@/types/Charts";
 import { parseMarketData } from "@/utils/parse";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo } from "react";
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/_layout/candlestick/000001")({
 function RouteComponent() {
   const { data } = useRedis<any>("getquotation.000001");
 
-  const chartResult = useMemo<ChartResult>(() => {
+  const chartResult = useMemo<ChartData>(() => {
     if (!data) {
       return { marketData: [], volData: [], breaks: [], avgData: undefined };
     }

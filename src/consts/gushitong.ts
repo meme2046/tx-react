@@ -1,4 +1,6 @@
-export const GUSHITONG_LOGO: Record<string, string> = {
+import type { BasicInfo } from "@/types/Charts";
+
+export const GUSHITONG_IMG: Record<string, string> = {
   "000001": "https://baidu-finance.cdn.bcebos.com/imgs/icons/index_000001.svg",
   IXIC: "https://baidu-finance.cdn.bcebos.com/imgs/logo/indices/bbed2a87be06d1318a5c035e45c0f54c.svg",
   USDCNH: "https://arweave.net/qIGswQTXG_7jNU0RflLi8Qt-2FTC5ccbpWoOmMm7u5Q",
@@ -7,15 +9,163 @@ export const GUSHITONG_LOGO: Record<string, string> = {
     "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png",
   XAUUSD:
     "https://baidu-finance.cdn.bcebos.com/imgs/icons/0530/futures_ab_GOLD.png",
+  AU888: "https://arweave.net/rHREQxYYqqCf6h6TMewqh36Uw23tB3dcxzVTADr7sCo",
+  AG888: "https://arweave.net/d3LGw6kQJkYHM-8FPfkd2euVn2GM_413mu2zuGzd_ZE",
   "600519": "https://arweave.net/K9W8zYbRg6HtBHW1wS273_2td2UOvHS27G9u_Z4ffIc",
   "399300":
     "https://baidu-finance.cdn.bcebos.com/imgs/logo/indices/d0c11e7e09802a02888fcf5be5af8769.svg",
   "399905":
     "https://baidu-finance.cdn.bcebos.com/imgs/logo/indices/62f226489b7e56c90b9e14e0d4fc7531.svg",
+  SH: "https://arweave.net/zbcDqHBR69HECkU04pJe2cMb9UZdkaw368Z9-7Ooie0", // 上海证券交易所
+  L1: "https://arweave.net/mJQhNY4Ia1obLHgGvf_DKcAobINcDEm6RbyCbCEnteU", // Level1 基础行情
+  WH: "https://arweave.net/Y7ZsOW9u9VZf7fDQLa4tJcjDcACNBXe8L_-PPl5qy6A", // 外汇
+  US: "https://arweave.net/yAB9AibGUbrgn0oNiB8Zgw9S0aFwIbnz8gqW52UjM5M",
+  NLS: "https://arweave.net/1A0Jrarna-hux7sirCX0moYedkUqixmJLB1T59Wx6Ew",
 };
 
 export const GUSHITONG_MARKET: Record<string, string> = {
   ab: "A股",
   us: "美股",
   global: "全球",
+};
+
+export const basicInfoMap: Record<string, BasicInfo> = {
+  "000001": {
+    code: "000001",
+    exchange: "SZ",
+    logo: GUSHITONG_IMG["000001"],
+    name: "上证指数",
+    provider: "东方财富",
+    tagList: [
+      {
+        desc: "上海证券交易所",
+        imageUrl: GUSHITONG_IMG["SH"],
+      },
+      {
+        desc: "Level1 基础行情",
+        imageUrl: GUSHITONG_IMG["L1"],
+      },
+    ],
+    time: undefined,
+    price: undefined,
+    increase: undefined,
+    ratio: undefined,
+    datetime: undefined,
+    tradeStatusCN: undefined,
+  },
+  AU888: {
+    code: "AU888",
+    exchange: "FT",
+    logo: GUSHITONG_IMG["AU888"],
+    name: "黄金",
+    provider: "东方财富",
+    tagList: [
+      {
+        desc: "上海期货交易所",
+        imageUrl: GUSHITONG_IMG["SH"],
+      },
+      {
+        desc: "Level1 基础行情",
+        imageUrl: GUSHITONG_IMG["L1"],
+      },
+    ],
+    time: undefined,
+    price: undefined,
+    increase: undefined,
+    ratio: undefined,
+    datetime: undefined,
+    tradeStatusCN: undefined,
+  },
+  AG888: {
+    code: "AG888",
+    exchange: "FT",
+    logo: GUSHITONG_IMG["AG888"],
+    name: "白银",
+    provider: "东方财富",
+    tagList: [
+      {
+        desc: "上海期货交易所",
+        imageUrl: GUSHITONG_IMG["SH"],
+      },
+      {
+        desc: "Level1 基础行情",
+        imageUrl: GUSHITONG_IMG["L1"],
+      },
+    ],
+    time: undefined,
+    price: undefined,
+    increase: undefined,
+    ratio: undefined,
+    datetime: undefined,
+    tradeStatusCN: undefined,
+  },
+  IXIC: {
+    code: "IXIC",
+    exchange: "US",
+    logo: GUSHITONG_IMG["IXIC"],
+    name: "纳斯达克",
+    provider: "东方财富",
+    tagList: [
+      {
+        desc: "自定义市场-美指",
+        imageUrl: GUSHITONG_IMG["US"],
+      },
+      {
+        desc: "NLS基础行情",
+        imageUrl: GUSHITONG_IMG["NLS"],
+      },
+    ],
+    time: undefined,
+    price: undefined,
+    increase: undefined,
+    ratio: undefined,
+    datetime: undefined,
+    tradeStatusCN: undefined,
+  },
+  "600519": {
+    code: "600519",
+    exchange: "SH",
+    logo: GUSHITONG_IMG["600519"],
+    name: "贵州茅台",
+    provider: "东方财富",
+    tagList: [
+      {
+        desc: "上海交易所",
+        imageUrl: GUSHITONG_IMG["SH"],
+      },
+      {
+        desc: "Level1基础行情",
+        imageUrl: GUSHITONG_IMG["L1"],
+      },
+    ],
+    time: undefined,
+    price: undefined,
+    increase: undefined,
+    ratio: undefined,
+    datetime: undefined,
+    tradeStatusCN: undefined,
+  },
+  USDCNH: {
+    code: "USDCNH",
+    exchange: "FX",
+    logo: GUSHITONG_IMG["USDCNH"],
+    name: "美元兑中国离岸人民币",
+    provider: "",
+    tagList: [
+      {
+        desc: "外汇",
+        imageUrl: GUSHITONG_IMG["WH"],
+      },
+      {
+        desc: "Level1基础行情",
+        imageUrl: GUSHITONG_IMG["L1"],
+      },
+    ],
+    time: undefined,
+    price: undefined,
+    increase: undefined,
+    ratio: undefined,
+    datetime: undefined,
+    tradeStatusCN: undefined,
+  },
 };

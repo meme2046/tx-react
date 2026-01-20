@@ -1,10 +1,10 @@
-import type { BreakItem, ChartResult, MarketData } from "@/types/Charts";
+import type { BreakItem, ChartData, MarketData } from "@/types/Charts";
 import { round } from "lodash";
 
 export function parseMarketData(
   p: string,
   keys: Array<keyof MarketData>,
-): ChartResult {
+): ChartData {
   const marketData = p.split(";").map((record) => {
     const values = record.split(",");
     if (values.length !== keys.length) {

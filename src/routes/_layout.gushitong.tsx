@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { SVG_SRC } from "@/consts";
-import { GUSHITONG_LOGO, GUSHITONG_MARKET } from "@/consts/gushitong";
+import { GUSHITONG_IMG, GUSHITONG_MARKET } from "@/consts/gushitong";
 import { useRedis } from "@/hooks/use-redis";
 import type {
   BannerItem,
@@ -35,7 +35,7 @@ function BannerCard(props: { item: BannerItem }) {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <img
-            src={GUSHITONG_LOGO[item.code]}
+            src={GUSHITONG_IMG[item.code]}
             alt={item.code}
             className={`w-10 ${item.code == "USDCNH" ? "" : "rounded-full"}`}
           />
@@ -91,7 +91,7 @@ function OpenDataCard(props: { item: OpenData }) {
       <CardHeader className="gap-0">
         <div className="flex items-center gap-2">
           <img
-            src={item.minute_data.basicinfos.logo ?? GUSHITONG_LOGO[item.code]}
+            src={item.minute_data.basicinfos.logo ?? GUSHITONG_IMG[item.code]}
             alt={item.code}
             className="w-10 rounded-full"
           />
@@ -167,7 +167,7 @@ function SelfSelectCard({ item }: { item: SelfSelectItem }) {
       <CardHeader className="gap-0">
         <div className="flex items-center gap-2">
           <img
-            src={GUSHITONG_LOGO[item.code] ?? item.logo?.logo}
+            src={GUSHITONG_IMG[item.code] ?? item.logo?.logo}
             alt={item.code}
             className={`rounded-full ${item.code == "600519" ? "w-20 m-[-16px]" : "w-10"}`}
           />
@@ -235,7 +235,7 @@ function RouteComponent() {
       })),
     ];
     return combinedBanner.filter((item) =>
-      Object.keys(GUSHITONG_LOGO).includes(item.code),
+      Object.keys(GUSHITONG_IMG).includes(item.code),
     );
   }, [indexBanner, foreign]);
 

@@ -1,4 +1,4 @@
-import type { ChartResult } from "@/types/Charts";
+import type { ChartData } from "@/types/Charts";
 import { formatNumberZh } from "@/utils/parse";
 import { time } from "echarts";
 import ReactECharts, { type EChartsOption } from "echarts-for-react";
@@ -7,11 +7,11 @@ interface Props {
   title?: string;
   className?: string;
   matrixMargin?: number;
-  data: ChartResult;
+  data: ChartData;
 }
 const defaultProps = {
   title: "",
-  className: "w-full h-96",
+  className: "w-full h-64",
   matrixMargin: 10,
 };
 export function VolPxChart(props: Props) {
@@ -60,7 +60,7 @@ export function VolPxChart(props: Props) {
         }
 
         tooltipContent += `
-          成交量: ${isNaN(param.data.volume) ? "--" : formatNumberZh(param.data.volume / 100) + "手"}<br/>
+          成交量: ${isNaN(param.data.volume) ? "--" : formatNumberZh(param.data.volume) + "股"}<br/>
           成交额: ${formatNumberZh(param.data.amount)}<br/> 
           `;
 
@@ -89,7 +89,7 @@ export function VolPxChart(props: Props) {
       xAxisIndex: 0,
       yAxisIndex: 0,
     },
-    {
+    volData && {
       name: "成交量",
       type: "bar",
       xAxisIndex: 1,
