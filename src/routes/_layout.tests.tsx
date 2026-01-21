@@ -4,8 +4,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { ICON_SRC, SVG_SRC } from "@/consts";
 import { createFileRoute } from "@tanstack/react-router";
 import { ReactSVG } from "react-svg";
-import GoldSVG from "@/assets/gold.svg";
-import SilverSVG from "@/assets/silver.svg";
 
 export const Route = createFileRoute("/_layout/tests")({
   component: RouteComponent,
@@ -109,10 +107,6 @@ function RouteComponent() {
         </div>
         <div className="size-50 border bg-slash">斜线背景</div>
         <div className="size-50 border bg-dot">dot背景</div>
-      </div>
-      <div>
-        <ReactSVG src={GoldSVG} className="w-12" />
-        <ReactSVG src={SilverSVG} className="w-12" />
       </div>
     </div>
   );
