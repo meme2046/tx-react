@@ -1,9 +1,10 @@
 import type { BreakItem, ChartData, MarketData, UiKline } from "@/types/Charts";
-import { has, round, toNumber } from "lodash";
+import { has, includes, round, toNumber } from "lodash";
 
 export function parseMarketData(
   p: string,
   keys: Array<keyof MarketData>,
+  isOz: boolean = false, // 是否盎司计价
 ): ChartData {
   const marketData = p.split(";").map((record) => {
     const values = record.split(",");
@@ -21,9 +22,14 @@ export function parseMarketData(
         key === "volume" ||
         key === "price" ||
         key === "avgPrice" ||
-        key == "amount"
+        key === "amount" ||
+        key === "range"
       ) {
-        obj[key] = Number(values[index]);
+        if (isOz && includes(["price", "avgPrice", "range"], key)) {
+          obj[key] = round(Number(values[index]) / 31.1034768, 2);
+        } else {
+          obj[key] = Number(values[index]);
+        }
       } else if (key !== "value") {
         obj[key] = values[index];
       }

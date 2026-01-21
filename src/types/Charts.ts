@@ -16,7 +16,7 @@ export interface MarketData {
   time: string;
   price: number;
   avgPrice?: number;
-  range: string;
+  range: number;
   ratio: string;
   volume: number;
   amount: number;

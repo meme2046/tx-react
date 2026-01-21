@@ -33,6 +33,7 @@ function RouteComponent() {
     return parseMarketData(
       xaucny?.data.newMarketData.marketData[0].p,
       xaucny?.data.newMarketData.keys,
+      true,
     );
   }, [xaucny]);
 
@@ -43,6 +44,7 @@ function RouteComponent() {
     return parseMarketData(
       usdcnh?.data.newMarketData.marketData[0].p,
       usdcnh?.data.newMarketData.keys,
+      true,
     );
   }, [usdcnh]);
 
