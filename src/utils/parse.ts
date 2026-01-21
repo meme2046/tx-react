@@ -1,5 +1,5 @@
-import type { BreakItem, ChartData, MarketData } from "@/types/Charts";
-import { round } from "lodash";
+import type { BreakItem, ChartData, MarketData, UiKline } from "@/types/Charts";
+import { has, round, toNumber } from "lodash";
 
 export function parseMarketData(
   p: string,
@@ -33,8 +33,10 @@ export function parseMarketData(
     return obj as MarketData;
   });
 
-  // 构建 volData
-  const volData = marketData.map((item) => [item.timestamp!, item.volume!]);
+  let volData: number[][] | undefined;
+  if (has(marketData[0], "volume")) {
+    volData = marketData.map((item) => [item.timestamp!, item.volume!]);
+  }
 
   const breaks: BreakItem[] = [];
   for (let i = 0; i < marketData.length - 1; i++) {
@@ -49,12 +51,8 @@ export function parseMarketData(
     }
   }
 
-  // 检查是否所有记录都有 avgPrice
-  const hasAvgPrice =
-    marketData.length > 0 && marketData[0].avgPrice !== undefined;
-
   let avgData: number[][] | undefined;
-  if (hasAvgPrice) {
+  if (has(marketData[0], "avgPrice")) {
     avgData = marketData.map((item) => [item.timestamp!, item.avgPrice!]);
   }
 
@@ -98,4 +96,32 @@ export function formatNumberZh(num: number, precision = 2) {
 
   // 4. 小于1万的数字，直接返回原始数字（保留指定精度）
   return round(num, precision).toString();
+}
+
+export function parseKlineData(data: any[]): UiKline[] {
+  if (!data || !Array.isArray(data)) {
+    return [];
+  }
+  return data.map((item) => {
+    const start = toNumber(item[0]);
+    const open = toNumber(item[1]);
+    const highest = toNumber(item[2]);
+    const lowest = toNumber(item[3]);
+    const close = toNumber(item[4]);
+    return {
+      start, // k线开盘时间
+      open, // 开盘价
+      highest, // 最高价
+      lowest, // 最低价
+      mean: (highest + lowest) / 2,
+      close, // 收盘价(当前K线未结束的即为最新价)
+      volume: item[5], // 成交量
+      end: item[6], // k线收盘时间
+      amount: item[7], // 成交额
+      trades: item[8], // 成交笔数
+      buyVolume: item[9], // 主动买入成交量
+      buyAmount: item[10], // 主动买入成交额
+      trend: close - open >= 0 ? "up" : "down",
+    };
+  });
 }

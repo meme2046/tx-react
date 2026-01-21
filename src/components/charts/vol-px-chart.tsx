@@ -3,6 +3,7 @@ import { formatNumberZh } from "@/utils/parse";
 import { time } from "echarts";
 import ReactECharts, { type EChartsOption } from "echarts-for-react";
 import { isPlainObject } from "lodash";
+import { useRef } from "react";
 interface Props {
   title?: string;
   className?: string;
@@ -26,7 +27,7 @@ export function VolPxChart(props: Props) {
       coordinateSystem: "matrix",
       coord: [0, 0],
     },
-    {
+    volData && {
       text: "成交量",
       left: 36,
       textStyle: {
@@ -109,7 +110,7 @@ export function VolPxChart(props: Props) {
       ],
     },
     dataZoom: [
-      {
+      marketData.length > 1 && {
         type: "slider",
         xAxisIndex: [0, 1], // 同时作用于第 0 和第 1 个 x 轴
       },
@@ -270,12 +271,25 @@ export function VolPxChart(props: Props) {
     ],
     series: series,
   };
+
+  const chartRef = useRef<ReactECharts>(null);
+
+  if (data.marketData.length === 0) {
+    return <p>Loading chart...</p>;
+  }
+
   return (
     <div className={className}>
       <ReactECharts
+        ref={chartRef}
         option={option}
         style={{ height: "100%", width: "100%" }}
         opts={{ renderer: "canvas" }}
+        notMerge={true}
+        lazyUpdate={true}
+        autoResize={true}
+        // onChartReady={this.onChartReadyCallback}
+        // onEvents={EventsDict}
       />
     </div>
   );

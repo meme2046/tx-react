@@ -15,6 +15,7 @@ import dayjs from "dayjs";
 import { SVG_SRC } from "@/consts/svg";
 import { ReactSVG } from "react-svg";
 import { includes, startsWith } from "lodash";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 interface Props {
   className?: string;
   basicInfo: BasicInfo;
@@ -33,11 +34,14 @@ export function GushiCard(props: Props) {
     <Card className={className}>
       <CardHeader className="gap-0">
         <CardTitle className="flex items-center">
-          <img
-            src={basicInfo.logo}
-            className={`${includes(["USDCNH", "AU888"], basicInfo.code) ? "" : "rounded-full"} 
-            ${includes(["600519"], basicInfo.code) ? "w-20 m-[-16px]" : "w-12"}`}
-          />
+          <Avatar
+            className={`${includes(["600519"], basicInfo.code) ? "size-20 m-[-16px]" : "size-12"}
+            ${!includes(["USDCNH", "600519"], basicInfo.code) ? "ring-2 ring-primary/50" : ""}
+            ${includes(["USDCNH"], basicInfo.code) ? "rounded" : ""}`}
+          >
+            <AvatarImage src={basicInfo.logo} alt={basicInfo.code} />
+            <AvatarFallback>{basicInfo.code}</AvatarFallback>
+          </Avatar>
           <div className="ml-1">
             <div className="space-x-0.5 [&_span]:py-0">
               <span className="text-lg">{basicInfo.name}</span>

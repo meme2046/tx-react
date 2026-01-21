@@ -19,22 +19,22 @@ export const Route = createFileRoute("/_layout/candlestick/gushi")({
 });
 
 function RouteComponent() {
-  const { data: au888 } = useRedis<any>("getstockquotation.AU888");
-  const { data: ag888 } = useRedis<any>("getstockquotation.AG888");
+  const { data: xaucny } = useRedis<any>("getquotation.XAUCNY");
+  const { data: xagcny } = useRedis<any>("getquotation.XAGCNY");
   const { data: sz000001 } = useRedis<any>("getquotation.000001");
   const { data: ixic } = useRedis<any>("getquotation.IXIC");
   const { data: sh600519 } = useRedis<any>("getquotation.600519");
   const { data: usdcnh } = useRedis<any>("getquotation.USDCNH");
 
-  const au888ChartData = useMemo<ChartData>(() => {
-    if (!au888) {
+  const xaucnyChartData = useMemo<ChartData>(() => {
+    if (!xaucny) {
       return { marketData: [], volData: [], breaks: [], avgData: undefined };
     }
     return parseMarketData(
-      au888?.data.newMarketData.marketData[0].p,
-      au888?.data.newMarketData.keys,
+      xaucny?.data.newMarketData.marketData[0].p,
+      xaucny?.data.newMarketData.keys,
     );
-  }, [au888]);
+  }, [xaucny]);
 
   const usdcnhChartData = useMemo<ChartData>(() => {
     if (!usdcnh) {
@@ -66,15 +66,15 @@ function RouteComponent() {
     );
   }, [ixic]);
 
-  const ag888ChartData = useMemo<ChartData>(() => {
-    if (!ag888) {
+  const xagcnyChartData = useMemo<ChartData>(() => {
+    if (!xagcny) {
       return { marketData: [], volData: [], breaks: [], avgData: undefined };
     }
     return parseMarketData(
-      ag888?.data.newMarketData.marketData[0].p,
-      ag888?.data.newMarketData.keys,
+      xagcny?.data.newMarketData.marketData[0].p,
+      xagcny?.data.newMarketData.keys,
     );
-  }, [ag888]);
+  }, [xagcny]);
 
   const sh000001ChartData = useMemo<ChartData>(() => {
     if (!sz000001) {
@@ -89,12 +89,12 @@ function RouteComponent() {
     <div className="px-4 pb-4 grid grid-cols-1 xl:grid-cols-2 gap-2">
       <GushiCard
         className="py-1 gap-1"
-        basicInfo={mergeNonEmpty(au888?.data.cur ?? {}, {
-          ...basicInfoMap["AU888"],
-          timestamp: au888?.timestamp,
-          tradeStatus: au888?.data.basicinfos?.tradeStatus,
+        basicInfo={mergeNonEmpty(xaucny?.data.cur ?? {}, {
+          ...basicInfoMap["XAUCNY"],
+          timestamp: xaucny?.timestamp,
+          tradeStatus: xaucny?.data.basicinfos?.tradeStatus,
         })}
-        data={au888ChartData}
+        data={xaucnyChartData}
       />
       <GushiCard
         className="py-1 gap-1"
@@ -107,12 +107,12 @@ function RouteComponent() {
       />
       <GushiCard
         className="py-1 gap-1"
-        basicInfo={mergeNonEmpty(ag888?.data.cur ?? {}, {
-          ...basicInfoMap["AG888"],
-          timestamp: ag888?.timestamp,
-          tradeStatus: ag888?.data.basicinfos?.tradeStatus,
+        basicInfo={mergeNonEmpty(xagcny?.data.cur ?? {}, {
+          ...basicInfoMap["XAGCNY"],
+          timestamp: xagcny?.timestamp,
+          tradeStatus: xagcny?.data.basicinfos?.tradeStatus,
         })}
-        data={ag888ChartData}
+        data={xagcnyChartData}
       />
       <GushiCard
         className="py-1 gap-1"

@@ -9,8 +9,12 @@ export const GUSHITONG_IMG: Record<string, string> = {
     "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png",
   XAUUSD:
     "https://baidu-finance.cdn.bcebos.com/imgs/icons/0530/futures_ab_GOLD.png",
-  AU888: "https://arweave.net/rHREQxYYqqCf6h6TMewqh36Uw23tB3dcxzVTADr7sCo",
-  AG888: "https://arweave.net/d3LGw6kQJkYHM-8FPfkd2euVn2GM_413mu2zuGzd_ZE",
+  AU888:
+    "https://baidu-finance.cdn.bcebos.com/imgs/icons/0530/futures_ab_GOLD.png",
+  AG888: "https://arweave.net/cME70JrezZj1FjE-sjkS_QIjMGwWx_U3gV3uTfJPKqQ",
+  XAGCNY: "https://arweave.net/cME70JrezZj1FjE-sjkS_QIjMGwWx_U3gV3uTfJPKqQ",
+  XAUCNY:
+    "https://baidu-finance.cdn.bcebos.com/imgs/icons/0530/futures_ab_GOLD.png",
   "600519": "https://arweave.net/K9W8zYbRg6HtBHW1wS273_2td2UOvHS27G9u_Z4ffIc",
   "399300":
     "https://baidu-finance.cdn.bcebos.com/imgs/logo/indices/d0c11e7e09802a02888fcf5be5af8769.svg",
@@ -76,6 +80,29 @@ export const basicInfoMap: Record<string, BasicInfo> = {
     datetime: undefined,
     tradeStatusCN: undefined,
   },
+  XAUCNY: {
+    code: "XAUCNY",
+    exchange: "FX",
+    logo: GUSHITONG_IMG["XAUCNY"],
+    name: "黄金",
+    provider: "",
+    tagList: [
+      {
+        desc: "外汇",
+        imageUrl: GUSHITONG_IMG["WH"],
+      },
+      {
+        desc: "Level1 基础行情",
+        imageUrl: GUSHITONG_IMG["L1"],
+      },
+    ],
+    time: undefined,
+    price: undefined,
+    increase: undefined,
+    ratio: undefined,
+    datetime: undefined,
+    tradeStatusCN: undefined,
+  },
   AG888: {
     code: "AG888",
     exchange: "FT",
@@ -86,6 +113,29 @@ export const basicInfoMap: Record<string, BasicInfo> = {
       {
         desc: "上海期货交易所",
         imageUrl: GUSHITONG_IMG["SH"],
+      },
+      {
+        desc: "Level1 基础行情",
+        imageUrl: GUSHITONG_IMG["L1"],
+      },
+    ],
+    time: undefined,
+    price: undefined,
+    increase: undefined,
+    ratio: undefined,
+    datetime: undefined,
+    tradeStatusCN: undefined,
+  },
+  XAGCNY: {
+    code: "XAGCNY",
+    exchange: "FT",
+    logo: GUSHITONG_IMG["XAGCNY"],
+    name: "白银",
+    provider: "",
+    tagList: [
+      {
+        desc: "外汇",
+        imageUrl: GUSHITONG_IMG["WH"],
       },
       {
         desc: "Level1 基础行情",
