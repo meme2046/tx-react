@@ -288,8 +288,6 @@ export function VolPxChart(props: Props) {
         notMerge={true}
         lazyUpdate={true}
         autoResize={true}
-        // onChartReady={this.onChartReadyCallback}
-        // onEvents={EventsDict}
       />
     </div>
   );

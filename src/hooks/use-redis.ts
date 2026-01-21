@@ -20,7 +20,7 @@ export const useRedis = <T>(key: string) => {
       });
     },
     refetchOnWindowFocus: true,
-    refetchInterval: 60 * 1000,
+    refetchInterval: 30 * 1000,
   });
 };
 
@@ -78,6 +78,6 @@ export const useRedisListInfinite = <T extends object>(
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
     refetchOnWindowFocus: true,
-    refetchInterval: 60 * 1000,
+    refetchInterval: 30 * 1000,
   });
 };
