@@ -1,18 +1,18 @@
 import type { ECharts, EChartsOption } from "echarts";
 import * as echarts from "echarts";
 import { useEffect, useRef } from "react";
-import { useResizeObserver } from "./use-resize-observer";
+import { useResizeObserver } from "../use-resize-observer";
 
 interface UseEChartProps {
   opts?: echarts.EChartsInitOpts;
   theme?: string | object | null;
-  option: EChartsOption;
+  options: EChartsOption;
   loading?: boolean;
   onReady?: (chart: ECharts) => void;
 }
 
 export function useEChart({
-  option,
+  options,
   loading,
   onReady,
   theme,
@@ -25,21 +25,22 @@ export function useEChart({
   useEffect(() => {
     if (!ref.current || chartRef.current) return;
 
-    const chart = echarts.init(ref.current, theme, opts);
-    chartRef.current = chart;
-    onReady?.(chart);
+    chartRef.current = echarts.init(ref.current, theme, opts);
+    onReady?.(chartRef.current);
 
     return () => {
       // 它在 组件卸载 或 effect 重新执行前 被调用。
-      chart.dispose();
-      chartRef.current = null;
+      if (chartRef.current) {
+        chartRef.current.dispose();
+        chartRef.current = null;
+      }
     };
   }, []);
 
-  // set option
+  // set options
   useEffect(() => {
-    chartRef.current?.setOption(option, true);
-  }, [option]);
+    chartRef.current?.setOption(options, true);
+  }, [options]);
 
   // loading
   useEffect(() => {

@@ -80,6 +80,11 @@ function RouteComponent() {
         </AlertDescription>
       </Alert>
       {alertData.map(({ type, label }) => renderAlert(type, label))}
+      <div className="bg-foreground">
+        ['『', '』', '✔', '✘', '❗', '⭕', '❓', '❌', '⤴︎', '⤵︎', '⇡', '⇣', '⤶',
+        '↩', '↖', '↙', '↗', '↘', '╰›']
+        {/* <div className="size-50 border bg-size-[5px_5px] bg-radial-[at_50%_50%] from-foreground/50 from-0% to-transparent to-10%"></div> */}
+      </div>
     </div>
   );
 }

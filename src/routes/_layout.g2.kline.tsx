@@ -6,12 +6,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import dayjs from "dayjs";
 import { useMemo } from "react";
 
-export const Route = createFileRoute("/_layout/g2/line")({
+export const Route = createFileRoute("/_layout/g2/kline")({
   component: RouteComponent,
   head: () => ({
     meta: [
       {
-        title: "G2 Line",
+        title: "G2 KLine",
       },
     ],
   }),

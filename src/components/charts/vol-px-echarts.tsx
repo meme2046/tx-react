@@ -1,4 +1,4 @@
-import { useEChart } from "@/hooks/echarts/use-base-chart";
+import { useEChart } from "@/hooks/echarts/use-echart";
 import type {
   EChartsOption,
   SeriesOption,
@@ -123,7 +123,7 @@ export function VolPxECharts(props: Props) {
       data: volData,
     });
 
-  const option: EChartsOption = {
+  const options: EChartsOption = {
     title: titles,
     tooltip: tooltip,
     axisPointer: {
@@ -297,11 +297,8 @@ export function VolPxECharts(props: Props) {
 
   const ref = useEChart({
     opts: { renderer: "canvas" },
-    option,
+    options: options,
     loading: false,
-    onReady: (chart) => {
-      chart.showLoading();
-    },
   });
 
   return <div className={className} ref={ref} />;

@@ -7,6 +7,10 @@ export function mergeNonEmpty<T extends BasicInfo>(b: object, a: T) {
   const filteredB: Partial<T> = pickBy(pickedB, (v) => v);
   if (includes(["XAUCNY", "XAGCNY"], a.code)) {
     filteredB.price = round(toNumber(filteredB.price) / 31.1034768, 2);
+    filteredB.increase = round(
+      toNumber(filteredB.increase) / 31.1034768,
+      2,
+    ).toString();
   } else {
     filteredB.price = toNumber(filteredB.price);
   }
