@@ -7,7 +7,7 @@ import { mergeNonEmpty } from "@/utils/pick";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo } from "react";
 
-export const Route = createFileRoute("/_layout/candlestick/gushi")({
+export const Route = createFileRoute("/_layout/echarts/gushi")({
   component: RouteComponent,
   head: () => ({
     meta: [

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/_layout/candlestick/crypto")({
+export const Route = createFileRoute("/_layout/echarts/crypto")({
   component: RouteComponent,
   head: () => ({
     meta: [

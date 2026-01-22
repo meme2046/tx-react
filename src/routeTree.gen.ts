@@ -35,9 +35,9 @@ import { Route as AuthInvoicesRouteImport } from './routes/_auth.invoices'
 import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
 import { Route as AuthInvoicesIndexRouteImport } from './routes/_auth.invoices.index'
 import { Route as LayoutG2LineRouteImport } from './routes/_layout.g2.line'
-import { Route as LayoutCandlestickGushiRouteImport } from './routes/_layout.candlestick.gushi'
-import { Route as LayoutCandlestickCryptoRouteImport } from './routes/_layout.candlestick.crypto'
-import { Route as LayoutCandlestickBtcusdtRouteImport } from './routes/_layout.candlestick.btcusdt'
+import { Route as LayoutEchartsGushiRouteImport } from './routes/_layout.echarts.gushi'
+import { Route as LayoutEchartsCryptoRouteImport } from './routes/_layout.echarts.crypto'
+import { Route as LayoutEchartsBtcusdtRouteImport } from './routes/_layout.echarts.btcusdt'
 import { Route as AuthInvoicesInvoiceIdRouteImport } from './routes/_auth.invoices.$invoiceId'
 
 const LoginRoute = LoginRouteImport.update({
@@ -168,22 +168,21 @@ const LayoutG2LineRoute = LayoutG2LineRouteImport.update({
   path: '/g2/line',
   getParentRoute: () => LayoutRoute,
 } as any)
-const LayoutCandlestickGushiRoute = LayoutCandlestickGushiRouteImport.update({
-  id: '/candlestick/gushi',
-  path: '/candlestick/gushi',
+const LayoutEchartsGushiRoute = LayoutEchartsGushiRouteImport.update({
+  id: '/echarts/gushi',
+  path: '/echarts/gushi',
   getParentRoute: () => LayoutRoute,
 } as any)
-const LayoutCandlestickCryptoRoute = LayoutCandlestickCryptoRouteImport.update({
-  id: '/candlestick/crypto',
-  path: '/candlestick/crypto',
+const LayoutEchartsCryptoRoute = LayoutEchartsCryptoRouteImport.update({
+  id: '/echarts/crypto',
+  path: '/echarts/crypto',
   getParentRoute: () => LayoutRoute,
 } as any)
-const LayoutCandlestickBtcusdtRoute =
-  LayoutCandlestickBtcusdtRouteImport.update({
-    id: '/candlestick/btcusdt',
-    path: '/candlestick/btcusdt',
-    getParentRoute: () => LayoutRoute,
-  } as any)
+const LayoutEchartsBtcusdtRoute = LayoutEchartsBtcusdtRouteImport.update({
+  id: '/echarts/btcusdt',
+  path: '/echarts/btcusdt',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const AuthInvoicesInvoiceIdRoute = AuthInvoicesInvoiceIdRouteImport.update({
   id: '/$invoiceId',
   path: '/$invoiceId',
@@ -214,9 +213,9 @@ export interface FileRoutesByFullPath {
   '/text': typeof LayoutTextRoute
   '/valtio': typeof LayoutValtioRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
-  '/candlestick/btcusdt': typeof LayoutCandlestickBtcusdtRoute
-  '/candlestick/crypto': typeof LayoutCandlestickCryptoRoute
-  '/candlestick/gushi': typeof LayoutCandlestickGushiRoute
+  '/echarts/btcusdt': typeof LayoutEchartsBtcusdtRoute
+  '/echarts/crypto': typeof LayoutEchartsCryptoRoute
+  '/echarts/gushi': typeof LayoutEchartsGushiRoute
   '/g2/line': typeof LayoutG2LineRoute
   '/invoices/': typeof AuthInvoicesIndexRoute
 }
@@ -243,9 +242,9 @@ export interface FileRoutesByTo {
   '/text': typeof LayoutTextRoute
   '/valtio': typeof LayoutValtioRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
-  '/candlestick/btcusdt': typeof LayoutCandlestickBtcusdtRoute
-  '/candlestick/crypto': typeof LayoutCandlestickCryptoRoute
-  '/candlestick/gushi': typeof LayoutCandlestickGushiRoute
+  '/echarts/btcusdt': typeof LayoutEchartsBtcusdtRoute
+  '/echarts/crypto': typeof LayoutEchartsCryptoRoute
+  '/echarts/gushi': typeof LayoutEchartsGushiRoute
   '/g2/line': typeof LayoutG2LineRoute
   '/invoices': typeof AuthInvoicesIndexRoute
 }
@@ -276,9 +275,9 @@ export interface FileRoutesById {
   '/_layout/text': typeof LayoutTextRoute
   '/_layout/valtio': typeof LayoutValtioRoute
   '/_auth/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
-  '/_layout/candlestick/btcusdt': typeof LayoutCandlestickBtcusdtRoute
-  '/_layout/candlestick/crypto': typeof LayoutCandlestickCryptoRoute
-  '/_layout/candlestick/gushi': typeof LayoutCandlestickGushiRoute
+  '/_layout/echarts/btcusdt': typeof LayoutEchartsBtcusdtRoute
+  '/_layout/echarts/crypto': typeof LayoutEchartsCryptoRoute
+  '/_layout/echarts/gushi': typeof LayoutEchartsGushiRoute
   '/_layout/g2/line': typeof LayoutG2LineRoute
   '/_auth/invoices/': typeof AuthInvoicesIndexRoute
 }
@@ -308,9 +307,9 @@ export interface FileRouteTypes {
     | '/text'
     | '/valtio'
     | '/invoices/$invoiceId'
-    | '/candlestick/btcusdt'
-    | '/candlestick/crypto'
-    | '/candlestick/gushi'
+    | '/echarts/btcusdt'
+    | '/echarts/crypto'
+    | '/echarts/gushi'
     | '/g2/line'
     | '/invoices/'
   fileRoutesByTo: FileRoutesByTo
@@ -337,9 +336,9 @@ export interface FileRouteTypes {
     | '/text'
     | '/valtio'
     | '/invoices/$invoiceId'
-    | '/candlestick/btcusdt'
-    | '/candlestick/crypto'
-    | '/candlestick/gushi'
+    | '/echarts/btcusdt'
+    | '/echarts/crypto'
+    | '/echarts/gushi'
     | '/g2/line'
     | '/invoices'
   id:
@@ -369,9 +368,9 @@ export interface FileRouteTypes {
     | '/_layout/text'
     | '/_layout/valtio'
     | '/_auth/invoices/$invoiceId'
-    | '/_layout/candlestick/btcusdt'
-    | '/_layout/candlestick/crypto'
-    | '/_layout/candlestick/gushi'
+    | '/_layout/echarts/btcusdt'
+    | '/_layout/echarts/crypto'
+    | '/_layout/echarts/gushi'
     | '/_layout/g2/line'
     | '/_auth/invoices/'
   fileRoutesById: FileRoutesById
@@ -568,25 +567,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutG2LineRouteImport
       parentRoute: typeof LayoutRoute
     }
-    '/_layout/candlestick/gushi': {
-      id: '/_layout/candlestick/gushi'
-      path: '/candlestick/gushi'
-      fullPath: '/candlestick/gushi'
-      preLoaderRoute: typeof LayoutCandlestickGushiRouteImport
+    '/_layout/echarts/gushi': {
+      id: '/_layout/echarts/gushi'
+      path: '/echarts/gushi'
+      fullPath: '/echarts/gushi'
+      preLoaderRoute: typeof LayoutEchartsGushiRouteImport
       parentRoute: typeof LayoutRoute
     }
-    '/_layout/candlestick/crypto': {
-      id: '/_layout/candlestick/crypto'
-      path: '/candlestick/crypto'
-      fullPath: '/candlestick/crypto'
-      preLoaderRoute: typeof LayoutCandlestickCryptoRouteImport
+    '/_layout/echarts/crypto': {
+      id: '/_layout/echarts/crypto'
+      path: '/echarts/crypto'
+      fullPath: '/echarts/crypto'
+      preLoaderRoute: typeof LayoutEchartsCryptoRouteImport
       parentRoute: typeof LayoutRoute
     }
-    '/_layout/candlestick/btcusdt': {
-      id: '/_layout/candlestick/btcusdt'
-      path: '/candlestick/btcusdt'
-      fullPath: '/candlestick/btcusdt'
-      preLoaderRoute: typeof LayoutCandlestickBtcusdtRouteImport
+    '/_layout/echarts/btcusdt': {
+      id: '/_layout/echarts/btcusdt'
+      path: '/echarts/btcusdt'
+      fullPath: '/echarts/btcusdt'
+      preLoaderRoute: typeof LayoutEchartsBtcusdtRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_auth/invoices/$invoiceId': {
@@ -643,9 +642,9 @@ interface LayoutRouteChildren {
   LayoutTestsRoute: typeof LayoutTestsRoute
   LayoutTextRoute: typeof LayoutTextRoute
   LayoutValtioRoute: typeof LayoutValtioRoute
-  LayoutCandlestickBtcusdtRoute: typeof LayoutCandlestickBtcusdtRoute
-  LayoutCandlestickCryptoRoute: typeof LayoutCandlestickCryptoRoute
-  LayoutCandlestickGushiRoute: typeof LayoutCandlestickGushiRoute
+  LayoutEchartsBtcusdtRoute: typeof LayoutEchartsBtcusdtRoute
+  LayoutEchartsCryptoRoute: typeof LayoutEchartsCryptoRoute
+  LayoutEchartsGushiRoute: typeof LayoutEchartsGushiRoute
   LayoutG2LineRoute: typeof LayoutG2LineRoute
 }
 
@@ -667,9 +666,9 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutTestsRoute: LayoutTestsRoute,
   LayoutTextRoute: LayoutTextRoute,
   LayoutValtioRoute: LayoutValtioRoute,
-  LayoutCandlestickBtcusdtRoute: LayoutCandlestickBtcusdtRoute,
-  LayoutCandlestickCryptoRoute: LayoutCandlestickCryptoRoute,
-  LayoutCandlestickGushiRoute: LayoutCandlestickGushiRoute,
+  LayoutEchartsBtcusdtRoute: LayoutEchartsBtcusdtRoute,
+  LayoutEchartsCryptoRoute: LayoutEchartsCryptoRoute,
+  LayoutEchartsGushiRoute: LayoutEchartsGushiRoute,
   LayoutG2LineRoute: LayoutG2LineRoute,
 }
 
