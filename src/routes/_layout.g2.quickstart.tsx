@@ -30,7 +30,7 @@ function RouteComponent() {
     encode: { x: "genre", y: "sold" },
   };
 
-  const ref = useG2({
+  const { ref } = useG2({
     options: options,
   });
 

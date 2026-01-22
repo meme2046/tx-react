@@ -36,5 +36,5 @@ export function useG2({ options, onReady }: UseG2Props) {
     }
   }, [options]);
 
-  return ref;
+  return { ref, chart: chartRef.current };
 }
