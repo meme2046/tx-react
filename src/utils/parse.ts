@@ -1,5 +1,5 @@
 import type { BreakItem, ChartData, MarketData, UiKline } from "@/types/Charts";
-import { has, includes, round, toNumber } from "lodash";
+import { has, includes, round, toNumber, isNaN } from "lodash";
 
 export function parseMarketData(
   p: string,
@@ -51,7 +51,7 @@ export function parseMarketData(
     if (nextItem.timestamp - item.timestamp > 60 * 1000) {
       breaks.push({
         start: item.timestamp,
-        end: nextItem.timestamp - 60 * 1000,
+        end: nextItem.timestamp,
         gap: 0,
       });
     }

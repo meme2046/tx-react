@@ -41,11 +41,11 @@ function RouteComponent() {
     if (!usdcnh) {
       return { marketData: [], volData: [], breaks: [], avgData: undefined };
     }
-    return parseMarketData(
+    const parseData = parseMarketData(
       usdcnh?.data.newMarketData.marketData[0].p,
       usdcnh?.data.newMarketData.keys,
-      true,
     );
+    return parseData;
   }, [usdcnh]);
 
   const sh600519ChartData = useMemo<ChartData>(() => {
@@ -75,6 +75,7 @@ function RouteComponent() {
     return parseMarketData(
       xagcny?.data.newMarketData.marketData[0].p,
       xagcny?.data.newMarketData.keys,
+      true,
     );
   }, [xagcny]);
 

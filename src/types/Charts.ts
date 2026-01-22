@@ -34,7 +34,7 @@ export interface BasicInfo {
   timestamp?: number;
   tradeStatus?: string;
   time?: number;
-  price?: string;
+  price?: number;
   increase?: string;
   ratio?: string;
   volume?: number;

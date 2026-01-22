@@ -1,5 +1,10 @@
 import { useEChart } from "@/hooks/echarts/use-base-chart";
-import type { EChartsOption } from "echarts";
+import type {
+  EChartsOption,
+  SeriesOption,
+  TitleComponentOption,
+  TooltipComponentOption,
+} from "echarts";
 import type { BasicInfo, ChartData } from "@/types/Charts";
 import { formatNumberZh } from "@/utils/parse";
 import { time } from "echarts";
@@ -21,29 +26,13 @@ export function VolPxECharts(props: Props) {
     ...props,
   };
   const { marketData, volData, breaks, avgData } = data;
-  // const titles = [
-  //   {
-  //     text: title,
-  //     coordinateSystem: "matrix",
-  //     coord: [0, 0],
-  //   },
-  //   volData && {
-  //     text: "成交量",
-  //     left: 36,
-  //     textStyle: {
-  //       fontSize: 12,
-  //     },
-  //     coordinateSystem: "matrix",
-  //     coord: [0, 7],
-  //   },
-  // ];
 
   const getMatrixTitle = (
     coord: number[],
     text: string,
     subtext: string,
     left = 36,
-  ) => {
+  ): TitleComponentOption => {
     return {
       text: text,
       subtext: subtext,
@@ -62,19 +51,20 @@ export function VolPxECharts(props: Props) {
     };
   };
 
-  const titles = [
-    getMatrixTitle([0, 0], "", ""),
-    volData &&
-      getMatrixTitle([0, 7], "成交量", `${formatNumberZh(basicInfo.volume)}股`),
-  ];
+  const titles: TitleComponentOption[] = [getMatrixTitle([0, 0], "", "")];
 
-  const tooltip = {
+  volData &&
+    titles.push(
+      getMatrixTitle([0, 7], "成交量", `${formatNumberZh(basicInfo.volume)}股`),
+    );
+
+  const tooltip: TooltipComponentOption = {
     show: true,
     trigger: "axis",
     axisPointer: {
       type: "cross",
     },
-    formatter: (params: string | any[]) => {
+    formatter: (params: any) => {
       if (Array.isArray(params) && params.length > 0) {
         const param =
           params.find((item: any) => isPlainObject(item.data)) || params[0];
@@ -101,7 +91,7 @@ export function VolPxECharts(props: Props) {
     },
   };
 
-  const series = [
+  const series: SeriesOption[] = [
     {
       name: "价格",
       type: "line",
@@ -111,7 +101,10 @@ export function VolPxECharts(props: Props) {
       xAxisIndex: 0,
       yAxisIndex: 0,
     },
-    avgData && {
+  ];
+
+  avgData &&
+    series.push({
       name: "均价",
       type: "line",
       showSymbol: false,
@@ -119,15 +112,16 @@ export function VolPxECharts(props: Props) {
       data: avgData,
       xAxisIndex: 0,
       yAxisIndex: 0,
-    },
-    volData && {
+    });
+
+  volData &&
+    series.push({
       name: "成交量",
       type: "bar",
       xAxisIndex: 1,
       yAxisIndex: 1,
       data: volData,
-    },
-  ];
+    });
 
   const option: EChartsOption = {
     title: titles,
@@ -139,12 +133,15 @@ export function VolPxECharts(props: Props) {
         },
       ],
     },
-    dataZoom: [
-      marketData.length > 1 && {
-        type: "slider",
-        xAxisIndex: [0, 1], // 同时作用于第 0 和第 1 个 x 轴
-      },
-    ],
+    dataZoom:
+      marketData.length > 1
+        ? [
+            {
+              type: "slider",
+              xAxisIndex: [0, 1], // 同时作用于第 0 和第 1 个 x 轴
+            },
+          ]
+        : [],
     matrix: {
       left: matrixMargin,
       right: matrixMargin,
@@ -168,17 +165,11 @@ export function VolPxECharts(props: Props) {
         },
         data: [
           {
-            coord: [
-              [0, 0],
-              [0, 6],
-            ],
+            coord: [[0, 0], volData ? [0, 6] : [0, 8]],
             mergeCells: true,
           },
           {
-            coord: [
-              [0, 0],
-              [7, 8],
-            ],
+            coord: [[0, 0], volData ? [7, 8] : [8, 9]],
             mergeCells: true,
           },
         ],
@@ -243,6 +234,7 @@ export function VolPxECharts(props: Props) {
         },
         breakArea: {
           expandOnClick: false,
+          zigzagZ: 0,
           itemStyle: {
             borderColor: "orange",
           },
@@ -268,6 +260,7 @@ export function VolPxECharts(props: Props) {
         },
         breakArea: {
           expandOnClick: false,
+          zigzagZ: 0,
           itemStyle: {
             borderColor: "orange",
           },
@@ -303,6 +296,7 @@ export function VolPxECharts(props: Props) {
   };
 
   const ref = useEChart({
+    opts: { renderer: "canvas" },
     option,
     loading: false,
     onReady: (chart) => {
@@ -310,17 +304,5 @@ export function VolPxECharts(props: Props) {
     },
   });
 
-  return (
-    <div className={className} ref={ref}>
-      {/* <ReactECharts
-        ref={ref}
-        option={option}
-        style={{ height: "100%", width: "100%" }}
-        opts={{ renderer: "canvas" }}
-        notMerge={true}
-        lazyUpdate={true}
-        autoResize={true}
-      /> */}
-    </div>
-  );
+  return <div className={className} ref={ref} />;
 }

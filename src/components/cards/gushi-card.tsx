@@ -11,7 +11,7 @@ import { Badge } from "../ui/badge";
 import type { BasicInfo, ChartData } from "@/types/Charts";
 import { VolPxECharts } from "../charts/vol-px-echarts";
 import { Button } from "../ui/button";
-import { includes, startsWith } from "lodash";
+import { includes, startsWith, isNaN } from "lodash";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { UpdateTime } from "./update-time";
 interface Props {
@@ -51,8 +51,9 @@ export function CardECharts(props: Props) {
             <div
               className={`flex text-sm gap-1 ${startsWith(basicInfo.increase, "+") ? "text-green-700" : "text-red-600"}`}
             >
-              <span className="text-5xl">{basicInfo.price}</span>
-
+              <span className="text-5xl">
+                {isNaN(basicInfo.price) ? "--" : basicInfo.price}
+              </span>
               <div
                 className={`${includes(["USDCNH", "IXIC"], basicInfo.code) ? "hidden sm:flex sm:flex-col sm:gap-0.5" : "flex flex-col gap-0.5"}`}
               >
