@@ -9,13 +9,11 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "../ui/badge";
 import type { BasicInfo, ChartData } from "@/types/Charts";
-import { VolPxChart } from "../charts/vol-px-chart";
+import { VolPxECharts } from "../charts/vol-px-echarts";
 import { Button } from "../ui/button";
-import dayjs from "dayjs";
-import { SVG_SRC } from "@/consts/svg";
-import { ReactSVG } from "react-svg";
 import { includes, startsWith } from "lodash";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { UpdateTime } from "./update-time";
 interface Props {
   className?: string;
   basicInfo: BasicInfo;
@@ -25,7 +23,7 @@ const defaultProps = {
   className: "",
 };
 
-export function GushiCard(props: Props) {
+export function CardECharts(props: Props) {
   const { className, basicInfo, data } = {
     ...defaultProps,
     ...props,
@@ -54,7 +52,10 @@ export function GushiCard(props: Props) {
               className={`flex text-sm gap-1 ${startsWith(basicInfo.increase, "+") ? "text-green-700" : "text-red-600"}`}
             >
               <span className="text-5xl">{basicInfo.price}</span>
-              <div className="flex flex-col gap-0.5">
+
+              <div
+                className={`${includes(["USDCNH", "IXIC"], basicInfo.code) ? "hidden sm:flex sm:flex-col sm:gap-0.5" : "flex flex-col gap-0.5"}`}
+              >
                 <span className="border rounded px-0.5">
                   {basicInfo.increase}
                 </span>
@@ -63,37 +64,30 @@ export function GushiCard(props: Props) {
             </div>
           </div>
         </CardTitle>
-        <CardDescription></CardDescription>
-        <CardAction className="space-y-1">
-          <div className="flex flex-col gap-0.5">
-            {basicInfo.tagList?.map((tag, index) => (
-              <Button
-                variant="outline"
-                size="sm"
-                key={index}
-                className="px-0.5 h-auto"
-              >
-                <img src={tag.imageUrl} className="w-4" />
-                <span>{tag.desc}</span>
-              </Button>
-            ))}
-          </div>
-          <div className="relative text-xs">
-            <span>更新时间:</span>
-            <span>
-              {basicInfo.time
-                ? dayjs.unix(basicInfo.time).format("YYYY-MM-DD HH:mm")
-                : dayjs(basicInfo.timestamp).format("YYYY-MM-DD HH:mm")}
-            </span>
-            <ReactSVG
-              src={SVG_SRC["line"]}
-              className="text-primary absolute left-0 bottom-[-4px] w-full"
-            />
+        <CardDescription className="flex sm:hidden">
+          <UpdateTime timestamp={basicInfo.time ?? basicInfo.timestamp} />
+        </CardDescription>
+        <CardAction>
+          <div className="space-y-1 hidden sm:block">
+            <div className="flex flex-col gap-0.5">
+              {basicInfo.tagList?.map((tag, index) => (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  key={index}
+                  className="px-0.5 h-auto justify-start"
+                >
+                  <img src={tag.imageUrl} className="w-4" />
+                  <span>{tag.desc}</span>
+                </Button>
+              ))}
+            </div>
+            <UpdateTime timestamp={basicInfo.time ?? basicInfo.timestamp} />
           </div>
         </CardAction>
       </CardHeader>
       <CardContent className="p-0 m-0">
-        <VolPxChart data={data} />
+        <VolPxECharts basicInfo={basicInfo} data={data} />
       </CardContent>
       <CardFooter></CardFooter>
     </Card>

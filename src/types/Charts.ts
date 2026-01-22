@@ -37,6 +37,7 @@ export interface BasicInfo {
   price?: string;
   increase?: string;
   ratio?: string;
+  volume?: number;
   datetime?: string;
   code: string;
   exchange: string;

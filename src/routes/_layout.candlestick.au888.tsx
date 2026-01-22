@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo } from "react";
 import type { ChartData } from "@/types/Charts";
 import { parseMarketData } from "@/utils/parse";
-import { VolPxChart } from "@/components/charts/vol-px-chart";
+import { VolPxECharts } from "@/components/charts/vol-px-echarts";
 export const Route = createFileRoute("/_layout/candlestick/au888")({
   component: RouteComponent,
   head: () => ({
@@ -27,5 +27,5 @@ function RouteComponent() {
       data?.data.newMarketData.keys,
     );
   }, [data]);
-  return <VolPxChart data={chartResult} title="沪金主连" />;
+  return <VolPxECharts data={chartResult} title="沪金主连" />;
 }

@@ -7,34 +7,34 @@ import { HeadContent } from "@tanstack/react-router";
 import { ToggleTheme } from "@/components/toggle-theme";
 
 interface RouterContext {
-	app: IAppContext;
+  app: IAppContext;
 }
 
 export const Route = createRootRouteWithContext<RouterContext>()({
-	component: () => (
-		<>
-			<ToggleTheme />
-			<HeadContent />
-			{/* <SidebarProvider className="w-full h-full p-0 m-0"> */}
-			<Outlet />
-			{/* </SidebarProvider> */}
-			<TanStackDevtools
-				config={{
-					position: "bottom-right",
-				}}
-				plugins={[
-					{
-						name: "TanStack Query",
-						render: <ReactQueryDevtoolsPanel />,
-						defaultOpen: false,
-					},
-					{
-						name: "TanStack Router",
-						render: <TanStackRouterDevtoolsPanel />,
-						defaultOpen: false,
-					},
-				]}
-			/>
-		</>
-	),
+  component: () => (
+    <>
+      <ToggleTheme />
+      <HeadContent />
+      {/* <SidebarProvider className="w-full h-full p-0 m-0"> */}
+      <Outlet />
+      {/* </SidebarProvider> */}
+      <TanStackDevtools
+        config={{
+          position: "bottom-right",
+        }}
+        plugins={[
+          {
+            name: "TanStack Query",
+            render: <ReactQueryDevtoolsPanel />,
+            defaultOpen: false,
+          },
+          {
+            name: "TanStack Router",
+            render: <TanStackRouterDevtoolsPanel />,
+            defaultOpen: false,
+          },
+        ]}
+      />
+    </>
+  ),
 });

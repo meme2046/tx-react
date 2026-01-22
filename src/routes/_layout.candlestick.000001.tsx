@@ -1,4 +1,4 @@
-import { VolPxChart } from "@/components/charts/vol-px-chart";
+import { VolPxECharts } from "@/components/charts/vol-px-echarts";
 import { useRedis } from "@/hooks/use-redis";
 import type { ChartData } from "@/types/Charts";
 import { parseMarketData } from "@/utils/parse";
@@ -28,5 +28,5 @@ function RouteComponent() {
       data?.data.newMarketData.keys,
     );
   }, [data]);
-  return <VolPxChart data={chartResult} title="上证指数" />;
+  return <VolPxECharts data={chartResult} title="上证指数" />;
 }

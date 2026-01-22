@@ -1,11 +1,11 @@
-import type { ChartData } from "@/types/Charts";
+import { useEChart } from "@/hooks/echarts/use-base-chart";
+import type { EChartsOption } from "echarts";
+import type { BasicInfo, ChartData } from "@/types/Charts";
 import { formatNumberZh } from "@/utils/parse";
 import { time } from "echarts";
-import ReactECharts, { type EChartsOption } from "echarts-for-react";
 import { isPlainObject } from "lodash";
-import { useRef } from "react";
 interface Props {
-  title?: string;
+  basicInfo: BasicInfo;
   className?: string;
   matrixMargin?: number;
   data: ChartData;
@@ -15,27 +15,57 @@ const defaultProps = {
   className: "w-full h-64",
   matrixMargin: 10,
 };
-export function VolPxChart(props: Props) {
-  const { title, className, data, matrixMargin } = {
+export function VolPxECharts(props: Props) {
+  const { basicInfo, className, data, matrixMargin } = {
     ...defaultProps,
     ...props,
   };
   const { marketData, volData, breaks, avgData } = data;
-  const titles = [
-    {
-      text: title,
-      coordinateSystem: "matrix",
-      coord: [0, 0],
-    },
-    volData && {
-      text: "成交量",
-      left: 36,
+  // const titles = [
+  //   {
+  //     text: title,
+  //     coordinateSystem: "matrix",
+  //     coord: [0, 0],
+  //   },
+  //   volData && {
+  //     text: "成交量",
+  //     left: 36,
+  //     textStyle: {
+  //       fontSize: 12,
+  //     },
+  //     coordinateSystem: "matrix",
+  //     coord: [0, 7],
+  //   },
+  // ];
+
+  const getMatrixTitle = (
+    coord: number[],
+    text: string,
+    subtext: string,
+    left = 36,
+  ) => {
+    return {
+      text: text,
+      subtext: subtext,
+      coord: coord,
+      left,
+      top: 0,
       textStyle: {
         fontSize: 12,
+        fontWeight: "bold",
       },
+      subtextStyle: {
+        fontSize: 10,
+      },
+      itemGap: 0, // 主副标题之间的间距
       coordinateSystem: "matrix",
-      coord: [0, 7],
-    },
+    };
+  };
+
+  const titles = [
+    getMatrixTitle([0, 0], "", ""),
+    volData &&
+      getMatrixTitle([0, 7], "成交量", `${formatNumberZh(basicInfo.volume)}股`),
   ];
 
   const tooltip = {
@@ -272,23 +302,25 @@ export function VolPxChart(props: Props) {
     series: series,
   };
 
-  const chartRef = useRef<ReactECharts>(null);
-
-  if (data.marketData.length === 0) {
-    return <p>Loading chart...</p>;
-  }
+  const ref = useEChart({
+    option,
+    loading: false,
+    onReady: (chart) => {
+      chart.showLoading();
+    },
+  });
 
   return (
-    <div className={className}>
-      <ReactECharts
-        ref={chartRef}
+    <div className={className} ref={ref}>
+      {/* <ReactECharts
+        ref={ref}
         option={option}
         style={{ height: "100%", width: "100%" }}
         opts={{ renderer: "canvas" }}
         notMerge={true}
         lazyUpdate={true}
         autoResize={true}
-      />
+      /> */}
     </div>
   );
 }

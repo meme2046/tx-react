@@ -1,4 +1,4 @@
-import { GushiCard } from "@/components/cards/gushi-card";
+import { CardECharts } from "@/components/cards/gushi-card";
 import { basicInfoMap } from "@/consts/gushitong";
 import { useRedis } from "@/hooks/use-redis";
 import type { ChartData } from "@/types/Charts";
@@ -89,7 +89,7 @@ function RouteComponent() {
   }, [sz000001]);
   return (
     <div className="px-4 pb-4 grid grid-cols-1 xl:grid-cols-2 gap-2">
-      <GushiCard
+      <CardECharts
         className="py-1 gap-1"
         basicInfo={mergeNonEmpty(xaucny?.data.cur ?? {}, {
           ...basicInfoMap["XAUCNY"],
@@ -98,7 +98,7 @@ function RouteComponent() {
         })}
         data={xaucnyChartData}
       />
-      <GushiCard
+      <CardECharts
         className="py-1 gap-1"
         basicInfo={mergeNonEmpty(sz000001?.data.cur ?? {}, {
           ...basicInfoMap["000001"],
@@ -107,7 +107,7 @@ function RouteComponent() {
         })}
         data={sh000001ChartData}
       />
-      <GushiCard
+      <CardECharts
         className="py-1 gap-1"
         basicInfo={mergeNonEmpty(xagcny?.data.cur ?? {}, {
           ...basicInfoMap["XAGCNY"],
@@ -116,7 +116,7 @@ function RouteComponent() {
         })}
         data={xagcnyChartData}
       />
-      <GushiCard
+      <CardECharts
         className="py-1 gap-1"
         basicInfo={mergeNonEmpty(ixic?.data.cur ?? {}, {
           ...basicInfoMap["IXIC"],
@@ -125,7 +125,7 @@ function RouteComponent() {
         })}
         data={ixicChartData}
       />
-      <GushiCard
+      <CardECharts
         className="py-1 gap-1"
         basicInfo={mergeNonEmpty(sh600519?.data.cur ?? {}, {
           ...basicInfoMap["600519"],
@@ -135,7 +135,7 @@ function RouteComponent() {
         data={sh600519ChartData}
       />
 
-      <GushiCard
+      <CardECharts
         className="py-1 gap-1"
         basicInfo={mergeNonEmpty(usdcnh?.data.cur ?? {}, {
           ...basicInfoMap["USDCNH"],

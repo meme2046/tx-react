@@ -1,5 +1,5 @@
 import type { BasicInfo } from "@/types/Charts";
-import { includes, pick, pickBy, round, toNumber } from "lodash";
+import { has, includes, pick, pickBy, round, toNumber } from "lodash";
 
 export function mergeNonEmpty<T extends BasicInfo>(b: object, a: T) {
   const pickedB = pick(b, Object.keys(a));
@@ -7,6 +7,10 @@ export function mergeNonEmpty<T extends BasicInfo>(b: object, a: T) {
   const filteredB: Partial<T> = pickBy(pickedB, (v) => v);
   if (includes(["XAUCNY", "XAGCNY"], a.code)) {
     filteredB.price = `${round(toNumber(filteredB.price) / 31.1034768, 2)}`;
+  }
+
+  if (has(filteredB, "volume")) {
+    (filteredB as Partial<BasicInfo>).volume = toNumber(filteredB.volume);
   }
   // 会被排除的值(假值)：
   // - undefined

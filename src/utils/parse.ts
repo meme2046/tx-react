@@ -76,8 +76,8 @@ export function parseMarketData(
  * @param {number} precision - 小数保留精度，默认2位（可根据需求调整）
  * @returns {string} 格式化后的带单位字符串
  */
-export function formatNumberZh(num: number, precision = 2) {
-  if (isNaN(num)) {
+export function formatNumberZh(num?: number, precision = 2) {
+  if (num === undefined || isNaN(num)) {
     return "--";
   }
   // 2. 定义单位阈值和对应单位（万：10^4，亿：10^8）
