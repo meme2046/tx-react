@@ -18,7 +18,7 @@ export const Route = createFileRoute("/_layout/g2/candle-sticks")({
 
 function RouteComponent() {
   const { data } = useJson<any>(
-    "https://api4.binance.com/api/v3/uiKlines?symbol=BTCUSDT&interval=15m&limit=500",
+    "https://api4.binance.com/api/v3/uiKlines?symbol=BTCUSDT&interval=15m&limit=100",
   );
 
   const parsedData = useMemo(() => parseKlineData(data), [data]);
@@ -31,10 +31,10 @@ function RouteComponent() {
       {
         type: "link",
         encode: {
-          x: "time",
+          x: "start",
           y: ["min", "max"],
           color: (d: any) => {
-            const trend = Math.sign(d.start - d.end);
+            const trend = Math.sign(d.open - d.close);
             return trend > 0 ? "下跌" : trend === 0 ? "不变" : "上涨";
           },
         },
@@ -48,7 +48,7 @@ function RouteComponent() {
           },
         },
         tooltip: {
-          title: "time",
+          title: "start",
           items: [
             { field: "start", name: "开盘价" },
             { field: "end", name: "收盘价" },
@@ -60,7 +60,7 @@ function RouteComponent() {
       {
         type: "interval",
         encode: {
-          x: "time",
+          x: "start",
           y: ["start", "end"],
           color: (d: any) => {
             const trend = Math.sign(d.start - d.end);
@@ -91,7 +91,7 @@ function RouteComponent() {
           },
         },
         tooltip: {
-          title: "time",
+          title: "start",
           items: [
             { field: "start", name: "开盘价" },
             { field: "end", name: "收盘价" },
@@ -103,28 +103,28 @@ function RouteComponent() {
       {
         type: "line",
         encode: {
-          x: "time",
+          x: "start",
           y: "sma7",
         },
       },
       {
         type: "line",
         encode: {
-          x: "time",
+          x: "start",
           y: "sma25",
         },
       },
       {
         type: "line",
         encode: {
-          x: "time",
+          x: "start",
           y: "ema12",
         },
       },
       {
         type: "line",
         encode: {
-          x: "time",
+          x: "start",
           y: "ema26",
         },
       },
@@ -139,7 +139,7 @@ function RouteComponent() {
       {
         type: "interval",
         encode: {
-          x: "time",
+          x: "start",
           y: "volumn",
           color: (d: any) => {
             const trend = Math.sign(d.start - d.end);
