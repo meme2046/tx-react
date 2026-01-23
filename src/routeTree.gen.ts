@@ -34,6 +34,7 @@ import { Route as LayoutBitgetGridRouteImport } from './routes/_layout.bitget-gr
 import { Route as AuthInvoicesRouteImport } from './routes/_auth.invoices'
 import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
 import { Route as AuthInvoicesIndexRouteImport } from './routes/_auth.invoices.index'
+import { Route as LayoutG2TooltipRouteImport } from './routes/_layout.g2.tooltip'
 import { Route as LayoutG2QuickstartRouteImport } from './routes/_layout.g2.quickstart'
 import { Route as LayoutG2KlineRouteImport } from './routes/_layout.g2.kline'
 import { Route as LayoutG2CandleSticksRouteImport } from './routes/_layout.g2.candle-sticks'
@@ -165,6 +166,11 @@ const AuthInvoicesIndexRoute = AuthInvoicesIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthInvoicesRoute,
 } as any)
+const LayoutG2TooltipRoute = LayoutG2TooltipRouteImport.update({
+  id: '/g2/tooltip',
+  path: '/g2/tooltip',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const LayoutG2QuickstartRoute = LayoutG2QuickstartRouteImport.update({
   id: '/g2/quickstart',
   path: '/g2/quickstart',
@@ -231,6 +237,7 @@ export interface FileRoutesByFullPath {
   '/g2/candle-sticks': typeof LayoutG2CandleSticksRoute
   '/g2/kline': typeof LayoutG2KlineRoute
   '/g2/quickstart': typeof LayoutG2QuickstartRoute
+  '/g2/tooltip': typeof LayoutG2TooltipRoute
   '/invoices/': typeof AuthInvoicesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -262,6 +269,7 @@ export interface FileRoutesByTo {
   '/g2/candle-sticks': typeof LayoutG2CandleSticksRoute
   '/g2/kline': typeof LayoutG2KlineRoute
   '/g2/quickstart': typeof LayoutG2QuickstartRoute
+  '/g2/tooltip': typeof LayoutG2TooltipRoute
   '/invoices': typeof AuthInvoicesIndexRoute
 }
 export interface FileRoutesById {
@@ -297,6 +305,7 @@ export interface FileRoutesById {
   '/_layout/g2/candle-sticks': typeof LayoutG2CandleSticksRoute
   '/_layout/g2/kline': typeof LayoutG2KlineRoute
   '/_layout/g2/quickstart': typeof LayoutG2QuickstartRoute
+  '/_layout/g2/tooltip': typeof LayoutG2TooltipRoute
   '/_auth/invoices/': typeof AuthInvoicesIndexRoute
 }
 export interface FileRouteTypes {
@@ -331,6 +340,7 @@ export interface FileRouteTypes {
     | '/g2/candle-sticks'
     | '/g2/kline'
     | '/g2/quickstart'
+    | '/g2/tooltip'
     | '/invoices/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -362,6 +372,7 @@ export interface FileRouteTypes {
     | '/g2/candle-sticks'
     | '/g2/kline'
     | '/g2/quickstart'
+    | '/g2/tooltip'
     | '/invoices'
   id:
     | '__root__'
@@ -396,6 +407,7 @@ export interface FileRouteTypes {
     | '/_layout/g2/candle-sticks'
     | '/_layout/g2/kline'
     | '/_layout/g2/quickstart'
+    | '/_layout/g2/tooltip'
     | '/_auth/invoices/'
   fileRoutesById: FileRoutesById
 }
@@ -584,6 +596,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthInvoicesIndexRouteImport
       parentRoute: typeof AuthInvoicesRoute
     }
+    '/_layout/g2/tooltip': {
+      id: '/_layout/g2/tooltip'
+      path: '/g2/tooltip'
+      fullPath: '/g2/tooltip'
+      preLoaderRoute: typeof LayoutG2TooltipRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/g2/quickstart': {
       id: '/_layout/g2/quickstart'
       path: '/g2/quickstart'
@@ -686,6 +705,7 @@ interface LayoutRouteChildren {
   LayoutG2CandleSticksRoute: typeof LayoutG2CandleSticksRoute
   LayoutG2KlineRoute: typeof LayoutG2KlineRoute
   LayoutG2QuickstartRoute: typeof LayoutG2QuickstartRoute
+  LayoutG2TooltipRoute: typeof LayoutG2TooltipRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
@@ -712,6 +732,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutG2CandleSticksRoute: LayoutG2CandleSticksRoute,
   LayoutG2KlineRoute: LayoutG2KlineRoute,
   LayoutG2QuickstartRoute: LayoutG2QuickstartRoute,
+  LayoutG2TooltipRoute: LayoutG2TooltipRoute,
 }
 
 const LayoutRouteWithChildren =

@@ -6,9 +6,9 @@ import type {
   TooltipComponentOption,
 } from "echarts";
 import type { BasicInfo, ChartData } from "@/types/Charts";
-import { formatNumberZh } from "@/utils/parse";
 import { time } from "echarts";
 import { isPlainObject } from "lodash";
+import { formatNumberZh } from "@/utils/format";
 interface Props {
   basicInfo: BasicInfo;
   className?: string;

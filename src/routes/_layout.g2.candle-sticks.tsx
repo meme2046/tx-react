@@ -1,7 +1,9 @@
 import { useG2 } from "@/hooks/g2/use-g2";
 import { useJson } from "@/hooks/use-json";
+import { parseKlineData } from "@/utils/parse";
 import type { G2Spec } from "@antv/g2";
 import { createFileRoute } from "@tanstack/react-router";
+import { useMemo } from "react";
 
 export const Route = createFileRoute("/_layout/g2/candle-sticks")({
   component: RouteComponent,
@@ -16,13 +18,15 @@ export const Route = createFileRoute("/_layout/g2/candle-sticks")({
 
 function RouteComponent() {
   const { data } = useJson<any>(
-    "https://gw.alipayobjects.com/os/antvdemo/assets/data/candle-sticks.json",
+    "https://api4.binance.com/api/v3/uiKlines?symbol=BTCUSDT&interval=15m&limit=500",
   );
+
+  const parsedData = useMemo(() => parseKlineData(data), [data]);
 
   const kChartOptions: G2Spec = {
     type: "view",
     autoFit: true,
-    data: data || [],
+    data: parsedData,
     children: [
       {
         type: "link",
@@ -96,13 +100,41 @@ function RouteComponent() {
           ],
         },
       },
+      {
+        type: "line",
+        encode: {
+          x: "time",
+          y: "sma7",
+        },
+      },
+      {
+        type: "line",
+        encode: {
+          x: "time",
+          y: "sma25",
+        },
+      },
+      {
+        type: "line",
+        encode: {
+          x: "time",
+          y: "ema12",
+        },
+      },
+      {
+        type: "line",
+        encode: {
+          x: "time",
+          y: "ema26",
+        },
+      },
     ],
   };
 
   const columnChartOptions: G2Spec = {
     type: "view",
     autoFit: true,
-    data: data || [],
+    data: parsedData,
     children: [
       {
         type: "interval",
@@ -158,6 +190,7 @@ function RouteComponent() {
     <>
       <div className="w-full h-96" ref={kChartRef} />
       <div className="w-full h-56" ref={columnChartRef} />
+      <div>{JSON.stringify(parsedData)}</div>
     </>
   );
 }

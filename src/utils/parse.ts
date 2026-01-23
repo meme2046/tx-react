@@ -1,6 +1,6 @@
 import type { BreakItem, ChartData, MarketData, UiKline } from "@/types/Charts";
-import { has, includes, round, toNumber, isNaN } from "lodash";
-
+import { has, includes, isNull, round, toNumber } from "lodash";
+import { MACD, SMA, EMA } from "trading-signals";
 export function parseMarketData(
   p: string,
   keys: Array<keyof MarketData>,
@@ -70,50 +70,38 @@ export function parseMarketData(
   };
 }
 
-/**
- * 数字格式化为万/亿单位
- * @param {number|string} num - 待转换的数字（支持数字或数字字符串）
- * @param {number} precision - 小数保留精度，默认2位（可根据需求调整）
- * @returns {string} 格式化后的带单位字符串
- */
-export function formatNumberZh(num?: number, precision = 2) {
-  if (num === undefined || isNaN(num)) {
-    return "--";
-  }
-  // 2. 定义单位阈值和对应单位（万：10^4，亿：10^8）
-  const thresholds = [
-    { value: 1e8, unit: "亿" }, // 1亿 = 100000000
-    { value: 1e4, unit: "万" }, // 1万 = 10000
-  ];
-
-  // 3. 匹配对应单位并格式化
-  for (const { value, unit } of thresholds) {
-    if (Math.abs(num) >= value) {
-      // 使用 _.round 进行四舍五入，保证精度准确性
-      const formattedNum = round(num / value, precision);
-      // 处理小数末尾的0（可选，如 2891.30万 → 2891.3万）
-      const cleanNum =
-        formattedNum % 1 === 0
-          ? formattedNum
-          : formattedNum.toString().replace(/\.?0*$/, "");
-      return `${cleanNum}${unit}`;
-    }
-  }
-
-  // 4. 小于1万的数字，直接返回原始数字（保留指定精度）
-  return round(num, precision).toString();
-}
-
-export function parseKlineData(data: any[]): UiKline[] {
+export function parseKlineData(
+  data: any,
+  signalPrecision: number = 2,
+): UiKline[] {
   if (!data || !Array.isArray(data)) {
     return [];
   }
-  return data.map((item) => {
+
+  const sma7 = new SMA(7);
+  const sma25 = new SMA(25);
+  const ema12 = new EMA(12);
+  const ema26 = new EMA(26);
+
+  // 1. 解析原始数据
+  const parsedData: UiKline[] = data.map((item) => {
     const start = toNumber(item[0]);
     const open = toNumber(item[1]);
     const highest = toNumber(item[2]);
     const lowest = toNumber(item[3]);
     const close = toNumber(item[4]);
+    const volume = toNumber(item[5]);
+    const amount = toNumber(item[7]);
+
+    sma7.add(close);
+    sma25.add(close);
+    ema12.add(close);
+    ema26.add(close);
+    const sma7Result = sma7.getResult();
+    const sma25Result = sma25.getResult();
+    const ema12Result = ema12.getResult();
+    const ema26Result = ema26.getResult();
+
     return {
       start, // k线开盘时间
       open, // 开盘价
@@ -121,13 +109,19 @@ export function parseKlineData(data: any[]): UiKline[] {
       lowest, // 最低价
       mean: (highest + lowest) / 2,
       close, // 收盘价(当前K线未结束的即为最新价)
-      volume: item[5], // 成交量
+      volume, // 成交量
       end: item[6], // k线收盘时间
-      amount: item[7], // 成交额
+      amount, // 成交额
       trades: item[8], // 成交笔数
       buyVolume: item[9], // 主动买入成交量
       buyAmount: item[10], // 主动买入成交额
       trend: close - open >= 0 ? "up" : "down",
+      sma7: sma7Result ? round(sma7Result, signalPrecision) : null,
+      sma25: sma25Result ? round(sma25Result, signalPrecision) : null,
+      ema12: ema12Result ? round(ema12Result, signalPrecision) : null,
+      ema26: ema26Result ? round(ema26Result, signalPrecision) : null,
     };
   });
+
+  return parsedData.slice(25);
 }
