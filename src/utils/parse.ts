@@ -70,10 +70,7 @@ export function parseMarketData(
   };
 }
 
-export function parseKlineData(
-  data: any,
-  signalPrecision: number = 2,
-): UiKline[] {
+export function parseKlineData(data: any, precision: number = 2): UiKline[] {
   if (!data || !Array.isArray(data)) {
     return [];
   }
@@ -107,7 +104,7 @@ export function parseKlineData(
       open, // 开盘价
       highest, // 最高价
       lowest, // 最低价
-      mean: (highest + lowest) / 2,
+      mean: round((highest + lowest) / 2, precision), // 均价
       close, // 收盘价(当前K线未结束的即为最新价)
       volume, // 成交量
       end: item[6], // k线收盘时间
@@ -116,10 +113,10 @@ export function parseKlineData(
       buyVolume: item[9], // 主动买入成交量
       buyAmount: item[10], // 主动买入成交额
       trend: close - open >= 0 ? "up" : "down",
-      sma7: sma7Result ? round(sma7Result, signalPrecision) : null,
-      sma25: sma25Result ? round(sma25Result, signalPrecision) : null,
-      ema12: ema12Result ? round(ema12Result, signalPrecision) : null,
-      ema26: ema26Result ? round(ema26Result, signalPrecision) : null,
+      sma7: sma7Result ? round(sma7Result, precision) : null,
+      sma25: sma25Result ? round(sma25Result, precision) : null,
+      ema12: ema12Result ? round(ema12Result, precision) : null,
+      ema26: ema26Result ? round(ema26Result, precision) : null,
     };
   });
 

@@ -1,8 +1,10 @@
+import { Chart } from "@/hooks/g2/charts";
 import { useG2 } from "@/hooks/g2/use-g2";
 import { useJson } from "@/hooks/use-json";
 import type { UiKline } from "@/types/Charts";
 import { parseKlineData } from "@/utils/parse";
 import type { G2Spec } from "@antv/g2";
+import { arrowPoints } from "@antv/g2/lib/shape/utils";
 import { createFileRoute } from "@tanstack/react-router";
 import dayjs from "dayjs";
 import { useMemo } from "react";
@@ -18,87 +20,127 @@ function RouteComponent() {
 
   const parsedData = useMemo(() => parseKlineData(data), [data]);
   const colors = ["#00C9C9", "#7863FF", "#1783FF", "#F0884D", "#D580FF"];
-  const colorMap = {
-    up: "#4daf4a",
-    down: "#e41a1c",
+  const grMap = {
+    up: "#4DAF4A",
+    down: "#E41A1C",
   };
   const options: G2Spec = {
     type: "view",
     autoFit: true,
-    data: {
-      value: parsedData,
+    data: parsedData,
+    paddingLeft: 36,
+    encode: {
+      x: "start",
+    },
+    scale: {
+      x: {
+        compare: (a: number, b: number) => a - b,
+      },
+    },
+    axis: {
+      x: {
+        title: false,
+        labelFormatter: (d: number) => dayjs(d).format("HH:mm"),
+      },
+      y: {
+        title: false,
+      },
+    },
+    slider: {
+      x: {
+        labelFormatter: (d: number) => dayjs(d).format("YYYY-MM-DD HH:mm"),
+      },
+    },
+    interaction: {
+      tooltip: {
+        body: true,
+        crosshairs: true,
+        crosshairsXStroke: colors[0],
+        crosshairsYStroke: colors[1],
+        shared: true,
+      },
     },
     children: [
       {
         type: "link",
         encode: {
-          x: "start",
           y: ["lowest", "highest"],
         },
         style: {
-          stroke: (d: UiKline) => colorMap[d.trend], // 设置连接线颜色
+          stroke: (d: UiKline) => grMap[d.trend], // 设置连接线颜色
         },
+        tooltip: false,
       },
       {
         type: "interval",
         encode: {
-          x: "start",
           y: ["open", "close"],
         },
         style: {
-          fill: (d: UiKline) => colorMap[d.trend],
+          fill: (d: UiKline) => grMap[d.trend],
+        },
+        tooltip: {
+          items: [
+            { field: "open", name: "开盘价" },
+            { field: "close", name: "收盘价" },
+            { field: "lowest", name: "最低价" },
+            { field: "highest", name: "最高价" },
+          ],
         },
       },
       {
         type: "line",
         encode: {
-          x: "start",
           y: "mean",
-          color: "#00C9C9",
+          color: colors[0],
+        },
+        tooltip: {
+          items: [{ field: "mean", name: "均价" }],
         },
       },
       {
         type: "line",
         encode: {
-          x: "start",
           y: "sma7",
-          color: "#7863FF",
+          color: colors[1],
+        },
+        tooltip: {
+          items: [{ field: "sma7", name: "SMA7" }],
         },
       },
       {
         type: "line",
         encode: {
-          x: "start",
           y: "sma25",
-          color: "#1783FF",
+          color: colors[2],
+        },
+        tooltip: {
+          items: [{ field: "sma25", name: "SMA25" }],
         },
       },
       {
         type: "line",
         encode: {
-          x: "start",
           y: "ema12",
-          color: "#F0884D",
+          color: colors[3],
+        },
+        tooltip: {
+          items: [{ field: "ema12", name: "EMA12" }],
         },
       },
       {
         type: "line",
         encode: {
-          x: "start",
           y: "ema26",
-          color: "#D580FF",
+          color: colors[4],
+        },
+        tooltip: {
+          items: [{ field: "ema26", name: "EMA26" }],
         },
       },
     ],
-    interaction: {
-      tooltip: {
-        crosshairs: true,
-        crosshairsXStroke: "#00C9C9",
-        crosshairsYStroke: "#7863FF",
-      },
-    },
   };
 
-  const { ref } = useG2({ options });
-  return <div className="w-full h-160" ref={ref} />;
+  return <Chart options={options} className="w-full h-160" />;
+  // return <div className="w-full h-160" ref={ref} />;
 }
