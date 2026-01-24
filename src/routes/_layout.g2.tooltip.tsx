@@ -9,11 +9,18 @@ import { Base } from "@ant-design/charts";
 
 export const Route = createFileRoute("/_layout/g2/tooltip")({
   component: RouteComponent,
+  head: () => ({
+    meta: [
+      {
+        title: "Tooltip",
+      },
+    ],
+  }),
 });
 
 function RouteComponent() {
   const { data } = useJson(
-    "https://api4.binance.com/api/v3/uiKlines?symbol=BTCUSDT&interval=5m&limit=200",
+    "https://api4.binance.com/api/v3/uiKlines?symbol=BTCUSDT&interval=15m&limit=200",
   );
 
   const parsedData = useMemo(() => parseKlineData(data), [data]);
@@ -26,18 +33,25 @@ function RouteComponent() {
     type: "spaceFlex",
     data: parsedData,
     direction: "col",
+    border: true,
     ratio: [4, 1],
+    paddingLeft: 64,
+    style: {
+      backgroundColor: "red",
+      border: "solid 1px red",
+    },
+    viewStyle: {
+      border: "solid 1px red",
+    },
     encode: {
       x: "start",
     },
     sync: {
       x: true, // 共享X轴
     },
-
     children: [
       {
         type: "view",
-        // paddingLeft: 64,
         encode: {
           x: "start",
         },
@@ -139,7 +153,6 @@ function RouteComponent() {
       },
       {
         type: "view",
-        // paddingLeft: 64,
         encode: {
           x: "start",
         },
