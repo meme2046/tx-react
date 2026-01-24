@@ -53,11 +53,11 @@ function RouteComponent() {
     },
     interaction: {
       tooltip: {
-        body: true,
         crosshairs: true,
         crosshairsXStroke: colors[0],
         crosshairsYStroke: colors[1],
         shared: true,
+        groupName: false,
       },
     },
     children: [
@@ -69,7 +69,9 @@ function RouteComponent() {
         style: {
           stroke: (d: UiKline) => grMap[d.trend], // 设置连接线颜色
         },
-        tooltip: false,
+        tooltip: {
+          title: "",
+        },
       },
       {
         type: "interval",
@@ -80,6 +82,7 @@ function RouteComponent() {
           fill: (d: UiKline) => grMap[d.trend],
         },
         tooltip: {
+          title: (d: any) => dayjs(d.start).format("YYYY-MM-DD HH:mm"),
           items: [
             { field: "open", name: "开盘价" },
             { field: "close", name: "收盘价" },
@@ -91,20 +94,11 @@ function RouteComponent() {
       {
         type: "line",
         encode: {
-          y: "mean",
-          color: colors[0],
-        },
-        tooltip: {
-          items: [{ field: "mean", name: "均价" }],
-        },
-      },
-      {
-        type: "line",
-        encode: {
           y: "sma7",
           color: colors[1],
         },
         tooltip: {
+          title: "",
           items: [{ field: "sma7", name: "SMA7" }],
         },
       },
@@ -115,6 +109,7 @@ function RouteComponent() {
           color: colors[2],
         },
         tooltip: {
+          title: "",
           items: [{ field: "sma25", name: "SMA25" }],
         },
       },
@@ -125,6 +120,7 @@ function RouteComponent() {
           color: colors[3],
         },
         tooltip: {
+          title: "",
           items: [{ field: "ema12", name: "EMA12" }],
         },
       },
@@ -135,6 +131,7 @@ function RouteComponent() {
           color: colors[4],
         },
         tooltip: {
+          title: "",
           items: [{ field: "ema26", name: "EMA26" }],
         },
       },
