@@ -1,10 +1,8 @@
 import { Chart } from "@/hooks/g2/charts";
-import { useG2 } from "@/hooks/g2/use-g2";
 import { useJson } from "@/hooks/use-json";
 import type { UiKline } from "@/types/Charts";
 import { parseKlineData } from "@/utils/parse";
 import type { G2Spec } from "@antv/g2";
-import { arrowPoints } from "@antv/g2/lib/shape/utils";
 import { createFileRoute } from "@tanstack/react-router";
 import dayjs from "dayjs";
 import { useMemo } from "react";

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@ant-design/charts": "^2.6.7",
+    "@ant-design/plots": "^2.6.8",
     "@antv/g2": "^5.4.8",
     "@faker-js/faker": "^10.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.15",
