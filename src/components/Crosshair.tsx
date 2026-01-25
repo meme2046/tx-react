@@ -64,8 +64,16 @@ const Crosshair: React.FC<CrosshairProps> = ({
       }
     };
 
+    const handleMouseLeave = () => {
+      gsap.to(
+        [lineHorizontalRef.current, lineVerticalRef.current].filter(Boolean),
+        { opacity: 0 },
+      );
+    };
+
     const target: HTMLElement | Window = containerRef?.current || window;
     target.addEventListener("mousemove", handleMouseMove);
+    target.addEventListener("mouseleave", handleMouseLeave);
 
     const renderedStyles: {
       [key: string]: { previous: number; current: number; amt: number };
@@ -79,18 +87,33 @@ const Crosshair: React.FC<CrosshairProps> = ({
       { opacity: 0 },
     );
 
-    const onMouseMove = (_ev: Event) => {
+    const onMouseMove = (ev: Event) => {
+      const mouseEvent = ev as MouseEvent;
+      mouse = getMousePos(mouseEvent, containerRef?.current);
       renderedStyles.tx.previous = renderedStyles.tx.current = mouse.x;
       renderedStyles.ty.previous = renderedStyles.ty.current = mouse.y;
 
-      gsap.to(
-        [lineHorizontalRef.current, lineVerticalRef.current].filter(Boolean),
-        {
-          duration: 0.9,
-          ease: "Power3.easeOut",
-          opacity: 1,
-        },
-      );
+      // 只有当鼠标在容器范围内时才显示十字线
+      let shouldShowCrosshair = !containerRef?.current;
+      if (containerRef?.current) {
+        const bounds = containerRef.current.getBoundingClientRect();
+        shouldShowCrosshair =
+          mouseEvent.clientX >= bounds.left &&
+          mouseEvent.clientX <= bounds.right &&
+          mouseEvent.clientY >= bounds.top &&
+          mouseEvent.clientY <= bounds.bottom;
+      }
+
+      if (shouldShowCrosshair) {
+        gsap.to(
+          [lineHorizontalRef.current, lineVerticalRef.current].filter(Boolean),
+          {
+            duration: 0.9,
+            ease: "Power3.easeOut",
+            opacity: 1,
+          },
+        );
+      }
 
       requestAnimationFrame(render);
 
@@ -172,6 +195,7 @@ const Crosshair: React.FC<CrosshairProps> = ({
     return () => {
       target.removeEventListener("mousemove", handleMouseMove);
       target.removeEventListener("mousemove", onMouseMove);
+      target.removeEventListener("mouseleave", handleMouseLeave);
       links.forEach((link) => {
         link.removeEventListener("mouseenter", enter);
         link.removeEventListener("mouseleave", leave);
@@ -182,7 +206,7 @@ const Crosshair: React.FC<CrosshairProps> = ({
   return (
     <div
       ref={cursorRef}
-      className={`${containerRef ? "absolute" : "fixed"} top-0 left-0 w-full h-full pointer-events-none z-[10000]`}
+      className={`${containerRef ? "absolute" : "fixed"} top-0 left-0 w-full h-full pointer-events-none z-100`}
     >
       <svg className="absolute top-0 left-0 w-full h-full">
         <defs>
