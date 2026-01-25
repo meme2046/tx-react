@@ -38,6 +38,7 @@ import { Route as LayoutG2TooltipRouteImport } from './routes/_layout.g2.tooltip
 import { Route as LayoutG2SpotRouteImport } from './routes/_layout.g2.spot'
 import { Route as LayoutG2SliderRouteImport } from './routes/_layout.g2.slider'
 import { Route as LayoutG2MultiAreaRouteImport } from './routes/_layout.g2.multi-area'
+import { Route as LayoutG2MouseRouteImport } from './routes/_layout.g2.mouse'
 import { Route as LayoutG2KlineRouteImport } from './routes/_layout.g2.kline'
 import { Route as LayoutG2CandleSticksRouteImport } from './routes/_layout.g2.candle-sticks'
 import { Route as LayoutEchartsGushiRouteImport } from './routes/_layout.echarts.gushi'
@@ -188,6 +189,11 @@ const LayoutG2MultiAreaRoute = LayoutG2MultiAreaRouteImport.update({
   path: '/g2/multi-area',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutG2MouseRoute = LayoutG2MouseRouteImport.update({
+  id: '/g2/mouse',
+  path: '/g2/mouse',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const LayoutG2KlineRoute = LayoutG2KlineRouteImport.update({
   id: '/g2/kline',
   path: '/g2/kline',
@@ -248,6 +254,7 @@ export interface FileRoutesByFullPath {
   '/echarts/gushi': typeof LayoutEchartsGushiRoute
   '/g2/candle-sticks': typeof LayoutG2CandleSticksRoute
   '/g2/kline': typeof LayoutG2KlineRoute
+  '/g2/mouse': typeof LayoutG2MouseRoute
   '/g2/multi-area': typeof LayoutG2MultiAreaRoute
   '/g2/slider': typeof LayoutG2SliderRoute
   '/g2/spot': typeof LayoutG2SpotRoute
@@ -282,6 +289,7 @@ export interface FileRoutesByTo {
   '/echarts/gushi': typeof LayoutEchartsGushiRoute
   '/g2/candle-sticks': typeof LayoutG2CandleSticksRoute
   '/g2/kline': typeof LayoutG2KlineRoute
+  '/g2/mouse': typeof LayoutG2MouseRoute
   '/g2/multi-area': typeof LayoutG2MultiAreaRoute
   '/g2/slider': typeof LayoutG2SliderRoute
   '/g2/spot': typeof LayoutG2SpotRoute
@@ -320,6 +328,7 @@ export interface FileRoutesById {
   '/_layout/echarts/gushi': typeof LayoutEchartsGushiRoute
   '/_layout/g2/candle-sticks': typeof LayoutG2CandleSticksRoute
   '/_layout/g2/kline': typeof LayoutG2KlineRoute
+  '/_layout/g2/mouse': typeof LayoutG2MouseRoute
   '/_layout/g2/multi-area': typeof LayoutG2MultiAreaRoute
   '/_layout/g2/slider': typeof LayoutG2SliderRoute
   '/_layout/g2/spot': typeof LayoutG2SpotRoute
@@ -357,6 +366,7 @@ export interface FileRouteTypes {
     | '/echarts/gushi'
     | '/g2/candle-sticks'
     | '/g2/kline'
+    | '/g2/mouse'
     | '/g2/multi-area'
     | '/g2/slider'
     | '/g2/spot'
@@ -391,6 +401,7 @@ export interface FileRouteTypes {
     | '/echarts/gushi'
     | '/g2/candle-sticks'
     | '/g2/kline'
+    | '/g2/mouse'
     | '/g2/multi-area'
     | '/g2/slider'
     | '/g2/spot'
@@ -428,6 +439,7 @@ export interface FileRouteTypes {
     | '/_layout/echarts/gushi'
     | '/_layout/g2/candle-sticks'
     | '/_layout/g2/kline'
+    | '/_layout/g2/mouse'
     | '/_layout/g2/multi-area'
     | '/_layout/g2/slider'
     | '/_layout/g2/spot'
@@ -648,6 +660,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutG2MultiAreaRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/g2/mouse': {
+      id: '/_layout/g2/mouse'
+      path: '/g2/mouse'
+      fullPath: '/g2/mouse'
+      preLoaderRoute: typeof LayoutG2MouseRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/g2/kline': {
       id: '/_layout/g2/kline'
       path: '/g2/kline'
@@ -742,6 +761,7 @@ interface LayoutRouteChildren {
   LayoutEchartsGushiRoute: typeof LayoutEchartsGushiRoute
   LayoutG2CandleSticksRoute: typeof LayoutG2CandleSticksRoute
   LayoutG2KlineRoute: typeof LayoutG2KlineRoute
+  LayoutG2MouseRoute: typeof LayoutG2MouseRoute
   LayoutG2MultiAreaRoute: typeof LayoutG2MultiAreaRoute
   LayoutG2SliderRoute: typeof LayoutG2SliderRoute
   LayoutG2SpotRoute: typeof LayoutG2SpotRoute
@@ -771,6 +791,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutEchartsGushiRoute: LayoutEchartsGushiRoute,
   LayoutG2CandleSticksRoute: LayoutG2CandleSticksRoute,
   LayoutG2KlineRoute: LayoutG2KlineRoute,
+  LayoutG2MouseRoute: LayoutG2MouseRoute,
   LayoutG2MultiAreaRoute: LayoutG2MultiAreaRoute,
   LayoutG2SliderRoute: LayoutG2SliderRoute,
   LayoutG2SpotRoute: LayoutG2SpotRoute,

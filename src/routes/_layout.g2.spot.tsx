@@ -190,7 +190,7 @@ function RouteComponent() {
   };
 
   return (
-    <div className="chart-container">
+    <div>
       <Base {...config1} className="w-full" />
       <Base {...config2} className="w-full" />
     </div>
