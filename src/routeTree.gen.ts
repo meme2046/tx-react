@@ -34,6 +34,7 @@ import { Route as LayoutBitgetGridRouteImport } from './routes/_layout.bitget-gr
 import { Route as AuthInvoicesRouteImport } from './routes/_auth.invoices'
 import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
 import { Route as AuthInvoicesIndexRouteImport } from './routes/_auth.invoices.index'
+import { Route as LayoutReactbitsCrosshairRouteImport } from './routes/_layout.reactbits.crosshair'
 import { Route as LayoutG2TooltipRouteImport } from './routes/_layout.g2.tooltip'
 import { Route as LayoutG2SpotRouteImport } from './routes/_layout.g2.spot'
 import { Route as LayoutG2SliderRouteImport } from './routes/_layout.g2.slider'
@@ -169,6 +170,12 @@ const AuthInvoicesIndexRoute = AuthInvoicesIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthInvoicesRoute,
 } as any)
+const LayoutReactbitsCrosshairRoute =
+  LayoutReactbitsCrosshairRouteImport.update({
+    id: '/reactbits/crosshair',
+    path: '/reactbits/crosshair',
+    getParentRoute: () => LayoutRoute,
+  } as any)
 const LayoutG2TooltipRoute = LayoutG2TooltipRouteImport.update({
   id: '/g2/tooltip',
   path: '/g2/tooltip',
@@ -259,6 +266,7 @@ export interface FileRoutesByFullPath {
   '/g2/slider': typeof LayoutG2SliderRoute
   '/g2/spot': typeof LayoutG2SpotRoute
   '/g2/tooltip': typeof LayoutG2TooltipRoute
+  '/reactbits/crosshair': typeof LayoutReactbitsCrosshairRoute
   '/invoices/': typeof AuthInvoicesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -294,6 +302,7 @@ export interface FileRoutesByTo {
   '/g2/slider': typeof LayoutG2SliderRoute
   '/g2/spot': typeof LayoutG2SpotRoute
   '/g2/tooltip': typeof LayoutG2TooltipRoute
+  '/reactbits/crosshair': typeof LayoutReactbitsCrosshairRoute
   '/invoices': typeof AuthInvoicesIndexRoute
 }
 export interface FileRoutesById {
@@ -333,6 +342,7 @@ export interface FileRoutesById {
   '/_layout/g2/slider': typeof LayoutG2SliderRoute
   '/_layout/g2/spot': typeof LayoutG2SpotRoute
   '/_layout/g2/tooltip': typeof LayoutG2TooltipRoute
+  '/_layout/reactbits/crosshair': typeof LayoutReactbitsCrosshairRoute
   '/_auth/invoices/': typeof AuthInvoicesIndexRoute
 }
 export interface FileRouteTypes {
@@ -371,6 +381,7 @@ export interface FileRouteTypes {
     | '/g2/slider'
     | '/g2/spot'
     | '/g2/tooltip'
+    | '/reactbits/crosshair'
     | '/invoices/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -406,6 +417,7 @@ export interface FileRouteTypes {
     | '/g2/slider'
     | '/g2/spot'
     | '/g2/tooltip'
+    | '/reactbits/crosshair'
     | '/invoices'
   id:
     | '__root__'
@@ -444,6 +456,7 @@ export interface FileRouteTypes {
     | '/_layout/g2/slider'
     | '/_layout/g2/spot'
     | '/_layout/g2/tooltip'
+    | '/_layout/reactbits/crosshair'
     | '/_auth/invoices/'
   fileRoutesById: FileRoutesById
 }
@@ -632,6 +645,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthInvoicesIndexRouteImport
       parentRoute: typeof AuthInvoicesRoute
     }
+    '/_layout/reactbits/crosshair': {
+      id: '/_layout/reactbits/crosshair'
+      path: '/reactbits/crosshair'
+      fullPath: '/reactbits/crosshair'
+      preLoaderRoute: typeof LayoutReactbitsCrosshairRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/g2/tooltip': {
       id: '/_layout/g2/tooltip'
       path: '/g2/tooltip'
@@ -766,6 +786,7 @@ interface LayoutRouteChildren {
   LayoutG2SliderRoute: typeof LayoutG2SliderRoute
   LayoutG2SpotRoute: typeof LayoutG2SpotRoute
   LayoutG2TooltipRoute: typeof LayoutG2TooltipRoute
+  LayoutReactbitsCrosshairRoute: typeof LayoutReactbitsCrosshairRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
@@ -796,6 +817,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutG2SliderRoute: LayoutG2SliderRoute,
   LayoutG2SpotRoute: LayoutG2SpotRoute,
   LayoutG2TooltipRoute: LayoutG2TooltipRoute,
+  LayoutReactbitsCrosshairRoute: LayoutReactbitsCrosshairRoute,
 }
 
 const LayoutRouteWithChildren =

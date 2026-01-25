@@ -17,6 +17,9 @@ importers:
       '@faker-js/faker':
         specifier: ^10.2.0
         version: 10.2.0
+      '@gsap/react':
+        specifier: ^2.1.2
+        version: 2.1.2(gsap@3.14.2)(react@19.2.3)
       '@radix-ui/react-alert-dialog':
         specifier: ^1.1.15
         version: 1.1.15(@types/react-dom@19.2.3(@types/react@19.2.9))(@types/react@19.2.9)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -107,6 +110,9 @@ importers:
       echarts:
         specifier: ^6.0.0
         version: 6.0.0
+      gsap:
+        specifier: ^3.13.0
+        version: 3.14.2
       lodash:
         specifier: ^4.17.23
         version: 4.17.23
@@ -673,6 +679,12 @@ packages:
 
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
+
+  '@gsap/react@2.1.2':
+    resolution: {integrity: sha512-JqliybO1837UcgH2hVOM4VO+38APk3ECNrsuSM4MuXp+rbf+/2IG2K1YJiqfTcXQHH7XlA0m3ykniFYstfq0Iw==}
+    peerDependencies:
+      gsap: ^3.12.5
+      react: '>=17'
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -2569,6 +2581,9 @@ packages:
   graphlib@2.1.8:
     resolution: {integrity: sha512-jcLLfkpoVGmH7/InMC/1hIvOPSUh38oJtGhvrOFGzioE1DZ+0YW16RgmOJhHiuWTvGiJQ9Z1Ik43JvkRPRvE+A==}
 
+  gsap@3.14.2:
+    resolution: {integrity: sha512-P8/mMxVLU7o4+55+1TCnQrPmgjPKnwkzkXOK1asnR9Jg2lna4tEY5qBJjMmAaOBDDZWtlRjBXjLa0w53G/uBLA==}
+
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
@@ -4010,6 +4025,11 @@ snapshots:
       react-dom: 19.2.3(react@19.2.3)
 
   '@floating-ui/utils@0.2.10': {}
+
+  '@gsap/react@2.1.2(gsap@3.14.2)(react@19.2.3)':
+    dependencies:
+      gsap: 3.14.2
+      react: 19.2.3
 
   '@humanfs/core@0.19.1': {}
 
@@ -5982,6 +6002,8 @@ snapshots:
   graphlib@2.1.8:
     dependencies:
       lodash: 4.17.23
+
+  gsap@3.14.2: {}
 
   has-flag@4.0.0: {}
 

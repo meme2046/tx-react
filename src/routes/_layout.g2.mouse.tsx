@@ -1,5 +1,9 @@
+import Crosshair from "@/components/Crosshair";
+import { useJson } from "@/hooks/use-json";
+import { parseKlineData } from "@/utils/parse";
 import { Base, type CommonConfig } from "@ant-design/charts";
 import { createFileRoute } from "@tanstack/react-router";
+import { useMemo, useRef, type RefObject } from "react";
 
 export const Route = createFileRoute("/_layout/g2/mouse")({
   component: RouteComponent,
@@ -13,20 +17,20 @@ export const Route = createFileRoute("/_layout/g2/mouse")({
 });
 
 function RouteComponent() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { data } = useJson(
+    "https://api4.binance.com/api/v3/uiKlines?symbol=BTCUSDT&interval=15m&limit=200",
+  );
+
+  const parsedData = useMemo(() => parseKlineData(data), [data]);
   const config: CommonConfig = {
     type: "view",
-    data: [
-      { genre: "Sports", sold: 100 },
-      { genre: "Strategy", sold: 115 },
-      { genre: "Action", sold: 120 },
-      { genre: "Shooter", sold: 350 },
-      { genre: "Other", sold: 150 },
-    ],
-    encode: { x: "genre" },
+    data: parsedData,
+    encode: { x: "start" },
     children: [
       {
         type: "interval",
-        encode: { y: "sold", color: "genre" },
+        encode: { y: "volume", color: "trend" },
         viewStyle: {
           viewFill: "blue",
           viewFillOpacity: 0.3,
@@ -42,19 +46,19 @@ function RouteComponent() {
         const statusPanel = document.createElement("div");
         statusPanel.id = "mouse-status-panel";
         statusPanel.style.cssText = `
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 12px;
-        border-radius: 6px;
-        font-family: monospace;
-        font-size: 12px;
-        line-height: 1.4;
-        z-index: 1000;
-        min-width: 220px;
-      `;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          background: rgba(0, 0, 0, 0.8);
+          color: white;
+          padding: 12px;
+          border-radius: 6px;
+          font-family: monospace;
+          font-size: 12px;
+          line-height: 1.4;
+          z-index: 1000;
+          min-width: 220px;
+        `;
 
         // 更新状态显示
         const updateStatus = (isInside, eventInfo = {}) => {
@@ -78,7 +82,6 @@ function RouteComponent() {
           </div>
         `;
         };
-
         if (container) {
           // 将状态面板添加到容器的父元素
           container.parentElement.style.position = "relative";
@@ -124,8 +127,12 @@ function RouteComponent() {
     },
   };
   return (
-    <>
-      <Base {...config} className="px-10" />
-    </>
+    <div ref={containerRef} className="relative mx-10">
+      <Crosshair
+        containerRef={containerRef as RefObject<HTMLElement>}
+        color="var(--color-primary)"
+      />
+      <Base {...config}></Base>
+    </div>
   );
 }
