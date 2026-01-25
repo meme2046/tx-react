@@ -42,20 +42,29 @@ function RouteComponent() {
     type: "view",
     data: parsedData,
     paddingLeft: 64,
+    marginBottom: 0,
+    height: 280,
     encode: {
       x: "start",
     },
     axis: {
-      x: {
-        labelFormatter: (d: number) => dayjs(d).format("HH:mm"),
-      },
+      x: false,
+      // x: {
+      //   labelFormatter: (d: number) => dayjs(d).format("HH:mm"),
+      // },
     },
     slider: {
       x: {
+        style: {
+          // showHandle: false,
+          // selectionSize: 0,
+          // trackSize: 0,
+          // handleSize: 0,
+          // sparklineSize: 0,
+        },
         labelFormatter: (d: number) => dayjs(d).format("YYYY-MM-DD HH:mm"),
       },
     },
-
     children: [
       {
         type: "link",
@@ -126,12 +135,22 @@ function RouteComponent() {
     ],
     onReady: ({ chart }) => {
       ref1.current = chart;
+      chart.on("sliderX:filter", (e: PlotEvent) => {
+        const { nativeEvent, data } = e;
+        if (!nativeEvent) return;
+        const { selection } = data;
+        ref2.current?.emit("sliderX:filter", { data: { selection } });
+      });
     },
   };
   const config2: CommonConfig = {
     type: "view",
     data: parsedData,
     paddingLeft: 64,
+    marginTop: 0,
+    paddingTop: 0,
+    marginBottom: 0,
+    paddingBotton: 0,
     height: 160,
     encode: {
       x: "start",
@@ -144,6 +163,7 @@ function RouteComponent() {
     },
     slider: {
       x: {
+        style: { showHandle: false, trackSize: 0 },
         labelFormatter: (d: number) => dayjs(d).format("YYYY-MM-DD HH:mm"),
       },
     },
@@ -170,9 +190,9 @@ function RouteComponent() {
   };
 
   return (
-    <>
+    <div className="chart-container">
       <Base {...config1} className="w-full" />
       <Base {...config2} className="w-full" />
-    </>
+    </div>
   );
 }
