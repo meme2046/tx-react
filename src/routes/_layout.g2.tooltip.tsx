@@ -183,7 +183,6 @@ function RouteComponent() {
   return (
     <>
       <Base {...config} className="w-1/2 bg-amber-400" onReady={onReady} />
-      <div>{JSON.stringify(parsedData)}</div>
     </>
   );
 }

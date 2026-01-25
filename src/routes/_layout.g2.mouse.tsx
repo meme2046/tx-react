@@ -32,7 +32,9 @@ function RouteComponent() {
     type: "view",
     data: parsedData,
     encode: { x: "start", y: "volume" },
-    interaction: {},
+    tooltip: {
+      items: [{ channel: "y", valueFormatter: ".0%" }],
+    },
     children: [
       {
         type: "interval",
@@ -46,7 +48,8 @@ function RouteComponent() {
     onReady: ({ chart }) => {
       let containerMouseEntered = false;
       chart.on("afterrender", (_e: PlotEvent) => {
-        const container = chart.getContainer();
+        const container = chart.getContainer(); // 获取图表容器 DOM
+        // const coordinate = chart.getCoordinate(); // 获取坐标系实例
 
         // 创建状态显示面板
         const statusPanel = document.createElement("div");
@@ -73,7 +76,7 @@ function RouteComponent() {
             type?: string;
             clientX?: number;
             clientY?: number;
-            getDataByXY?: string;
+            yValue?: string;
           } = {},
         ) => {
           const status = isInside ? "✅ 鼠标在容器内" : "❌ 鼠标在容器外";
@@ -91,7 +94,7 @@ function RouteComponent() {
               : ""
           }
           ${eventInfo.type ? `<div>事件类型: ${eventInfo.type}</div>` : ""}
-          ${eventInfo.getDataByXY ? `<div>x值: ${eventInfo.getDataByXY}</div>` : ""}
+          ${eventInfo.yValue ? `<div>y值: ${eventInfo.yValue}</div>` : ""}
           <div style="margin-top: 8px; font-size: 11px; opacity: 0.8;">
             移动鼠标到图表上试试看！
           </div>
@@ -118,11 +121,15 @@ function RouteComponent() {
           // 监听鼠标在容器内移动
           container.addEventListener("mousemove", (e: MouseEvent) => {
             if (containerMouseEntered) {
+              // 获取鼠标位置相对于容器的坐标
+              const rect = container.getBoundingClientRect();
+              const _x = e.clientX - rect.left;
+              const _y = e.clientY - rect.top;
+
               updateStatus(true, {
                 type: e.type,
                 clientX: e.clientX,
                 clientY: e.clientY,
-                getDataByXY: "",
               });
             }
           });
@@ -141,15 +148,36 @@ function RouteComponent() {
         }
       });
 
-      // 尝试使用不同的事件名称
-      chart.on("pointermove", (event: PlotEvent) => {
-        console.log("pointermove event:", event);
-      });
+      // 监听tooltip显示事件
+      chart.on("tooltip:show", (event: PlotEvent) => {
+        const yScale = chart.getScaleByChannel("y");
 
-      // 也尝试使用mousemove事件
-      chart.on(ChartEvent.POINTER_MOVE, (event: PlotEvent) => {
-        console.log("mousemove event:", event);
-        // const point = { x: event.x, y: event.y };
+        if (yScale && event.canvas && event.viewport) {
+          // 尝试使用viewport坐标，考虑图表y轴倒置的情况
+          try {
+            // 获取图表的高度，用于调整y坐标
+            const chartHeight = chart.getContainer().offsetHeight;
+
+            // 直接使用viewport.y，归一化到[0, 1]范围
+            const normalizedY = event.viewport.y / chartHeight;
+
+            // 使用归一化后的y坐标获取y轴值
+            const yValue = yScale.invert(normalizedY);
+            console.log("Y轴值 (adjusted):", yValue);
+            console.log("Canvas y:", event.canvas.y);
+            console.log("Viewport y:", event.viewport.y);
+            console.log("Chart height:", chartHeight);
+            console.log("Normalized y:", normalizedY);
+
+            // 检查比例尺的范围
+            const domain = yScale.getOptions().domain;
+            const range = yScale.getOptions().range;
+            console.log("Y轴定义域:", domain);
+            console.log("Y轴值域:", range);
+          } catch (error) {
+            console.error("Error getting adjusted y value:", error);
+          }
+        }
       });
     },
   };
