@@ -1,7 +1,12 @@
 import Crosshair from "@/components/Crosshair";
 import { useJson } from "@/hooks/use-json";
 import { parseKlineData } from "@/utils/parse";
-import { Base, type CommonConfig } from "@ant-design/charts";
+import {
+  Base,
+  ChartEvent,
+  type CommonConfig,
+  type PlotEvent,
+} from "@ant-design/charts";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useRef, type RefObject } from "react";
 
@@ -26,7 +31,8 @@ function RouteComponent() {
   const config: CommonConfig = {
     type: "view",
     data: parsedData,
-    encode: { x: "start" },
+    encode: { x: "start", y: "volume" },
+    interaction: {},
     children: [
       {
         type: "interval",
@@ -39,7 +45,7 @@ function RouteComponent() {
     ],
     onReady: ({ chart }) => {
       let containerMouseEntered = false;
-      chart.on("afterrender", (e) => {
+      chart.on("afterrender", (_e: PlotEvent) => {
         const container = chart.getContainer();
 
         // 创建状态显示面板
@@ -61,13 +67,21 @@ function RouteComponent() {
         `;
 
         // 更新状态显示
-        const updateStatus = (isInside, eventInfo = {}) => {
+        const updateStatus = (
+          isInside: boolean,
+          eventInfo: {
+            type?: string;
+            clientX?: number;
+            clientY?: number;
+            getDataByXY?: string;
+          } = {},
+        ) => {
           const status = isInside ? "✅ 鼠标在容器内" : "❌ 鼠标在容器外";
           const containerRect = container.getBoundingClientRect();
 
           statusPanel.innerHTML = `
           <div style="font-weight: bold; margin-bottom: 8px;">${status}</div>
-          <div>容器尺寸: ${container.offsetWidth} × ${container.offsetHeight}</div>
+          <div>容器尺寸: ${container.offsetWidth} ✘ ${container.offsetHeight}</div>
           <div>容器位置: (${Math.round(containerRect.left)}, ${Math.round(
             containerRect.top,
           )})</div>
@@ -77,6 +91,7 @@ function RouteComponent() {
               : ""
           }
           ${eventInfo.type ? `<div>事件类型: ${eventInfo.type}</div>` : ""}
+          ${eventInfo.getDataByXY ? `<div>x值: ${eventInfo.getDataByXY}</div>` : ""}
           <div style="margin-top: 8px; font-size: 11px; opacity: 0.8;">
             移动鼠标到图表上试试看！
           </div>
@@ -91,7 +106,7 @@ function RouteComponent() {
           updateStatus(false);
 
           // 监听鼠标进入容器
-          container.addEventListener("mouseenter", (e) => {
+          container.addEventListener("mouseenter", (e: MouseEvent) => {
             containerMouseEntered = true;
             updateStatus(true, {
               type: e.type,
@@ -101,18 +116,19 @@ function RouteComponent() {
           });
 
           // 监听鼠标在容器内移动
-          container.addEventListener("mousemove", (e) => {
+          container.addEventListener("mousemove", (e: MouseEvent) => {
             if (containerMouseEntered) {
               updateStatus(true, {
                 type: e.type,
                 clientX: e.clientX,
                 clientY: e.clientY,
+                getDataByXY: "",
               });
             }
           });
 
           // 监听鼠标离开容器
-          container.addEventListener("mouseleave", (e) => {
+          container.addEventListener("mouseleave", (e: MouseEvent) => {
             if (containerMouseEntered) {
               containerMouseEntered = false;
               updateStatus(false, {
@@ -123,6 +139,17 @@ function RouteComponent() {
             }
           });
         }
+      });
+
+      // 尝试使用不同的事件名称
+      chart.on("pointermove", (event: PlotEvent) => {
+        console.log("pointermove event:", event);
+      });
+
+      // 也尝试使用mousemove事件
+      chart.on(ChartEvent.POINTER_MOVE, (event: PlotEvent) => {
+        console.log("mousemove event:", event);
+        // const point = { x: event.x, y: event.y };
       });
     },
   };
