@@ -1,11 +1,11 @@
 import { useJson } from "@/hooks/use-json";
 import type { UiKline } from "@/types/Charts";
 import { parseKlineData } from "@/utils/parse";
-import type { G2Spec } from "@antv/g2";
 import { createFileRoute } from "@tanstack/react-router";
 import dayjs from "dayjs";
 import { useMemo } from "react";
-import { Base } from "@ant-design/charts";
+import { Base, type Chart } from "@ant-design/charts";
+import type { G2Spec } from "@antv/g2";
 
 export const Route = createFileRoute("/_layout/g2/tooltip")({
   component: RouteComponent,
@@ -31,18 +31,10 @@ function RouteComponent() {
   };
   const config: G2Spec = {
     type: "spaceFlex",
-    data: parsedData,
     direction: "col",
-    border: true,
-    ratio: [4, 1],
+    ratio: [1, 1],
+    data: parsedData,
     paddingLeft: 64,
-    style: {
-      backgroundColor: "red",
-      border: "solid 1px red",
-    },
-    viewStyle: {
-      border: "solid 1px red",
-    },
     encode: {
       x: "start",
     },
@@ -157,13 +149,14 @@ function RouteComponent() {
           x: "start",
         },
         axis: {
-          x: {
-            labelFormatter: (d: number) => dayjs(d).format("HH:mm"),
-          },
+          x: false,
+          // x: {
+          //   labelFormatter: (d: number) => dayjs(d).format("HH:mm"),
+          // },
         },
         slider: {
           x: {
-            labelFormatter: (d: number) => dayjs(d).format("YYYY-MM-DD HH:mm"),
+            // labelFormatter: (d: number) => dayjs(d).format("YYYY-MM-DD HH:mm"),
           },
         },
         children: [
@@ -181,5 +174,16 @@ function RouteComponent() {
     ],
   };
 
-  return <Base {...config} />;
+  function onReady({ chart }: { chart: Chart }) {
+    chart.on("brush:filter", (e: any) => {
+      console.log(e);
+    });
+  }
+
+  return (
+    <>
+      <Base {...config} className="w-1/2 bg-amber-400" onReady={onReady} />
+      <div>{JSON.stringify(parsedData)}</div>
+    </>
+  );
 }

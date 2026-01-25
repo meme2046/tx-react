@@ -1,7 +1,6 @@
 import { useG2 } from "@/hooks/g2/use-g2";
 import { useJson } from "@/hooks/use-json";
 import { parseKlineData } from "@/utils/parse";
-import type { G2Spec } from "@antv/g2";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo } from "react";
 
