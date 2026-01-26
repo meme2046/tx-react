@@ -6,6 +6,13 @@ import { useRef, type RefObject } from "react";
 
 export const Route = createFileRoute("/_layout/reactbits/crosshair")({
   component: RouteComponent,
+  head: () => ({
+    meta: [
+      {
+        title: "Crosshair",
+      },
+    ],
+  }),
 });
 
 function RouteComponent() {

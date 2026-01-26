@@ -41,6 +41,7 @@ import { Route as LayoutG2SliderRouteImport } from './routes/_layout.g2.slider'
 import { Route as LayoutG2MultiAreaRouteImport } from './routes/_layout.g2.multi-area'
 import { Route as LayoutG2MouseRouteImport } from './routes/_layout.g2.mouse'
 import { Route as LayoutG2KlineRouteImport } from './routes/_layout.g2.kline'
+import { Route as LayoutG2DataPanelRouteImport } from './routes/_layout.g2.data-panel'
 import { Route as LayoutG2CandleSticksRouteImport } from './routes/_layout.g2.candle-sticks'
 import { Route as LayoutEchartsGushiRouteImport } from './routes/_layout.echarts.gushi'
 import { Route as LayoutEchartsCryptoRouteImport } from './routes/_layout.echarts.crypto'
@@ -206,6 +207,11 @@ const LayoutG2KlineRoute = LayoutG2KlineRouteImport.update({
   path: '/g2/kline',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutG2DataPanelRoute = LayoutG2DataPanelRouteImport.update({
+  id: '/g2/data-panel',
+  path: '/g2/data-panel',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const LayoutG2CandleSticksRoute = LayoutG2CandleSticksRouteImport.update({
   id: '/g2/candle-sticks',
   path: '/g2/candle-sticks',
@@ -260,6 +266,7 @@ export interface FileRoutesByFullPath {
   '/echarts/crypto': typeof LayoutEchartsCryptoRoute
   '/echarts/gushi': typeof LayoutEchartsGushiRoute
   '/g2/candle-sticks': typeof LayoutG2CandleSticksRoute
+  '/g2/data-panel': typeof LayoutG2DataPanelRoute
   '/g2/kline': typeof LayoutG2KlineRoute
   '/g2/mouse': typeof LayoutG2MouseRoute
   '/g2/multi-area': typeof LayoutG2MultiAreaRoute
@@ -296,6 +303,7 @@ export interface FileRoutesByTo {
   '/echarts/crypto': typeof LayoutEchartsCryptoRoute
   '/echarts/gushi': typeof LayoutEchartsGushiRoute
   '/g2/candle-sticks': typeof LayoutG2CandleSticksRoute
+  '/g2/data-panel': typeof LayoutG2DataPanelRoute
   '/g2/kline': typeof LayoutG2KlineRoute
   '/g2/mouse': typeof LayoutG2MouseRoute
   '/g2/multi-area': typeof LayoutG2MultiAreaRoute
@@ -336,6 +344,7 @@ export interface FileRoutesById {
   '/_layout/echarts/crypto': typeof LayoutEchartsCryptoRoute
   '/_layout/echarts/gushi': typeof LayoutEchartsGushiRoute
   '/_layout/g2/candle-sticks': typeof LayoutG2CandleSticksRoute
+  '/_layout/g2/data-panel': typeof LayoutG2DataPanelRoute
   '/_layout/g2/kline': typeof LayoutG2KlineRoute
   '/_layout/g2/mouse': typeof LayoutG2MouseRoute
   '/_layout/g2/multi-area': typeof LayoutG2MultiAreaRoute
@@ -375,6 +384,7 @@ export interface FileRouteTypes {
     | '/echarts/crypto'
     | '/echarts/gushi'
     | '/g2/candle-sticks'
+    | '/g2/data-panel'
     | '/g2/kline'
     | '/g2/mouse'
     | '/g2/multi-area'
@@ -411,6 +421,7 @@ export interface FileRouteTypes {
     | '/echarts/crypto'
     | '/echarts/gushi'
     | '/g2/candle-sticks'
+    | '/g2/data-panel'
     | '/g2/kline'
     | '/g2/mouse'
     | '/g2/multi-area'
@@ -450,6 +461,7 @@ export interface FileRouteTypes {
     | '/_layout/echarts/crypto'
     | '/_layout/echarts/gushi'
     | '/_layout/g2/candle-sticks'
+    | '/_layout/g2/data-panel'
     | '/_layout/g2/kline'
     | '/_layout/g2/mouse'
     | '/_layout/g2/multi-area'
@@ -694,6 +706,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutG2KlineRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/g2/data-panel': {
+      id: '/_layout/g2/data-panel'
+      path: '/g2/data-panel'
+      fullPath: '/g2/data-panel'
+      preLoaderRoute: typeof LayoutG2DataPanelRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/g2/candle-sticks': {
       id: '/_layout/g2/candle-sticks'
       path: '/g2/candle-sticks'
@@ -780,6 +799,7 @@ interface LayoutRouteChildren {
   LayoutEchartsCryptoRoute: typeof LayoutEchartsCryptoRoute
   LayoutEchartsGushiRoute: typeof LayoutEchartsGushiRoute
   LayoutG2CandleSticksRoute: typeof LayoutG2CandleSticksRoute
+  LayoutG2DataPanelRoute: typeof LayoutG2DataPanelRoute
   LayoutG2KlineRoute: typeof LayoutG2KlineRoute
   LayoutG2MouseRoute: typeof LayoutG2MouseRoute
   LayoutG2MultiAreaRoute: typeof LayoutG2MultiAreaRoute
@@ -811,6 +831,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutEchartsCryptoRoute: LayoutEchartsCryptoRoute,
   LayoutEchartsGushiRoute: LayoutEchartsGushiRoute,
   LayoutG2CandleSticksRoute: LayoutG2CandleSticksRoute,
+  LayoutG2DataPanelRoute: LayoutG2DataPanelRoute,
   LayoutG2KlineRoute: LayoutG2KlineRoute,
   LayoutG2MouseRoute: LayoutG2MouseRoute,
   LayoutG2MultiAreaRoute: LayoutG2MultiAreaRoute,

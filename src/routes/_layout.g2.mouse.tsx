@@ -1,10 +1,19 @@
 import Crosshair from "@/components/Crosshair";
 import { useJson } from "@/hooks/use-json";
 import { parseKlineData } from "@/utils/parse";
-import { Base, type CommonConfig, type PlotEvent } from "@ant-design/charts";
+import {
+  Base,
+  ChartEvent,
+  type CommonConfig,
+  type PlotEvent,
+} from "@ant-design/charts";
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useRef, type RefObject } from "react";
-import { toString } from "lodash";
+import { useMemo, useRef, useState, type RefObject } from "react";
+import dayjs from "dayjs";
+import format, { format as prettyFormat } from "pretty-format"; // ES2015 modules
+import type { UiKline } from "@/types/Charts";
+import { getPanel } from "@/utils/panel";
+import { round } from "lodash";
 
 export const Route = createFileRoute("/_layout/g2/mouse")({
   component: RouteComponent,
@@ -17,7 +26,27 @@ export const Route = createFileRoute("/_layout/g2/mouse")({
   }),
 });
 
+function getStatusPanel(container: HTMLElement) {
+  if (!container) return null;
+  container.style.position = "relative";
+  const div = document.createElement("div");
+  div.id = "point-data";
+  div.style.position = "absolute";
+  div.style.left = `10px`;
+  div.style.top = `10px`;
+  div.style.padding = "12px";
+  div.style.borderRadius = "4px";
+  div.style.backgroundColor = "#eee";
+  container.insertBefore(div, container.firstChild);
+  return div;
+}
+
 function RouteComponent() {
+  const colors = ["#00C9C9", "#7863FF", "#1783FF", "#F0884D", "#D580FF"];
+  const grMap = {
+    up: "#4DAF4A",
+    down: "#E41A1C",
+  };
   const containerRef = useRef<HTMLDivElement>(null);
   const { data } = useJson(
     "https://api4.binance.com/api/v3/uiKlines?symbol=BTCUSDT&interval=15m&limit=200",
@@ -27,159 +56,154 @@ function RouteComponent() {
   const config: CommonConfig = {
     type: "view",
     data: parsedData,
-    encode: { x: "start", y: "volume" },
-    tooltip: {
-      items: [{ channel: "y", valueFormatter: ".0%" }],
+    encode: { x: "start", y: "mean" },
+    axis: {
+      x: {
+        title: false,
+        line: true,
+        labelFormatter: (d: number) => dayjs(d).format("HH:mm"),
+      },
+      y: {
+        title: false,
+        line: true,
+      },
+    },
+    slider: {
+      x: {
+        labelFormatter: (d: number) => dayjs(d).format("YYYY-MM-DD HH:mm"),
+      },
+    },
+    interaction: {
+      tooltip: false,
     },
     children: [
       {
+        type: "link",
+        encode: {
+          y: ["lowest", "highest"],
+        },
+        style: {
+          stroke: (d: UiKline) => grMap[d.trend], // 设置连接线颜色
+        },
+      },
+      {
         type: "interval",
-        encode: { y: "volume", color: "trend" },
-        viewStyle: {
-          viewFill: "blue",
-          viewFillOpacity: 0.3,
+        encode: {
+          y: ["open", "close"],
+        },
+        style: {
+          fill: (d: UiKline) => grMap[d.trend],
+        },
+      },
+      {
+        type: "line",
+        encode: {
+          y: "sma7",
+          color: colors[1],
+        },
+      },
+      {
+        type: "line",
+        encode: {
+          y: "sma25",
+          color: colors[2],
+        },
+      },
+      {
+        type: "line",
+        encode: {
+          y: "ema12",
+          color: colors[3],
+        },
+      },
+      {
+        type: "line",
+        encode: {
+          y: "ema26",
+          color: colors[4],
         },
       },
     ],
     onReady: ({ chart }) => {
-      chart.on("afterrender", (_e: PlotEvent) => {
-        const container = chart.getContainer(); // 获取图表容器 DOM
-        // const coordinate = chart.getCoordinate(); // 获取坐标系实例
-
-        let statusPanel = document.getElementById(
-          "mouse-status-panel",
-        ) as HTMLDivElement | null;
-
-        // 如果不存在，创建新的状态面板
-        if (!statusPanel) {
-          statusPanel = document.createElement("div");
-          statusPanel.id = "mouse-status-panel";
-          statusPanel.style.cssText = `
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 12px;
-            border-radius: 6px;
-            font-family: monospace;
-            font-size: 12px;
-            line-height: 1.4;
-            z-index: 1000;
-            min-width: 220px;
-          `;
-
-          // 将状态面板添加到容器的父元素
-          container.parentElement.style.position = "relative";
-          container.parentElement.appendChild(statusPanel);
-        }
-
-        let containerMouseEntered = false;
-
-        // 更新状态显示
-        const updateStatus = (
-          isInside: boolean,
-          eventInfo: {
-            type?: string;
-            x?: number;
-            y?: number;
-            yValue?: string;
-          } = {},
-        ) => {
-          const status = isInside ? "✅ 鼠标在容器内" : "❌ 鼠标在容器外";
-          const containerRect = container.getBoundingClientRect();
-
-          statusPanel.innerHTML = `
-          <div style="font-weight: bold; margin-bottom: 8px;">${status}</div>
-          <div>容器尺寸: ${container.offsetWidth} ✘ ${container.offsetHeight}</div>
-          <div>容器位置: (${Math.round(containerRect.left)}, ${Math.round(
-            containerRect.top,
-          )})</div>
-          ${
-            eventInfo.x
-              ? `<div>鼠标坐标: (${eventInfo.x}, ${eventInfo.y})</div>`
-              : ""
-          }
-          ${eventInfo.type ? `<div>事件类型: ${eventInfo.type}</div>` : ""}
-          ${eventInfo.yValue ? `<div>y值: ${eventInfo.yValue}</div>` : ""}
-          <div style="margin-top: 8px; font-size: 11px; opacity: 0.8;">
-            移动鼠标到图表上试试看！
-          </div>
-        `;
-        };
+      const container = chart.getContainer(); // 获取图表容器 DOM
+      chart.on("afterrender", (_event: PlotEvent) => {
         if (container) {
-          const rect = container.getBoundingClientRect();
-          updateStatus(false);
-
-          // 监听鼠标进入容器
-          container.addEventListener("mouseenter", (e: MouseEvent) => {
-            containerMouseEntered = true;
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            updateStatus(true, {
-              type: e.type,
-              x: x,
-              y: y,
-            });
-          });
-
           // 监听鼠标在容器内移动
           container.addEventListener("mousemove", (e: MouseEvent) => {
-            if (containerMouseEntered) {
-              // 获取鼠标位置相对于容器的坐标
-              const x = e.clientX - rect.left;
-              const y = e.clientY - rect.top;
-
-              updateStatus(true, {
-                type: e.type,
-                x: x,
-                y: y,
-              });
-            }
-          });
-
-          // 监听鼠标离开容器
-          container.addEventListener("mouseleave", (e: MouseEvent) => {
-            containerMouseEntered = false;
-            updateStatus(false, {
-              type: e.type,
+            const panel = getPanel({
+              container,
+              id: "mousemove",
+              width: "220px",
+              pos: "right",
             });
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            panel.innerHTML = `
+              <div>🧱容器尺寸: ${container.offsetWidth} ✘ ${container.offsetHeight}</div>
+              <div>容器位置: ${rect.left}, ${rect.top}</div>
+              <div>坐标: (${e.clientX}, ${e.clientY})</div>
+              <div>🔢容器坐标: (${x}, ${y})</div>
+              <div>事件类型: ${e.type}</div>
+            `;
           });
         }
       });
 
       // 监听tooltip显示事件
-      chart.on("tooltip:show", (event: PlotEvent) => {
-        console.log("🚀event", event);
-        const yScale = chart.getScaleByChannel("y");
+      chart.on(`plot:pointermove`, (event: PlotEvent) => {
+        const { nativeEvent, x, y } = event;
+        if (!nativeEvent) return; // 过滤程序触发的事件
+        // console.log("🚀event", event);
+        const panel = getPanel({
+          container,
+          id: "plot-pointermove",
+          width: "220px",
+          pos: "left",
+        });
 
-        if (yScale && event.canvas && event.viewport) {
-          // 尝试使用viewport坐标，考虑图表y轴倒置的情况
-          try {
-            // 获取图表的高度，用于调整y坐标
-            const chartHeight = chart.getContainer().offsetHeight;
+        // const yScale = chart.getScaleByChannel("y");
+        const coordOptions = chart.getCoordinate().getOptions();
+        const {
+          innerWidth: plotWidth, // 绘图区真实宽度（核心）
+          innerHeight: plotHeight, // 绘图区真实高度（核心）
+          paddingLeft, // 绘图区左偏移
+          paddingTop, // 绘图区上偏移
+          // paddingBottom, // 无需用到，因为 y 轴是从 top 开始计算
+        } = coordOptions;
 
-            // 直接使用viewport.y，归一化到[0, 1]范围
-            const normalizedY = event.viewport.y / chartHeight;
+        const plotMouseX = x - paddingLeft;
+        const plotMouseY = y - paddingTop;
 
-            // 使用归一化后的y坐标获取y轴值
-            const yValue = yScale.invert(normalizedY);
-
-            console.log("✅Y轴值 (adjusted):", yValue);
-            console.log("Canvas y:", event.canvas.y);
-            console.log("Viewport y:", event.viewport.y);
-            console.log("Chart height:", chartHeight);
-            console.log("Normalized y:", normalizedY);
-
-            // 检查比例尺的范围
-            const domain = yScale.getOptions().domain;
-            const range = yScale.getOptions().range;
-            console.log("Y轴定义域:", domain);
-            console.log("Y轴值域:", range);
-          } catch (error) {
-            console.error("Error getting adjusted y value:", error);
-          }
+        // ✘ 鼠标移出绘图区域
+        if (
+          plotMouseX < 0 ||
+          plotMouseX > plotWidth ||
+          plotMouseY < 0 ||
+          plotMouseY > plotHeight
+        ) {
+          return;
         }
+
+        // 转为 Scale 所需的 0~1 相对占比（基于真实绘图区尺寸）
+        const xRatio = plotMouseX / plotWidth;
+        const yRatio = plotMouseY / plotHeight;
+
+        const xScale = chart.getScaleByChannel("x");
+        const yScale = chart.getScaleByChannel("y");
+        const domain = yScale.getOptions().domain;
+
+        let originalXValue = xScale.invert(xRatio);
+        let originalYValue = yScale.invert(yRatio);
+
+        panel.innerHTML = `
+              <div>🔢容器坐标: (${round(x)}, ${round(y)})</div>
+              <div>事件类型: ${event.type}</div>
+              <div>xValue: ${originalXValue}</div>
+              <div>yValue: ${originalYValue}</div>
+              <div>yDomain: ${domain}</div>
+            `;
       });
     },
   };

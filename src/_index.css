@@ -110,3 +110,10 @@ body {
 --font-serif: "Gabriela",
 --font-mono: "Consolas", 
 */
+.x-line {
+  @apply bg-repeat-x bg-size-[10px_2px] bg-linear-[to_right,var(--muted-foreground)_0_7px,transparent_7px_10px];
+}
+
+.y-line {
+  @apply bg-repeat-y bg-size-[2px_10px] bg-linear-[to_bottom,var(--muted-foreground)_0_7px,transparent_7px_10px];
+}
