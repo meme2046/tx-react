@@ -46,7 +46,16 @@ function RouteComponent() {
   const config: CommonConfig = {
     type: "view",
     data: parsedData,
-    encode: { x: "start", y: ["lowest", "highest"] },
+    encode: { x: "start", color: "trend" },
+    scale: {
+      start: {
+        type: "time",
+      },
+      x: {
+        compare: (a: number, b: number) => a - b,
+      },
+      color: { domain: ["up", "down"], range: [grMap.up, grMap.down] },
+    },
     style: {
       // 自己的样式
       stroke: "red",
@@ -65,7 +74,6 @@ function RouteComponent() {
       y: {
         title: false,
         line: true,
-        nice: true,
       },
     },
     slider: {
@@ -75,6 +83,9 @@ function RouteComponent() {
     },
     interaction: {
       tooltip: false,
+      sliderFilter: {
+        adaptiveMode: "filter", // 启用自适应
+      },
       // tooltip: {
       //   title: (d: UiKline) => dayjs(d.start).format("YYYY-MM-DD HH:mm"),
       // },
@@ -129,9 +140,9 @@ function RouteComponent() {
       },
     ],
     onReady: ({ chart }) => {
-      ref1.current = chart;
       const container = chart.getContainer(); // 获取图表容器 DOM
       chart.on("afterrender", (_event: PlotEvent) => {
+        ref1.current = chart;
         if (container) {
           // 监听鼠标在容器内移动
           container.addEventListener("mousemove", (e: MouseEvent) => {
@@ -157,17 +168,19 @@ function RouteComponent() {
       });
 
       chart.on("sliderX:filter", (_event: PlotEvent) => {
-        const coordinate = ref1.current?.getCoordinate();
+        // 获取Y轴scale
+        const scaleY = chart.getScaleByChannel("y");
 
-        console.log("Slider过滤后重新获取的Coordinate:", coordinate);
-        console.log("Coordinate类型:", coordinate.type);
-        console.log("Coordinate配置:", coordinate.getOptions());
+        console.log("Slider过滤后的Y轴Scale:");
+        console.log("Scale Domain:", scaleY.getOptions().domain);
+        console.log("Scale Range:", scaleY.getOptions().range);
+
+        // 如果启用了adaptiveMode，Y轴的domain会根据X轴过滤后的数据自动调整
+        // 这就是为什么scaleY的值会发生变化的原因
       });
-
-      // 监听tooltip显示事件
       chart.on(`plot:pointermove`, (event: PlotEvent) => {
         const { nativeEvent, x, y } = event;
-        if (!nativeEvent || !ref1.current) return; // 过滤程序触发的事件
+        if (!nativeEvent || !x || !y) return; // 过滤程序触发的事件
 
         console.log("🐞debug", "plot:pointermove");
 
@@ -189,7 +202,7 @@ function RouteComponent() {
           marginBottom, // 绘图区下外边距
           paddingRight, // 绘图区右偏移
           marginRight, // 绘图区右外边距
-        } = ref1.current.getCoordinate().getOptions();
+        } = chart.getCoordinate().getOptions();
 
         const plotMouseX = x - paddingLeft - marginLeft;
         const plotMouseY = y - paddingTop - marginTop;
@@ -206,12 +219,12 @@ function RouteComponent() {
 
         // 转为 Scale 所需的 0~1 相对占比（基于真实绘图区尺寸）
         const yRatio = plotMouseY / plotHeight;
-        const yScale = ref1.current.getScaleByChannel("y");
+        const yScale = chart.getScaleByChannel("y");
         const domain = yScale.getOptions().domain;
 
         let originalYValue = yScale.invert(yRatio);
 
-        const pointData = ref1.current.getDataByXY({ x, y });
+        const pointData = chart.getDataByXY({ x, y });
         const firstPointData =
           pointData && pointData.length > 0 ? pointData[0] : null;
 

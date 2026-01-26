@@ -22,7 +22,7 @@ export function getPanel({
   const div = document.createElement("div");
   div.id = id;
   div.style.position = "absolute";
-  pos === "left" ? (div.style.left = `10px`) : (div.style.right = `10px`);
+  pos === "left" ? (div.style.left = `400px`) : (div.style.right = `10px`);
   div.style.top = `10px`;
   div.style.padding = "10px";
   div.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
