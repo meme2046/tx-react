@@ -4,6 +4,7 @@ import { parseKlineData } from "@/utils/parse";
 import {
   Base,
   ChartEvent,
+  type Chart,
   type CommonConfig,
   type PlotEvent,
 } from "@ant-design/charts";
@@ -28,6 +29,9 @@ export const Route = createFileRoute("/_layout/g2/mouse")({
 });
 
 function RouteComponent() {
+  const ref1 = useRef<Chart>(null);
+  // const ref2 = useRef<Chart>(null);
+
   const colors = ["#00C9C9", "#7863FF", "#1783FF", "#F0884D", "#D580FF"];
   const grMap = {
     up: "#4DAF4A",
@@ -125,6 +129,7 @@ function RouteComponent() {
       },
     ],
     onReady: ({ chart }) => {
+      ref1.current = chart;
       const container = chart.getContainer(); // 获取图表容器 DOM
       chart.on("afterrender", (_event: PlotEvent) => {
         if (container) {
@@ -151,11 +156,21 @@ function RouteComponent() {
         }
       });
 
+      chart.on("sliderX:filter", (_event: PlotEvent) => {
+        const coordinate = ref1.current?.getCoordinate();
+
+        console.log("Slider过滤后重新获取的Coordinate:", coordinate);
+        console.log("Coordinate类型:", coordinate.type);
+        console.log("Coordinate配置:", coordinate.getOptions());
+      });
+
       // 监听tooltip显示事件
       chart.on(`plot:pointermove`, (event: PlotEvent) => {
         const { nativeEvent, x, y } = event;
-        if (!nativeEvent) return; // 过滤程序触发的事件
-        // console.log("🚀event", event);
+        if (!nativeEvent || !ref1.current) return; // 过滤程序触发的事件
+
+        console.log("🐞debug", "plot:pointermove");
+
         const panel = getPanel({
           container,
           id: "plot-pointermove",
@@ -163,8 +178,6 @@ function RouteComponent() {
           pos: "left",
         });
 
-        // const yScale = chart.getScaleByChannel("y");
-        const coordOptions = chart.getCoordinate().getOptions();
         const {
           innerWidth: plotWidth, // 绘图区真实宽度（核心）
           innerHeight: plotHeight, // 绘图区真实高度（核心）
@@ -176,7 +189,7 @@ function RouteComponent() {
           marginBottom, // 绘图区下外边距
           paddingRight, // 绘图区右偏移
           marginRight, // 绘图区右外边距
-        } = coordOptions;
+        } = ref1.current.getCoordinate().getOptions();
 
         const plotMouseX = x - paddingLeft - marginLeft;
         const plotMouseY = y - paddingTop - marginTop;
@@ -193,19 +206,19 @@ function RouteComponent() {
 
         // 转为 Scale 所需的 0~1 相对占比（基于真实绘图区尺寸）
         const yRatio = plotMouseY / plotHeight;
-        const yScale = chart.getScaleByChannel("y");
+        const yScale = ref1.current.getScaleByChannel("y");
         const domain = yScale.getOptions().domain;
 
         let originalYValue = yScale.invert(yRatio);
 
-        const pointData = chart.getDataByXY({ x, y });
+        const pointData = ref1.current.getDataByXY({ x, y });
         const firstPointData =
           pointData && pointData.length > 0 ? pointData[0] : null;
 
         panel.innerHTML = `
               <div>🔢容器坐标: (${round(x)}, ${round(y)})</div>
               <div>事件类型: ${event.type}</div>
-              <div>xValue: ${dayjs(firstPointData.start).format("YYYY-MM-DD HH:mm")}</div>
+              <div>xValue: ${firstPointData && dayjs(firstPointData.start).format("YYYY-MM-DD HH:mm")}</div>
               <div>yValue: ${originalYValue}</div>
               <div>yDomain: [${domain}]</div>
               <div>left: [${paddingLeft},${marginLeft}]</div>
