@@ -123,8 +123,8 @@ function RouteComponent() {
             if (containerMouseEntered) {
               // 获取鼠标位置相对于容器的坐标
               const rect = container.getBoundingClientRect();
-              const _x = e.clientX - rect.left;
-              const _y = e.clientY - rect.top;
+              const x = e.clientX - rect.left;
+              const y = e.clientY - rect.top;
 
               updateStatus(true, {
                 type: e.type,
@@ -136,6 +136,7 @@ function RouteComponent() {
 
           // 监听鼠标离开容器
           container.addEventListener("mouseleave", (e: MouseEvent) => {
+            console.log("🎊mouseleave");
             if (containerMouseEntered) {
               containerMouseEntered = false;
               updateStatus(false, {
@@ -150,6 +151,7 @@ function RouteComponent() {
 
       // 监听tooltip显示事件
       chart.on("tooltip:show", (event: PlotEvent) => {
+        console.log("🚀event", event);
         const yScale = chart.getScaleByChannel("y");
 
         if (yScale && event.canvas && event.viewport) {
@@ -163,7 +165,8 @@ function RouteComponent() {
 
             // 使用归一化后的y坐标获取y轴值
             const yValue = yScale.invert(normalizedY);
-            console.log("Y轴值 (adjusted):", yValue);
+
+            console.log("✅Y轴值 (adjusted):", yValue);
             console.log("Canvas y:", event.canvas.y);
             console.log("Viewport y:", event.viewport.y);
             console.log("Chart height:", chartHeight);
