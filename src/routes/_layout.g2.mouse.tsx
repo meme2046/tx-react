@@ -14,6 +14,7 @@ import format, { format as prettyFormat } from "pretty-format"; // ES2015 module
 import type { UiKline } from "@/types/Charts";
 import { getPanel } from "@/utils/panel";
 import { round } from "lodash";
+import { tooltip } from "@antv/g2/lib/interaction/tooltip";
 
 export const Route = createFileRoute("/_layout/g2/mouse")({
   component: RouteComponent,
@@ -25,21 +26,6 @@ export const Route = createFileRoute("/_layout/g2/mouse")({
     ],
   }),
 });
-
-function getStatusPanel(container: HTMLElement) {
-  if (!container) return null;
-  container.style.position = "relative";
-  const div = document.createElement("div");
-  div.id = "point-data";
-  div.style.position = "absolute";
-  div.style.left = `10px`;
-  div.style.top = `10px`;
-  div.style.padding = "12px";
-  div.style.borderRadius = "4px";
-  div.style.backgroundColor = "#eee";
-  container.insertBefore(div, container.firstChild);
-  return div;
-}
 
 function RouteComponent() {
   const colors = ["#00C9C9", "#7863FF", "#1783FF", "#F0884D", "#D580FF"];
@@ -56,7 +42,16 @@ function RouteComponent() {
   const config: CommonConfig = {
     type: "view",
     data: parsedData,
-    encode: { x: "start", y: "mean" },
+    encode: { x: "start", y: ["lowest", "highest"] },
+    style: {
+      // 自己的样式
+      stroke: "red",
+      strokeWidth: 2,
+      viewFill: "red",
+      viewFillOpacity: 0.3,
+      contentFill: "cyan",
+      contentFillOpacity: 0.3,
+    },
     axis: {
       x: {
         title: false,
@@ -66,6 +61,7 @@ function RouteComponent() {
       y: {
         title: false,
         line: true,
+        nice: true,
       },
     },
     slider: {
@@ -75,7 +71,11 @@ function RouteComponent() {
     },
     interaction: {
       tooltip: false,
+      // tooltip: {
+      //   title: (d: UiKline) => dayjs(d.start).format("YYYY-MM-DD HH:mm"),
+      // },
     },
+
     children: [
       {
         type: "link",
@@ -159,7 +159,7 @@ function RouteComponent() {
         const panel = getPanel({
           container,
           id: "plot-pointermove",
-          width: "220px",
+          width: "320px",
           pos: "left",
         });
 
@@ -169,12 +169,17 @@ function RouteComponent() {
           innerWidth: plotWidth, // 绘图区真实宽度（核心）
           innerHeight: plotHeight, // 绘图区真实高度（核心）
           paddingLeft, // 绘图区左偏移
+          marginLeft, // 绘图区左外边距
           paddingTop, // 绘图区上偏移
-          // paddingBottom, // 无需用到，因为 y 轴是从 top 开始计算
+          marginTop, // 绘图区上外边距
+          paddingBottom, // 无需用到，因为 y 轴是从 top 开始计算
+          marginBottom, // 绘图区下外边距
+          paddingRight, // 绘图区右偏移
+          marginRight, // 绘图区右外边距
         } = coordOptions;
 
-        const plotMouseX = x - paddingLeft;
-        const plotMouseY = y - paddingTop;
+        const plotMouseX = x - paddingLeft - marginLeft;
+        const plotMouseY = y - paddingTop - marginTop;
 
         // ✘ 鼠标移出绘图区域
         if (
@@ -187,28 +192,32 @@ function RouteComponent() {
         }
 
         // 转为 Scale 所需的 0~1 相对占比（基于真实绘图区尺寸）
-        const xRatio = plotMouseX / plotWidth;
         const yRatio = plotMouseY / plotHeight;
-
-        const xScale = chart.getScaleByChannel("x");
         const yScale = chart.getScaleByChannel("y");
         const domain = yScale.getOptions().domain;
 
-        let originalXValue = xScale.invert(xRatio);
         let originalYValue = yScale.invert(yRatio);
+
+        const pointData = chart.getDataByXY({ x, y });
+        const firstPointData =
+          pointData && pointData.length > 0 ? pointData[0] : null;
 
         panel.innerHTML = `
               <div>🔢容器坐标: (${round(x)}, ${round(y)})</div>
               <div>事件类型: ${event.type}</div>
-              <div>xValue: ${originalXValue}</div>
+              <div>xValue: ${dayjs(firstPointData.start).format("YYYY-MM-DD HH:mm")}</div>
               <div>yValue: ${originalYValue}</div>
-              <div>yDomain: ${domain}</div>
+              <div>yDomain: [${domain}]</div>
+              <div>left: [${paddingLeft},${marginLeft}]</div>
+              <div>top: [${paddingTop},${marginTop}]</div>
+              <div>right: [${paddingRight},${marginRight}]</div>
+              <div>bottom: [${paddingBottom},${marginBottom}]</div>
             `;
       });
     },
   };
   return (
-    <div ref={containerRef} className="relative mx-10">
+    <div ref={containerRef} className="relative">
       <Crosshair
         containerRef={containerRef as RefObject<HTMLElement>}
         color="var(--color-primary)"
