@@ -20,9 +20,19 @@ const getMousePos = (
 
 interface CrosshairProps {
   containerRef?: RefObject<HTMLElement>;
+  xLeftPadding?: number;
+  xRightPadding?: number;
+  yTopPadding?: number;
+  yBottomPadding?: number;
 }
 
-const Crosshair: React.FC<CrosshairProps> = ({ containerRef = null }) => {
+const Crosshair: React.FC<CrosshairProps> = ({
+  containerRef = null,
+  xLeftPadding = 10,
+  xRightPadding = 10,
+  yTopPadding = 10,
+  yBottomPadding = 10,
+}) => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const lineHorizontalRef = useRef<HTMLDivElement>(null);
   const lineVerticalRef = useRef<HTMLDivElement>(null);
@@ -38,10 +48,10 @@ const Crosshair: React.FC<CrosshairProps> = ({ containerRef = null }) => {
       if (containerRef?.current) {
         const bounds = containerRef.current.getBoundingClientRect();
         if (
-          mouseEvent.clientX < bounds.left ||
-          mouseEvent.clientX > bounds.right ||
-          mouseEvent.clientY < bounds.top ||
-          mouseEvent.clientY > bounds.bottom
+          mouseEvent.clientX < bounds.left + xLeftPadding ||
+          mouseEvent.clientX > bounds.right - xRightPadding ||
+          mouseEvent.clientY < bounds.top + yTopPadding ||
+          mouseEvent.clientY > bounds.bottom - yBottomPadding
         ) {
           gsap.to(
             [lineHorizontalRef.current, lineVerticalRef.current].filter(
@@ -94,10 +104,10 @@ const Crosshair: React.FC<CrosshairProps> = ({ containerRef = null }) => {
       if (containerRef?.current) {
         const bounds = containerRef.current.getBoundingClientRect();
         shouldShowCrosshair =
-          mouseEvent.clientX >= bounds.left &&
-          mouseEvent.clientX <= bounds.right &&
-          mouseEvent.clientY >= bounds.top &&
-          mouseEvent.clientY <= bounds.bottom;
+          mouseEvent.clientX >= bounds.left + xLeftPadding &&
+          mouseEvent.clientX <= bounds.right - xRightPadding &&
+          mouseEvent.clientY >= bounds.top + yTopPadding &&
+          mouseEvent.clientY <= bounds.bottom - yBottomPadding;
       }
 
       if (shouldShowCrosshair) {
@@ -229,14 +239,22 @@ const Crosshair: React.FC<CrosshairProps> = ({ containerRef = null }) => {
       <div
         ref={lineHorizontalRef}
         // className={`absolute w-full h-px pointer-events-none opacity-0 transform translate-y-1/2`}
-        className="absolute w-full h-px pointer-events-none opacity-0 transform translate-y-1/2 x-line"
+        className={`absolute w-full h-px pointer-events-none opacity-0 transform translate-y-1/2 x-line bg-clip-content`}
+        style={{
+          paddingLeft: xLeftPadding + "px",
+          paddingRight: xRightPadding + "px",
+        }}
         // style={{ background: color }}
         // className={`absolute w-full h-0 pointer-events-none opacity-0 transform translate-y-1/2`}
         // style={{ borderTop: `1px solid ${color}` }}
       ></div>
       <div
         ref={lineVerticalRef}
-        className={`absolute h-full w-px pointer-events-none opacity-0 transform translate-x-1/2 y-line`}
+        className={`absolute h-full w-px pointer-events-none opacity-0 transform translate-x-1/2 y-line bg-clip-content`}
+        style={{
+          paddingTop: yTopPadding + "px",
+          paddingBottom: yBottomPadding + "px",
+        }}
         // className={`absolute h-full w-px pointer-events-none opacity-0 transform translate-x-1/2`}
         // style={{ background: color }}
         // className={`absolute h-full w-0 pointer-events-none opacity-0 transform translate-x-1/2`}

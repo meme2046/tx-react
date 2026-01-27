@@ -22,7 +22,13 @@ function RouteComponent() {
     <div className="p-4 overflow-hidden">
       <ElectricBorder className="">
         <div ref={containerRef} className="relative">
-          <Crosshair containerRef={containerRef as RefObject<HTMLElement>} />
+          <Crosshair
+            containerRef={containerRef as RefObject<HTMLElement>}
+            xLeftPadding={40}
+            xRightPadding={40}
+            yTopPadding={40}
+            yBottomPadding={40}
+          />
           <div className="flex justify-center items-center h-160">
             <a>
               <SplitText

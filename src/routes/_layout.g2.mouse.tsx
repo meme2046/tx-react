@@ -13,7 +13,7 @@ import { useMemo, useRef, type RefObject } from "react";
 import dayjs from "dayjs";
 import type { UiKline } from "@/types/Charts";
 import { getPanel } from "@/utils/panel";
-import { minBy, maxBy, round, get } from "lodash";
+import { minBy, maxBy, round, get, includes } from "lodash";
 
 export const Route = createFileRoute("/_layout/g2/mouse")({
   component: RouteComponent,
@@ -57,24 +57,54 @@ function RouteComponent() {
       },
       style: {
         // 自己的样式
-        stroke: "red",
-        strokeWidth: 2,
-        viewFill: "red",
-        viewFillOpacity: 0.3,
-        contentFill: "cyan",
-        contentFillOpacity: 0.3,
+        // stroke: "red",
+        // strokeWidth: 2,
+        // viewFill: "red",
+        // viewFillOpacity: 0.3,
+        // contentFill: "cyan",
+        // contentFillOpacity: 0.3,
       },
       axis: {
         x: {
           title: false,
+          grid: false,
           line: true,
           labelFormatter: (d: number) => dayjs(d).format("HH:mm"),
         },
         y: {
           title: false,
+          grid: false,
           line: true,
           tick: true, // 是否显示刻度
-          tickCount: 8, // 设置推荐生成的刻度数量
+          tickCount: 100, // 设置推荐生成的刻度数量
+          labelAutoHide: false,
+          labelLineWidth: 0,
+          labelLineHeight: 0,
+          labelFontSize: (
+            _datum: {
+              id: string;
+              label: string;
+              value: number;
+            },
+            idx: number,
+          ) => {
+            if (idx === 0 || idx % 10 === 9) {
+              return 12;
+            } else {
+              return 0;
+            }
+          },
+          // labelRender: (datum: { id: string; label: string; value: number }) => {
+          //   // 添加明确的字体大小和行高，帮助 G2 更好估算（虽仍不完美）
+          //   return `<span>${datum.label}</span>`;
+          // },
+          // labelFormatter: (value: number, idx: number) => {
+          //   if (idx === 0 || (idx + 1) % 20 === 0) {
+          //     return value;
+          //   } else {
+          //     return "";
+          //   }
+          // },
           tickMethod: (start: number, end: number, count: number) => {
             const step = (end - start) / (count - 1);
             return Array.from({ length: count }, (_, i) =>
@@ -197,7 +227,7 @@ function RouteComponent() {
         return;
       }
 
-      const estimatedCount = 12; // 预估y轴刻度最大数量
+      const estimatedCount = 100; // 预估y轴刻度最大数量
       const yTicksEle = document.getElementsByClassName("g2-axis-tick");
 
       if (yTicksEle.length === 0) return;
@@ -206,6 +236,26 @@ function RouteComponent() {
         .slice(-estimatedCount)
         .map((item: any) => item.__data__)
         .filter((item: any) => Number(item.id) < estimatedCount);
+
+      const ratio = (y1 - y) / y1 - y2;
+
+      // console.log(yTicks);
+
+      const labelEle = document.getElementsByClassName("g2-axis-label-item");
+      console.log(labelEle);
+      // const showEle = labelEle.at(-2);
+      // showEle.__data__.label = "123123";
+      // console.log(showEle);
+      // showEle.config.visible = true;
+      // showEle.dirty = true;
+      // showEle.parentNode.dirty = true;
+      // showEle.style.display = "block";
+      // showEle.style.opacity = "1";
+      // showEle.style.fontSize = 12;
+      // showEle.style.opacity = 1;
+      // showEle.style.fill = "red";
+      // showEle.style.stroke = "#ddd";
+      // showEle.style.strokeWidth = "1px";
 
       const min = Number(get(minBy(yTicks, "value"), "label"));
       const max = Number(get(maxBy(yTicks, "value"), "label"));
@@ -227,7 +277,13 @@ function RouteComponent() {
 
   return (
     <div ref={containerRef} className="relative">
-      <Crosshair containerRef={containerRef as RefObject<HTMLElement>} />
+      <Crosshair
+        containerRef={containerRef as RefObject<HTMLElement>}
+        xLeftPadding={72}
+        xRightPadding={16}
+        yTopPadding={16}
+        yBottomPadding={88}
+      />
       <Base {...config} onReady={onReady}></Base>
     </div>
   );

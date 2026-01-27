@@ -108,7 +108,7 @@ function RouteComponent() {
         <div className="size-50 border bg-slash">斜线背景</div>
         <div className="size-50 border bg-dot">dot背景</div>
       </div>
-      <div className="w-64 h-2 x-line" />
+      <div className="w-64 h-2 px-10 bg-clip-content x-line" />
       <div className="h-24 w-2 y-line" />
       <div className="w-64 h-2 x-line" />
       <div className="h-2 bg-linear-to-r from-cyan-500 to-blue-500"></div>
