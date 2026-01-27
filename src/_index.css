@@ -117,3 +117,5 @@ body {
 .y-line {
   @apply bg-repeat-y bg-size-[2px_10px] bg-linear-[to_bottom,var(--muted-foreground)_0_7px,transparent_7px_10px];
 }
+
+/* className={`absolute w-full h-px pointer-events-none opacity-0 transform translate-y-1/2 x-line bg-clip-content`} */

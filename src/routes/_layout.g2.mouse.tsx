@@ -190,9 +190,19 @@ function RouteComponent() {
 
       const [[x1, y1], [_x2, y2]] = yLine[0];
 
+      const panel = getPanel({
+        container,
+        id: "plot-pointermove",
+        width: "auto",
+        pos: "left",
+      });
+
       if (x <= x1 || y > y1 || y < y2) {
         // 鼠标不在范围内
+        panel.style.display = "none";
         return;
+      } else {
+        panel.style.display = "";
       }
 
       const estimatedCount = 12; // 预估y轴刻度最大数量
@@ -218,18 +228,11 @@ function RouteComponent() {
       // <div>事件类型: ${event.type}</div>
       // <div>xValue: ${firstPointData && dayjs(firstPointData.start).format("YYYY-MM-DD HH:mm")}</div>
 
-      const panel = getPanel({
-        container,
-        id: "plot-pointermove",
-        width: "auto",
-        pos: "left",
-      });
-
+      // 调用平滑更新方法
+      panel.updateY(y);
       panel.innerHTML = `
               <div>${round(yValue, 2)}</div>
             `;
-
-      panel.style.top = `${y}px`;
     });
   }
 
