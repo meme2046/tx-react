@@ -175,9 +175,7 @@ function RouteComponent() {
   };
 
   function onReady({ chart }: { chart: Chart }) {
-    chart.on("brush:filter", (e: any) => {
-      console.log(e);
-    });
+    chart.on("brush:filter", (_e: any) => {});
   }
 
   return (

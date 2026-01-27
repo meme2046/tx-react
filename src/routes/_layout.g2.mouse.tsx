@@ -1,21 +1,19 @@
 import Crosshair from "@/components/Crosshair";
 import { useJson } from "@/hooks/use-json";
 import { parseKlineData } from "@/utils/parse";
+import { calculateYValue } from "@/utils/calc";
 import {
   Base,
-  ChartEvent,
   type Chart,
   type CommonConfig,
   type PlotEvent,
 } from "@ant-design/charts";
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useRef, useState, type RefObject } from "react";
+import { useMemo, useRef, type RefObject } from "react";
 import dayjs from "dayjs";
-import format, { format as prettyFormat } from "pretty-format"; // ES2015 modules
 import type { UiKline } from "@/types/Charts";
 import { getPanel } from "@/utils/panel";
-import { filter, findIndex, minBy, maxBy, round, get } from "lodash";
-import { tooltip } from "@antv/g2/lib/interaction/tooltip";
+import { minBy, maxBy, round, get } from "lodash";
 
 export const Route = createFileRoute("/_layout/g2/mouse")({
   component: RouteComponent,
@@ -29,12 +27,6 @@ export const Route = createFileRoute("/_layout/g2/mouse")({
 });
 
 function RouteComponent() {
-  const [axisYData, setAxisYData] = useState<{
-    yStart?: number; //86074.72
-    yEnd?: number; //89010
-    y1?: number; //389.0240478515625
-    y2?: number; //45
-  }>({});
   const colors = ["#00C9C9", "#7863FF", "#1783FF", "#F0884D", "#D580FF"];
   const grMap = {
     up: "#4DAF4A",
@@ -51,7 +43,7 @@ function RouteComponent() {
     () => ({
       type: "view",
       data: parsedData,
-      encode: { x: "start", y: ["lowest", "highest"], color: "trend" },
+      encode: { x: "start", y: ["lowest", "highest"] },
       scale: {
         start: {
           type: "time",
@@ -62,7 +54,6 @@ function RouteComponent() {
         x: {
           compare: (a: number, b: number) => a - b,
         },
-        color: { domain: ["up", "down"], range: [grMap.up, grMap.down] },
       },
       style: {
         // 自己的样式
@@ -87,7 +78,7 @@ function RouteComponent() {
           tickMethod: (start: number, end: number, count: number) => {
             const step = (end - start) / (count - 1);
             return Array.from({ length: count }, (_, i) =>
-              round(start + i * step),
+              round(start + i * step, 2),
             );
           },
         },
@@ -99,12 +90,6 @@ function RouteComponent() {
       },
       interaction: {
         tooltip: false,
-        sliderFilter: {
-          adaptiveMode: "filter", // 启用自适应
-        },
-        // tooltip: {
-        //   title: (d: UiKline) => dayjs(d.start).format("YYYY-MM-DD HH:mm"),
-        // },
       },
       children: [
         {
@@ -185,18 +170,6 @@ function RouteComponent() {
       }
     });
 
-    // chart.on("sliderX:filter", (event: PlotEvent) => {
-    //   const { nativeEvent } = event;
-    //   if (!nativeEvent) return;
-
-    //   const { canvas } = chart.getContext();
-    //   const { document } = canvas;
-    //   const tickItems = document.getElementsByClassName("g2-axis-tick");
-    //   console.log(tickItems.slice(-12));
-
-    //   // findLastIndex(tickItems);
-    // });
-
     chart.on(`plot:pointermove`, (event: PlotEvent) => {
       const { nativeEvent, x, y } = event;
       if (!nativeEvent || !x || !y) return; // 过滤程序触发的事件
@@ -208,66 +181,36 @@ function RouteComponent() {
         pos: "left",
       });
 
-      // const {
-      //   innerWidth: plotWidth, // 绘图区真实宽度（核心）
-      //   innerHeight: plotHeight, // 绘图区真实高度（核心）
-      //   paddingLeft, // 绘图区左偏移
-      //   marginLeft, // 绘图区左外边距
-      //   paddingTop, // 绘图区上偏移
-      //   marginTop, // 绘图区上外边距
-      //   paddingBottom, // 无需用到，因为 y 轴是从 top 开始计算
-      //   marginBottom, // 绘图区下外边距
-      //   paddingRight, // 绘图区右偏移
-      //   marginRight, // 绘图区右外边距
-      // } = chart.getCoordinate().getOptions();
-
-      // const plotMouseX = x - paddingLeft - marginLeft;
-      // const plotMouseY = y - paddingTop - marginTop;
-
-      // // ✘ 鼠标移出绘图区域
-      // if (
-      //   plotMouseX < 0 ||
-      //   plotMouseX > plotWidth ||
-      //   plotMouseY < 0 ||
-      //   plotMouseY > plotHeight
-      // ) {
-      //   return;
-      // }
-
-      // 转为 Scale 所需的 0~1 相对占比（基于真实绘图区尺寸）
-      // const yRatio = plotMouseY / plotHeight;
-      // const yScale = chart.getScaleByChannel("y");
-      // const domain = yScale.getOptions().domain;
-
-      // let originalYValue = yScale.invert(yRatio);
-
       const { canvas } = chart.getContext();
       const { document } = canvas;
 
-      const yLine = document
-        .getElementsByClassName("g2-axis-line")
-        .slice(-1)
-        .map((item: any) => item.__data__.line);
+      const yLineEle = document.getElementsByClassName("g2-axis-line");
+
+      if (yLineEle.length === 0) return;
+
+      const yLine = yLineEle.slice(-1).map((item: any) => item.__data__.line);
 
       const [[x1, y1], [_x2, y2]] = yLine[0];
 
       if (x <= x1 || y > y1 || y < y2) {
+        // 鼠标不在范围内
         return;
       }
 
-      // console.log(x1, y1, x2, y2);
-
       const estimatedCount = 12; // 预估y轴刻度最大数量
-      const yTicks = document
-        .getElementsByClassName("g2-axis-tick")
+      const yTicksEle = document.getElementsByClassName("g2-axis-tick");
+
+      if (yTicksEle.length === 0) return;
+
+      const yTicks = yTicksEle
         .slice(-estimatedCount)
         .map((item: any) => item.__data__)
         .filter((item: any) => Number(item.id) < estimatedCount);
 
-      const min = get(minBy(yTicks, "value"), "label");
-      const max = get(maxBy(yTicks, "value"), "label");
-      console.log(min, max); // 86075,89010
-      console.log(y1, y2); // 389.0240478515625,45
+      const min = Number(get(minBy(yTicks, "value"), "label"));
+      const max = Number(get(maxBy(yTicks, "value"), "label"));
+
+      const yValue = calculateYValue(y, min, max, y1, y2);
 
       const pointData = chart.getDataByXY({ x, y });
       const firstPointData =
@@ -277,24 +220,15 @@ function RouteComponent() {
               <div>🔢容器坐标: (${round(x)}, ${round(y)})</div>
               <div>事件类型: ${event.type}</div>
               <div>xValue: ${firstPointData && dayjs(firstPointData.start).format("YYYY-MM-DD HH:mm")}</div>
+              <div>yValue: ${yValue}</div>
             `;
-      // <div>yValue: ${originalYValue}</div>
-      // <div>yDomain: [${domain}]</div>
-      // <div>left: [${paddingLeft},${marginLeft}]</div>
-      // <div>top: [${paddingTop},${marginTop}]</div>
-      // <div>right: [${paddingRight},${marginRight}]</div>
-      // <div>bottom: [${paddingBottom},${marginBottom}]</div>
     });
   }
 
   return (
     <div ref={containerRef} className="relative">
-      <Crosshair
-        containerRef={containerRef as RefObject<HTMLElement>}
-        color="var(--color-primary)"
-      />
+      <Crosshair containerRef={containerRef as RefObject<HTMLElement>} />
       <Base {...config} onReady={onReady}></Base>
-      <div>{format(axisYData)}</div>
     </div>
   );
 }

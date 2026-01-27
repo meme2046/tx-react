@@ -19,21 +19,20 @@ function RouteComponent() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <ElectricBorder className="mx-10">
-      <div ref={containerRef} className="relative h-160">
-        <Crosshair
-          containerRef={containerRef as RefObject<HTMLElement>}
-          color="var(--color-primary)"
-        />
-        <div className="w-full h-full flex justify-center items-center">
-          <a>
-            <SplitText
-              text={`containerRef defaults to "window" if not provided`}
-              className="text-4xl font-semibold"
-            />
-          </a>
+    <div className="p-4 overflow-hidden">
+      <ElectricBorder className="">
+        <div ref={containerRef} className="relative">
+          <Crosshair containerRef={containerRef as RefObject<HTMLElement>} />
+          <div className="flex justify-center items-center h-160">
+            <a>
+              <SplitText
+                text={`containerRef defaults to "window" if not provided`}
+                className="text-4xl font-semibold"
+              />
+            </a>
+          </div>
         </div>
-      </div>
-    </ElectricBorder>
+      </ElectricBorder>
+    </div>
   );
 }
