@@ -13,7 +13,7 @@ import { useMemo, useRef, type RefObject } from "react";
 import dayjs from "dayjs";
 import type { UiKline } from "@/types/Charts";
 import { getPanel } from "@/utils/panel";
-import { minBy, maxBy, round, get, includes } from "lodash";
+import { minBy, maxBy, round, get } from "lodash";
 
 export const Route = createFileRoute("/_layout/g2/mouse")({
   component: RouteComponent,
@@ -76,35 +76,10 @@ function RouteComponent() {
           grid: false,
           line: true,
           tick: true, // 是否显示刻度
-          tickCount: 100, // 设置推荐生成的刻度数量
+          tickCount: 10, // 设置推荐生成的刻度数量
           labelAutoHide: false,
           labelLineWidth: 0,
           labelLineHeight: 0,
-          labelFontSize: (
-            _datum: {
-              id: string;
-              label: string;
-              value: number;
-            },
-            idx: number,
-          ) => {
-            if (idx === 0 || idx % 10 === 9) {
-              return 12;
-            } else {
-              return 0;
-            }
-          },
-          // labelRender: (datum: { id: string; label: string; value: number }) => {
-          //   // 添加明确的字体大小和行高，帮助 G2 更好估算（虽仍不完美）
-          //   return `<span>${datum.label}</span>`;
-          // },
-          // labelFormatter: (value: number, idx: number) => {
-          //   if (idx === 0 || (idx + 1) % 20 === 0) {
-          //     return value;
-          //   } else {
-          //     return "";
-          //   }
-          // },
           tickMethod: (start: number, end: number, count: number) => {
             const step = (end - start) / (count - 1);
             return Array.from({ length: count }, (_, i) =>
@@ -204,13 +179,6 @@ function RouteComponent() {
       const { nativeEvent, x, y } = event;
       if (!nativeEvent || !x || !y) return; // 过滤程序触发的事件
 
-      const panel = getPanel({
-        container,
-        id: "plot-pointermove",
-        width: "320px",
-        pos: "left",
-      });
-
       const { canvas } = chart.getContext();
       const { document } = canvas;
 
@@ -227,7 +195,7 @@ function RouteComponent() {
         return;
       }
 
-      const estimatedCount = 100; // 预估y轴刻度最大数量
+      const estimatedCount = 12; // 预估y轴刻度最大数量
       const yTicksEle = document.getElementsByClassName("g2-axis-tick");
 
       if (yTicksEle.length === 0) return;
@@ -237,41 +205,31 @@ function RouteComponent() {
         .map((item: any) => item.__data__)
         .filter((item: any) => Number(item.id) < estimatedCount);
 
-      const ratio = (y1 - y) / y1 - y2;
-
-      // console.log(yTicks);
-
-      const labelEle = document.getElementsByClassName("g2-axis-label-item");
-      console.log(labelEle);
-      // const showEle = labelEle.at(-2);
-      // showEle.__data__.label = "123123";
-      // console.log(showEle);
-      // showEle.config.visible = true;
-      // showEle.dirty = true;
-      // showEle.parentNode.dirty = true;
-      // showEle.style.display = "block";
-      // showEle.style.opacity = "1";
-      // showEle.style.fontSize = 12;
-      // showEle.style.opacity = 1;
-      // showEle.style.fill = "red";
-      // showEle.style.stroke = "#ddd";
-      // showEle.style.strokeWidth = "1px";
-
       const min = Number(get(minBy(yTicks, "value"), "label"));
       const max = Number(get(maxBy(yTicks, "value"), "label"));
 
       const yValue = calculateYValue(y, min, max, y1, y2);
 
-      const pointData = chart.getDataByXY({ x, y });
-      const firstPointData =
-        pointData && pointData.length > 0 ? pointData[0] : null;
+      // const pointData = chart.getDataByXY({ x, y });
+      // const firstPointData =
+      //   pointData && pointData.length > 0 ? pointData[0] : null;
+
+      // <div>🔢容器坐标: (${round(x)}, ${round(y)})</div>
+      // <div>事件类型: ${event.type}</div>
+      // <div>xValue: ${firstPointData && dayjs(firstPointData.start).format("YYYY-MM-DD HH:mm")}</div>
+
+      const panel = getPanel({
+        container,
+        id: "plot-pointermove",
+        width: "auto",
+        pos: "left",
+      });
 
       panel.innerHTML = `
-              <div>🔢容器坐标: (${round(x)}, ${round(y)})</div>
-              <div>事件类型: ${event.type}</div>
-              <div>xValue: ${firstPointData && dayjs(firstPointData.start).format("YYYY-MM-DD HH:mm")}</div>
-              <div>yValue: ${yValue}</div>
+              <div>${round(yValue, 2)}</div>
             `;
+
+      panel.style.top = `${y}px`;
     });
   }
 
