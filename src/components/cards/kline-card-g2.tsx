@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { includes, startsWith, isNaN } from "lodash";
+import { includes, startsWith, isNaN, round } from "lodash";
 import { Badge } from "../ui/badge";
 import { UpdateTime } from "./update-time";
 import { Button } from "../ui/button";
@@ -20,13 +20,9 @@ interface Props {
   data?: UiKline[];
 }
 
-export function KLineCardG2({
-  className = "py-0 gap-0 m-0",
-  basic,
-  data,
-}: Props) {
+export function KLineCardG2({ className = "py-0 gap-0", basic, data }: Props) {
   return (
-    <Card className={className}>
+    <Card className={`${className}`}>
       <CardHeader className="gap-0">
         <CardTitle className="flex items-center">
           <Avatar
@@ -52,7 +48,7 @@ export function KLineCardG2({
             </div>
 
             <div
-              className={`flex text-sm gap-1 ${startsWith(basic.increase, "-") ? "text-red-600" : "text-green-700"}`}
+              className={`flex items-start text-sm gap-1 ${startsWith(basic.increase, "-") ? "text-red-600" : "text-green-700"}`}
             >
               <span className="text-5xl">
                 {isNaN(basic.price) ? "--" : basic.price}
@@ -60,14 +56,27 @@ export function KLineCardG2({
               <div
                 className={`${includes(["USDCNH", "IXIC"], basic.code) ? "hidden sm:flex sm:flex-col sm:gap-0.5" : "flex flex-col gap-0.5"}`}
               >
-                <span className="border rounded px-0.5">{basic.increase}</span>
+                {includes(["XAUTUSDT"], basic.code) && basic.price && (
+                  <span className="border rounded px-0.5 bg-accent">
+                    ￥
+                    {round((basic.price / 31.1034768) * 6.96, basic.precision)}
+                  </span>
+                )}
+                {!includes(["XAUTUSDT"], basic.code) && (
+                  <span className="border rounded px-0.5">
+                    {basic.increase}
+                  </span>
+                )}
                 <span className="border rounded px-0.5">{basic.ratio}</span>
               </div>
             </div>
           </div>
         </CardTitle>
-        <CardDescription className="flex sm:hidden">
-          <UpdateTime timestamp={basic.time ?? basic.timestamp} />
+        <CardDescription className="flex gap-2 items-center">
+          <UpdateTime
+            className="sm:hidden"
+            timestamp={basic.time ?? basic.timestamp}
+          />
         </CardDescription>
         <CardAction>
           <div className="space-y-1 hidden sm:block">

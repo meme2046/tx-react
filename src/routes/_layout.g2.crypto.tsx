@@ -68,7 +68,6 @@ function RouteComponent() {
         basic={mergeNonEmpty(basicBTC, basicInfoMap["BTCUSDT"])}
       />
       <KLineCardG2
-        className="my-2 gap-0"
         data={parsedDataBnLife}
         basic={mergeNonEmpty(basicBnLife, basicInfoMap["币安人生USDT"])}
       />

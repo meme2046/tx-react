@@ -2,10 +2,16 @@ import { SVG_SRC } from "@/consts";
 import dayjs from "dayjs";
 import { ReactSVG } from "react-svg";
 
-export function UpdateTime({ timestamp }: { timestamp: number | undefined }) {
+export function UpdateTime({
+  timestamp,
+  className,
+}: {
+  timestamp?: number;
+  className?: string;
+}) {
   return (
     timestamp && (
-      <div className="relative text-xs">
+      <div className={`relative text-xs ${className ?? ""}`}>
         <span>更新时间:</span>
         <span>
           {dayjs
