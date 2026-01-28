@@ -1,6 +1,7 @@
 import type { BreakItem, ChartData, MarketData, UiKline } from "@/types/Charts";
-import { has, includes, isNull, round, toNumber } from "lodash";
-import { MACD, SMA, EMA } from "trading-signals";
+import dayjs from "dayjs";
+import { has, includes, isNumber, round, toNumber } from "lodash";
+import { SMA, EMA } from "trading-signals";
 export function parseMarketData(
   p: string,
   keys: Array<keyof MarketData>,
@@ -70,10 +71,22 @@ export function parseMarketData(
   };
 }
 
-export function parseKlineData(data: any, precision: number = 2): UiKline[] {
+export function parseKlineData(data: any): {
+  parsedData: UiKline[];
+  basic: {
+    price?: number;
+    increase?: string;
+    ratio?: string;
+    timestamp?: number;
+    precision: number;
+  };
+} {
   if (!data || !Array.isArray(data)) {
-    return [];
+    return { parsedData: [], basic: { precision: 0 } };
   }
+
+  const price = toNumber(data.at(-1)[4]);
+  const precision = getPrecision(price || 0);
 
   const sma7 = new SMA(7);
   const sma25 = new SMA(25);
@@ -88,6 +101,7 @@ export function parseKlineData(data: any, precision: number = 2): UiKline[] {
     const lowest = toNumber(item[3]);
     const close = toNumber(item[4]);
     const volume = toNumber(item[5]);
+    // const end = toNumber(item[6]);
     const amount = toNumber(item[7]);
 
     sma7.add(close);
@@ -107,11 +121,11 @@ export function parseKlineData(data: any, precision: number = 2): UiKline[] {
       mean: round((highest + lowest) / 2, precision), // 均价
       close, // 收盘价(当前K线未结束的即为最新价)
       volume, // 成交量
-      end: item[6], // k线收盘时间
+      // end, // k线收盘时间
       amount, // 成交额
-      trades: item[8], // 成交笔数
-      buyVolume: item[9], // 主动买入成交量
-      buyAmount: item[10], // 主动买入成交额
+      // trades: item[8], // 成交笔数
+      // buyVolume: item[9], // 主动买入成交量
+      // buyAmount: item[10], // 主动买入成交额
       trend: close - open >= 0 ? "up" : "down",
       sma7: sma7Result ? round(sma7Result, precision) : null,
       sma25: sma25Result ? round(sma25Result, precision) : null,
@@ -120,5 +134,39 @@ export function parseKlineData(data: any, precision: number = 2): UiKline[] {
     };
   });
 
-  return parsedData.slice(25);
+  const last = parsedData.at(-1);
+  const first = parsedData.at(0);
+  const increase = last && first ? last.close - first.open : 0;
+  const ratio = last && first ? round((increase / first.open) * 100, 2) : 0;
+  const prefix = increase > 0 ? "+" : "";
+
+  return {
+    parsedData: parsedData.slice(25),
+    basic: {
+      price,
+      increase: `${prefix}${round(increase, precision)}`,
+      ratio: `${prefix}${ratio}%`,
+      timestamp: dayjs().valueOf(),
+      precision: precision,
+    },
+  };
+}
+
+export function getPrecision(num: number): number {
+  // 1. 先通过 Lodash 判断是否为数字（避免非数字传入报错）
+  if (!isNumber(num)) {
+    throw new Error("✘ number is not valid");
+  }
+
+  // 2. 将数字转为字符串
+  const numStr = num.toString();
+
+  // 3. 判断是否包含小数点
+  if (!numStr.includes(".")) {
+    return 0; // 整数，小数位数为 0
+  }
+
+  // 4. 分割字符串，获取小数点后部分的长度
+  const decimalPart = numStr.split(".")[1];
+  return decimalPart.length;
 }

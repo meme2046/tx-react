@@ -33,11 +33,11 @@ function RouteComponent() {
     down: "#E41A1C",
   };
   const containerRef = useRef<HTMLDivElement>(null);
-  const { data } = useJson(
-    "https://api4.binance.com/api/v3/uiKlines?symbol=BTCUSDT&interval=15m&limit=200",
+  const { data } = useJson<any>(
+    `https://api4.binance.com/api/v3/uiKlines?symbol=币安人生USDT&interval=5m&limit=${314}`,
   );
 
-  const parsedData = useMemo(() => parseKlineData(data), [data]);
+  const { parsedData, basic } = useMemo(() => parseKlineData(data), [data]);
 
   const config: CommonConfig = useMemo(
     () => ({
@@ -55,14 +55,16 @@ function RouteComponent() {
           compare: (a: number, b: number) => a - b,
         },
       },
+      // padding: 0,
+      // margin: 0,
       style: {
         // 自己的样式
-        // stroke: "red",
-        // strokeWidth: 2,
-        // viewFill: "red",
-        // viewFillOpacity: 0.3,
-        // contentFill: "cyan",
-        // contentFillOpacity: 0.3,
+        stroke: "red",
+        strokeWidth: 2,
+        viewFill: "red",
+        viewFillOpacity: 0.3,
+        contentFill: "cyan",
+        contentFillOpacity: 0.3,
       },
       axis: {
         x: {
@@ -73,17 +75,17 @@ function RouteComponent() {
         },
         y: {
           title: false,
-          grid: false,
+          grid: true,
           line: true,
           tick: true, // 是否显示刻度
-          tickCount: 10, // 设置推荐生成的刻度数量
-          labelAutoHide: false,
+          tickCount: 5, // 设置推荐生成的刻度数量
+          // labelAutoHide: false,
           labelLineWidth: 0,
           labelLineHeight: 0,
           tickMethod: (start: number, end: number, count: number) => {
             const step = (end - start) / (count - 1);
             return Array.from({ length: count }, (_, i) =>
-              round(start + i * step, 2),
+              round(start + i * step, basic.precision),
             );
           },
         },
@@ -185,9 +187,9 @@ function RouteComponent() {
       const yLineEle = document.getElementsByClassName("g2-axis-line");
 
       if (yLineEle.length === 0) return;
-
+      const xLine = yLineEle.slice(-2).map((item: any) => item.__data__.line);
       const yLine = yLineEle.slice(-1).map((item: any) => item.__data__.line);
-
+      const [[_x1, _y1], [x2, _y2]] = xLine[0];
       const [[x1, y1], [_x2, y2]] = yLine[0];
 
       const panel = getPanel({
@@ -197,12 +199,12 @@ function RouteComponent() {
         pos: "left",
       });
 
-      if (x <= x1 || y > y1 || y < y2) {
+      if (x <= x1 || x >= x2 || y > y1 || y < y2) {
         // 鼠标不在范围内
-        panel.style.display = "none";
+        panel.style.opacity = 0;
         return;
       } else {
-        panel.style.display = "";
+        panel.style.opacity = 1;
       }
 
       const estimatedCount = 12; // 预估y轴刻度最大数量
@@ -231,7 +233,7 @@ function RouteComponent() {
       // 调用平滑更新方法
       panel.updateY(y);
       panel.innerHTML = `
-              <div>${round(yValue, 2)}</div>
+              <div>${round(yValue, basic.precision)}</div>
             `;
     });
   }

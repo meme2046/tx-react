@@ -212,7 +212,7 @@ const Crosshair: React.FC<CrosshairProps> = ({
   return (
     <div
       ref={cursorRef}
-      className={`${containerRef ? "absolute" : "fixed"} top-0 left-0 w-full h-full pointer-events-none z-100`}
+      className={`${containerRef ? "absolute" : "fixed"} top-0 left-0 w-full h-full pointer-events-none z-40`}
     >
       <svg className="absolute top-0 left-0 w-full h-full">
         <defs>

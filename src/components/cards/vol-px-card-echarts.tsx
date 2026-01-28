@@ -3,7 +3,6 @@ import {
   CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -20,10 +19,10 @@ interface Props {
   data: ChartData;
 }
 const defaultProps = {
-  className: "",
+  className: "py-0 gap-0",
 };
 
-export function CardECharts(props: Props) {
+export function VolPxCardEcharts(props: Props) {
   const { className, basicInfo, data } = {
     ...defaultProps,
     ...props,
@@ -49,7 +48,7 @@ export function CardECharts(props: Props) {
             </div>
 
             <div
-              className={`flex text-sm gap-1 ${startsWith(basicInfo.increase, "+") ? "text-green-700" : "text-red-600"}`}
+              className={`flex text-sm gap-1 ${startsWith(basicInfo.increase, "-") ? "text-red-600" : "text-green-700"}`}
             >
               <span className="text-5xl">
                 {isNaN(basicInfo.price) ? "--" : basicInfo.price}
@@ -90,7 +89,6 @@ export function CardECharts(props: Props) {
       <CardContent className="p-0 m-0">
         <VolPxECharts basicInfo={basicInfo} data={data} />
       </CardContent>
-      <CardFooter></CardFooter>
     </Card>
   );
 }

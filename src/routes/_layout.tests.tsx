@@ -109,7 +109,10 @@ function RouteComponent() {
         <div className="size-50 border bg-dot">dot背景</div>
       </div>
       <div className="w-64 h-2 px-10 bg-clip-content x-line" />
-      <div className="h-24 w-2 y-line" />
+      <div className="relative h-24">
+        <div className="absolute h-full w-2 y-line" />
+        <div className="absolute h-full w-2 y-line translate-x-64" />
+      </div>
       <div className="w-64 h-2 x-line" />
       <div className="h-2 bg-linear-to-r from-cyan-500 to-blue-500"></div>
       <div className="h-2 bg-linear-to-t from-sky-500 to-indigo-500"></div>

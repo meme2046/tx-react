@@ -1,5 +1,5 @@
-import { CardECharts } from "@/components/cards/gushi-card";
-import { basicInfoMap } from "@/consts/gushitong";
+import { VolPxCardEcharts } from "@/components/cards/vol-px-card-echarts";
+import { basicInfoMap } from "@/consts/charts";
 import { useRedis } from "@/hooks/use-redis";
 import type { ChartData } from "@/types/Charts";
 import { parseMarketData } from "@/utils/parse";
@@ -90,8 +90,7 @@ function RouteComponent() {
   }, [sz000001]);
   return (
     <div className="px-4 pb-4 grid grid-cols-1 xl:grid-cols-2 gap-2">
-      <CardECharts
-        className="py-1 gap-1"
+      <VolPxCardEcharts
         basicInfo={mergeNonEmpty(xaucny?.data.cur ?? {}, {
           ...basicInfoMap["XAUCNY"],
           timestamp: xaucny?.timestamp,
@@ -99,8 +98,7 @@ function RouteComponent() {
         })}
         data={xaucnyChartData}
       />
-      <CardECharts
-        className="py-1 gap-1"
+      <VolPxCardEcharts
         basicInfo={mergeNonEmpty(sz000001?.data.cur ?? {}, {
           ...basicInfoMap["000001"],
           timestamp: sz000001?.timestamp,
@@ -108,8 +106,7 @@ function RouteComponent() {
         })}
         data={sh000001ChartData}
       />
-      <CardECharts
-        className="py-1 gap-1"
+      <VolPxCardEcharts
         basicInfo={mergeNonEmpty(xagcny?.data.cur ?? {}, {
           ...basicInfoMap["XAGCNY"],
           timestamp: xagcny?.timestamp,
@@ -117,8 +114,7 @@ function RouteComponent() {
         })}
         data={xagcnyChartData}
       />
-      <CardECharts
-        className="py-1 gap-1"
+      <VolPxCardEcharts
         basicInfo={mergeNonEmpty(ixic?.data.cur ?? {}, {
           ...basicInfoMap["IXIC"],
           timestamp: ixic?.timestamp,
@@ -126,8 +122,7 @@ function RouteComponent() {
         })}
         data={ixicChartData}
       />
-      <CardECharts
-        className="py-1 gap-1"
+      <VolPxCardEcharts
         basicInfo={mergeNonEmpty(sh600519?.data.cur ?? {}, {
           ...basicInfoMap["600519"],
           timestamp: sh600519?.timestamp,
@@ -136,8 +131,7 @@ function RouteComponent() {
         data={sh600519ChartData}
       />
 
-      <CardECharts
-        className="py-1 gap-1"
+      <VolPxCardEcharts
         basicInfo={mergeNonEmpty(usdcnh?.data.cur ?? {}, {
           ...basicInfoMap["USDCNH"],
           timestamp: usdcnh?.timestamp,

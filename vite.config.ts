@@ -6,18 +6,22 @@ import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import { devtools } from "@tanstack/devtools-vite";
 // https://vite.dev/config/
 export default defineConfig({
-	plugins: [
-		devtools(),
-		tanstackRouter({
-			target: "react",
-			autoCodeSplitting: true,
-		}),
-		react(),
-		tailwindcss(),
-	],
-	resolve: {
-		alias: {
-			"@": path.resolve(__dirname, "./src"),
-		},
-	},
+  plugins: [
+    devtools(),
+    tanstackRouter({
+      target: "react",
+      autoCodeSplitting: true,
+    }),
+    react(),
+    tailwindcss(),
+  ],
+  server: {
+    host: ["localhost", "192.168.123.7"] as any,
+    port: 5173,
+  },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
 });

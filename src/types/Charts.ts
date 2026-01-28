@@ -31,6 +31,7 @@ export interface Taglist {
 }
 
 export interface BasicInfo {
+  precision: number;
   timestamp?: number;
   tradeStatus?: string;
   time?: number;
@@ -56,11 +57,11 @@ export interface UiKline {
   mean: number; // 均价
   close: number; // 收盘价(当前K线未结束的即为最新价)
   volume: number; // 成交量
-  end: number; // k线收盘时间
   amount: number; // 成交额
-  trades: number; // 成交笔数
-  buyVolume: string; // 主动买入成交量
-  buyAmount: string; // 主动买入成交额
+  // end: number; // k线收盘时间
+  // trades: number; // 成交笔数
+  // buyVolume: string; // 主动买入成交量
+  // buyAmount: string; // 主动买入成交额
   trend: "up" | "down"; // 趋势
   // 技术指标
   sma7?: number | null; // 7日均线

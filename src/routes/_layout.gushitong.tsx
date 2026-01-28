@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { SVG_SRC } from "@/consts";
-import { GUSHITONG_IMG, GUSHITONG_MARKET } from "@/consts/gushitong";
+import { GUSHITONG_IMG, GUSHITONG_MARKET } from "@/consts/charts";
 import { useRedis } from "@/hooks/use-redis";
 import type {
   BannerItem,
