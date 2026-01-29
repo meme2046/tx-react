@@ -35,8 +35,6 @@ import { Route as AuthInvoicesRouteImport } from './routes/_auth.invoices'
 import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
 import { Route as AuthInvoicesIndexRouteImport } from './routes/_auth.invoices.index'
 import { Route as LayoutReactbitsCrosshairRouteImport } from './routes/_layout.reactbits.crosshair'
-import { Route as LayoutG2TooltipRouteImport } from './routes/_layout.g2.tooltip'
-import { Route as LayoutG2SpotRouteImport } from './routes/_layout.g2.spot'
 import { Route as LayoutG2SliderRouteImport } from './routes/_layout.g2.slider'
 import { Route as LayoutG2MultiAreaRouteImport } from './routes/_layout.g2.multi-area'
 import { Route as LayoutG2MouseRouteImport } from './routes/_layout.g2.mouse'
@@ -44,7 +42,6 @@ import { Route as LayoutG2KlineRouteImport } from './routes/_layout.g2.kline'
 import { Route as LayoutG2DemoRouteImport } from './routes/_layout.g2.demo'
 import { Route as LayoutG2DataPanelRouteImport } from './routes/_layout.g2.data-panel'
 import { Route as LayoutG2CryptoRouteImport } from './routes/_layout.g2.crypto'
-import { Route as LayoutG2CandleSticksRouteImport } from './routes/_layout.g2.candle-sticks'
 import { Route as LayoutEchartsGushiRouteImport } from './routes/_layout.echarts.gushi'
 import { Route as LayoutEchartsCryptoRouteImport } from './routes/_layout.echarts.crypto'
 import { Route as LayoutEchartsBtcusdtRouteImport } from './routes/_layout.echarts.btcusdt'
@@ -179,16 +176,6 @@ const LayoutReactbitsCrosshairRoute =
     path: '/reactbits/crosshair',
     getParentRoute: () => LayoutRoute,
   } as any)
-const LayoutG2TooltipRoute = LayoutG2TooltipRouteImport.update({
-  id: '/g2/tooltip',
-  path: '/g2/tooltip',
-  getParentRoute: () => LayoutRoute,
-} as any)
-const LayoutG2SpotRoute = LayoutG2SpotRouteImport.update({
-  id: '/g2/spot',
-  path: '/g2/spot',
-  getParentRoute: () => LayoutRoute,
-} as any)
 const LayoutG2SliderRoute = LayoutG2SliderRouteImport.update({
   id: '/g2/slider',
   path: '/g2/slider',
@@ -222,11 +209,6 @@ const LayoutG2DataPanelRoute = LayoutG2DataPanelRouteImport.update({
 const LayoutG2CryptoRoute = LayoutG2CryptoRouteImport.update({
   id: '/g2/crypto',
   path: '/g2/crypto',
-  getParentRoute: () => LayoutRoute,
-} as any)
-const LayoutG2CandleSticksRoute = LayoutG2CandleSticksRouteImport.update({
-  id: '/g2/candle-sticks',
-  path: '/g2/candle-sticks',
   getParentRoute: () => LayoutRoute,
 } as any)
 const LayoutEchartsGushiRoute = LayoutEchartsGushiRouteImport.update({
@@ -277,7 +259,6 @@ export interface FileRoutesByFullPath {
   '/echarts/btcusdt': typeof LayoutEchartsBtcusdtRoute
   '/echarts/crypto': typeof LayoutEchartsCryptoRoute
   '/echarts/gushi': typeof LayoutEchartsGushiRoute
-  '/g2/candle-sticks': typeof LayoutG2CandleSticksRoute
   '/g2/crypto': typeof LayoutG2CryptoRoute
   '/g2/data-panel': typeof LayoutG2DataPanelRoute
   '/g2/demo': typeof LayoutG2DemoRoute
@@ -285,8 +266,6 @@ export interface FileRoutesByFullPath {
   '/g2/mouse': typeof LayoutG2MouseRoute
   '/g2/multi-area': typeof LayoutG2MultiAreaRoute
   '/g2/slider': typeof LayoutG2SliderRoute
-  '/g2/spot': typeof LayoutG2SpotRoute
-  '/g2/tooltip': typeof LayoutG2TooltipRoute
   '/reactbits/crosshair': typeof LayoutReactbitsCrosshairRoute
   '/invoices/': typeof AuthInvoicesIndexRoute
 }
@@ -316,7 +295,6 @@ export interface FileRoutesByTo {
   '/echarts/btcusdt': typeof LayoutEchartsBtcusdtRoute
   '/echarts/crypto': typeof LayoutEchartsCryptoRoute
   '/echarts/gushi': typeof LayoutEchartsGushiRoute
-  '/g2/candle-sticks': typeof LayoutG2CandleSticksRoute
   '/g2/crypto': typeof LayoutG2CryptoRoute
   '/g2/data-panel': typeof LayoutG2DataPanelRoute
   '/g2/demo': typeof LayoutG2DemoRoute
@@ -324,8 +302,6 @@ export interface FileRoutesByTo {
   '/g2/mouse': typeof LayoutG2MouseRoute
   '/g2/multi-area': typeof LayoutG2MultiAreaRoute
   '/g2/slider': typeof LayoutG2SliderRoute
-  '/g2/spot': typeof LayoutG2SpotRoute
-  '/g2/tooltip': typeof LayoutG2TooltipRoute
   '/reactbits/crosshair': typeof LayoutReactbitsCrosshairRoute
   '/invoices': typeof AuthInvoicesIndexRoute
 }
@@ -359,7 +335,6 @@ export interface FileRoutesById {
   '/_layout/echarts/btcusdt': typeof LayoutEchartsBtcusdtRoute
   '/_layout/echarts/crypto': typeof LayoutEchartsCryptoRoute
   '/_layout/echarts/gushi': typeof LayoutEchartsGushiRoute
-  '/_layout/g2/candle-sticks': typeof LayoutG2CandleSticksRoute
   '/_layout/g2/crypto': typeof LayoutG2CryptoRoute
   '/_layout/g2/data-panel': typeof LayoutG2DataPanelRoute
   '/_layout/g2/demo': typeof LayoutG2DemoRoute
@@ -367,8 +342,6 @@ export interface FileRoutesById {
   '/_layout/g2/mouse': typeof LayoutG2MouseRoute
   '/_layout/g2/multi-area': typeof LayoutG2MultiAreaRoute
   '/_layout/g2/slider': typeof LayoutG2SliderRoute
-  '/_layout/g2/spot': typeof LayoutG2SpotRoute
-  '/_layout/g2/tooltip': typeof LayoutG2TooltipRoute
   '/_layout/reactbits/crosshair': typeof LayoutReactbitsCrosshairRoute
   '/_auth/invoices/': typeof AuthInvoicesIndexRoute
 }
@@ -401,7 +374,6 @@ export interface FileRouteTypes {
     | '/echarts/btcusdt'
     | '/echarts/crypto'
     | '/echarts/gushi'
-    | '/g2/candle-sticks'
     | '/g2/crypto'
     | '/g2/data-panel'
     | '/g2/demo'
@@ -409,8 +381,6 @@ export interface FileRouteTypes {
     | '/g2/mouse'
     | '/g2/multi-area'
     | '/g2/slider'
-    | '/g2/spot'
-    | '/g2/tooltip'
     | '/reactbits/crosshair'
     | '/invoices/'
   fileRoutesByTo: FileRoutesByTo
@@ -440,7 +410,6 @@ export interface FileRouteTypes {
     | '/echarts/btcusdt'
     | '/echarts/crypto'
     | '/echarts/gushi'
-    | '/g2/candle-sticks'
     | '/g2/crypto'
     | '/g2/data-panel'
     | '/g2/demo'
@@ -448,8 +417,6 @@ export interface FileRouteTypes {
     | '/g2/mouse'
     | '/g2/multi-area'
     | '/g2/slider'
-    | '/g2/spot'
-    | '/g2/tooltip'
     | '/reactbits/crosshair'
     | '/invoices'
   id:
@@ -482,7 +449,6 @@ export interface FileRouteTypes {
     | '/_layout/echarts/btcusdt'
     | '/_layout/echarts/crypto'
     | '/_layout/echarts/gushi'
-    | '/_layout/g2/candle-sticks'
     | '/_layout/g2/crypto'
     | '/_layout/g2/data-panel'
     | '/_layout/g2/demo'
@@ -490,8 +456,6 @@ export interface FileRouteTypes {
     | '/_layout/g2/mouse'
     | '/_layout/g2/multi-area'
     | '/_layout/g2/slider'
-    | '/_layout/g2/spot'
-    | '/_layout/g2/tooltip'
     | '/_layout/reactbits/crosshair'
     | '/_auth/invoices/'
   fileRoutesById: FileRoutesById
@@ -688,20 +652,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutReactbitsCrosshairRouteImport
       parentRoute: typeof LayoutRoute
     }
-    '/_layout/g2/tooltip': {
-      id: '/_layout/g2/tooltip'
-      path: '/g2/tooltip'
-      fullPath: '/g2/tooltip'
-      preLoaderRoute: typeof LayoutG2TooltipRouteImport
-      parentRoute: typeof LayoutRoute
-    }
-    '/_layout/g2/spot': {
-      id: '/_layout/g2/spot'
-      path: '/g2/spot'
-      fullPath: '/g2/spot'
-      preLoaderRoute: typeof LayoutG2SpotRouteImport
-      parentRoute: typeof LayoutRoute
-    }
     '/_layout/g2/slider': {
       id: '/_layout/g2/slider'
       path: '/g2/slider'
@@ -749,13 +699,6 @@ declare module '@tanstack/react-router' {
       path: '/g2/crypto'
       fullPath: '/g2/crypto'
       preLoaderRoute: typeof LayoutG2CryptoRouteImport
-      parentRoute: typeof LayoutRoute
-    }
-    '/_layout/g2/candle-sticks': {
-      id: '/_layout/g2/candle-sticks'
-      path: '/g2/candle-sticks'
-      fullPath: '/g2/candle-sticks'
-      preLoaderRoute: typeof LayoutG2CandleSticksRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_layout/echarts/gushi': {
@@ -836,7 +779,6 @@ interface LayoutRouteChildren {
   LayoutEchartsBtcusdtRoute: typeof LayoutEchartsBtcusdtRoute
   LayoutEchartsCryptoRoute: typeof LayoutEchartsCryptoRoute
   LayoutEchartsGushiRoute: typeof LayoutEchartsGushiRoute
-  LayoutG2CandleSticksRoute: typeof LayoutG2CandleSticksRoute
   LayoutG2CryptoRoute: typeof LayoutG2CryptoRoute
   LayoutG2DataPanelRoute: typeof LayoutG2DataPanelRoute
   LayoutG2DemoRoute: typeof LayoutG2DemoRoute
@@ -844,8 +786,6 @@ interface LayoutRouteChildren {
   LayoutG2MouseRoute: typeof LayoutG2MouseRoute
   LayoutG2MultiAreaRoute: typeof LayoutG2MultiAreaRoute
   LayoutG2SliderRoute: typeof LayoutG2SliderRoute
-  LayoutG2SpotRoute: typeof LayoutG2SpotRoute
-  LayoutG2TooltipRoute: typeof LayoutG2TooltipRoute
   LayoutReactbitsCrosshairRoute: typeof LayoutReactbitsCrosshairRoute
 }
 
@@ -870,7 +810,6 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutEchartsBtcusdtRoute: LayoutEchartsBtcusdtRoute,
   LayoutEchartsCryptoRoute: LayoutEchartsCryptoRoute,
   LayoutEchartsGushiRoute: LayoutEchartsGushiRoute,
-  LayoutG2CandleSticksRoute: LayoutG2CandleSticksRoute,
   LayoutG2CryptoRoute: LayoutG2CryptoRoute,
   LayoutG2DataPanelRoute: LayoutG2DataPanelRoute,
   LayoutG2DemoRoute: LayoutG2DemoRoute,
@@ -878,8 +817,6 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutG2MouseRoute: LayoutG2MouseRoute,
   LayoutG2MultiAreaRoute: LayoutG2MultiAreaRoute,
   LayoutG2SliderRoute: LayoutG2SliderRoute,
-  LayoutG2SpotRoute: LayoutG2SpotRoute,
-  LayoutG2TooltipRoute: LayoutG2TooltipRoute,
   LayoutReactbitsCrosshairRoute: LayoutReactbitsCrosshairRoute,
 }
 

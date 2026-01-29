@@ -218,16 +218,14 @@ export const getColorScale = (
 };
 
 export const chartColors = [
+  "#1783FF",
+  "#E12AFB",
+  "#8200DB",
+  "#F0884D",
   "#4DAF4A",
   "#E41A1C",
-  "#00C9C9",
-  "#7863FF",
-  "#1783FF",
-  "#F0884D",
-  "#D580FF",
+  "#00B8DB",
   "#57534D",
-  "#8200DB",
-  "#78716B",
 ];
 export const trendColor = {
   up: "#4DAF4A",

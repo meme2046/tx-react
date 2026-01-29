@@ -53,10 +53,11 @@ export function VolPxECharts(props: Props) {
 
   const titles: TitleComponentOption[] = [getMatrixTitle([0, 0], "", "")];
 
-  volData &&
+  if (volData) {
     titles.push(
       getMatrixTitle([0, 7], "成交量", `${formatNumberZh(basicInfo.volume)}股`),
     );
+  }
 
   const tooltip: TooltipComponentOption = {
     show: true,
@@ -103,7 +104,7 @@ export function VolPxECharts(props: Props) {
     },
   ];
 
-  avgData &&
+  if (avgData) {
     series.push({
       name: "均价",
       type: "line",
@@ -113,8 +114,9 @@ export function VolPxECharts(props: Props) {
       xAxisIndex: 0,
       yAxisIndex: 0,
     });
+  }
 
-  volData &&
+  if (volData) {
     series.push({
       name: "成交量",
       type: "bar",
@@ -122,6 +124,7 @@ export function VolPxECharts(props: Props) {
       yAxisIndex: 1,
       data: volData,
     });
+  }
 
   const options: EChartsOption = {
     title: titles,

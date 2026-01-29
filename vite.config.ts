@@ -16,8 +16,7 @@ export default defineConfig({
     tailwindcss(),
   ],
   server: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    host: ["localhost", "192.168.123.7"] as any,
+    host: ["localhost", "192.168.123.7"] as never,
     port: 5173,
   },
   resolve: {

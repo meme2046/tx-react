@@ -9,7 +9,7 @@ import Crosshair from "../Crosshair";
 import type { UiKline } from "@/types/Charts";
 import dayjs from "dayjs";
 import { get, round, slice, values } from "lodash";
-import { chartColors, trendColor } from "@/consts/colors";
+import { chartColors } from "@/consts/colors";
 import { calculateYValue } from "@/utils/calc";
 import { isMobile } from "react-device-detect";
 interface Props {
@@ -44,10 +44,11 @@ export function KLineG2({
       },
       color: {
         type: "ordinal",
-        domain: ["SMA7", "SMA25", "EMA12", "EMA26", "UP", "DOWN", "CLOSE"],
-        range: values(chartColors),
+        domain: ["SMA7", "SMA25", "EMA12", "EMA26", "UP", "DOWN", "收盘价"],
+        range: values(chartColors.slice(0, 7)),
       },
     },
+    legend: {},
     axis: {
       x: {
         title: false,
@@ -83,7 +84,7 @@ export function KLineG2({
         type: "line",
         encode: {
           y: ["close"],
-          color: () => "CLOSE",
+          color: () => "收盘价",
         },
         style: {
           lineWidth: 0,
@@ -91,15 +92,8 @@ export function KLineG2({
         tooltip: {
           title: {
             field: "start",
-            channel: "x",
             valueFormatter: (d: number) => dayjs(d).format("YYYY-MM-DD HH:mm"),
           },
-          items: [
-            {
-              name: "收盘价",
-              field: "close",
-            },
-          ],
         },
         interaction: {
           tooltip: {
