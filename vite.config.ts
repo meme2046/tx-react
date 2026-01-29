@@ -16,7 +16,7 @@ export default defineConfig({
     tailwindcss(),
   ],
   server: {
-    host: ["localhost", "192.168.123.7"] as any,
+    host: ["localhost", "192.168.123.7"],
     port: 5173,
   },
   resolve: {

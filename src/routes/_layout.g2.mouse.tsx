@@ -13,7 +13,9 @@ import { useMemo, useRef, type RefObject } from "react";
 import dayjs from "dayjs";
 import type { UiKline } from "@/types/Charts";
 import { getPanel } from "@/utils/panel";
-import { minBy, maxBy, round, get } from "lodash";
+import { round, get } from "lodash";
+import { isMobile } from "react-device-detect";
+import { basicInfoMap } from "@/consts/charts";
 
 export const Route = createFileRoute("/_layout/g2/mouse")({
   component: RouteComponent,
@@ -27,10 +29,11 @@ export const Route = createFileRoute("/_layout/g2/mouse")({
 });
 
 function RouteComponent() {
+  const symbol = "币安人生USDT";
   const colors = ["#00C9C9", "#7863FF", "#1783FF", "#F0884D", "#D580FF"];
   const grMap = {
-    up: "#4DAF4A",
-    down: "#E41A1C",
+    UP: "#4DAF4A",
+    DOWN: "#E41A1C",
   };
   const containerRef = useRef<HTMLDivElement>(null);
   const { data } = useJson<any>(
@@ -217,8 +220,8 @@ function RouteComponent() {
         .map((item: any) => item.__data__)
         .filter((item: any) => Number(item.id) < estimatedCount);
 
-      const min = Number(get(minBy(yTicks, "value"), "label"));
-      const max = Number(get(maxBy(yTicks, "value"), "label"));
+      const min = Number(get(yTicks.at(0), "label"));
+      const max = Number(get(yTicks.at(-1), "label"));
 
       const yValue = calculateYValue(y, min, max, y1, y2);
 
@@ -232,21 +235,24 @@ function RouteComponent() {
 
       // 调用平滑更新方法
       panel.updateY(y);
+
       panel.innerHTML = `
-              <div>${round(yValue, basic.precision)}</div>
-            `;
+        <div>${round(yValue, basic.precision || basicInfoMap[symbol].precision)}</div>
+      `;
     });
   }
 
   return (
     <div ref={containerRef} className="relative">
-      <Crosshair
-        containerRef={containerRef as RefObject<HTMLElement>}
-        xLeftPadding={72}
-        xRightPadding={16}
-        yTopPadding={16}
-        yBottomPadding={88}
-      />
+      {!isMobile && (
+        <Crosshair
+          containerRef={containerRef as RefObject<HTMLElement>}
+          xLeftPadding={72}
+          xRightPadding={16}
+          yTopPadding={16}
+          yBottomPadding={88}
+        />
+      )}
       <Base {...config} onReady={onReady}></Base>
     </div>
   );

@@ -4,7 +4,6 @@ import { useJson } from "@/hooks/use-json";
 import { parseKlineData } from "@/utils/parse";
 import { mergeNonEmpty } from "@/utils/pick";
 import { createFileRoute } from "@tanstack/react-router";
-import format from "pretty-format";
 import { useMemo } from "react";
 
 export const Route = createFileRoute("/_layout/g2/crypto")({
@@ -18,7 +17,7 @@ export const Route = createFileRoute("/_layout/g2/crypto")({
   }),
 });
 
-const limit = 314;
+const limit = 314 / 2;
 
 function RouteComponent() {
   const { data: xaut } = useJson<any>(

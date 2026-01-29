@@ -62,7 +62,7 @@ export interface UiKline {
   // trades: number; // 成交笔数
   // buyVolume: string; // 主动买入成交量
   // buyAmount: string; // 主动买入成交额
-  trend: "up" | "down"; // 趋势
+  trend: "UP" | "DOWN"; // 趋势
   // 技术指标
   sma7?: number | null; // 7日均线
   sma25?: number | null; // 25日均线

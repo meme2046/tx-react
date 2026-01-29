@@ -3,6 +3,7 @@
   "editor.fontFamily": "Consolas,'Courier New',monospace",
   "terminal.integrated.fontFamily": "FiraCode Nerd Font Mono",
   "terminal.integrated.fontSize": 12,
+  "editor.colorDecorators": true,
   // 📝powershelel配置
   "terminal.integrated.profiles.windows": {
     "pwsh": {
@@ -61,7 +62,7 @@
     "commands": [
       {
         // prettier
-        "match": "\\.(ts|js|tsx|jsx|json|html|css|graphql|gql|yaml|yml|md)$",
+        "match": "\\.(txt|ts|js|jsx|tsx|json|html|css|graphql|gql|yaml|yml|md)$",
         "notMatch": "node_modules/*$",
         "isAsync": true,
         "cmd": "me prettier ${file}"
@@ -143,7 +144,7 @@
   },
   "json.format.enable": true,
   "workbench.iconTheme": "vscode-icons",
-  "workbench.colorTheme": "GitHub Dark Colorblind (Beta)",
+  "workbench.colorTheme": "GitHub Dark Default",
   "terminal.integrated.enableMultiLinePasteWarning": "auto",
   // 📝vscode自带css规则配置
   "css.validate": true,

@@ -126,7 +126,7 @@ export function parseKlineData(data: any): {
       // trades: item[8], // 成交笔数
       // buyVolume: item[9], // 主动买入成交量
       // buyAmount: item[10], // 主动买入成交额
-      trend: close - open >= 0 ? "up" : "down",
+      trend: close - open >= 0 ? "UP" : "DOWN",
       sma7: sma7Result ? round(sma7Result, precision) : null,
       sma25: sma25Result ? round(sma25Result, precision) : null,
       ema12: ema12Result ? round(ema12Result, precision) : null,
@@ -139,6 +139,16 @@ export function parseKlineData(data: any): {
   const increase = last && first ? last.close - first.open : 0;
   const ratio = last && first ? round((increase / first.open) * 100, 2) : 0;
   const prefix = increase > 0 ? "+" : "";
+
+  // const types = ["sma7", "sma25", "ema12", "ema26"];
+
+  // parsedData.slice(25).flatMap((item: UiKline) => {
+  //   return types.map((field) => ({
+  //     time: item.time,
+  //     metric: field,
+  //     value: item[field],
+  //   }));
+  // });
 
   return {
     parsedData: parsedData.slice(25),

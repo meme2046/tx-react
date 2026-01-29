@@ -8,10 +8,10 @@ import { useRef, type RefObject } from "react";
 import Crosshair from "../Crosshair";
 import type { UiKline } from "@/types/Charts";
 import dayjs from "dayjs";
-import { get, round, slice } from "lodash";
+import { get, round, slice, values } from "lodash";
 import { chartColors, trendColor } from "@/consts/colors";
 import { calculateYValue } from "@/utils/calc";
-
+import { isMobile } from "react-device-detect";
 interface Props {
   className?: string;
   data?: UiKline[];
@@ -31,7 +31,7 @@ export function KLineG2({
   const config: CommonConfig = {
     type: "view",
     data,
-    encode: { x: "start", y: ["lowest", "highest"] },
+    encode: { x: "start" },
     scale: {
       start: {
         type: "time",
@@ -41,6 +41,11 @@ export function KLineG2({
       },
       x: {
         compare: (a: number, b: number) => a - b,
+      },
+      color: {
+        type: "ordinal",
+        domain: ["SMA7", "SMA25", "EMA12", "EMA26", "UP", "DOWN", "CLOSE"],
+        range: values(chartColors),
       },
     },
     axis: {
@@ -73,55 +78,85 @@ export function KLineG2({
         labelFormatter: (d: number) => dayjs(d).format("YYYY-MM-DD HH:mm"),
       },
     },
-    interaction: {
-      tooltip: false,
-    },
     children: [
+      {
+        type: "line",
+        encode: {
+          y: ["close"],
+          color: () => "CLOSE",
+        },
+        style: {
+          lineWidth: 0,
+        },
+        tooltip: {
+          title: {
+            field: "start",
+            channel: "x",
+            valueFormatter: (d: number) => dayjs(d).format("YYYY-MM-DD HH:mm"),
+          },
+          items: [
+            {
+              name: "收盘价",
+              field: "close",
+            },
+          ],
+        },
+        interaction: {
+          tooltip: {
+            shared: true,
+            leading: true,
+            trailing: true,
+            crosshairsY: isMobile,
+          },
+        },
+      },
       {
         type: "link",
         encode: {
           y: ["lowest", "highest"],
+          color: "trend",
         },
-        style: {
-          stroke: (d: UiKline) => trendColor[d.trend], // 设置连接线颜色
-        },
+        tooltip: false,
       },
       {
         type: "interval",
         encode: {
           y: ["open", "close"],
+          color: "trend",
         },
-        style: {
-          fill: (d: UiKline) => trendColor[d.trend],
-        },
+        tooltip: false,
       },
       {
         type: "line",
         encode: {
           y: "sma7",
-          color: chartColors[1],
+          color: () => "SMA7",
         },
+        tooltip: false,
       },
       {
         type: "line",
         encode: {
           y: "sma25",
-          color: chartColors[2],
+          color: () => "SMA25",
         },
+        tooltip: false,
       },
       {
         type: "line",
         encode: {
           y: "ema12",
-          color: chartColors[3],
+          color: () => "EMA12",
         },
+        tooltip: false,
       },
       {
         type: "line",
         encode: {
           y: "ema26",
-          color: chartColors[4],
+          color: () => "EMA26",
         },
+        tooltip: false,
       },
     ],
   };
@@ -131,9 +166,10 @@ export function KLineG2({
     if (!yPxTooltipRef.current) return;
 
     const tooltip = yPxTooltipRef.current as any;
+
     tooltip.innerHTML = `
-        <div>${round(yValue, precision)}</div>
-      `;
+      <div>${round(yValue, precision)}</div>
+    `;
 
     if (!tooltip.isAnimating) {
       tooltip.isAnimating = true;
@@ -146,8 +182,9 @@ export function KLineG2({
   };
 
   function onReady({ chart }: { chart: Chart }) {
-    chart.on(`plot:pointermove`, (event: PlotEvent) => {
-      const { nativeEvent, x, y } = event;
+    chart.on(`tooltip:show`, (event: PlotEvent) => {
+      const { nativeEvent } = event;
+      const { x, y } = event.viewport;
       if (!nativeEvent || !x || !y || !yPxTooltipRef.current) return; // 过滤程序触发的事件
 
       const { canvas } = chart.getContext();
@@ -196,13 +233,15 @@ export function KLineG2({
         id="y-px-tooltip"
         className="absolute left-3 p-1 rounded z-50 text-primary bg-accent/60 transition-[transform,opacity] duration-[100ms,400ms] ease-[ease-out,ease-in-out]"
       ></div>
-      <Crosshair
-        containerRef={containerRef as RefObject<HTMLElement>}
-        xLeftPadding={64}
-        xRightPadding={12}
-        yTopPadding={12}
-        yBottomPadding={80}
-      />
+      {!isMobile && (
+        <Crosshair
+          containerRef={containerRef as RefObject<HTMLElement>}
+          xLeftPadding={64}
+          xRightPadding={12}
+          yTopPadding={12}
+          yBottomPadding={80}
+        />
+      )}
       <Base {...config} onReady={onReady}></Base>
     </div>
   );
