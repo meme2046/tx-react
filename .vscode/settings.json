@@ -4,6 +4,8 @@
   "terminal.integrated.fontFamily": "FiraCode Nerd Font Mono",
   "terminal.integrated.fontSize": 12,
   "editor.colorDecorators": true,
+  "editor.defaultColorDecorators": "always",
+  "tailwindCSS.colorDecorators": true,
   // 📝powershelel配置
   "terminal.integrated.profiles.windows": {
     "pwsh": {
