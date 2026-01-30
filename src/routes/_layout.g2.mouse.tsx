@@ -42,116 +42,113 @@ function RouteComponent() {
 
   const { parsedData, basic } = useMemo(() => parseKlineData(data), [data]);
 
-  const config: CommonConfig = useMemo(
-    () => ({
-      type: "view",
-      data: parsedData,
-      encode: { x: "start", y: ["lowest", "highest"] },
-      scale: {
-        start: {
-          type: "time",
-        },
-        y: {
-          type: "linear",
-        },
-        x: {
-          compare: (a: number, b: number) => a - b,
+  const config: CommonConfig = {
+    type: "view",
+    data: parsedData,
+    encode: { x: "start", y: ["lowest", "highest"] },
+    scale: {
+      start: {
+        type: "time",
+      },
+      y: {
+        type: "linear",
+      },
+      x: {
+        compare: (a: number, b: number) => a - b,
+      },
+    },
+    // padding: 0,
+    // margin: 0,
+    style: {
+      // 自己的样式
+      stroke: "red",
+      strokeWidth: 2,
+      viewFill: "red",
+      viewFillOpacity: 0.3,
+      contentFill: "cyan",
+      contentFillOpacity: 0.3,
+    },
+    axis: {
+      x: {
+        title: false,
+        grid: false,
+        line: true,
+        labelFormatter: (d: number) => dayjs(d).format("HH:mm"),
+      },
+      y: {
+        title: false,
+        grid: true,
+        line: true,
+        tick: true, // 是否显示刻度
+        tickCount: 5, // 设置推荐生成的刻度数量
+        // labelAutoHide: false,
+        labelLineWidth: 0,
+        labelLineHeight: 0,
+        tickMethod: (start: number, end: number, count: number) => {
+          const step = (end - start) / (count - 1);
+          return Array.from({ length: count }, (_, i) =>
+            round(start + i * step, basic.precision),
+          );
         },
       },
-      // padding: 0,
-      // margin: 0,
-      style: {
-        // 自己的样式
-        stroke: "red",
-        strokeWidth: 2,
-        viewFill: "red",
-        viewFillOpacity: 0.3,
-        contentFill: "cyan",
-        contentFillOpacity: 0.3,
+    },
+    slider: {
+      x: {
+        labelFormatter: (d: number) => dayjs(d).format("YYYY-MM-DD HH:mm"),
       },
-      axis: {
-        x: {
-          title: false,
-          grid: false,
-          line: true,
-          labelFormatter: (d: number) => dayjs(d).format("HH:mm"),
+    },
+    interaction: {
+      tooltip: false,
+    },
+    children: [
+      {
+        type: "link",
+        encode: {
+          y: ["lowest", "highest"],
         },
-        y: {
-          title: false,
-          grid: true,
-          line: true,
-          tick: true, // 是否显示刻度
-          tickCount: 5, // 设置推荐生成的刻度数量
-          // labelAutoHide: false,
-          labelLineWidth: 0,
-          labelLineHeight: 0,
-          tickMethod: (start: number, end: number, count: number) => {
-            const step = (end - start) / (count - 1);
-            return Array.from({ length: count }, (_, i) =>
-              round(start + i * step, basic.precision),
-            );
-          },
+        style: {
+          stroke: (d: UiKline) => grMap[d.trend], // 设置连接线颜色
         },
       },
-      slider: {
-        x: {
-          labelFormatter: (d: number) => dayjs(d).format("YYYY-MM-DD HH:mm"),
+      {
+        type: "interval",
+        encode: {
+          y: ["open", "close"],
+        },
+        style: {
+          fill: (d: UiKline) => grMap[d.trend],
         },
       },
-      interaction: {
-        tooltip: false,
+      {
+        type: "line",
+        encode: {
+          y: "sma7",
+          color: colors[1],
+        },
       },
-      children: [
-        {
-          type: "link",
-          encode: {
-            y: ["lowest", "highest"],
-          },
-          style: {
-            stroke: (d: UiKline) => grMap[d.trend], // 设置连接线颜色
-          },
+      {
+        type: "line",
+        encode: {
+          y: "sma25",
+          color: colors[2],
         },
-        {
-          type: "interval",
-          encode: {
-            y: ["open", "close"],
-          },
-          style: {
-            fill: (d: UiKline) => grMap[d.trend],
-          },
+      },
+      {
+        type: "line",
+        encode: {
+          y: "ema12",
+          color: colors[3],
         },
-        {
-          type: "line",
-          encode: {
-            y: "sma7",
-            color: colors[1],
-          },
+      },
+      {
+        type: "line",
+        encode: {
+          y: "ema26",
+          color: colors[4],
         },
-        {
-          type: "line",
-          encode: {
-            y: "sma25",
-            color: colors[2],
-          },
-        },
-        {
-          type: "line",
-          encode: {
-            y: "ema12",
-            color: colors[3],
-          },
-        },
-        {
-          type: "line",
-          encode: {
-            y: "ema26",
-            color: colors[4],
-          },
-        },
-      ],
-    }),
-    [parsedData],
-  );
+      },
+    ],
+  };
 
   function onReady({ chart }: { chart: Chart }) {
     const container = chart.getContainer(); // 获取图表容器 DOM

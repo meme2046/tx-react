@@ -20,7 +20,6 @@ import { Route as LayoutTestsRouteImport } from './routes/_layout.tests'
 import { Route as LayoutTablePaginationRouteImport } from './routes/_layout.table-pagination'
 import { Route as LayoutTableBasicRouteImport } from './routes/_layout.table-basic'
 import { Route as LayoutIconsRouteImport } from './routes/_layout.icons'
-import { Route as LayoutGushitongRouteImport } from './routes/_layout.gushitong'
 import { Route as LayoutGateGridRouteImport } from './routes/_layout.gate-grid'
 import { Route as LayoutFearGreedRouteImport } from './routes/_layout.fear-greed'
 import { Route as LayoutCronWorkerRouteImport } from './routes/_layout.cron-worker'
@@ -35,11 +34,7 @@ import { Route as AuthInvoicesRouteImport } from './routes/_auth.invoices'
 import { Route as AuthDashboardRouteImport } from './routes/_auth.dashboard'
 import { Route as AuthInvoicesIndexRouteImport } from './routes/_auth.invoices.index'
 import { Route as LayoutReactbitsCrosshairRouteImport } from './routes/_layout.reactbits.crosshair'
-import { Route as LayoutG2MultiAreaRouteImport } from './routes/_layout.g2.multi-area'
 import { Route as LayoutG2MouseRouteImport } from './routes/_layout.g2.mouse'
-import { Route as LayoutG2KlineRouteImport } from './routes/_layout.g2.kline'
-import { Route as LayoutG2DemoRouteImport } from './routes/_layout.g2.demo'
-import { Route as LayoutG2DataPanelRouteImport } from './routes/_layout.g2.data-panel'
 import { Route as LayoutG2CryptoRouteImport } from './routes/_layout.g2.crypto'
 import { Route as LayoutEchartsGushiRouteImport } from './routes/_layout.echarts.gushi'
 import { Route as AuthInvoicesInvoiceIdRouteImport } from './routes/_auth.invoices.$invoiceId'
@@ -95,11 +90,6 @@ const LayoutTableBasicRoute = LayoutTableBasicRouteImport.update({
 const LayoutIconsRoute = LayoutIconsRouteImport.update({
   id: '/icons',
   path: '/icons',
-  getParentRoute: () => LayoutRoute,
-} as any)
-const LayoutGushitongRoute = LayoutGushitongRouteImport.update({
-  id: '/gushitong',
-  path: '/gushitong',
   getParentRoute: () => LayoutRoute,
 } as any)
 const LayoutGateGridRoute = LayoutGateGridRouteImport.update({
@@ -173,29 +163,9 @@ const LayoutReactbitsCrosshairRoute =
     path: '/reactbits/crosshair',
     getParentRoute: () => LayoutRoute,
   } as any)
-const LayoutG2MultiAreaRoute = LayoutG2MultiAreaRouteImport.update({
-  id: '/g2/multi-area',
-  path: '/g2/multi-area',
-  getParentRoute: () => LayoutRoute,
-} as any)
 const LayoutG2MouseRoute = LayoutG2MouseRouteImport.update({
   id: '/g2/mouse',
   path: '/g2/mouse',
-  getParentRoute: () => LayoutRoute,
-} as any)
-const LayoutG2KlineRoute = LayoutG2KlineRouteImport.update({
-  id: '/g2/kline',
-  path: '/g2/kline',
-  getParentRoute: () => LayoutRoute,
-} as any)
-const LayoutG2DemoRoute = LayoutG2DemoRouteImport.update({
-  id: '/g2/demo',
-  path: '/g2/demo',
-  getParentRoute: () => LayoutRoute,
-} as any)
-const LayoutG2DataPanelRoute = LayoutG2DataPanelRouteImport.update({
-  id: '/g2/data-panel',
-  path: '/g2/data-panel',
   getParentRoute: () => LayoutRoute,
 } as any)
 const LayoutG2CryptoRoute = LayoutG2CryptoRouteImport.update({
@@ -230,7 +200,6 @@ export interface FileRoutesByFullPath {
   '/cron-worker': typeof LayoutCronWorkerRoute
   '/fear-greed': typeof LayoutFearGreedRoute
   '/gate-grid': typeof LayoutGateGridRoute
-  '/gushitong': typeof LayoutGushitongRoute
   '/icons': typeof LayoutIconsRoute
   '/table-basic': typeof LayoutTableBasicRoute
   '/table-pagination': typeof LayoutTablePaginationRoute
@@ -240,11 +209,7 @@ export interface FileRoutesByFullPath {
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/echarts/gushi': typeof LayoutEchartsGushiRoute
   '/g2/crypto': typeof LayoutG2CryptoRoute
-  '/g2/data-panel': typeof LayoutG2DataPanelRoute
-  '/g2/demo': typeof LayoutG2DemoRoute
-  '/g2/kline': typeof LayoutG2KlineRoute
   '/g2/mouse': typeof LayoutG2MouseRoute
-  '/g2/multi-area': typeof LayoutG2MultiAreaRoute
   '/reactbits/crosshair': typeof LayoutReactbitsCrosshairRoute
   '/invoices/': typeof AuthInvoicesIndexRoute
 }
@@ -263,7 +228,6 @@ export interface FileRoutesByTo {
   '/cron-worker': typeof LayoutCronWorkerRoute
   '/fear-greed': typeof LayoutFearGreedRoute
   '/gate-grid': typeof LayoutGateGridRoute
-  '/gushitong': typeof LayoutGushitongRoute
   '/icons': typeof LayoutIconsRoute
   '/table-basic': typeof LayoutTableBasicRoute
   '/table-pagination': typeof LayoutTablePaginationRoute
@@ -273,11 +237,7 @@ export interface FileRoutesByTo {
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/echarts/gushi': typeof LayoutEchartsGushiRoute
   '/g2/crypto': typeof LayoutG2CryptoRoute
-  '/g2/data-panel': typeof LayoutG2DataPanelRoute
-  '/g2/demo': typeof LayoutG2DemoRoute
-  '/g2/kline': typeof LayoutG2KlineRoute
   '/g2/mouse': typeof LayoutG2MouseRoute
-  '/g2/multi-area': typeof LayoutG2MultiAreaRoute
   '/reactbits/crosshair': typeof LayoutReactbitsCrosshairRoute
   '/invoices': typeof AuthInvoicesIndexRoute
 }
@@ -300,7 +260,6 @@ export interface FileRoutesById {
   '/_layout/cron-worker': typeof LayoutCronWorkerRoute
   '/_layout/fear-greed': typeof LayoutFearGreedRoute
   '/_layout/gate-grid': typeof LayoutGateGridRoute
-  '/_layout/gushitong': typeof LayoutGushitongRoute
   '/_layout/icons': typeof LayoutIconsRoute
   '/_layout/table-basic': typeof LayoutTableBasicRoute
   '/_layout/table-pagination': typeof LayoutTablePaginationRoute
@@ -310,11 +269,7 @@ export interface FileRoutesById {
   '/_auth/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
   '/_layout/echarts/gushi': typeof LayoutEchartsGushiRoute
   '/_layout/g2/crypto': typeof LayoutG2CryptoRoute
-  '/_layout/g2/data-panel': typeof LayoutG2DataPanelRoute
-  '/_layout/g2/demo': typeof LayoutG2DemoRoute
-  '/_layout/g2/kline': typeof LayoutG2KlineRoute
   '/_layout/g2/mouse': typeof LayoutG2MouseRoute
-  '/_layout/g2/multi-area': typeof LayoutG2MultiAreaRoute
   '/_layout/reactbits/crosshair': typeof LayoutReactbitsCrosshairRoute
   '/_auth/invoices/': typeof AuthInvoicesIndexRoute
 }
@@ -336,7 +291,6 @@ export interface FileRouteTypes {
     | '/cron-worker'
     | '/fear-greed'
     | '/gate-grid'
-    | '/gushitong'
     | '/icons'
     | '/table-basic'
     | '/table-pagination'
@@ -346,11 +300,7 @@ export interface FileRouteTypes {
     | '/invoices/$invoiceId'
     | '/echarts/gushi'
     | '/g2/crypto'
-    | '/g2/data-panel'
-    | '/g2/demo'
-    | '/g2/kline'
     | '/g2/mouse'
-    | '/g2/multi-area'
     | '/reactbits/crosshair'
     | '/invoices/'
   fileRoutesByTo: FileRoutesByTo
@@ -369,7 +319,6 @@ export interface FileRouteTypes {
     | '/cron-worker'
     | '/fear-greed'
     | '/gate-grid'
-    | '/gushitong'
     | '/icons'
     | '/table-basic'
     | '/table-pagination'
@@ -379,11 +328,7 @@ export interface FileRouteTypes {
     | '/invoices/$invoiceId'
     | '/echarts/gushi'
     | '/g2/crypto'
-    | '/g2/data-panel'
-    | '/g2/demo'
-    | '/g2/kline'
     | '/g2/mouse'
-    | '/g2/multi-area'
     | '/reactbits/crosshair'
     | '/invoices'
   id:
@@ -405,7 +350,6 @@ export interface FileRouteTypes {
     | '/_layout/cron-worker'
     | '/_layout/fear-greed'
     | '/_layout/gate-grid'
-    | '/_layout/gushitong'
     | '/_layout/icons'
     | '/_layout/table-basic'
     | '/_layout/table-pagination'
@@ -415,11 +359,7 @@ export interface FileRouteTypes {
     | '/_auth/invoices/$invoiceId'
     | '/_layout/echarts/gushi'
     | '/_layout/g2/crypto'
-    | '/_layout/g2/data-panel'
-    | '/_layout/g2/demo'
-    | '/_layout/g2/kline'
     | '/_layout/g2/mouse'
-    | '/_layout/g2/multi-area'
     | '/_layout/reactbits/crosshair'
     | '/_auth/invoices/'
   fileRoutesById: FileRoutesById
@@ -509,13 +449,6 @@ declare module '@tanstack/react-router' {
       path: '/icons'
       fullPath: '/icons'
       preLoaderRoute: typeof LayoutIconsRouteImport
-      parentRoute: typeof LayoutRoute
-    }
-    '/_layout/gushitong': {
-      id: '/_layout/gushitong'
-      path: '/gushitong'
-      fullPath: '/gushitong'
-      preLoaderRoute: typeof LayoutGushitongRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_layout/gate-grid': {
@@ -616,39 +549,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutReactbitsCrosshairRouteImport
       parentRoute: typeof LayoutRoute
     }
-    '/_layout/g2/multi-area': {
-      id: '/_layout/g2/multi-area'
-      path: '/g2/multi-area'
-      fullPath: '/g2/multi-area'
-      preLoaderRoute: typeof LayoutG2MultiAreaRouteImport
-      parentRoute: typeof LayoutRoute
-    }
     '/_layout/g2/mouse': {
       id: '/_layout/g2/mouse'
       path: '/g2/mouse'
       fullPath: '/g2/mouse'
       preLoaderRoute: typeof LayoutG2MouseRouteImport
-      parentRoute: typeof LayoutRoute
-    }
-    '/_layout/g2/kline': {
-      id: '/_layout/g2/kline'
-      path: '/g2/kline'
-      fullPath: '/g2/kline'
-      preLoaderRoute: typeof LayoutG2KlineRouteImport
-      parentRoute: typeof LayoutRoute
-    }
-    '/_layout/g2/demo': {
-      id: '/_layout/g2/demo'
-      path: '/g2/demo'
-      fullPath: '/g2/demo'
-      preLoaderRoute: typeof LayoutG2DemoRouteImport
-      parentRoute: typeof LayoutRoute
-    }
-    '/_layout/g2/data-panel': {
-      id: '/_layout/g2/data-panel'
-      path: '/g2/data-panel'
-      fullPath: '/g2/data-panel'
-      preLoaderRoute: typeof LayoutG2DataPanelRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_layout/g2/crypto': {
@@ -712,7 +617,6 @@ interface LayoutRouteChildren {
   LayoutCronWorkerRoute: typeof LayoutCronWorkerRoute
   LayoutFearGreedRoute: typeof LayoutFearGreedRoute
   LayoutGateGridRoute: typeof LayoutGateGridRoute
-  LayoutGushitongRoute: typeof LayoutGushitongRoute
   LayoutIconsRoute: typeof LayoutIconsRoute
   LayoutTableBasicRoute: typeof LayoutTableBasicRoute
   LayoutTablePaginationRoute: typeof LayoutTablePaginationRoute
@@ -721,11 +625,7 @@ interface LayoutRouteChildren {
   LayoutValtioRoute: typeof LayoutValtioRoute
   LayoutEchartsGushiRoute: typeof LayoutEchartsGushiRoute
   LayoutG2CryptoRoute: typeof LayoutG2CryptoRoute
-  LayoutG2DataPanelRoute: typeof LayoutG2DataPanelRoute
-  LayoutG2DemoRoute: typeof LayoutG2DemoRoute
-  LayoutG2KlineRoute: typeof LayoutG2KlineRoute
   LayoutG2MouseRoute: typeof LayoutG2MouseRoute
-  LayoutG2MultiAreaRoute: typeof LayoutG2MultiAreaRoute
   LayoutReactbitsCrosshairRoute: typeof LayoutReactbitsCrosshairRoute
 }
 
@@ -740,7 +640,6 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutCronWorkerRoute: LayoutCronWorkerRoute,
   LayoutFearGreedRoute: LayoutFearGreedRoute,
   LayoutGateGridRoute: LayoutGateGridRoute,
-  LayoutGushitongRoute: LayoutGushitongRoute,
   LayoutIconsRoute: LayoutIconsRoute,
   LayoutTableBasicRoute: LayoutTableBasicRoute,
   LayoutTablePaginationRoute: LayoutTablePaginationRoute,
@@ -749,11 +648,7 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutValtioRoute: LayoutValtioRoute,
   LayoutEchartsGushiRoute: LayoutEchartsGushiRoute,
   LayoutG2CryptoRoute: LayoutG2CryptoRoute,
-  LayoutG2DataPanelRoute: LayoutG2DataPanelRoute,
-  LayoutG2DemoRoute: LayoutG2DemoRoute,
-  LayoutG2KlineRoute: LayoutG2KlineRoute,
   LayoutG2MouseRoute: LayoutG2MouseRoute,
-  LayoutG2MultiAreaRoute: LayoutG2MultiAreaRoute,
   LayoutReactbitsCrosshairRoute: LayoutReactbitsCrosshairRoute,
 }
 
