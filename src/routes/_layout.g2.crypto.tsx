@@ -22,12 +22,18 @@ export const Route = createFileRoute("/_layout/g2/crypto")({
 function RouteComponent() {
   const { qiniuBaseURL } = useSnapshot(store);
 
-  const { data: xaut } = useJson<any>(`${qiniuBaseURL}/bitget.XAUTUSDT.json`);
-  const { data: bnLife } = useJson<any>(
-    `${qiniuBaseURL}/binance.%E5%B8%81%E5%AE%89%E4%BA%BA%E7%94%9FUSDT.json`,
+  const { data: xaut } = useJson<any>(
+    `${qiniuBaseURL}/crypto/bitget.XAUTUSDT.json`,
   );
-  const { data: btc } = useJson<any>(`${qiniuBaseURL}/binance.BTCUSDT.json`);
-  const { data: eth } = useJson<any>(`${qiniuBaseURL}/bitget.ETHUSDT.json`);
+  const { data: bnLife } = useJson<any>(
+    `${qiniuBaseURL}/crypto/binance.%E5%B8%81%E5%AE%89%E4%BA%BA%E7%94%9FUSDT.json`,
+  );
+  const { data: btc } = useJson<any>(
+    `${qiniuBaseURL}/crypto/binance.BTCUSDT.json`,
+  );
+  const { data: eth } = useJson<any>(
+    `${qiniuBaseURL}/crypto/bitget.ETHUSDT.json`,
+  );
 
   const { parsedData: parsedDataXAUT, basic: basicXAUT } = useMemo(
     () => parseKlineData(xaut?.data),
