@@ -5,6 +5,7 @@ interface IApp {
   loaderDelay: number;
   githubDataURL: string;
   redisBaseURL: string;
+  qiniuBaseURL: string;
 }
 
 const initialState: IApp = {
@@ -13,7 +14,7 @@ const initialState: IApp = {
   githubDataURL:
     "https://raw.githubusercontent.com/meme2046/data/refs/heads/main",
   redisBaseURL: "https://meme.us.kg:8888",
-  // https://meme.us.kg:8888 http://192.168.123.7:8877
+  qiniuBaseURL: "http://qiniu.memeking.dpdns.org",
 };
 
 export const store = proxy<IApp>(initialState);

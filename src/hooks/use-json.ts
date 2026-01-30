@@ -6,6 +6,6 @@ export const useJson = <T>(url: string) => {
     queryKey: [url],
     queryFn: () => http<T>(url),
     refetchOnWindowFocus: true,
-    refetchInterval: 60 * 1000,
+    refetchInterval: 30 * 1000,
   });
 };

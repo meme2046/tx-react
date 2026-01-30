@@ -7,7 +7,7 @@ import { useSnapshot } from "valtio";
 export const useRedis = <T>(key: string) => {
   const { redisBaseURL } = useSnapshot(store);
   return useQuery({
-    queryKey: [`${key}`],
+    queryKey: [redisBaseURL, `${key}`],
     queryFn: () => {
       return http<RedisResponse<T>>(`${redisBaseURL}/api/v1/redis/json`, {
         params: { key },
@@ -66,7 +66,7 @@ export const useRedisListInfinite = <T extends object>(
 ) => {
   const { redisBaseURL } = useSnapshot(store);
   return useInfiniteQuery<InfiniteList<T>>({
-    queryKey: [`redis-set-${key}`],
+    queryKey: [redisBaseURL, size, `redis-set-${key}`],
     queryFn: ({ pageParam }) => {
       return fetchRedisList<T>(
         `${redisBaseURL}/api/v1/redis/byset`,

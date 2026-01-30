@@ -1,10 +1,12 @@
 import { KLineCardG2 } from "@/components/cards/kline-card-g2";
 import { basicInfoMap } from "@/consts/charts";
 import { useJson } from "@/hooks/use-json";
+import { store } from "@/lib/valtio/store";
 import { parseKlineData } from "@/utils/parse";
 import { mergeNonEmpty } from "@/utils/pick";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo } from "react";
+import { useSnapshot } from "valtio";
 
 export const Route = createFileRoute("/_layout/g2/crypto")({
   component: RouteComponent,
@@ -17,24 +19,15 @@ export const Route = createFileRoute("/_layout/g2/crypto")({
   }),
 });
 
-const limit = 314 / 2;
-
 function RouteComponent() {
-  const { data: xaut } = useJson<any>(
-    `https://api.bitget.com/api/v2/spot/market/candles?symbol=XAUTUSDT&granularity=5min&limit=${limit}`,
-  );
+  const { qiniuBaseURL } = useSnapshot(store);
 
+  const { data: xaut } = useJson<any>(`${qiniuBaseURL}/bitget.XAUTUSDT.json`);
   const { data: bnLife } = useJson<any>(
-    `https://api4.binance.com/api/v3/uiKlines?symbol=币安人生USDT&interval=5m&limit=${limit}`,
+    `${qiniuBaseURL}/binance.%E5%B8%81%E5%AE%89%E4%BA%BA%E7%94%9FUSDT.json`,
   );
-
-  const { data: btc } = useJson<any>(
-    `https://api4.binance.com/api/v3/uiKlines?symbol=BTCUSDT&interval=5m&limit=${limit}`,
-  );
-
-  const { data: eth } = useJson<any>(
-    `https://api.bitget.com/api/v2/spot/market/candles?symbol=ETHUSDT&granularity=5min&limit=${limit}`,
-  );
+  const { data: btc } = useJson<any>(`${qiniuBaseURL}/binance.BTCUSDT.json`);
+  const { data: eth } = useJson<any>(`${qiniuBaseURL}/bitget.ETHUSDT.json`);
 
   const { parsedData: parsedDataXAUT, basic: basicXAUT } = useMemo(
     () => parseKlineData(xaut?.data),
@@ -42,12 +35,12 @@ function RouteComponent() {
   );
 
   const { parsedData: parsedDataBTC, basic: basicBTC } = useMemo(
-    () => parseKlineData(btc),
+    () => parseKlineData(btc?.data),
     [btc],
   );
 
   const { parsedData: parsedDataBnLife, basic: basicBnLife } = useMemo(
-    () => parseKlineData(bnLife),
+    () => parseKlineData(bnLife?.data),
     [bnLife],
   );
 
@@ -60,19 +53,31 @@ function RouteComponent() {
     <div className="px-4 pb-4 grid grid-cols-1 xl:grid-cols-2 gap-2">
       <KLineCardG2
         data={parsedDataXAUT}
-        basic={mergeNonEmpty(basicXAUT, basicInfoMap["XAUTUSDT"])}
+        basic={mergeNonEmpty(
+          { ...basicXAUT, timestamp: xaut?.timestamp },
+          basicInfoMap["XAUTUSDT"],
+        )}
       />
       <KLineCardG2
         data={parsedDataBTC}
-        basic={mergeNonEmpty(basicBTC, basicInfoMap["BTCUSDT"])}
+        basic={mergeNonEmpty(
+          { ...basicBTC, timestamp: btc?.timestamp },
+          basicInfoMap["BTCUSDT"],
+        )}
       />
       <KLineCardG2
         data={parsedDataBnLife}
-        basic={mergeNonEmpty(basicBnLife, basicInfoMap["币安人生USDT"])}
+        basic={mergeNonEmpty(
+          { ...basicBnLife, timestamp: bnLife?.timestamp },
+          basicInfoMap["币安人生USDT"],
+        )}
       />
       <KLineCardG2
         data={parsedDataETH}
-        basic={mergeNonEmpty(basicETH, basicInfoMap["ETHUSDT"])}
+        basic={mergeNonEmpty(
+          { ...basicETH, timestamp: eth?.timestamp },
+          basicInfoMap["ETHUSDT"],
+        )}
       />
     </div>
   );

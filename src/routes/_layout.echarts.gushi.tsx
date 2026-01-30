@@ -1,11 +1,13 @@
 import { VolPxCardEcharts } from "@/components/cards/vol-px-card-echarts";
 import { basicInfoMap } from "@/consts/charts";
-import { useRedis } from "@/hooks/use-redis";
+import { useJson } from "@/hooks/use-json";
+import { store } from "@/lib/valtio/store";
 import type { ChartData } from "@/types/Charts";
 import { parseMarketData } from "@/utils/parse";
 import { mergeNonEmpty } from "@/utils/pick";
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo } from "react";
+import { useSnapshot } from "valtio";
 
 export const Route = createFileRoute("/_layout/echarts/gushi")({
   component: RouteComponent,
@@ -19,12 +21,32 @@ export const Route = createFileRoute("/_layout/echarts/gushi")({
 });
 
 function RouteComponent() {
-  const { data: xaucny } = useRedis<any>("getquotation.XAUCNY");
-  const { data: xagcny } = useRedis<any>("getquotation.XAGCNY");
-  const { data: sz000001 } = useRedis<any>("getquotation.000001");
-  const { data: ixic } = useRedis<any>("getquotation.IXIC");
-  const { data: sh600519 } = useRedis<any>("getquotation.600519");
-  const { data: usdcnh } = useRedis<any>("getquotation.USDCNH");
+  // const { data: xaucny } = useRedis<any>("getquotation.XAUCNY");
+  // const { data: xagcny } = useRedis<any>("getquotation.XAGCNY");
+  // const { data: sz000001 } = useRedis<any>("getquotation.000001");
+  // const { data: ixic } = useRedis<any>("getquotation.IXIC");
+  // const { data: sh600519 } = useRedis<any>("getquotation.600519");
+  // const { data: usdcnh } = useRedis<any>("getquotation.USDCNH");
+
+  const { qiniuBaseURL } = useSnapshot(store);
+  const { data: xaucny } = useJson<any>(
+    `${qiniuBaseURL}/baidu/getquotation.XAUCNY`,
+  );
+  const { data: xagcny } = useJson<any>(
+    `${qiniuBaseURL}/baidu/getquotation.XAGCNY`,
+  );
+  const { data: sz000001 } = useJson<any>(
+    `${qiniuBaseURL}/baidu/getquotation.000001`,
+  );
+  const { data: ixic } = useJson<any>(
+    `${qiniuBaseURL}/baidu/getquotation.IXIC`,
+  );
+  const { data: sh600519 } = useJson<any>(
+    `${qiniuBaseURL}/baidu/getquotation.600519`,
+  );
+  const { data: usdcnh } = useJson<any>(
+    `${qiniuBaseURL}/baidu/getquotation.USDCNH`,
+  );
 
   const xaucnyChartData = useMemo<ChartData>(() => {
     if (!xaucny) {
