@@ -17,18 +17,6 @@ const navDemo: INav[] = [
     desc: "",
     value: "/table-pagination",
   },
-  {
-    name: "k线图-single",
-    emoj: "",
-    desc: "",
-    value: "/candlestick/single",
-  },
-  {
-    name: "股市矩阵图",
-    emoj: "",
-    desc: "",
-    value: "/candlestick/matrix-stock",
-  },
 ];
 
 export const navOther: INav[] = [
@@ -54,6 +42,12 @@ const navCron: INav[] = [
 const navCrypto: INav[] = [
   { name: "恐贪指数", emoj: "🐝", desc: "", value: "/fear-greed" },
   { name: "关注币种", emoj: "🪙", desc: "", value: "/coingecko" },
+  {
+    name: "Bitget FF",
+    emoj: "🍀",
+    desc: "",
+    value: "/bitget-ff",
+  },
   {
     name: "Bitget SF",
     emoj: "🚀",
