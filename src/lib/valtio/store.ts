@@ -13,8 +13,8 @@ const initialState: IApp = {
   loaderDelay: 0,
   githubDataURL:
     "https://raw.githubusercontent.com/meme2046/data/refs/heads/main",
-  redisBaseURL: "https://meme.us.kg:8888",
-  qiniuBaseURL: "http://qiniu.memeking.dpdns.org",
+  redisBaseURL: "https://api.memeniu.xyz:8888",
+  qiniuBaseURL: "https://memeniu.xyz",
 };
 
 export const store = proxy<IApp>(initialState);
