@@ -18,7 +18,12 @@ export default defineConfig({
   server: {
     host: ["localhost", "192.168.123.7"] as never,
     port: 5173,
-    allowedHosts: ["meme.us.kg", "localhost", "192.168.123.7"], // 允许多个主机
+    allowedHosts: [
+      "meme.us.kg",
+      "api.memeniu.xyz",
+      "localhost",
+      "192.168.123.7",
+    ], // 允许多个主机
   },
   resolve: {
     alias: {
