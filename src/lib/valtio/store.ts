@@ -16,7 +16,7 @@ export const valtioStoreInitialState: IApp = {
     "https://raw.githubusercontent.com/meme2046/data/refs/heads/main",
   redisBaseURL: "https://api.memeniu.xyz:8888",
   qiniuBaseURL: "https://memeniu.xyz",
-  qiniuCDNBaseURL: "http://t9od1laib.sabkt.gdipper.com",
+  qiniuCDNBaseURL: "https://cdn.memeniu.xyz",
 };
 
 export const store = proxy<IApp>(valtioStoreInitialState);
