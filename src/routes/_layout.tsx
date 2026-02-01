@@ -21,7 +21,7 @@ function RouteComponent() {
   return (
     <SidebarProvider className="w-full h-full p-0 m-0" defaultOpen={false}>
       <ProgressSpinner />
-      <Sidebar className="z-50" variant="inset">
+      <Sidebar className="z-50" variant="floating">
         <SidebarHeader>
           <div className="flex gap-2 items-center">
             <Avatar className="ring">

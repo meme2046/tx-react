@@ -1,37 +1,30 @@
 import type { BasicInfo } from "@/types/Charts";
+import { SVG_SRC } from "./svg";
+import { IMG_SRC } from "./image";
 
-export const GUSHITONG_IMG: Record<string, string> = {
-  "000001": "https://baidu-finance.cdn.bcebos.com/imgs/icons/index_000001.svg",
-  IXIC: "https://baidu-finance.cdn.bcebos.com/imgs/logo/indices/bbed2a87be06d1318a5c035e45c0f54c.svg",
-  USDCNH: "https://arweave.net/qIGswQTXG_7jNU0RflLi8Qt-2FTC5ccbpWoOmMm7u5Q",
-  BTCUSD: "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png",
-  ETHUSD:
-    "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png",
-  XAUUSD:
-    "https://baidu-finance.cdn.bcebos.com/imgs/icons/0530/futures_ab_GOLD.png",
-  AU888:
-    "https://baidu-finance.cdn.bcebos.com/imgs/icons/0530/futures_ab_GOLD.png",
-  AG888: "https://arweave.net/cME70JrezZj1FjE-sjkS_QIjMGwWx_U3gV3uTfJPKqQ",
-  XAGCNY: "https://arweave.net/cME70JrezZj1FjE-sjkS_QIjMGwWx_U3gV3uTfJPKqQ",
-  XAUCNY:
-    "https://baidu-finance.cdn.bcebos.com/imgs/icons/0530/futures_ab_GOLD.png",
-  "600519": "https://arweave.net/K9W8zYbRg6HtBHW1wS273_2td2UOvHS27G9u_Z4ffIc",
-  "399300":
-    "https://baidu-finance.cdn.bcebos.com/imgs/logo/indices/d0c11e7e09802a02888fcf5be5af8769.svg",
-  "399905":
-    "https://baidu-finance.cdn.bcebos.com/imgs/logo/indices/62f226489b7e56c90b9e14e0d4fc7531.svg",
-  SH: "https://arweave.net/zbcDqHBR69HECkU04pJe2cMb9UZdkaw368Z9-7Ooie0", // 上海证券交易所
-  L1: "https://arweave.net/mJQhNY4Ia1obLHgGvf_DKcAobINcDEm6RbyCbCEnteU", // Level1 基础行情
-  WH: "https://arweave.net/Y7ZsOW9u9VZf7fDQLa4tJcjDcACNBXe8L_-PPl5qy6A", // 外汇
-  US: "https://arweave.net/yAB9AibGUbrgn0oNiB8Zgw9S0aFwIbnz8gqW52UjM5M",
-  NLS: "https://arweave.net/1A0Jrarna-hux7sirCX0moYedkUqixmJLB1T59Wx6Ew",
-  XAUTUSDT:
-    "https://coin-images.coingecko.com/coins/images/10481/large/Tether_Gold.png",
-  币安人生USDT:
-    "https://coin-images.coingecko.com/coins/images/69848/large/%E5%B8%81%E5%AE%89%E4%BA%BA%E7%94%9F.png",
-  BTCUSDT: "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png",
-  ETHUSDT:
-    "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png",
+export const CHARTS_IMG: Record<string, string> = {
+  "000001": SVG_SRC["000001"],
+  IXIC: SVG_SRC["IXIC"],
+  USDCNH: IMG_SRC["USDCNH"],
+  BTCUSD: IMG_SRC["BTCUSDT"],
+  ETHUSD: IMG_SRC["ETHUSDT"],
+  XAUUSD: IMG_SRC["AU888"],
+  AU888: IMG_SRC["AU888"],
+  XAUCNY: IMG_SRC["AU888"],
+  AG888: SVG_SRC["AG888"],
+  XAGCNY: SVG_SRC["AG888"],
+  "600519": SVG_SRC["600519"],
+  "399300": SVG_SRC["399300"],
+  "399905": SVG_SRC["399905"],
+  SH: IMG_SRC["SH"], // 上海证券交易所
+  L1: IMG_SRC["L1"], // Level1 基础行情
+  WH: IMG_SRC["WH"], // 外汇
+  US: IMG_SRC["US"],
+  NLS: IMG_SRC["NLS"],
+  XAUTUSDT: IMG_SRC["XAUTUSDT"],
+  币安人生USDT: IMG_SRC["币安人生USDT"],
+  BTCUSDT: IMG_SRC["BTCUSDT"],
+  ETHUSDT: IMG_SRC["ETHUSDT"],
 };
 
 export const GUSHITONG_MARKET: Record<string, string> = {
@@ -45,17 +38,17 @@ export const basicInfoMap: Record<string, BasicInfo> = {
     precision: 4,
     code: "000001",
     exchange: "SZ",
-    logo: GUSHITONG_IMG["000001"],
+    logo: CHARTS_IMG["000001"],
     name: "上证指数",
     provider: "东方财富",
     tagList: [
       {
         desc: "上海证券交易所",
-        imageUrl: GUSHITONG_IMG["SH"],
+        imageUrl: CHARTS_IMG["SH"],
       },
       {
         desc: "Level1 基础行情",
-        imageUrl: GUSHITONG_IMG["L1"],
+        imageUrl: CHARTS_IMG["L1"],
       },
     ],
     timestamp: undefined,
@@ -71,17 +64,17 @@ export const basicInfoMap: Record<string, BasicInfo> = {
     precision: 4,
     code: "AU888",
     exchange: "FT",
-    logo: GUSHITONG_IMG["AU888"],
+    logo: CHARTS_IMG["AU888"],
     name: "黄金",
     provider: "东方财富",
     tagList: [
       {
         desc: "上海期货交易所",
-        imageUrl: GUSHITONG_IMG["SH"],
+        imageUrl: CHARTS_IMG["SH"],
       },
       {
         desc: "Level1 基础行情",
-        imageUrl: GUSHITONG_IMG["L1"],
+        imageUrl: CHARTS_IMG["L1"],
       },
     ],
     timestamp: undefined,
@@ -97,17 +90,17 @@ export const basicInfoMap: Record<string, BasicInfo> = {
     precision: 4,
     code: "XAUCNY",
     exchange: "FX",
-    logo: GUSHITONG_IMG["XAUCNY"],
+    logo: CHARTS_IMG["XAUCNY"],
     name: "黄金",
     provider: "",
     tagList: [
       {
         desc: "外汇",
-        imageUrl: GUSHITONG_IMG["WH"],
+        imageUrl: CHARTS_IMG["WH"],
       },
       {
         desc: "Level1 基础行情",
-        imageUrl: GUSHITONG_IMG["L1"],
+        imageUrl: CHARTS_IMG["L1"],
       },
     ],
     timestamp: undefined,
@@ -123,17 +116,17 @@ export const basicInfoMap: Record<string, BasicInfo> = {
     precision: 4,
     code: "AG888",
     exchange: "FT",
-    logo: GUSHITONG_IMG["AG888"],
+    logo: CHARTS_IMG["AG888"],
     name: "白银",
     provider: "东方财富",
     tagList: [
       {
         desc: "上海期货交易所",
-        imageUrl: GUSHITONG_IMG["SH"],
+        imageUrl: CHARTS_IMG["SH"],
       },
       {
         desc: "Level1 基础行情",
-        imageUrl: GUSHITONG_IMG["L1"],
+        imageUrl: CHARTS_IMG["L1"],
       },
     ],
     timestamp: undefined,
@@ -149,17 +142,17 @@ export const basicInfoMap: Record<string, BasicInfo> = {
     precision: 4,
     code: "XAGCNY",
     exchange: "FT",
-    logo: GUSHITONG_IMG["XAGCNY"],
+    logo: CHARTS_IMG["XAGCNY"],
     name: "白银",
     provider: "",
     tagList: [
       {
         desc: "外汇",
-        imageUrl: GUSHITONG_IMG["WH"],
+        imageUrl: CHARTS_IMG["WH"],
       },
       {
         desc: "Level1 基础行情",
-        imageUrl: GUSHITONG_IMG["L1"],
+        imageUrl: CHARTS_IMG["L1"],
       },
     ],
     timestamp: undefined,
@@ -175,17 +168,17 @@ export const basicInfoMap: Record<string, BasicInfo> = {
     precision: 4,
     code: "IXIC",
     exchange: "US",
-    logo: GUSHITONG_IMG["IXIC"],
+    logo: CHARTS_IMG["IXIC"],
     name: "纳斯达克",
     provider: "东方财富",
     tagList: [
       {
         desc: "自定义市场-美指",
-        imageUrl: GUSHITONG_IMG["US"],
+        imageUrl: CHARTS_IMG["US"],
       },
       {
         desc: "NLS基础行情",
-        imageUrl: GUSHITONG_IMG["NLS"],
+        imageUrl: CHARTS_IMG["NLS"],
       },
     ],
     timestamp: undefined,
@@ -201,17 +194,17 @@ export const basicInfoMap: Record<string, BasicInfo> = {
     precision: 4,
     code: "600519",
     exchange: "SH",
-    logo: GUSHITONG_IMG["600519"],
+    logo: CHARTS_IMG["600519"],
     name: "贵州茅台",
     provider: "东方财富",
     tagList: [
       {
         desc: "上海交易所",
-        imageUrl: GUSHITONG_IMG["SH"],
+        imageUrl: CHARTS_IMG["SH"],
       },
       {
         desc: "Level1基础行情",
-        imageUrl: GUSHITONG_IMG["L1"],
+        imageUrl: CHARTS_IMG["L1"],
       },
     ],
     timestamp: undefined,
@@ -227,17 +220,17 @@ export const basicInfoMap: Record<string, BasicInfo> = {
     precision: 4,
     code: "USDCNH",
     exchange: "FX",
-    logo: GUSHITONG_IMG["USDCNH"],
+    logo: CHARTS_IMG["USDCNH"],
     name: "美元兑中国离岸人民币",
     provider: "",
     tagList: [
       {
         desc: "外汇",
-        imageUrl: GUSHITONG_IMG["WH"],
+        imageUrl: CHARTS_IMG["WH"],
       },
       {
         desc: "Level1基础行情",
-        imageUrl: GUSHITONG_IMG["L1"],
+        imageUrl: CHARTS_IMG["L1"],
       },
     ],
     timestamp: undefined,
@@ -253,7 +246,7 @@ export const basicInfoMap: Record<string, BasicInfo> = {
     precision: 4,
     code: "币安人生USDT",
     exchange: "Binance",
-    logo: GUSHITONG_IMG["币安人生USDT"],
+    logo: CHARTS_IMG["币安人生USDT"],
     name: "币安人生",
     provider: "",
     tagList: [],
@@ -270,7 +263,7 @@ export const basicInfoMap: Record<string, BasicInfo> = {
     precision: 1,
     code: "BTCUSDT",
     exchange: "Binance",
-    logo: GUSHITONG_IMG["BTCUSDT"],
+    logo: CHARTS_IMG["BTCUSDT"],
     name: "比特币",
     provider: "",
     tagList: [],
@@ -287,7 +280,7 @@ export const basicInfoMap: Record<string, BasicInfo> = {
     precision: 1,
     code: "ETHUSDT",
     exchange: "Bitget",
-    logo: GUSHITONG_IMG["ETHUSDT"],
+    logo: CHARTS_IMG["ETHUSDT"],
     name: "以太坊",
     provider: "",
     tagList: [],
@@ -304,7 +297,7 @@ export const basicInfoMap: Record<string, BasicInfo> = {
     precision: 1,
     code: "XAUTUSDT",
     exchange: "Bitget",
-    logo: GUSHITONG_IMG["XAUTUSDT"],
+    logo: CHARTS_IMG["XAUTUSDT"],
     name: "黄金",
     provider: "",
     tagList: [],

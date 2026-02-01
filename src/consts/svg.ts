@@ -19,4 +19,11 @@ export const SVG_SRC: Record<string, string> = {
   solana: "https://arweave.net/cGqOWiKeBCH1xO97fbs7Pi4assSD3aBudpuCtamWLy4",
   sol: "https://arweave.net/cGqOWiKeBCH1xO97fbs7Pi4assSD3aBudpuCtamWLy4",
   "600519": "https://arweave.net/K9W8zYbRg6HtBHW1wS273_2td2UOvHS27G9u_Z4ffIc",
+  "000001": "https://baidu-finance.cdn.bcebos.com/imgs/icons/index_000001.svg",
+  IXIC: "https://baidu-finance.cdn.bcebos.com/imgs/logo/indices/bbed2a87be06d1318a5c035e45c0f54c.svg",
+  AG888: "https://arweave.net/cME70JrezZj1FjE-sjkS_QIjMGwWx_U3gV3uTfJPKqQ",
+  "399300":
+    "https://baidu-finance.cdn.bcebos.com/imgs/logo/indices/d0c11e7e09802a02888fcf5be5af8769.svg",
+  "399905":
+    "https://baidu-finance.cdn.bcebos.com/imgs/logo/indices/62f226489b7e56c90b9e14e0d4fc7531.svg",
 };
