@@ -40,9 +40,7 @@ function RouteComponent() {
         size: 160,
         cell: (cell) => (
           <Badge>
-            {dayjs(Number(cell.getValue<string>())).format(
-              "YYYY-MM-DD HH:mm:ss",
-            )}
+            {dayjs(Number(cell.getValue<string>())).format("YYYY-MM-DD HH:mm")}
           </Badge>
         ),
         enableColumnFilter: false,
@@ -70,6 +68,7 @@ function RouteComponent() {
           row.long_close_px,
           row.long_achieved_pl,
           row.long_fee,
+          row.long_close_at,
         ],
         id: "long",
         header: "多单",
@@ -86,6 +85,7 @@ function RouteComponent() {
           row.short_close_px,
           row.short_achieved_pl,
           row.short_fee,
+          row.short_close_at,
         ],
         id: "short",
         header: "空单",
@@ -121,7 +121,7 @@ function RouteComponent() {
               {closeAt ? (
                 <Badge variant="outline">
                   {dayjs(Number(cell.getValue<string>())).format(
-                    "YYYY-MM-DD HH:mm:ss",
+                    "YYYY-MM-DD HH:mm",
                   )}
                 </Badge>
               ) : (
@@ -202,7 +202,7 @@ function RouteComponent() {
         fetchNextPage={fetchNextPage}
         hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
-        estimateRowHeight={134}
+        estimateRowHeight={160}
         overscan={1}
       />
     </>

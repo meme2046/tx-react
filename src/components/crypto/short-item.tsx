@@ -1,6 +1,7 @@
 import { round } from "lodash";
 import { Badge } from "../ui/badge";
 import { Skeleton } from "../ui/skeleton";
+import dayjs from "dayjs";
 
 export function ShortItem({ data }: { data: string[] }) {
   const [
@@ -10,6 +11,7 @@ export function ShortItem({ data }: { data: string[] }) {
     short_close_px,
     short_achieved_pl,
     short_fee,
+    short_close_at,
   ] = data;
 
   const shortAchievedPl = Number(short_achieved_pl);
@@ -21,7 +23,7 @@ export function ShortItem({ data }: { data: string[] }) {
     <div className="flex flex-col gap-1 items-start">
       <div>
         <Badge variant="outline">🪂杠杆:✘{lever}</Badge>
-        {short_fee && <Badge variant="outline">手续费:{short_fee}</Badge>}
+        {short_fee && <Badge variant="destructive">手续费:{short_fee}</Badge>}
       </div>
       {short_open_px ? (
         <>
@@ -32,6 +34,7 @@ export function ShortItem({ data }: { data: string[] }) {
         </>
       ) : (
         <>
+          <Skeleton className={skeletonClassName}></Skeleton>
           <Skeleton className={skeletonClassName}></Skeleton>
           <Skeleton className={skeletonClassName}></Skeleton>
         </>
@@ -45,9 +48,13 @@ export function ShortItem({ data }: { data: string[] }) {
           >
             已实现盈亏: {round(shortAchievedPl, 2)}
           </Badge>
+          <Badge variant="default">
+            {dayjs(Number(short_close_at)).format("YYYY-MM-DD HH:mm")}
+          </Badge>
         </>
       ) : (
         <>
+          <Skeleton className={skeletonClassName}></Skeleton>
           <Skeleton className={skeletonClassName}></Skeleton>
           <Skeleton className={skeletonClassName}></Skeleton>
         </>
