@@ -1,4 +1,4 @@
-import { SVG_SRC } from "@/consts";
+import { getQiniuSrc } from "@/utils/qiniu";
 import dayjs from "dayjs";
 import { ReactSVG } from "react-svg";
 
@@ -23,7 +23,7 @@ export function UpdateTime({
             .format("YYYY-MM-DD HH:mm")}
         </span>
         <ReactSVG
-          src={SVG_SRC["line"]}
+          src={getQiniuSrc("line", "svg")}
           className="text-primary absolute left-0 bottom-[-4px] w-full"
         />
       </div>

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { AVATAR_SRC, ICON_SRC, IMG_SRC, SVG_SRC } from "@/consts";
+import { getQiniuSrc } from "@/utils/qiniu";
 import { createFileRoute } from "@tanstack/react-router";
 import { upperCase } from "lodash";
 import { ReactSVG } from "react-svg";
@@ -23,7 +24,7 @@ export const Route = createFileRoute("/_layout/icons")({
 interface CardComponentProps {
   title: string;
   icon: string;
-  type: "icon" | "svg" | "avatar" | "image";
+  type: "icon" | "svg" | "avatar" | "img";
   items: Record<string, string>;
 }
 
@@ -51,10 +52,10 @@ function CardComponent({ title, icon, type, items }: CardComponentProps) {
             <span className="mt-1 text-xs text-muted-foreground">{key}</span>
           </div>
         );
-      case "image":
+      case "img":
         return (
           <div className="text-center">
-            <img src={src} alt={upperCase(key)} className="w-24" />
+            <img src={src} alt={upperCase(key)} className="w-12" />
             <span className="mt-1 text-xs text-muted-foreground">{key}</span>
           </div>
         );
@@ -73,7 +74,7 @@ function CardComponent({ title, icon, type, items }: CardComponentProps) {
       <CardContent className="p-4 flex gap-4 flex-wrap justify-center">
         {Object.keys(items).map((key) => (
           <div key={key} className="flex flex-col items-center">
-            {renderItem(key, items[key])}
+            {renderItem(key, getQiniuSrc(key, type))}
           </div>
         ))}
       </CardContent>
@@ -104,29 +105,29 @@ function RouteComponent() {
 
       <CardComponent
         title="ICON"
-        icon={AVATAR_SRC["65"]}
+        icon={getQiniuSrc("65", "avatar")}
         type="icon"
         items={ICON_SRC}
       />
 
       <CardComponent
         title="SVG"
-        icon={AVATAR_SRC["71"]}
+        icon={getQiniuSrc("71", "avatar")}
         type="svg"
         items={SVG_SRC}
       />
 
       <CardComponent
         title="头像"
-        icon="https://github.com/shadcn.png"
+        icon={getQiniuSrc("shadcn", "avatar")}
         type="avatar"
         items={AVATAR_SRC}
       />
 
       <CardComponent
         title="图片"
-        icon={IMG_SRC["au888"]}
-        type="image"
+        icon={getQiniuSrc("AU888", "img")}
+        type="img"
         items={IMG_SRC}
       />
     </div>

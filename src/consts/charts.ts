@@ -1,30 +1,29 @@
 import type { BasicInfo } from "@/types/Charts";
-import { SVG_SRC } from "./svg";
-import { IMG_SRC } from "./image";
+import { getQiniuSrc } from "@/utils/qiniu";
 
 export const CHARTS_IMG: Record<string, string> = {
-  "000001": SVG_SRC["000001"],
-  IXIC: SVG_SRC["IXIC"],
-  USDCNH: IMG_SRC["USDCNH"],
-  BTCUSD: IMG_SRC["BTCUSDT"],
-  ETHUSD: IMG_SRC["ETHUSDT"],
-  XAUUSD: IMG_SRC["AU888"],
-  AU888: IMG_SRC["AU888"],
-  XAUCNY: IMG_SRC["AU888"],
-  AG888: SVG_SRC["AG888"],
-  XAGCNY: SVG_SRC["AG888"],
-  "600519": SVG_SRC["600519"],
-  "399300": SVG_SRC["399300"],
-  "399905": SVG_SRC["399905"],
-  SH: IMG_SRC["SH"], // 上海证券交易所
-  L1: IMG_SRC["L1"], // Level1 基础行情
-  WH: IMG_SRC["WH"], // 外汇
-  US: IMG_SRC["US"],
-  NLS: IMG_SRC["NLS"],
-  XAUTUSDT: IMG_SRC["XAUTUSDT"],
-  币安人生USDT: IMG_SRC["币安人生USDT"],
-  BTCUSDT: IMG_SRC["BTCUSDT"],
-  ETHUSDT: IMG_SRC["ETHUSDT"],
+  "000001": getQiniuSrc("000001", "svg"),
+  IXIC: getQiniuSrc("IXIC", "svg"),
+  USDCNH: getQiniuSrc("USDCNH", "img"),
+  BTCUSD: getQiniuSrc("BTCUSDT", "img"),
+  ETHUSD: getQiniuSrc("ETHUSDT", "img"),
+  XAUUSD: getQiniuSrc("AU888", "img"),
+  AU888: getQiniuSrc("AU888", "img"),
+  XAUCNY: getQiniuSrc("XAUCNY", "img"),
+  AG888: getQiniuSrc("AG888", "svg"),
+  XAGCNY: getQiniuSrc("XAGCNY", "svg"),
+  "600519": getQiniuSrc("600519", "svg"),
+  "399300": getQiniuSrc("399300", "svg"),
+  "399905": getQiniuSrc("399905", "svg"),
+  SH: getQiniuSrc("SH", "img"), // 上海证券交易所
+  L1: getQiniuSrc("L1", "img"), // Level1 基础行情
+  WH: getQiniuSrc("WH", "img"), // 外汇
+  US: getQiniuSrc("US", "img"),
+  NLS: getQiniuSrc("NLS", "img"),
+  XAUTUSDT: getQiniuSrc("XAUTUSDT", "img"),
+  币安人生USDT: getQiniuSrc("币安人生USDT", "img"),
+  BTCUSDT: getQiniuSrc("BTCUSDT", "img"),
+  ETHUSDT: getQiniuSrc("ETHUSDT", "img"),
 };
 
 export const GUSHITONG_MARKET: Record<string, string> = {
