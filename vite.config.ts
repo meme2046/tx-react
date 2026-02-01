@@ -19,8 +19,10 @@ export default defineConfig({
     host: ["localhost", "192.168.123.7"] as never,
     port: 5173,
     allowedHosts: [
-      "meme.us.kg",
+      "memeniu.xyz",
+      "cdn.memeniu.xyz",
       "api.memeniu.xyz",
+      "meme.us.kg",
       "localhost",
       "192.168.123.7",
     ], // 允许多个主机
