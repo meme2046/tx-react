@@ -2,8 +2,10 @@ import { Combobox } from "@/components/combobox";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ICON_SRC, SVG_SRC } from "@/consts";
+import { store } from "@/lib/valtio/store";
 import { createFileRoute } from "@tanstack/react-router";
 import { ReactSVG } from "react-svg";
+import { useSnapshot } from "valtio";
 
 export const Route = createFileRoute("/_layout/tests")({
   component: RouteComponent,
@@ -17,6 +19,8 @@ export const Route = createFileRoute("/_layout/tests")({
 });
 
 function RouteComponent() {
+  const { qiniuBaseURL } = useSnapshot(store);
+
   return (
     <div className="flex flex-col gap-4">
       <p>Hello "/_layout/test"!</p>
@@ -118,6 +122,14 @@ function RouteComponent() {
       <div className="h-2 bg-linear-to-t from-sky-500 to-indigo-500"></div>
       <div className="h-2 bg-linear-to-bl from-violet-500 to-fuchsia-500"></div>
       <div className="h-2 bg-linear-65 from-purple-500 to-pink-500"></div>
+      <div className="flex gap-1 [&>div]:size-16 [&>div]:border">
+        <ReactSVG src={`${qiniuBaseURL}/svgs/600519.svg`} />
+        <ReactSVG src={`${qiniuBaseURL}/svgs/399300.svg`} />
+        <ReactSVG src={`${qiniuBaseURL}/svgs/399905.svg`} />
+        <ReactSVG src={`${qiniuBaseURL}/svgs/000001.svg`} />
+        <ReactSVG src={`${qiniuBaseURL}/svgs/IXIC.svg`} />
+        <ReactSVG src={`${qiniuBaseURL}/svgs/AG888.svg`} />
+      </div>
     </div>
   );
 }
