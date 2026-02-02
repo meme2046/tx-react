@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "ncu": "ncu --target minor --reject webpack,shx",
+    "ncu": "ncu --target minor --reject webpack,shx,eslint-plugin-react-refresh",
     "dev": "vite --port 5173",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
