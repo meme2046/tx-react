@@ -15,9 +15,7 @@ import { Button } from "../ui/button";
 import { KLineG2 } from "../charts/kline-g2";
 import { TROY_OUNCE_TO_GRAM } from "@/consts/comm";
 import { useSnapshot } from "valtio";
-import { setUSDToCNY, store, storePersist } from "@/lib/valtio";
-import { useEffect } from "react";
-import { http } from "@/utils/http";
+import { storePersist } from "@/lib/valtio";
 
 interface Props {
   className?: string;
@@ -27,15 +25,6 @@ interface Props {
 
 export function KLineCardG2({ className = "py-0 gap-0", basic, data }: Props) {
   const { USDToCNY } = useSnapshot(storePersist);
-  const { qiniuBaseURL } = useSnapshot(store);
-
-  useEffect(() => {
-    http<{ price: number; ratio: string; increase: string }>(
-      `${qiniuBaseURL}/baidu/usdcnh.json`,
-    ).then((res) => {
-      setUSDToCNY(res.price);
-    });
-  }, [qiniuBaseURL]);
 
   return (
     <Card className={`${className}`}>
