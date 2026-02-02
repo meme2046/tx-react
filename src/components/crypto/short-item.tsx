@@ -54,7 +54,7 @@ export function ShortItem({ data }: { data: string[] }) {
           >
             已实现盈亏: {round(shortAchievedPl, 2)}
           </Badge>
-          <Badge variant="default">
+          <Badge variant="secondary">
             {dayjs(Number(short_close_at)).format("YYYY-MM-DD HH:mm")}
           </Badge>
         </>

@@ -50,7 +50,7 @@ export function LongItem({ data }: { data: string[] }) {
           >
             已实现盈亏: {round(longAchievedPl, 2)}
           </Badge>
-          <Badge variant="default">
+          <Badge variant="secondary">
             {dayjs(Number(long_close_at)).format("YYYY-MM-DD HH:mm")}
           </Badge>
         </>
