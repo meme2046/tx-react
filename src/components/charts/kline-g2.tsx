@@ -12,6 +12,8 @@ import { get, round, slice, values } from "lodash";
 import { chartColors } from "@/consts/colors";
 import { calculateYValue } from "@/utils/calc";
 import { isMobile } from "react-device-detect";
+import { storePersist } from "@/lib/valtio/storePersist";
+import { useSnapshot } from "valtio";
 interface Props {
   className?: string;
   data?: UiKline[];
@@ -27,8 +29,10 @@ export function KLineG2({
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const yPxTooltipRef = useRef<HTMLDivElement>(null);
+  const { theme } = useSnapshot(storePersist);
 
   const config: CommonConfig = {
+    theme: { type: theme },
     type: "view",
     data,
     encode: { x: "start" },
