@@ -22,7 +22,7 @@ export function LongItem({ data }: { data: string[] }) {
       <div className="flex gap-1">
         <Badge variant="outline">
           🚀杠杆:✘{lever}
-          {long_fee && <span>,手续费:{round(long_fee, 2)}</span>}
+          {long_fee > 0 && <span>,手续费:{round(long_fee, 2)}</span>}
         </Badge>
       </div>
       {long_open_px ? (

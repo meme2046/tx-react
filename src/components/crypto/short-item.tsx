@@ -22,7 +22,7 @@ export function ShortItem({ data }: { data: string[] }) {
       <div>
         <Badge variant="outline">
           🪂杠杆:✘{lever}
-          {short_fee && (
+          {short_fee > 0 && (
             <span className="text-xs">,手续费:{round(short_fee, 2)}</span>
           )}
         </Badge>
