@@ -45,7 +45,7 @@ function CardComponent({ title, icon, type, items }: CardComponentProps) {
       case "avatar":
         return (
           <div className="text-center">
-            <Avatar>
+            <Avatar className="size-12">
               <AvatarImage src={src} alt={upperCase(key)} />
               <AvatarFallback className="animate-pulse bg-linear-to-tr from-secondary to-primary"></AvatarFallback>
             </Avatar>
