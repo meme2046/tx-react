@@ -141,8 +141,8 @@ importers:
         specifier: ^3.0.6
         version: 3.0.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-svg:
-        specifier: ^16.4.0
-        version: 16.4.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^16.4.1
+        version: 16.4.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-toastify:
         specifier: ^11.0.5
         version: 11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -217,8 +217,8 @@ importers:
         specifier: ^7.0.1
         version: 7.0.1(eslint@9.39.2(jiti@2.6.1))
       eslint-plugin-react-refresh:
-        specifier: ^0.4.26
-        version: 0.4.26(eslint@9.39.2(jiti@2.6.1))
+        specifier: ^0.5.0
+        version: 0.5.0(eslint@9.39.2(jiti@2.6.1))
       globals:
         specifier: ^16.5.0
         version: 16.5.0
@@ -2400,10 +2400,10 @@ packages:
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
 
-  eslint-plugin-react-refresh@0.4.26:
-    resolution: {integrity: sha512-1RETEylht2O6FM/MvgnyvT+8K21wLqDNg4qD51Zj3guhjt433XbnnkVttHMyaVyAFD03QSV4LPS5iE3VQmO7XQ==}
+  eslint-plugin-react-refresh@0.5.0:
+    resolution: {integrity: sha512-ZYvmh7VfVgqR/7wR71I3Zl6hK/C5CcxdWYKZSpHawS5JCNgE4efhQWg/+/WPpgGAp9Ngp/rRZYyaIwmPQBq/lA==}
     peerDependencies:
-      eslint: '>=8.40'
+      eslint: '>=9'
 
   eslint-scope@5.1.1:
     resolution: {integrity: sha512-2NxwbF/hZ0KpepYN0cNbo+FN6XoK7GaHlQhgx/hIZl6Va0bF45RQOOwhLIy8lQDbuCiadSLCBnH2CFYquit5bw==}
@@ -3060,8 +3060,8 @@ packages:
       '@types/react':
         optional: true
 
-  react-svg@16.4.0:
-    resolution: {integrity: sha512-sXALwungaVItFzD6WQ7KErrfBChnmKTDVx+at37zEi5K98JtBmfGxm8cMTEOqpyo5iAE7Wz1d9CZ3PCO89M6fA==}
+  react-svg@16.4.1:
+    resolution: {integrity: sha512-9XOeSkmCb82Q9HsbowQfGhXsojx26QIa/QrbYMNvlz10oH6GX2lpVzWUN+7wvg3xFrhL8UOOHAw+/gQ+KYSEEg==}
     peerDependencies:
       react: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -5788,7 +5788,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-react-refresh@0.4.26(eslint@9.39.2(jiti@2.6.1)):
+  eslint-plugin-react-refresh@0.5.0(eslint@9.39.2(jiti@2.6.1)):
     dependencies:
       eslint: 9.39.2(jiti@2.6.1)
 
@@ -6370,7 +6370,7 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.2.10
 
-  react-svg@16.4.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+  react-svg@16.4.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
       '@babel/runtime': 7.28.6
       '@tanem/svg-injector': 10.1.68
