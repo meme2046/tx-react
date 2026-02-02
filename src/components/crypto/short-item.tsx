@@ -22,8 +22,14 @@ export function ShortItem({ data }: { data: string[] }) {
   return (
     <div className="flex flex-col gap-1 items-start">
       <div>
-        <Badge variant="outline">🪂杠杆:✘{lever}</Badge>
-        {short_fee && <Badge variant="destructive">手续费:{short_fee}</Badge>}
+        <Badge variant="outline">
+          🪂杠杆:✘{lever}
+          {short_fee && (
+            <span className="text-xs">
+              ,手续费:{round(Number(short_fee), 2)}
+            </span>
+          )}
+        </Badge>
       </div>
       {short_open_px ? (
         <>
