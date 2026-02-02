@@ -1,4 +1,4 @@
-import { round } from "lodash";
+import { map, round } from "lodash";
 import { Badge } from "../ui/badge";
 import { Skeleton } from "../ui/skeleton";
 import dayjs from "dayjs";
@@ -12,9 +12,7 @@ export function LongItem({ data }: { data: string[] }) {
     long_achieved_pl,
     long_fee,
     long_close_at,
-  ] = data;
-
-  const longAchievedPl = Number(long_achieved_pl);
+  ] = map(data, Number);
 
   const variant = "default";
   const skeletonClassName = "h-[22px] w-32 rounded-lg";
@@ -24,14 +22,14 @@ export function LongItem({ data }: { data: string[] }) {
       <div className="flex gap-1">
         <Badge variant="outline">
           🚀杠杆:✘{lever}
-          {long_fee && <span>,手续费:{round(Number(long_fee), 2)}</span>}
+          {long_fee && <span>,手续费:{round(long_fee, 2)}</span>}
         </Badge>
       </div>
       {long_open_px ? (
         <>
           <Badge variant="outline">开仓均价: {long_open_px}</Badge>
           <Badge variant="outline">
-            花费usdt: {round(Number(long_open_usdt), 2)}
+            花费usdt: {round(long_open_usdt / lever, 2)}
           </Badge>
         </>
       ) : (
@@ -46,12 +44,12 @@ export function LongItem({ data }: { data: string[] }) {
           <Badge variant={variant}>平仓均价: {long_close_px}</Badge>
           <Badge
             variant={variant}
-            className={`${longAchievedPl < 0 ? "bg-rose-600" : "bg-lime-600"}`}
+            className={`${long_achieved_pl < 0 ? "bg-rose-600" : "bg-lime-600"}`}
           >
-            已实现盈亏: {round(longAchievedPl, 2)}
+            已实现盈亏: {round(long_achieved_pl, 2)}
           </Badge>
           <Badge variant="secondary">
-            {dayjs(Number(long_close_at)).format("YYYY-MM-DD HH:mm")}
+            {dayjs(long_close_at).format("YYYY-MM-DD HH:mm")}
           </Badge>
         </>
       ) : (

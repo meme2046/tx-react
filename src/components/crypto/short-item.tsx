@@ -1,4 +1,4 @@
-import { round } from "lodash";
+import { map, round } from "lodash";
 import { Badge } from "../ui/badge";
 import { Skeleton } from "../ui/skeleton";
 import dayjs from "dayjs";
@@ -12,9 +12,7 @@ export function ShortItem({ data }: { data: string[] }) {
     short_achieved_pl,
     short_fee,
     short_close_at,
-  ] = data;
-
-  const shortAchievedPl = Number(short_achieved_pl);
+  ] = map(data, Number);
 
   const variant = "default";
   const skeletonClassName = "h-[22px] w-32 rounded-lg";
@@ -25,9 +23,7 @@ export function ShortItem({ data }: { data: string[] }) {
         <Badge variant="outline">
           🪂杠杆:✘{lever}
           {short_fee && (
-            <span className="text-xs">
-              ,手续费:{round(Number(short_fee), 2)}
-            </span>
+            <span className="text-xs">,手续费:{round(short_fee, 2)}</span>
           )}
         </Badge>
       </div>
@@ -35,7 +31,7 @@ export function ShortItem({ data }: { data: string[] }) {
         <>
           <Badge variant="outline">开仓均价: {short_open_px}</Badge>
           <Badge variant="outline">
-            花费usdt: {round(Number(short_open_usdt), 2)}
+            花费usdt: {round(short_open_usdt / lever, 2)}
           </Badge>
         </>
       ) : (
@@ -50,12 +46,12 @@ export function ShortItem({ data }: { data: string[] }) {
           <Badge variant={variant}>平仓均价: {short_close_px}</Badge>
           <Badge
             variant={variant}
-            className={`${shortAchievedPl < 0 ? "bg-rose-600" : "bg-lime-600"}`}
+            className={`${short_achieved_pl < 0 ? "bg-rose-600" : "bg-lime-600"}`}
           >
-            已实现盈亏: {round(shortAchievedPl, 2)}
+            已实现盈亏: {round(short_achieved_pl, 2)}
           </Badge>
           <Badge variant="secondary">
-            {dayjs(Number(short_close_at)).format("YYYY-MM-DD HH:mm")}
+            {dayjs(short_close_at).format("YYYY-MM-DD HH:mm")}
           </Badge>
         </>
       ) : (
