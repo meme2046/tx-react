@@ -1,3 +1,4 @@
+import { TROY_OUNCE_TO_GRAM } from "@/consts/comm";
 import type { BasicInfo } from "@/types/Charts";
 import { has, includes, pick, pickBy, round, toNumber } from "lodash";
 
@@ -6,9 +7,9 @@ export function mergeNonEmpty<T extends BasicInfo>(b: object, a: T) {
 
   const filteredB: Partial<T> = pickBy(pickedB, (v) => v);
   if (includes(["XAUCNY", "XAGCNY"], a.code)) {
-    filteredB.price = round(toNumber(filteredB.price) / 31.1034768, 2);
+    filteredB.price = round(toNumber(filteredB.price) / TROY_OUNCE_TO_GRAM, 2);
     filteredB.increase = round(
-      toNumber(filteredB.increase) / 31.1034768,
+      toNumber(filteredB.increase) / TROY_OUNCE_TO_GRAM,
       2,
     ).toString();
   } else {

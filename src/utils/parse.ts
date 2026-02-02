@@ -1,3 +1,4 @@
+import { TROY_OUNCE_TO_GRAM } from "@/consts/comm";
 import type { BreakItem, ChartData, MarketData, UiKline } from "@/types/Charts";
 import dayjs from "dayjs";
 import { has, includes, isNumber, round, toNumber } from "lodash";
@@ -27,7 +28,7 @@ export function parseMarketData(
         key === "range"
       ) {
         if (isOz && includes(["price", "avgPrice", "range"], key)) {
-          obj[key] = round(Number(values[index]) / 31.1034768, 2);
+          obj[key] = round(Number(values[index]) / TROY_OUNCE_TO_GRAM, 2);
         } else {
           obj[key] = Number(values[index]);
         }
