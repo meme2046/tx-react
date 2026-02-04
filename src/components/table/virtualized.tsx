@@ -46,6 +46,7 @@ export function VirtualizedTable<T extends RowData>(
   const { rows } = table.getRowModel();
   const tableContainerRef = useRef<HTMLDivElement>(null);
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const rowVirtualizer = useVirtualizer({
     count: rows.length,
     estimateSize: () => estimateRowHeight, //estimate row height for accurate scrollbar dragging
