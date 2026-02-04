@@ -21,8 +21,14 @@ export function LongItem({ data }: { data: string[] }) {
     <div className="flex flex-col gap-1 items-start">
       <div className="flex gap-1">
         <Badge variant="outline">
-          🚀杠杆:✘{lever}
-          {long_fee > 0 && <span>,手续费:{round(long_fee, 2)}</span>}
+          <span className="text-cyan-500">🚀杠杆:✘{lever}</span>
+          {long_fee != 0 && (
+            <span
+              className={`underline underline-offset-1 ${long_fee < 0 ? "text-red-500" : "text-green-500"}`}
+            >
+              手续费:{round(long_fee, 2)}
+            </span>
+          )}
         </Badge>
       </div>
       {long_open_px ? (
