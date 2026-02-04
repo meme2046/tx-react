@@ -66,29 +66,35 @@ function RouteComponent() {
       },
       {
         accessorFn: (row) => [
+          row.lever,
           row.spot_open_px,
           row.spot_open_usdt,
           row.spot_close_px,
           row.spot_achieved_pl,
+          row.spot_fee,
+          row.spot_close_at,
         ],
         id: "spot",
         header: "现货",
         size: 188,
-        cell: (row) => <TxStrategySpot data={row.getValue<number[]>()} />,
+        cell: (row) => <TxStrategySpot data={row.getValue<string[]>()} />,
         enableColumnFilter: false,
         enableSorting: false,
       },
       {
         accessorFn: (row) => [
+          row.lever,
           row.futures_open_px,
           row.futures_open_usdt,
           row.futures_close_px,
           row.futures_achieved_pl,
+          row.futures_fee,
+          row.futures_close_at,
         ],
         id: "futures",
-        header: "合约",
+        header: "空单",
         size: 188,
-        cell: (row) => <TxStrategyFutures data={row.getValue<number[]>()} />,
+        cell: (row) => <TxStrategyFutures data={row.getValue<string[]>()} />,
         enableColumnFilter: false,
         enableSorting: false,
       },
@@ -201,7 +207,7 @@ function RouteComponent() {
         fetchNextPage={fetchNextPage}
         hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
-        estimateRowHeight={143}
+        estimateRowHeight={108}
         overscan={1}
       />
     </>

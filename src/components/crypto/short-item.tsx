@@ -14,53 +14,48 @@ export function ShortItem({ data }: { data: string[] }) {
     short_close_at,
   ] = map(data, Number);
 
-  const variant = "default";
   const skeletonClassName = "h-[22px] w-32 rounded-lg";
 
   return (
     <div className="flex flex-col gap-1 items-start">
-      <div>
-        <Badge variant="outline">
-          <span className="text-indigo-500">🪂杠杆:✘{lever}</span>
-          {short_fee != 0 && (
-            <span
-              className={`underline underline-offset-1 ${short_fee < 0 ? "text-red-500" : "text-green-500"}`}
-            >
-              手续费:{round(short_fee, 2)}
-            </span>
-          )}
-        </Badge>
-      </div>
+      <Badge variant="outline">
+        <span className="text-cyan-600">🪂杠杆:✘{lever}</span>
+        {short_fee != 0 && (
+          <span
+            className={`underline underline-offset-1 ${short_fee < 0 ? "text-rose-400" : "text-lime-600"}`}
+          >
+            手续费:{round(short_fee, 2)}
+          </span>
+        )}
+      </Badge>
       {short_open_px ? (
         <>
-          <Badge variant="outline">开仓均价: {short_open_px}</Badge>
           <Badge variant="outline">
-            花费usdt: {round(short_open_usdt / lever, 2)}
+            <span>均价:{short_open_px}</span>
+            <span>金额:${round(short_open_usdt, 1)}</span>
           </Badge>
         </>
       ) : (
         <>
-          <Skeleton className={skeletonClassName}></Skeleton>
-          <Skeleton className={skeletonClassName}></Skeleton>
           <Skeleton className={skeletonClassName}></Skeleton>
         </>
       )}
       {short_close_px ? (
         <>
-          <Badge variant={variant}>平仓均价: {short_close_px}</Badge>
           <Badge
-            variant={variant}
-            className={`${short_achieved_pl < 0 ? "bg-rose-600" : "bg-lime-600"}`}
+            className={`${short_achieved_pl < 0 ? "bg-rose-400" : "bg-lime-600"}`}
           >
-            已实现盈亏: {round(short_achieved_pl, 2)}
+            <span>平仓均价:{short_close_px}</span>
+            <span>盈亏: {round(short_achieved_pl, 1)}</span>
           </Badge>
-          <Badge variant="secondary">
-            {dayjs(short_close_at).format("YYYY-MM-DD HH:mm")}
+          <Badge variant="outline">
+            <span>
+              平仓时间:{dayjs(short_close_at).format("YYYY-MM-DD HH:mm")}
+            </span>
           </Badge>
         </>
       ) : (
         <>
-          <Skeleton className={skeletonClassName}></Skeleton>
           <Skeleton className={skeletonClassName}></Skeleton>
           <Skeleton className={skeletonClassName}></Skeleton>
         </>

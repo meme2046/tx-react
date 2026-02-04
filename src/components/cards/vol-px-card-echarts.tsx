@@ -48,7 +48,7 @@ export function VolPxCardEcharts(props: Props) {
             </div>
 
             <div
-              className={`flex text-sm gap-1 ${startsWith(basicInfo.increase, "-") ? "text-red-600" : "text-green-700"}`}
+              className={`flex text-sm gap-1 ${startsWith(basicInfo.increase, "-") ? "text-rose-400" : "text-lime-600"}`}
             >
               <span className="text-5xl">
                 {isNaN(basicInfo.price) ? "--" : basicInfo.price}

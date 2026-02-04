@@ -202,7 +202,7 @@ function RouteComponent() {
         fetchNextPage={fetchNextPage}
         hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
-        estimateRowHeight={160}
+        estimateRowHeight={108}
         overscan={1}
       />
     </>

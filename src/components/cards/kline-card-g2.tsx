@@ -53,7 +53,7 @@ export function KLineCardG2({ className = "py-0 gap-0", basic, data }: Props) {
             </div>
 
             <div
-              className={`flex items-start text-sm gap-1 ${startsWith(basic.increase, "-") ? "text-red-600" : "text-green-700"}`}
+              className={`flex items-start text-sm gap-1 ${startsWith(basic.increase, "-") ? "text-rose-400" : "text-lime-600"}`}
             >
               <span className="text-5xl">
                 {isNaN(basic.price) ? "--" : basic.price}

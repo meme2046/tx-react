@@ -12,13 +12,13 @@ export function FFEnd({ data }: { data: string }) {
         <>
           <Badge
             variant={variant}
-            className={`${Number(pnl) < 0 ? "bg-rose-600" : "bg-lime-600"}`}
+            className={`${Number(pnl) < 0 ? "bg-rose-400" : "bg-lime-600"}`}
           >
             收益额: ${pnl}
           </Badge>
           <Badge
             variant={variant}
-            className={`${Number(pnl) < 0 ? "bg-rose-600" : "bg-lime-600"}`}
+            className={`${Number(pnl) < 0 ? "bg-rose-400" : "bg-lime-600"}`}
           >
             收益率: {(Number(pnlRatio) * 100).toFixed(3)}%
           </Badge>

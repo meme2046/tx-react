@@ -29,7 +29,7 @@ export function CoingeckoItem({ item }: CoingeckoItemProps) {
 					})}
 				> */}
         <span
-          className={`text-sm rounded-full px-1 shadow-xl ${change >= 0 ? "bg-lime-600" : "bg-red-400"}`}
+          className={`text-sm rounded-full px-1 shadow-xl ${change >= 0 ? "bg-lime-600" : "bg-rose-400"}`}
         >
           {change.toFixed(3)}%
         </span>

@@ -21,6 +21,8 @@ export interface Strategy {
   spot_client_order_id: string;
   spot_profit_order_id: number;
   spot_profit_client_order_id: string;
+  spot_fee: number;
+  futures_fee: number;
   spot_open_usdt: number;
   spot_open_px: number;
   spot_achieved_pl: number;

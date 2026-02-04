@@ -115,7 +115,7 @@ export function TopContent<T extends RowData>(props: ITopContent<T>) {
         >
           <ReactSVG
             src={getQiniuSrc("processing", "icon")}
-            className={`text-purple-500 w-6 ${isFetching ? "animate-spin" : ""}`}
+            className={`text-cyan-600 w-6 ${isFetching ? "animate-spin" : ""}`}
           />
         </Button>
         <span className="text-nowrap">
