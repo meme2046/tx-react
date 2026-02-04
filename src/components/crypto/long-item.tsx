@@ -32,7 +32,7 @@ export function LongItem({ data }: { data: string[] }) {
         <>
           <Badge variant="outline">
             <span>均价:{long_open_usdt}</span>
-            <span>金额:${round(long_open_usdt, 1)}</span>
+            <span>金额:${round(long_open_usdt / lever, 1)}</span>
           </Badge>
         </>
       ) : (

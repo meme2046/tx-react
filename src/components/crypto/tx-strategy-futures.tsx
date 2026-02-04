@@ -31,7 +31,7 @@ export const TxStrategyFutures = ({ data }: { data: string[] }) => {
         <>
           <Badge variant="outline">
             <span>均价:{futures_open_px}</span>
-            <span>金额:${round(futures_open_usdt, 1)}</span>
+            <span>金额:${round(futures_open_usdt / lever, 1)}</span>
           </Badge>
         </>
       ) : (

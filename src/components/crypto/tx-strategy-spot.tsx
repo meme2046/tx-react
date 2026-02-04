@@ -31,7 +31,7 @@ export const TxStrategySpot = ({ data }: { data: string[] }) => {
         <>
           <Badge variant="outline">
             <span>买入均价:{spot_open_px}</span>
-            <span>金额:${round(spot_open_usdt, 1)}</span>
+            <span>金额:${round(spot_open_usdt / lever, 1)}</span>
           </Badge>
         </>
       ) : (

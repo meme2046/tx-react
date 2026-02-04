@@ -32,7 +32,7 @@ export function ShortItem({ data }: { data: string[] }) {
         <>
           <Badge variant="outline">
             <span>均价:{short_open_px}</span>
-            <span>金额:${round(short_open_usdt, 1)}</span>
+            <span>金额:${round(short_open_usdt / lever, 1)}</span>
           </Badge>
         </>
       ) : (
