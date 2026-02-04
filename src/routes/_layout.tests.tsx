@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ICON_SRC, SVG_SRC } from "@/consts";
 import { store } from "@/lib/valtio/store";
+import { getQiniuSrc } from "@/utils/qiniu";
 import { createFileRoute } from "@tanstack/react-router";
 import { ReactSVG } from "react-svg";
 import { useSnapshot } from "valtio";
@@ -77,7 +78,7 @@ function RouteComponent() {
         </Button>
         <Button variant="outline" className="gap-1">
           <ReactSVG
-            src={ICON_SRC["processing"]}
+            src={getQiniuSrc("processing", "icon")}
             className="text-purple-500 animate-spin w-6"
           />
           <span className="text-xs">processing</span>

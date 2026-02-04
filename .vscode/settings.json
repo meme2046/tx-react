@@ -9,20 +9,19 @@
   // 📝powershelel配置
   "terminal.integrated.profiles.windows": {
     "pwsh": {
-      "path": "c:/scoop/shims/pwsh.exe",
+      "path": "c:/.scoop/shims/pwsh.exe",
       "args": [],
       "icon": "terminal-powershell"
     },
     "nu": {
-      "path": "c:/scoop/shims/nu.exe",
+      "path": "c:/.scoop/shims/nu.exe",
       "args": []
     }
   },
-  "window.commandCenter": false,
   "git.autofetch": true,
   "terminal.integrated.defaultProfile.windows": "nu",
   "terminal.integrated.automationProfile.windows": {
-    "path": "c:/scoop/shims/pwsh.exe",
+    "path": "c:/.scoop/shims/pwsh.exe",
     "args": []
   },
   // 终端日志级别
@@ -40,7 +39,6 @@
       "source.organizeImports.ruff": "explicit" // 保存时自动排序 import 语句
     }
   },
-  "python.analysis.typeCheckingMode": "standard",
   "python.envFile": "${workspaceFolder}/.env",
   "terminal.integrated.env.windows": {
     "PYTHONPATH": "${workspaceFolder}"
@@ -99,12 +97,6 @@
         "match": "Dockerfile$",
         "isAsync": true,
         "cmd": "me prettier ${file}"
-      },
-      {
-        // nushell
-        "match": "\\.(nu)$",
-        "isAsync": true,
-        "cmd": "topiary format ${file}"
       }
     ]
   },
@@ -146,7 +138,7 @@
   },
   "json.format.enable": true,
   "workbench.iconTheme": "vscode-icons",
-  "workbench.colorTheme": "GitHub Dark Default",
+  "workbench.colorTheme": "Default Dark Modern",
   "terminal.integrated.enableMultiLinePasteWarning": "auto",
   // 📝vscode自带css规则配置
   "css.validate": true,
