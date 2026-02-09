@@ -57,11 +57,12 @@ export function KLineG2({
       x: {
         title: false,
         grid: false,
-        line: true,
         labelFormatter: (d: number) => dayjs(d).format("HH:mm"),
-        label: {
-          labelAutoHide: true,
-          labelAutoRotate: true,
+        line: true,
+        tick: true, // 是否显示刻度
+        labelAutoHide: {
+          keepHeader: true, // 保留第一个刻度值
+          keepTail: true, // 保留最后一个刻度值
         },
       },
       y: {
