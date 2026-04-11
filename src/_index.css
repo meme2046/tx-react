@@ -12,7 +12,7 @@ html {
 }
 
 body {
-  @apply bg-[url('https://arweave.net/c3cCRBcDb-cbx26AlJqJ9MKYBUPFDXN6pJ3AsVBWTzw')] dark:bg-[url('https://arweave.net/STTh6euGv92OJDYAxAkUQwFj0fJ7oTY4ker1tUSPcY8')] bg-size-[50%] bg-no-repeat bg-top-right bg-fixed;
+  @apply bg-[url('https://ar.4everland.io/c3cCRBcDb-cbx26AlJqJ9MKYBUPFDXN6pJ3AsVBWTzw')] dark:bg-[url('https://ar.4everland.io/STTh6euGv92OJDYAxAkUQwFj0fJ7oTY4ker1tUSPcY8')] bg-size-[50%] bg-no-repeat bg-top-right bg-fixed;
 }
 
 #root {
@@ -39,7 +39,7 @@ body {
     font-family: "Inter";
     font-weight: 400;
     font-display: swap;
-    src: url("https://arweave.net/qFrZTwXAm1apiVgOYqpqmq2yWC8wRffpd3J6lMlzEwI")
+    src: url("https://ar.4everland.io/qFrZTwXAm1apiVgOYqpqmq2yWC8wRffpd3J6lMlzEwI")
       format("woff2");
   }
 
@@ -48,7 +48,7 @@ body {
     font-family: "Gabriela";
     font-weight: 400;
     font-display: swap;
-    src: url("https://arweave.net/qAID3w-MgaZrO6SEvGBM7qWjz9LbwZNXKFqMGQIZjA8")
+    src: url("https://ar.4everland.io/qAID3w-MgaZrO6SEvGBM7qWjz9LbwZNXKFqMGQIZjA8")
       format("woff2");
   }
 
@@ -57,7 +57,7 @@ body {
     font-family: "DeliusSwashCaps";
     font-weight: 400;
     font-display: swap;
-    src: url("https://arweave.net/6nKnlPeN4v9u1HqdQdT-8KLhqn4OECDmVsJosHnyz48")
+    src: url("https://ar.4everland.io/6nKnlPeN4v9u1HqdQdT-8KLhqn4OECDmVsJosHnyz48")
       format("woff2");
   }
   /* Sniglet-Regular.ttf */
@@ -65,7 +65,7 @@ body {
     font-family: "Sniglet";
     font-weight: 400;
     font-display: swap;
-    src: url("https://arweave.net/Wz2wNNDl9ypIdQU_4S04i6QuPDWwJnv1fQhQpBjB1iY")
+    src: url("https://ar.4everland.io/Wz2wNNDl9ypIdQU_4S04i6QuPDWwJnv1fQhQpBjB1iY")
       format("woff2");
   }
 
@@ -74,7 +74,7 @@ body {
 		font-family: "JetBrainsMono";
 		font-weight: 400;
 		font-display: swap;
-		src: url("https://arweave.net/HsIZ0ZIWD-YcRo_Z4lyZsHevQQIr0J_afG0pVRCotXw")
+		src: url("https://ar.4everland.io/HsIZ0ZIWD-YcRo_Z4lyZsHevQQIr0J_afG0pVRCotXw")
 			format("woff2");
 	} */
 
@@ -83,7 +83,7 @@ body {
 		font-family: "Nunito";
 		font-weight: 400;
 		font-display: swap;
-		src: url("https://arweave.net/-S1mctngrxKYvYi3RdgNJoZgJPh26mVDaVdKe-05hDA")
+		src: url("https://ar.4everland.io/-S1mctngrxKYvYi3RdgNJoZgJPh26mVDaVdKe-05hDA")
 			format("woff2");
 	} */
 
@@ -92,7 +92,7 @@ body {
 		font-family: "Outfit";
 		font-weight: 400;
 		font-display: swap;
-		src: url("https://arweave.net/Vp_lSwDuHQLfZ70OoLKczYsa8C3u5bxi17J-gOYMt8M")
+		src: url("https://ar.4everland.io/Vp_lSwDuHQLfZ70OoLKczYsa8C3u5bxi17J-gOYMt8M")
 			format("woff2");
 	} */
 }

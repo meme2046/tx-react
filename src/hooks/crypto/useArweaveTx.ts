@@ -52,7 +52,7 @@ export const arweaveGraphql = async <T extends ArweaveData>(
   cursor?: string,
 ): Promise<IArweaveDataList<T>> => {
   const query = getQueryString(fetchSize, type, cursor);
-  const resp = await http<IArweave>("https://arweave.net/graphql", {
+  const resp = await http<IArweave>("https://ar.4everland.io/graphql", {
     method: "post",
     data: query,
     d2: true,
@@ -65,7 +65,7 @@ export const arweaveGraphql = async <T extends ArweaveData>(
 
   const allPromise = resp.transactions.edges.map(async (edge) => {
     try {
-      const d = await axios.get(`https://arweave.net/${edge.node.id}`);
+      const d = await axios.get(`https://ar.4everland.io/${edge.node.id}`);
       d.data.nodeId = edge.node.id;
       return d.data;
     } catch {
