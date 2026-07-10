@@ -1,3 +1,7 @@
 {
-  "workbench.colorTheme": "GitHub Dark Dimmed"
+  "workbench.colorTheme": "GitHub Dark Dimmed",
+  "files.associations": {
+    "**/deleted/**/*.tsx": "plaintext",
+    "**/deleted/**/*.ts": "plaintext"
+  }
 }

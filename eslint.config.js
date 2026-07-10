@@ -9,7 +9,7 @@ import pluginQuery from "@tanstack/eslint-plugin-query";
 export default defineConfig([
   // 移除globalIgnores，使用ignores属性
   {
-    ignores: ["dist"],
+    ignores: ["dist", "deleted"],
   },
   ...pluginQuery.configs["flat/recommended"],
   {

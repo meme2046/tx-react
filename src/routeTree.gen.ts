@@ -37,7 +37,6 @@ import { Route as AuthInvoicesIndexRouteImport } from './routes/_auth.invoices.i
 import { Route as LayoutReactbitsCrosshairRouteImport } from './routes/_layout.reactbits.crosshair'
 import { Route as LayoutG2MouseRouteImport } from './routes/_layout.g2.mouse'
 import { Route as LayoutG2CryptoRouteImport } from './routes/_layout.g2.crypto'
-import { Route as LayoutEchartsGushiRouteImport } from './routes/_layout.echarts.gushi'
 import { Route as AuthInvoicesInvoiceIdRouteImport } from './routes/_auth.invoices.$invoiceId'
 
 const LoginRoute = LoginRouteImport.update({
@@ -179,11 +178,6 @@ const LayoutG2CryptoRoute = LayoutG2CryptoRouteImport.update({
   path: '/g2/crypto',
   getParentRoute: () => LayoutRoute,
 } as any)
-const LayoutEchartsGushiRoute = LayoutEchartsGushiRouteImport.update({
-  id: '/echarts/gushi',
-  path: '/echarts/gushi',
-  getParentRoute: () => LayoutRoute,
-} as any)
 const AuthInvoicesInvoiceIdRoute = AuthInvoicesInvoiceIdRouteImport.update({
   id: '/$invoiceId',
   path: '/$invoiceId',
@@ -214,7 +208,6 @@ export interface FileRoutesByFullPath {
   '/text': typeof LayoutTextRoute
   '/valtio': typeof LayoutValtioRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
-  '/echarts/gushi': typeof LayoutEchartsGushiRoute
   '/g2/crypto': typeof LayoutG2CryptoRoute
   '/g2/mouse': typeof LayoutG2MouseRoute
   '/reactbits/crosshair': typeof LayoutReactbitsCrosshairRoute
@@ -243,7 +236,6 @@ export interface FileRoutesByTo {
   '/text': typeof LayoutTextRoute
   '/valtio': typeof LayoutValtioRoute
   '/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
-  '/echarts/gushi': typeof LayoutEchartsGushiRoute
   '/g2/crypto': typeof LayoutG2CryptoRoute
   '/g2/mouse': typeof LayoutG2MouseRoute
   '/reactbits/crosshair': typeof LayoutReactbitsCrosshairRoute
@@ -276,7 +268,6 @@ export interface FileRoutesById {
   '/_layout/text': typeof LayoutTextRoute
   '/_layout/valtio': typeof LayoutValtioRoute
   '/_auth/invoices/$invoiceId': typeof AuthInvoicesInvoiceIdRoute
-  '/_layout/echarts/gushi': typeof LayoutEchartsGushiRoute
   '/_layout/g2/crypto': typeof LayoutG2CryptoRoute
   '/_layout/g2/mouse': typeof LayoutG2MouseRoute
   '/_layout/reactbits/crosshair': typeof LayoutReactbitsCrosshairRoute
@@ -308,7 +299,6 @@ export interface FileRouteTypes {
     | '/text'
     | '/valtio'
     | '/invoices/$invoiceId'
-    | '/echarts/gushi'
     | '/g2/crypto'
     | '/g2/mouse'
     | '/reactbits/crosshair'
@@ -337,7 +327,6 @@ export interface FileRouteTypes {
     | '/text'
     | '/valtio'
     | '/invoices/$invoiceId'
-    | '/echarts/gushi'
     | '/g2/crypto'
     | '/g2/mouse'
     | '/reactbits/crosshair'
@@ -369,7 +358,6 @@ export interface FileRouteTypes {
     | '/_layout/text'
     | '/_layout/valtio'
     | '/_auth/invoices/$invoiceId'
-    | '/_layout/echarts/gushi'
     | '/_layout/g2/crypto'
     | '/_layout/g2/mouse'
     | '/_layout/reactbits/crosshair'
@@ -582,13 +570,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutG2CryptoRouteImport
       parentRoute: typeof LayoutRoute
     }
-    '/_layout/echarts/gushi': {
-      id: '/_layout/echarts/gushi'
-      path: '/echarts/gushi'
-      fullPath: '/echarts/gushi'
-      preLoaderRoute: typeof LayoutEchartsGushiRouteImport
-      parentRoute: typeof LayoutRoute
-    }
     '/_auth/invoices/$invoiceId': {
       id: '/_auth/invoices/$invoiceId'
       path: '/$invoiceId'
@@ -643,7 +624,6 @@ interface LayoutRouteChildren {
   LayoutTestsRoute: typeof LayoutTestsRoute
   LayoutTextRoute: typeof LayoutTextRoute
   LayoutValtioRoute: typeof LayoutValtioRoute
-  LayoutEchartsGushiRoute: typeof LayoutEchartsGushiRoute
   LayoutG2CryptoRoute: typeof LayoutG2CryptoRoute
   LayoutG2MouseRoute: typeof LayoutG2MouseRoute
   LayoutReactbitsCrosshairRoute: typeof LayoutReactbitsCrosshairRoute
@@ -667,7 +647,6 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutTestsRoute: LayoutTestsRoute,
   LayoutTextRoute: LayoutTextRoute,
   LayoutValtioRoute: LayoutValtioRoute,
-  LayoutEchartsGushiRoute: LayoutEchartsGushiRoute,
   LayoutG2CryptoRoute: LayoutG2CryptoRoute,
   LayoutG2MouseRoute: LayoutG2MouseRoute,
   LayoutReactbitsCrosshairRoute: LayoutReactbitsCrosshairRoute,
