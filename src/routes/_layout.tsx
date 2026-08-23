@@ -12,25 +12,32 @@ import { Outlet } from "@tanstack/react-router";
 import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/layout/navbar";
 import { SidebarItems } from "@/components/layout/sidebar-items";
-import { useSnapshot } from "valtio";
 import { useEffect } from "react";
-import { http } from "@/utils";
-import { setUSDToCNY, store } from "@/lib/valtio";
+import { setUSDToCNY } from "@/lib/valtio";
+import { useRedis } from "@/hooks/use-redis";
 
 export const Route = createFileRoute("/_layout")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  const { qiniuBaseURL } = useSnapshot(store);
+  // const { qiniuBaseURL } = useSnapshot(store);
+
+  const { data: usdcny } = useRedis<number>("local.USDCNY");
 
   useEffect(() => {
-    http<{ price: number; ratio: string; increase: string }>(
-      `${qiniuBaseURL}/baidu/usdcnh.json`,
-    ).then((res) => {
-      setUSDToCNY(res.price);
-    });
-  }, [qiniuBaseURL]);
+    if (usdcny) {
+      setUSDToCNY(usdcny);
+    }
+  }, [usdcny]);
+
+  // useEffect(() => {
+  //   http<{ price: number; ratio: string; increase: string }>(
+  //     `${qiniuBaseURL}/baidu/usdcnh.json`,
+  //   ).then((res) => {
+  //     setUSDToCNY(res.price);
+  //   });
+  // }, [qiniuBaseURL]);
 
   return (
     <SidebarProvider className="w-full h-full p-0 m-0" defaultOpen={false}>

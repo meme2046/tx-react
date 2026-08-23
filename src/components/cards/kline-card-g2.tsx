@@ -59,7 +59,7 @@ export function KLineCardG2({ className = "py-0 gap-0", basic, data }: Props) {
                 className={`${includes(["USDCNH", "IXIC"], basic.code) ? "hidden sm:flex sm:flex-col sm:gap-0.5" : "flex flex-col gap-0.5"}`}>
                 {includes(["XAUTUSDT"], basic.code) && basic.price && (
                   <span className="border rounded px-0.5 bg-accent text-primary">
-                    ￥
+                    {/* ￥{USDToCNY} */}
                     {round(
                       (basic.price / TROY_OUNCE_TO_GRAM) * USDToCNY,
                       basic.precision,

@@ -5,10 +5,8 @@ import { store } from "@/lib/valtio/store";
 import { parseKlineData } from "@/utils/parse";
 import { mergeNonEmpty } from "@/utils/pick";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useSnapshot } from "valtio";
-import { useRedis } from "@/hooks/use-redis";
-import { setUSDToCNY } from "@/lib/valtio/storePersist";
 
 export const Route = createFileRoute("/_layout/g2/crypto")({
   component: RouteComponent,
@@ -22,14 +20,6 @@ export const Route = createFileRoute("/_layout/g2/crypto")({
 });
 
 function RouteComponent() {
-  const { data: usdcny } = useRedis<number>("local.USDCNY");
-
-  useEffect(() => {
-    if (usdcny) {
-      setUSDToCNY(usdcny);
-    }
-  }, [usdcny]);
-
   const { qiniuBaseURL } = useSnapshot(store);
 
   const { data: xaut } = useJson<any>(
