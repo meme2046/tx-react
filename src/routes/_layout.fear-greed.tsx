@@ -9,6 +9,8 @@ import { Badge } from "@/components/ui/badge";
 import { useRedis } from "@/hooks/use-redis";
 import type { FearGreed } from "@/types/FearGreed";
 import type { RedisData } from "@/types/Redis";
+import { useSnapshot } from "valtio";
+import { storePersist } from "@/lib/valtio";
 export const Route = createFileRoute("/_layout/fear-greed")({
   component: RouteComponent,
   head: () => ({
@@ -25,6 +27,7 @@ function RouteComponent() {
     "coinstats.fear-greed",
   );
   const data = redisData?.data;
+  const { USDToCNY } = useSnapshot(storePersist);
 
   return (
     <div className="flex flex-col items-center pt-4 font-[DeliusSwashCaps]">
@@ -68,6 +71,10 @@ function RouteComponent() {
             <p className="text-sm text-foreground">
               <span>本周:</span>
               <span>{`${data.lastWeek.value} (${data.lastWeek.value_classification})`}</span>
+            </p>
+            <p className="text-sm text-foreground">
+              <span>USDCNY: </span>
+              <span className="text-primary">{USDToCNY}</span>
             </p>
             <Badge variant="outline" className="shadow">
               <span>更新时间:</span>
