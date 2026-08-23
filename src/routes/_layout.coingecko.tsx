@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { AVATAR_SRC, SVG_SRC } from "@/consts";
 import { useRedis } from "@/hooks/use-redis";
 import type { CoingeckoMarketsItem } from "@/types/CoingeckoCoin";
-import type { RedisData } from "@/types/Gushitong";
+import type { RedisData } from "@/types/Redis";
 import { createFileRoute } from "@tanstack/react-router";
 import dayjs from "dayjs";
 import { useMemo } from "react";

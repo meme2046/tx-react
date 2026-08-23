@@ -33,8 +33,7 @@ export function KLineCardG2({ className = "py-0 gap-0", basic, data }: Props) {
           <Avatar
             className={`${includes(["600519"], basic.code) ? "size-20 m-[-16px]" : "size-12"}
             ${!includes(["USDCNH", "600519"], basic.code) ? "ring-2 ring-primary/50" : ""}
-            ${includes(["USDCNH"], basic.code) ? "rounded" : ""}`}
-          >
+            ${includes(["USDCNH"], basic.code) ? "rounded" : ""}`}>
             <AvatarImage src={basic.logo} alt={basic.code} />
             <AvatarFallback>{basic.code}</AvatarFallback>
           </Avatar>
@@ -44,8 +43,7 @@ export function KLineCardG2({ className = "py-0 gap-0", basic, data }: Props) {
               <Badge
                 className={
                   basic.exchange === "Binance" ? "bg-yellow-500" : "bg-cyan-400"
-                }
-              >
+                }>
                 {basic.exchange}
               </Badge>
               <Badge variant="outline">{basic.code}</Badge>
@@ -53,14 +51,12 @@ export function KLineCardG2({ className = "py-0 gap-0", basic, data }: Props) {
             </div>
 
             <div
-              className={`flex items-start text-sm gap-1 ${startsWith(basic.increase, "-") ? "text-rose-400" : "text-lime-600"}`}
-            >
+              className={`flex items-start text-sm gap-1 ${startsWith(basic.increase, "-") ? "text-rose-400" : "text-lime-600"}`}>
               <span className="text-5xl">
                 {isNaN(basic.price) ? "--" : basic.price}
               </span>
               <div
-                className={`${includes(["USDCNH", "IXIC"], basic.code) ? "hidden sm:flex sm:flex-col sm:gap-0.5" : "flex flex-col gap-0.5"}`}
-              >
+                className={`${includes(["USDCNH", "IXIC"], basic.code) ? "hidden sm:flex sm:flex-col sm:gap-0.5" : "flex flex-col gap-0.5"}`}>
                 {includes(["XAUTUSDT"], basic.code) && basic.price && (
                   <span className="border rounded px-0.5 bg-accent text-primary">
                     ￥
@@ -94,8 +90,7 @@ export function KLineCardG2({ className = "py-0 gap-0", basic, data }: Props) {
                   variant="outline"
                   size="sm"
                   key={index}
-                  className="px-0.5 h-auto justify-start"
-                >
+                  className="px-0.5 h-auto justify-start">
                   <img src={tag.imageUrl} className="w-4" />
                   <span>{tag.desc}</span>
                 </Button>

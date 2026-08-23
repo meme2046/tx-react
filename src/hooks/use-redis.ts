@@ -1,6 +1,6 @@
 import { store } from "@/lib/valtio/store";
-import type { RedisResponse } from "@/types/Gushitong";
 import type { InfiniteList } from "@/types/Infinite";
+import type { RedisResponse } from "@/types/Redis";
 import { http } from "@/utils";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useSnapshot } from "valtio";

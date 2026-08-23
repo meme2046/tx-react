@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useRedis } from "@/hooks/use-redis";
 import type { FearGreed } from "@/types/FearGreed";
-import type { RedisData } from "@/types/Gushitong";
+import type { RedisData } from "@/types/Redis";
 export const Route = createFileRoute("/_layout/fear-greed")({
   component: RouteComponent,
   head: () => ({
@@ -32,8 +32,7 @@ function RouteComponent() {
         <Button
           variant="outline"
           size="icon-lg"
-          className="rounded-full cursor-pointer absolute top-[86.7px]"
-        >
+          className="rounded-full cursor-pointer absolute top-[86.7px]">
           <ReactSVG
             className="animate-wiggle-more animate-infinite"
             src={SVG_SRC["btc"]}

@@ -56,7 +56,7 @@ const navCrypto: INav[] = [
   },
   { name: "Bitget Grid", emoj: "🐶", desc: "", value: "/bitget-grid" },
   { name: "Gate Grid", emoj: "🐷", desc: "", value: "/gate-grid" },
-  { name: "股市图表", emoj: "📈", desc: "", value: "/echarts/gushi" },
+  // { name: "股市图表", emoj: "📈", desc: "", value: "/echarts/gushi" },
   { name: "加密货币图表", emoj: "📊", desc: "", value: "/g2/crypto" },
 ];
 
