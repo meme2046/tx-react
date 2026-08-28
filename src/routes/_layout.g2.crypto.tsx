@@ -31,13 +31,13 @@ function RouteComponent() {
   //   `${qiniuBaseURL}/crypto/bitget.ETHUSDT.json`,
   // );
 
-  const { data: xaut } = useRedis<any>(`crypto/bitget.XAUTUSDT.json`);
+  const { data: xaut } = useRedis<any>(`crypto/okx.XAU-USDT.json`);
   const { data: bnLife } = useRedis<any>(`crypto/binance.币安人生USDT.json`);
   const { data: btc } = useRedis<any>(`crypto/binance.BTCUSDT.json`);
   const { data: eth } = useRedis<any>(`crypto/bitget.ETHUSDT.json`);
 
   const { parsedData: parsedDataXAUT, basic: basicXAUT } = useMemo(
-    () => parseKlineData(xaut?.data),
+    () => parseKlineData(xaut?.data.reverse()),
     [xaut],
   );
 
@@ -62,7 +62,7 @@ function RouteComponent() {
         data={parsedDataXAUT}
         basic={mergeNonEmpty(
           { ...basicXAUT, timestamp: xaut?.timestamp },
-          basicInfoMap["XAUTUSDT"],
+          basicInfoMap["XAU-USDT"],
         )}
       />
       <KLineCardG2
