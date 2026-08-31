@@ -24,7 +24,7 @@ function RouteComponent() {
           <CardHeader className="flex items-center">
             <img
               className="w-12 rounded-full"
-              src="https://ar.4everland.io/_i99TY7tIQP8wy6n2lU2wrddIGoQZiuMkZWdljQ4mIA"
+              src="https://arweave.net/_i99TY7tIQP8wy6n2lU2wrddIGoQZiuMkZWdljQ4mIA"
             />
             <span className="text-xl font-semibold">当前运行的节点</span>
           </CardHeader>

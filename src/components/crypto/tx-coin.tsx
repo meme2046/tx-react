@@ -15,7 +15,7 @@ export function TxCoin<T extends ArweaveData>({
   const [loading, setLoading] = useState(false);
   const [coin, cex, nodeId] = data.split(",");
   const getArweaveTx = () => {
-    return http<T>(`https://ar.4everland.io/${nodeId}`);
+    return http<T>(`https://arweave.net/${nodeId}`);
   };
   return (
     <>
