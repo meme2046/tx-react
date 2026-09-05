@@ -56,7 +56,7 @@ function RouteComponent() {
           <SidebarItems />
         </SidebarContent>
       </Sidebar>
-      <main className="grow overflow-auto scrollbar-thin">
+      <main className="grow overflow-auto scrollbar-thin px-1">
         <Navbar />
         {/* <div className="px-1 min-h-[calc(100vh-64px)]"> */}
         <Outlet />
